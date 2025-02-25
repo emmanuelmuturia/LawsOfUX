@@ -57,8 +57,14 @@ dependencies {
     implementation(dependencyNotation = libs.androidx.ui.graphics)
     implementation(dependencyNotation = libs.androidx.ui.tooling.preview)
     implementation(dependencyNotation = libs.androidx.material3)
+    implementation(dependencyNotation = libs.bundles.koin)
+    implementation(dependencyNotation = libs.navigation.compose)
+    implementation(dependencyNotation = libs.splash)
+    implementation(dependencyNotation = libs.kotlinx.coroutines)
+    implementation(dependencyNotation = libs.timber)
 
     testImplementation(dependencyNotation = libs.junit)
+    testImplementation(dependencyNotation = libs.bundles.test)
 
     androidTestImplementation(dependencyNotation = libs.androidx.junit)
     androidTestImplementation(dependencyNotation = libs.androidx.espresso.core)
@@ -67,5 +73,6 @@ dependencies {
 
     debugImplementation(dependencyNotation = libs.androidx.ui.tooling)
     debugImplementation(dependencyNotation = libs.androidx.ui.test.manifest)
+    debugImplementation(dependencyNotation = libs.leakCanary)
 
 }
