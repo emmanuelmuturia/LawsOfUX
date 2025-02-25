@@ -7,7 +7,6 @@ import org.koin.core.context.startKoin
 import timber.log.Timber
 
 class LawsOfUXApplication : Application() {
-
     override fun onCreate() {
         super.onCreate()
         if (BuildConfig.DEBUG) Timber.plant(tree = Timber.DebugTree())
@@ -16,5 +15,4 @@ class LawsOfUXApplication : Application() {
             modules(modules = listOf())
         }
     }
-
 }

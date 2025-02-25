@@ -23,10 +23,11 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
-                files = arrayOf(
-                    getDefaultProguardFile(name = "proguard-android-optimize.txt"),
-                    "proguard-rules.pro"
-                )
+                files =
+                    arrayOf(
+                        getDefaultProguardFile(name = "proguard-android-optimize.txt"),
+                        "proguard-rules.pro",
+                    ),
             )
         }
 
@@ -75,5 +76,4 @@ dependencies {
     debugImplementation(dependencyNotation = libs.androidx.ui.tooling)
     debugImplementation(dependencyNotation = libs.androidx.ui.test.manifest)
     debugImplementation(dependencyNotation = libs.leakCanary)
-
 }
