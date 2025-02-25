@@ -1,4 +1,4 @@
-package emmanuelmuturia.lawsofux.ui.theme
+package emmanuelmuturia.lawsofux.commons.theme
 
 import android.app.Activity
 import android.os.Build

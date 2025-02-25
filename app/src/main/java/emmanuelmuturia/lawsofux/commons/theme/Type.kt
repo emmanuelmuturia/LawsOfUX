@@ -1,4 +1,4 @@
-package emmanuelmuturia.lawsofux.ui.theme
+package emmanuelmuturia.lawsofux.commons.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
