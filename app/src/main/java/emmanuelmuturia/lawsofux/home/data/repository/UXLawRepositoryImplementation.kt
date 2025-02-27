@@ -6,9 +6,8 @@ import kotlinx.coroutines.withContext
 
 class UXLawRepositoryImplementation(
     private val ioDispatcher: CoroutineDispatcher,
-    private val localUXLawsSource: LocalUXLawsSource
+    private val localUXLawsSource: LocalUXLawsSource,
 ) : UXLawRepository {
-
     override suspend fun getAllLocalUXLaws() {
         withContext(context = ioDispatcher) {
             localUXLawsSource.getAllLocalUXLaws()

@@ -42,20 +42,18 @@ import emmanuelmuturia.lawsofux.home.data.model.UXLaw
 
 @Composable
 fun HomeScreen() {
-
     Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = MaterialTheme.colorScheme.background)
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .background(color = MaterialTheme.colorScheme.background),
     ) { paddingValues ->
         HomeScreenContent(modifier = Modifier.padding(paddingValues = paddingValues))
     }
-
 }
 
 @Composable
 fun HomeScreenContent(modifier: Modifier) {
-
 }
 
 @Composable
@@ -65,7 +63,7 @@ fun HomeScreenText() {
         fontSize = 49.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
-        fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular)))
+        fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
     )
 }
 
@@ -73,42 +71,53 @@ fun HomeScreenText() {
 fun HomeScreenNotification() {
     Card(
         modifier = Modifier.fillMaxWidth().padding(all = 14.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
     ) {
         Row {
             Icon(
                 imageVector = Icons.Rounded.Notifications,
                 contentDescription = "Home Screen Notification Icon",
-                tint = MaterialTheme.colorScheme.onSurface
+                tint = MaterialTheme.colorScheme.onSurface,
             )
 
             VerticalDivider(
                 modifier = Modifier.fillMaxHeight(),
                 thickness = 3.dp,
-                color = MaterialTheme.colorScheme.background
+                color = MaterialTheme.colorScheme.background,
             )
 
             Text(
-                text = buildAnnotatedString {
-                    append(text = "The updated Laws of UX large format index poster is now available! Additions include Paradox of the Active User, Selection Attention, Cognitive Bias, and more. ")
+                text =
+                    buildAnnotatedString {
+                        append(
+                            text =
+                                "The updated Laws of UX large format index poster is now " +
+                                    "available! Additions include Paradox of the Active User, " +
+                                    "Selection Attention, Cognitive Bias, and more. ",
+                        )
 
-                    withLink(
-                        link = LinkAnnotation.Url(
-                            url = "https://jonyablonski.bigcartel.com/product/laws-of-ux-index-poster",
-                        )
-                    ) {
-                        withStyle(style = SpanStyle(
-                            textDecoration = TextDecoration.Underline
-                        )
+                        withLink(
+                            link =
+                                LinkAnnotation.Url(
+                                    url =
+                                        "https://jonyablonski.bigcartel.com/product/" +
+                                            "laws-of-ux-index-poster",
+                                ),
                         ) {
-                            append(text = "Check it out →")
+                            withStyle(
+                                style =
+                                    SpanStyle(
+                                        textDecoration = TextDecoration.Underline,
+                                    ),
+                            ) {
+                                append(text = "Check it out →")
+                            }
                         }
-                    }
-                },
+                    },
                 color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 18.sp,
                 overflow = TextOverflow.Clip,
-                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular)))
+                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
             )
         }
     }
@@ -116,20 +125,19 @@ fun HomeScreenNotification() {
 
 @Composable
 fun HomeScreenCardList(modifier: Modifier = Modifier) {
-
 }
 
 @Composable
 fun HomeScreenCardItem(uxLaw: UXLaw) {
     Card(
         modifier = Modifier.fillMaxWidth().padding(all = 14.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
     ) {
         Column {
             Image(
                 painter = painterResource(id = uxLaw.uxLawThumbnail),
                 contentDescription = "Home Screen Content Thumbnail",
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
             )
 
             Text(
@@ -138,7 +146,7 @@ fun HomeScreenCardItem(uxLaw: UXLaw) {
                 color = MaterialTheme.colorScheme.onSurface,
                 overflow = TextOverflow.Clip,
                 fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
             )
 
             Text(
@@ -146,7 +154,7 @@ fun HomeScreenCardItem(uxLaw: UXLaw) {
                 fontSize = 25.sp,
                 color = MaterialTheme.colorScheme.onSurface,
                 overflow = TextOverflow.Clip,
-                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular)))
+                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
             )
         }
     }
