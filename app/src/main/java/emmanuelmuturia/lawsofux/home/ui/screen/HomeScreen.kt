@@ -20,6 +20,7 @@ import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -33,6 +34,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import emmanuelmuturia.lawsofux.R
+import emmanuelmuturia.lawsofux.home.data.model.UXLaw
 
 /**
  * This is the app's Home Screen...
@@ -118,20 +120,20 @@ fun HomeScreenCardList(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun HomeScreenCardItem() {
+fun HomeScreenCardItem(uxLaw: UXLaw) {
     Card(
         modifier = Modifier.fillMaxWidth().padding(all = 14.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
         Column {
             Image(
-                painter = ,
+                painter = painterResource(id = uxLaw.uxLawThumbnail),
                 contentDescription = "Home Screen Content Thumbnail",
                 contentScale = ContentScale.Crop
             )
 
             Text(
-                text = ,
+                text = uxLaw.uxLawTitle,
                 fontSize = 25.sp,
                 color = MaterialTheme.colorScheme.onSurface,
                 overflow = TextOverflow.Clip,
@@ -140,7 +142,7 @@ fun HomeScreenCardItem() {
             )
 
             Text(
-                text = ,
+                text = uxLaw.uxLawDescription,
                 fontSize = 25.sp,
                 color = MaterialTheme.colorScheme.onSurface,
                 overflow = TextOverflow.Clip,
