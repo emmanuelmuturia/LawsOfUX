@@ -16,7 +16,9 @@ import androidx.compose.ui.Modifier
 fun HomeScreen() {
 
     Scaffold(
-        modifier = Modifier.fillMaxSize().background(color = MaterialTheme.colorScheme.background)
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = MaterialTheme.colorScheme.background)
     ) { paddingValues ->
         HomeScreenContent(modifier = Modifier.padding(paddingValues = paddingValues))
     }
@@ -25,5 +27,25 @@ fun HomeScreen() {
 
 @Composable
 fun HomeScreenContent(modifier: Modifier) {
+
+}
+
+@Composable
+fun HomeScreenText() {
+
+}
+
+@Composable
+fun HomeScreenNotification(modifier: Modifier = Modifier) {
+
+}
+
+@Composable
+fun HomeScreenCardList(modifier: Modifier = Modifier) {
+
+}
+
+@Composable
+fun HomeScreenCardItem(modifier: Modifier = Modifier) {
 
 }
