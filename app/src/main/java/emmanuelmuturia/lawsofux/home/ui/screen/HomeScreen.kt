@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Notifications
 import androidx.compose.material3.Card
@@ -35,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import emmanuelmuturia.lawsofux.R
 import emmanuelmuturia.lawsofux.home.data.model.UXLaw
+import emmanuelmuturia.lawsofux.home.ui.state.HomeScreenUIState
 
 /**
  * This is the app's Home Screen...
@@ -124,7 +127,14 @@ fun HomeScreenNotification() {
 }
 
 @Composable
-fun HomeScreenCardList(modifier: Modifier = Modifier) {
+fun HomeScreenCardList(homeScreenUIState: HomeScreenUIState) {
+    LazyColumn(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        items(items = homeScreenUIState.uxLaws) { uxLaw ->
+            HomeScreenCardItem(uxLaw = uxLaw)
+        }
+    }
 }
 
 @Composable
