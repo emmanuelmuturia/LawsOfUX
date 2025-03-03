@@ -58,7 +58,7 @@ fun HomeScreen() {
 @Composable
 private fun HomeScreenContent(modifier: Modifier) {
     LazyColumn(
-        modifier = modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize(),
     ) {
         item { HomeScreenText() }
         item { HomeScreenNotification() }

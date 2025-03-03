@@ -11,11 +11,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ArrowForward
 import androidx.compose.material.icons.rounded.Clear
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.ShoppingCart
-import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -39,30 +37,28 @@ import emmanuelmuturia.lawsofux.R
 
 @Composable
 fun LawsOfUXTopAppBar() {
-
     var screensMenuExpanded by remember { mutableStateOf(value = false) }
     var languagesMenuExpanded by remember { mutableStateOf(value = false) }
 
     Row(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
     ) {
-
         Image(
             modifier = Modifier.size(size = 24.dp),
             painter = painterResource(id = R.drawable.logo),
             contentDescription = "Laws of UX Logo",
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop,
         )
 
         Box(
-            modifier = Modifier.fillMaxWidth().padding(all = 14.dp).background(color = MaterialTheme.colorScheme.primary)
+            modifier = Modifier.fillMaxWidth().padding(all = 14.dp).background(color = MaterialTheme.colorScheme.primary),
         ) {
             Row(modifier = Modifier.clickable { screensMenuExpanded = !screensMenuExpanded }) {
                 Icon(
                     imageVector = if (screensMenuExpanded) Icons.Rounded.Clear else Icons.Rounded.Menu,
                     contentDescription = if (screensMenuExpanded) "Close Menu Button" else "Open Menu Button",
                     modifier = Modifier.size(size = 14.dp),
-                    tint = MaterialTheme.colorScheme.onPrimary
+                    tint = MaterialTheme.colorScheme.onPrimary,
                 )
                 Spacer(modifier = Modifier.width(width = 8.dp))
                 Text(
@@ -70,13 +66,13 @@ fun LawsOfUXTopAppBar() {
                     color = MaterialTheme.colorScheme.onPrimary,
                     fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
                     fontWeight = FontWeight.Bold,
-                    fontSize = 14.sp
+                    fontSize = 14.sp,
                 )
             }
 
             DropdownMenu(
                 expanded = screensMenuExpanded,
-                onDismissRequest = { screensMenuExpanded = false }
+                onDismissRequest = { screensMenuExpanded = false },
             ) {
                 DropdownMenuItem(
                     text = {
@@ -90,7 +86,7 @@ fun LawsOfUXTopAppBar() {
                     },
                     onClick = {
                         // Navigate to ARTICLES...
-                    }
+                    },
                 )
 
                 DropdownMenuItem(
@@ -105,7 +101,7 @@ fun LawsOfUXTopAppBar() {
                     },
                     onClick = {
                         // Navigate to BOOK...
-                    }
+                    },
                 )
 
                 DropdownMenuItem(
@@ -120,7 +116,7 @@ fun LawsOfUXTopAppBar() {
                     },
                     onClick = {
                         // Navigate to CARDS...
-                    }
+                    },
                 )
 
                 DropdownMenuItem(
@@ -135,7 +131,7 @@ fun LawsOfUXTopAppBar() {
                     },
                     onClick = {
                         // Navigate to INFO...
-                    }
+                    },
                 )
 
                 DropdownMenuItem(
@@ -155,12 +151,11 @@ fun LawsOfUXTopAppBar() {
                         Icon(
                             imageVector = Icons.Rounded.ShoppingCart,
                             contentDescription = "Store Icon",
-                            tint = MaterialTheme.colorScheme.onPrimary
+                            tint = MaterialTheme.colorScheme.onPrimary,
                         )
-                    }
+                    },
                 )
             }
-
         }
 
         IconButton(onClick = {
@@ -169,9 +164,8 @@ fun LawsOfUXTopAppBar() {
             Icon(
                 imageVector = Icons.Rounded.L,
                 contentDescription = "Toggle Dark Mode and Light Mode",
-                tint = MaterialTheme.colorScheme.onBackground
+                tint = MaterialTheme.colorScheme.onBackground,
             )
         }
-
     }
 }
