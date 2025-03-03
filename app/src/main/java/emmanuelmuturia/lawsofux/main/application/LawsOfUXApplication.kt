@@ -13,9 +13,12 @@ class LawsOfUXApplication : Application() {
         if (BuildConfig.DEBUG) Timber.plant(tree = Timber.DebugTree())
         startKoin {
             androidContext(androidContext = this@LawsOfUXApplication)
-            modules(modules = listOf(
-                homeUIKoinModule
-            ))
+            modules(
+                modules =
+                    listOf(
+                        homeUIKoinModule,
+                    ),
+            )
         }
     }
 }

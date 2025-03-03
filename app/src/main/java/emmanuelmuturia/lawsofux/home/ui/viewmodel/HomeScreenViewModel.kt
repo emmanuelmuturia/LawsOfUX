@@ -11,8 +11,7 @@ import kotlinx.coroutines.launch
 
 class HomeScreenViewModel(
     private val homeRepository: HomeRepository,
-): ViewModel() {
-
+) : ViewModel() {
     val homeScreenUIState = MutableStateFlow(value = HomeScreenUIState())
 
     init {
@@ -24,24 +23,23 @@ class HomeScreenViewModel(
         viewModelScope.launch {
             homeRepository.getAllLocalUXLaws().asResult().collect { result ->
                 when (result) {
-
                     is LawsOfUXState.Success -> {
-                        homeScreenUIState.value = homeScreenUIState.value.copy(
-                            uxLaws = result.data,
-                            isLoading = false,
-                        )
+                        homeScreenUIState.value =
+                            homeScreenUIState.value.copy(
+                                uxLaws = result.data,
+                                isLoading = false,
+                            )
                     }
 
                     is LawsOfUXState.Error -> {
-                        homeScreenUIState.value = homeScreenUIState.value.copy(
-                            isError = true,
-                            isLoading = false,
-                        )
-
+                        homeScreenUIState.value =
+                            homeScreenUIState.value.copy(
+                                isError = true,
+                                isLoading = false,
+                            )
                     }
                 }
             }
         }
     }
-
 }

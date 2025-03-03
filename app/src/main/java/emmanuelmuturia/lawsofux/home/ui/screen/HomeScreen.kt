@@ -56,11 +56,18 @@ fun HomeScreen() {
 }
 
 @Composable
-fun HomeScreenContent(modifier: Modifier) {
+private fun HomeScreenContent(modifier: Modifier) {
+    LazyColumn(
+        modifier = modifier.fillMaxSize()
+    ) {
+        item { HomeScreenText() }
+        item { HomeScreenNotification() }
+        item { HomeScreenCardList(homeScreenUIState = HomeScreenUIState()) }
+    }
 }
 
 @Composable
-fun HomeScreenText() {
+private fun HomeScreenText() {
     Text(
         text = "Laws of UX is a collection of best practices that designers can consider when building user interfaces.",
         fontSize = 49.sp,
@@ -71,7 +78,7 @@ fun HomeScreenText() {
 }
 
 @Composable
-fun HomeScreenNotification() {
+private fun HomeScreenNotification() {
     Card(
         modifier = Modifier.fillMaxWidth().padding(all = 14.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
@@ -127,9 +134,9 @@ fun HomeScreenNotification() {
 }
 
 @Composable
-fun HomeScreenCardList(homeScreenUIState: HomeScreenUIState) {
+private fun HomeScreenCardList(homeScreenUIState: HomeScreenUIState) {
     LazyColumn(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
     ) {
         items(items = homeScreenUIState.uxLaws) { uxLaw ->
             HomeScreenCardItem(uxLaw = uxLaw)
@@ -138,7 +145,7 @@ fun HomeScreenCardList(homeScreenUIState: HomeScreenUIState) {
 }
 
 @Composable
-fun HomeScreenCardItem(uxLaw: UXLaw) {
+private fun HomeScreenCardItem(uxLaw: UXLaw) {
     Card(
         modifier = Modifier.fillMaxWidth().padding(all = 14.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),

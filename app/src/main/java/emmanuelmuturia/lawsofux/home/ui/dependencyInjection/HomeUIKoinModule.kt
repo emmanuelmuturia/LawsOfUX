@@ -5,12 +5,13 @@ import emmanuelmuturia.lawsofux.home.ui.viewmodel.HomeScreenViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
-val homeUIKoinModule = module {
-    viewModel {
-        HomeScreenViewModel(
-            homeRepository = get()
-        )
-    }
+val homeUIKoinModule =
+    module {
+        viewModel {
+            HomeScreenViewModel(
+                homeRepository = get(),
+            )
+        }
 
-    includes(module = listOf(homeDataKoinModule))
-}
+        includes(module = listOf(homeDataKoinModule))
+    }

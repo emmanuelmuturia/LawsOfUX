@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.map
 
 sealed class LawsOfUXState<out T> {
     data class Success<out T>(val data: T) : LawsOfUXState<T>()
+
     data class Error(val errorMessage: String) : LawsOfUXState<Nothing>()
 }
 
