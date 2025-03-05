@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Notifications
 import androidx.compose.material3.Card
@@ -30,6 +31,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -87,6 +89,7 @@ private fun HomeScreenContent(modifier: Modifier) {
 
     AnimatedVisibility(visible = showScrollToTopButton) {
         FloatingActionButton(
+            modifier = Modifier.clip(shape = RoundedCornerShape(size = 21.dp)),
             onClick = {
                 homeScreenCoroutineScope.launch {
                     homeScreenListState.animateScrollToItem(index = 0)
