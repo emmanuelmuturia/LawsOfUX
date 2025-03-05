@@ -18,7 +18,7 @@ class LawsOfUXApplication : Application() {
                 modules =
                     listOf(
                         homeUIKoinModule,
-                        commonsKoinModule
+                        commonsKoinModule,
                     ),
             )
         }

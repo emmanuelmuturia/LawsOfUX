@@ -28,7 +28,7 @@ fun LawsOfUXFooter() {
     Column(
         modifier = Modifier.fillMaxSize().padding(all = 21.dp),
         horizontalAlignment = Alignment.Start,
-        verticalArrangement = Arrangement.spacedBy(space = 7.dp)
+        verticalArrangement = Arrangement.spacedBy(space = 7.dp),
     ) {
         Text(
             text = "Laws of UX © Jon Yablonski ${getCurrentYear()}",
@@ -39,31 +39,35 @@ fun LawsOfUXFooter() {
         )
 
         Text(
-            text = buildAnnotatedString {
-                withStyle(
-                    style = SpanStyle(
-                        textDecoration = TextDecoration.Underline
-                    )
-                ) {
-                    append(text = "Contact")
-                    // I need to figure out how to make this clickable and navigate to the Contact screen...
-                }
-                append(text = " | ")
-                withLink(
-                    link = LinkAnnotation.Url(
-                        url = "https://creativecommons.org/licenses/by-nc-nd/4.0/"
-                    )
-                ) {
+            text =
+                buildAnnotatedString {
                     withStyle(
-                        style = SpanStyle(
-                            textDecoration = TextDecoration.Underline
-                        )
+                        style =
+                            SpanStyle(
+                                textDecoration = TextDecoration.Underline,
+                            ),
                     ) {
-                        append("Licence")
-                        // I need to figure out how to append the Click icon...
+                        append(text = "Contact")
+                        // I need to figure out how to make this clickable and navigate to the Contact screen...
                     }
-                }
-            },
+                    append(text = " | ")
+                    withLink(
+                        link =
+                            LinkAnnotation.Url(
+                                url = "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+                            ),
+                    ) {
+                        withStyle(
+                            style =
+                                SpanStyle(
+                                    textDecoration = TextDecoration.Underline,
+                                ),
+                        ) {
+                            append("Licence")
+                            // I need to figure out how to append the Click icon...
+                        }
+                    }
+                },
             color = MaterialTheme.colorScheme.onPrimary,
             fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
             fontWeight = FontWeight.Bold,

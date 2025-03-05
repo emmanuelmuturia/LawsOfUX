@@ -56,10 +56,11 @@ fun LawsOfUXTopAppBar() {
         )
 
         Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(all = 14.dp)
-                .background(color = MaterialTheme.colorScheme.primary),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(all = 14.dp)
+                    .background(color = MaterialTheme.colorScheme.primary),
         ) {
             Row(modifier = Modifier.clickable { screensMenuExpanded = !screensMenuExpanded }) {
                 Icon(
@@ -170,21 +171,25 @@ fun LawsOfUXTopAppBar() {
             // Toggle Dark Mode and Light Mode...
         }) {
             Icon(
-                imageVector = if (isSystemInDarkTheme())
-                        ImageVector.vectorResource(id = R.drawable.light_mode) else
-                                ImageVector.vectorResource(
-                    id = R.drawable.dark_mode
-                ),
+                imageVector =
+                    if (isSystemInDarkTheme()) {
+                        ImageVector.vectorResource(id = R.drawable.light_mode)
+                    } else {
+                        ImageVector.vectorResource(
+                            id = R.drawable.dark_mode,
+                        )
+                    },
                 contentDescription = "Toggle Dark Mode and Light Mode",
                 tint = MaterialTheme.colorScheme.onBackground,
             )
         }
 
         Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(all = 14.dp)
-                .background(color = MaterialTheme.colorScheme.primary),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(all = 14.dp)
+                    .background(color = MaterialTheme.colorScheme.primary),
         ) {
             Row(modifier = Modifier.clickable { languagesMenuExpanded = !languagesMenuExpanded }) {
                 Icon(
@@ -195,7 +200,8 @@ fun LawsOfUXTopAppBar() {
                 )
                 Spacer(modifier = Modifier.width(width = 8.dp))
                 Text(
-                    text = "ENGLISH", // This should be dynamic...
+                    // This should be dynamic...
+                    text = "ENGLISH",
                     color = MaterialTheme.colorScheme.onPrimary,
                     fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
                     fontWeight = FontWeight.Bold,
@@ -213,7 +219,6 @@ fun LawsOfUXTopAppBar() {
                 expanded = languagesMenuExpanded,
                 onDismissRequest = { languagesMenuExpanded = false },
             ) {
-
                 DropdownMenuItem(
                     text = {
                         Text(
@@ -243,7 +248,6 @@ fun LawsOfUXTopAppBar() {
                         // Change language to French...
                     },
                 )
-
             }
         }
     }

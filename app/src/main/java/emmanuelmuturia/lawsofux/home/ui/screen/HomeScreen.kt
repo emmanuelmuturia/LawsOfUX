@@ -3,7 +3,6 @@ package emmanuelmuturia.lawsofux.home.ui.screen
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -54,7 +53,6 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import emmanuelmuturia.lawsofux.R
 import emmanuelmuturia.lawsofux.commons.components.LawsOfUXFooter
-import emmanuelmuturia.lawsofux.commons.components.LawsOfUXTopAppBar
 import emmanuelmuturia.lawsofux.home.data.model.UXLaw
 import emmanuelmuturia.lawsofux.home.ui.state.HomeScreenUIState
 import emmanuelmuturia.lawsofux.home.ui.viewmodel.HomeScreenViewModel
@@ -83,8 +81,10 @@ fun HomeScreen() {
 }
 
 @Composable
-private fun HomeScreenContent(modifier: Modifier, homeScreenUIState: HomeScreenUIState) {
-
+private fun HomeScreenContent(
+    modifier: Modifier,
+    homeScreenUIState: HomeScreenUIState,
+) {
     val homeScreenListState = rememberLazyListState()
 
     val showScrollToTopButton by remember {
@@ -97,7 +97,7 @@ private fun HomeScreenContent(modifier: Modifier, homeScreenUIState: HomeScreenU
 
     LazyColumn(
         modifier = modifier.fillMaxSize(),
-        state = homeScreenListState
+        state = homeScreenListState,
     ) {
         item {
             AnimatedVisibility(visible = showScrollToTopButton) {
@@ -148,7 +148,7 @@ private fun HomeScreenNotification() {
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
                 modifier = Modifier.padding(all = 21.dp),
@@ -159,7 +159,8 @@ private fun HomeScreenNotification() {
 
             VerticalDivider(
                 modifier = Modifier.fillMaxHeight(),
-                thickness = 3.dp, // I need to display it...
+                // I need to display it...
+                thickness = 3.dp,
                 color = Color.Black,
             )
 
