@@ -3,6 +3,7 @@ package emmanuelmuturia.lawsofux.home.ui.screen
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -30,8 +31,10 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -48,12 +51,15 @@ import androidx.compose.ui.text.withLink
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import emmanuelmuturia.lawsofux.R
 import emmanuelmuturia.lawsofux.commons.components.LawsOfUXFooter
 import emmanuelmuturia.lawsofux.commons.components.LawsOfUXTopAppBar
 import emmanuelmuturia.lawsofux.home.data.model.UXLaw
 import emmanuelmuturia.lawsofux.home.ui.state.HomeScreenUIState
+import emmanuelmuturia.lawsofux.home.ui.viewmodel.HomeScreenViewModel
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
 /**
  * This is the app's Home Screen...
@@ -66,16 +72,18 @@ fun HomeScreen() {
             Modifier
                 .fillMaxSize()
                 .background(color = MaterialTheme.colorScheme.background),
-        topBar = {
+        /*topBar = {
             LawsOfUXTopAppBar()
-        }
+        }*/
     ) { paddingValues ->
-        HomeScreenContent(modifier = Modifier.padding(paddingValues = paddingValues))
+        val homeScreenViewModel: HomeScreenViewModel = koinViewModel()
+        val homeScreenUIState: HomeScreenUIState by homeScreenViewModel.homeScreenUIState.collectAsStateWithLifecycle()
+        HomeScreenContent(modifier = Modifier.padding(paddingValues = paddingValues), homeScreenUIState = homeScreenUIState)
     }
 }
 
 @Composable
-private fun HomeScreenContent(modifier: Modifier) {
+private fun HomeScreenContent(modifier: Modifier, homeScreenUIState: HomeScreenUIState) {
 
     val homeScreenListState = rememberLazyListState()
 
@@ -87,31 +95,34 @@ private fun HomeScreenContent(modifier: Modifier) {
 
     val homeScreenCoroutineScope = rememberCoroutineScope()
 
-    AnimatedVisibility(visible = showScrollToTopButton) {
-        FloatingActionButton(
-            modifier = Modifier.clip(shape = RoundedCornerShape(size = 21.dp)),
-            onClick = {
-                homeScreenCoroutineScope.launch {
-                    homeScreenListState.animateScrollToItem(index = 0)
-                }
-            },
-            containerColor = MaterialTheme.colorScheme.primary,
-        ) {
-            Icon(
-                imageVector = ImageVector.vectorResource(id = R.drawable.arrow_up),
-                contentDescription = "Scroll to Top Button",
-                tint = MaterialTheme.colorScheme.onPrimary,
-            )
-        }
-    }
-
     LazyColumn(
         modifier = modifier.fillMaxSize(),
         state = homeScreenListState
     ) {
+        item {
+            AnimatedVisibility(visible = showScrollToTopButton) {
+                FloatingActionButton(
+                    modifier = Modifier.clip(shape = RoundedCornerShape(size = 21.dp)),
+                    onClick = {
+                        homeScreenCoroutineScope.launch {
+                            homeScreenListState.animateScrollToItem(index = 0)
+                        }
+                    },
+                    containerColor = MaterialTheme.colorScheme.primary,
+                ) {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(id = R.drawable.arrow_up),
+                        contentDescription = "Scroll to Top Button",
+                        tint = MaterialTheme.colorScheme.onPrimary,
+                    )
+                }
+            }
+        }
         item { HomeScreenText() }
         item { HomeScreenNotification() }
-        item { HomeScreenCardList(homeScreenUIState = HomeScreenUIState()) }
+        items(items = homeScreenUIState.uxLaws) { uxLaw ->
+            HomeScreenCardItem(uxLaw = uxLaw)
+        }
         item { Spacer(modifier = Modifier.height(height = 21.dp)) }
         item { LawsOfUXFooter() }
     }
@@ -120,11 +131,12 @@ private fun HomeScreenContent(modifier: Modifier) {
 @Composable
 private fun HomeScreenText() {
     Text(
+        modifier = Modifier.padding(all = 14.dp),
         text = "Laws of UX is a collection of best practices that designers can consider when building user interfaces.",
-        fontSize = 49.sp,
+        fontSize = 21.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
-        fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
+        fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
     )
 }
 
@@ -134,8 +146,12 @@ private fun HomeScreenNotification() {
         modifier = Modifier.fillMaxWidth().padding(all = 14.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
     ) {
-        Row {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             Icon(
+                modifier = Modifier.padding(all = 21.dp),
                 imageVector = Icons.Rounded.Notifications,
                 contentDescription = "Home Screen Notification Icon",
                 tint = MaterialTheme.colorScheme.onSurface,
@@ -143,11 +159,12 @@ private fun HomeScreenNotification() {
 
             VerticalDivider(
                 modifier = Modifier.fillMaxHeight(),
-                thickness = 3.dp,
-                color = MaterialTheme.colorScheme.background,
+                thickness = 3.dp, // I need to display it...
+                color = Color.Black,
             )
 
             Text(
+                modifier = Modifier.padding(all = 14.dp),
                 text =
                     buildAnnotatedString {
                         append(
@@ -185,44 +202,38 @@ private fun HomeScreenNotification() {
 }
 
 @Composable
-private fun HomeScreenCardList(homeScreenUIState: HomeScreenUIState) {
-    LazyColumn(
-        modifier = Modifier.fillMaxSize(),
-    ) {
-        items(items = homeScreenUIState.uxLaws) { uxLaw ->
-            HomeScreenCardItem(uxLaw = uxLaw)
-        }
-    }
-}
-
-@Composable
 private fun HomeScreenCardItem(uxLaw: UXLaw) {
     Card(
         modifier = Modifier.fillMaxWidth().padding(all = 14.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
     ) {
-        Column {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+        ) {
             Image(
+                modifier = Modifier.fillMaxSize(),
                 painter = painterResource(id = uxLaw.uxLawThumbnail),
                 contentDescription = "Home Screen Content Thumbnail",
                 contentScale = ContentScale.Crop,
             )
 
             Text(
+                modifier = Modifier.padding(all = 14.dp),
                 text = uxLaw.uxLawTitle,
                 fontSize = 25.sp,
                 color = MaterialTheme.colorScheme.onSurface,
                 overflow = TextOverflow.Clip,
-                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
-                fontWeight = FontWeight.Bold,
+                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+                fontWeight = FontWeight.ExtraBold,
             )
 
             Text(
+                modifier = Modifier.padding(all = 14.dp),
                 text = uxLaw.uxLawDescription,
-                fontSize = 25.sp,
+                fontSize = 18.sp,
                 color = MaterialTheme.colorScheme.onSurface,
                 overflow = TextOverflow.Clip,
-                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
+                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
             )
         }
     }

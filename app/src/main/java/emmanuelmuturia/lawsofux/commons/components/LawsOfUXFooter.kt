@@ -26,14 +26,14 @@ import java.util.Calendar
 @Composable
 fun LawsOfUXFooter() {
     Column(
-        modifier = Modifier.fillMaxSize().padding(start = 14.dp),
+        modifier = Modifier.fillMaxSize().padding(all = 21.dp),
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.spacedBy(space = 7.dp)
     ) {
         Text(
             text = "Laws of UX © Jon Yablonski ${getCurrentYear()}",
             color = MaterialTheme.colorScheme.onPrimary,
-            fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
+            fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
             fontWeight = FontWeight.Bold,
             fontSize = 14.sp,
         )
@@ -65,7 +65,7 @@ fun LawsOfUXFooter() {
                 }
             },
             color = MaterialTheme.colorScheme.onPrimary,
-            fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
+            fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
             fontWeight = FontWeight.Bold,
             fontSize = 14.sp,
         )
