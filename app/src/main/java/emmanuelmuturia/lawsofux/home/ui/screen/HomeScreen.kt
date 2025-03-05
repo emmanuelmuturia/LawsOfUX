@@ -36,6 +36,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import emmanuelmuturia.lawsofux.R
+import emmanuelmuturia.lawsofux.commons.components.LawsOfUXTopAppBar
 import emmanuelmuturia.lawsofux.home.data.model.UXLaw
 import emmanuelmuturia.lawsofux.home.ui.state.HomeScreenUIState
 
@@ -50,6 +51,9 @@ fun HomeScreen() {
             Modifier
                 .fillMaxSize()
                 .background(color = MaterialTheme.colorScheme.background),
+        topBar = {
+            LawsOfUXTopAppBar()
+        }
     ) { paddingValues ->
         HomeScreenContent(modifier = Modifier.padding(paddingValues = paddingValues))
     }

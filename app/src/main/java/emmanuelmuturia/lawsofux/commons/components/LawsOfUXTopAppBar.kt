@@ -3,6 +3,7 @@ package emmanuelmuturia.lawsofux.commons.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -28,8 +29,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -53,7 +56,10 @@ fun LawsOfUXTopAppBar() {
         )
 
         Box(
-            modifier = Modifier.fillMaxWidth().padding(all = 14.dp).background(color = MaterialTheme.colorScheme.primary),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 14.dp)
+                .background(color = MaterialTheme.colorScheme.primary),
         ) {
             Row(modifier = Modifier.clickable { screensMenuExpanded = !screensMenuExpanded }) {
                 Icon(
@@ -164,18 +170,25 @@ fun LawsOfUXTopAppBar() {
             // Toggle Dark Mode and Light Mode...
         }) {
             Icon(
-                imageVector = Icons.Rounded.L,
+                imageVector = if (isSystemInDarkTheme())
+                        ImageVector.vectorResource(id = R.drawable.light_mode) else
+                                ImageVector.vectorResource(
+                    id = R.drawable.dark_mode
+                ),
                 contentDescription = "Toggle Dark Mode and Light Mode",
                 tint = MaterialTheme.colorScheme.onBackground,
             )
         }
 
         Box(
-            modifier = Modifier.fillMaxWidth().padding(all = 14.dp).background(color = MaterialTheme.colorScheme.primary),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 14.dp)
+                .background(color = MaterialTheme.colorScheme.primary),
         ) {
             Row(modifier = Modifier.clickable { languagesMenuExpanded = !languagesMenuExpanded }) {
                 Icon(
-                    imageVector = Icons.Rounded.Internet,
+                    imageVector = ImageVector.vectorResource(id = R.drawable.language),
                     contentDescription = "Languages Icon",
                     modifier = Modifier.size(size = 14.dp),
                     tint = MaterialTheme.colorScheme.onPrimary,
