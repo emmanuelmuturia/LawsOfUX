@@ -11,7 +11,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.ArrowDropDown
 import androidx.compose.material.icons.rounded.Clear
+import androidx.compose.material.icons.rounded.KeyboardArrowUp
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.ShoppingCart
 import androidx.compose.material3.DropdownMenu
@@ -166,6 +168,70 @@ fun LawsOfUXTopAppBar() {
                 contentDescription = "Toggle Dark Mode and Light Mode",
                 tint = MaterialTheme.colorScheme.onBackground,
             )
+        }
+
+        Box(
+            modifier = Modifier.fillMaxWidth().padding(all = 14.dp).background(color = MaterialTheme.colorScheme.primary),
+        ) {
+            Row(modifier = Modifier.clickable { languagesMenuExpanded = !languagesMenuExpanded }) {
+                Icon(
+                    imageVector = Icons.Rounded.Internet,
+                    contentDescription = "Languages Icon",
+                    modifier = Modifier.size(size = 14.dp),
+                    tint = MaterialTheme.colorScheme.onPrimary,
+                )
+                Spacer(modifier = Modifier.width(width = 8.dp))
+                Text(
+                    text = "ENGLISH", // This should be dynamic...
+                    color = MaterialTheme.colorScheme.onPrimary,
+                    fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 14.sp,
+                )
+                Icon(
+                    imageVector = if (languagesMenuExpanded) Icons.Rounded.KeyboardArrowUp else Icons.Rounded.ArrowDropDown,
+                    contentDescription = "Dropdown Icon",
+                    modifier = Modifier.size(size = 14.dp),
+                    tint = MaterialTheme.colorScheme.onPrimary,
+                )
+            }
+
+            DropdownMenu(
+                expanded = languagesMenuExpanded,
+                onDismissRequest = { languagesMenuExpanded = false },
+            ) {
+
+                DropdownMenuItem(
+                    text = {
+                        Text(
+                            text = "Español",
+                            fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onPrimary,
+                            fontSize = 21.sp,
+                        )
+                    },
+                    onClick = {
+                        // Change language to Spanish...
+                    },
+                )
+
+                DropdownMenuItem(
+                    text = {
+                        Text(
+                            text = "Français",
+                            fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onPrimary,
+                            fontSize = 21.sp,
+                        )
+                    },
+                    onClick = {
+                        // Change language to French...
+                    },
+                )
+
+            }
         }
     }
 }
