@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -53,6 +54,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import emmanuelmuturia.lawsofux.R
 import emmanuelmuturia.lawsofux.commons.components.LawsOfUXFooter
+import emmanuelmuturia.lawsofux.commons.components.LawsOfUXTopAppBar
 import emmanuelmuturia.lawsofux.home.data.model.UXLaw
 import emmanuelmuturia.lawsofux.home.ui.state.HomeScreenUIState
 import emmanuelmuturia.lawsofux.home.ui.viewmodel.HomeScreenViewModel
@@ -65,26 +67,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun HomeScreen() {
-    Scaffold(
-        modifier =
-            Modifier
-                .fillMaxSize()
-                .background(color = MaterialTheme.colorScheme.background),
-        /*topBar = {
-            LawsOfUXTopAppBar()
-        }*/
-    ) { paddingValues ->
-        val homeScreenViewModel: HomeScreenViewModel = koinViewModel()
-        val homeScreenUIState: HomeScreenUIState by homeScreenViewModel.homeScreenUIState.collectAsStateWithLifecycle()
-        HomeScreenContent(modifier = Modifier.padding(paddingValues = paddingValues), homeScreenUIState = homeScreenUIState)
-    }
-}
 
-@Composable
-private fun HomeScreenContent(
-    modifier: Modifier,
-    homeScreenUIState: HomeScreenUIState,
-) {
     val homeScreenListState = rememberLazyListState()
 
     val showScrollToTopButton by remember {
@@ -95,11 +78,15 @@ private fun HomeScreenContent(
 
     val homeScreenCoroutineScope = rememberCoroutineScope()
 
-    LazyColumn(
-        modifier = modifier.fillMaxSize(),
-        state = homeScreenListState,
-    ) {
-        item {
+    Scaffold(
+        modifier =
+        Modifier
+            .fillMaxSize()
+            .background(color = MaterialTheme.colorScheme.background),
+        topBar = {
+            LawsOfUXTopAppBar()
+        },
+        floatingActionButton = {
             AnimatedVisibility(visible = showScrollToTopButton) {
                 FloatingActionButton(
                     modifier = Modifier.clip(shape = RoundedCornerShape(size = 21.dp)),
@@ -118,6 +105,29 @@ private fun HomeScreenContent(
                 }
             }
         }
+    ) { paddingValues ->
+        val homeScreenViewModel: HomeScreenViewModel = koinViewModel()
+        val homeScreenUIState: HomeScreenUIState by
+                                homeScreenViewModel.homeScreenUIState.collectAsStateWithLifecycle()
+        HomeScreenContent(
+            modifier = Modifier.padding(paddingValues = paddingValues),
+            homeScreenUIState = homeScreenUIState,
+            homeScreenListState = homeScreenListState
+        )
+    }
+}
+
+@Composable
+private fun HomeScreenContent(
+    modifier: Modifier,
+    homeScreenUIState: HomeScreenUIState,
+    homeScreenListState: LazyListState
+) {
+
+    LazyColumn(
+        modifier = modifier.fillMaxSize(),
+        state = homeScreenListState,
+    ) {
         item { HomeScreenText() }
         item { HomeScreenNotification() }
         items(items = homeScreenUIState.uxLaws) { uxLaw ->
@@ -143,7 +153,9 @@ private fun HomeScreenText() {
 @Composable
 private fun HomeScreenNotification() {
     Card(
-        modifier = Modifier.fillMaxWidth().padding(all = 14.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(all = 14.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
     ) {
         Row(
@@ -167,32 +179,32 @@ private fun HomeScreenNotification() {
             Text(
                 modifier = Modifier.padding(all = 14.dp),
                 text =
-                    buildAnnotatedString {
-                        append(
-                            text =
-                                "The updated Laws of UX large format index poster is now " +
-                                    "available! Additions include Paradox of the Active User, " +
-                                    "Selection Attention, Cognitive Bias, and more. ",
-                        )
+                buildAnnotatedString {
+                    append(
+                        text =
+                        "The updated Laws of UX large format index poster is now " +
+                            "available! Additions include Paradox of the Active User, " +
+                            "Selection Attention, Cognitive Bias, and more. ",
+                    )
 
-                        withLink(
-                            link =
-                                LinkAnnotation.Url(
-                                    url =
-                                        "https://jonyablonski.bigcartel.com/product/" +
-                                            "laws-of-ux-index-poster",
-                                ),
+                    withLink(
+                        link =
+                        LinkAnnotation.Url(
+                            url =
+                            "https://jonyablonski.bigcartel.com/product/" +
+                                "laws-of-ux-index-poster",
+                        ),
+                    ) {
+                        withStyle(
+                            style =
+                            SpanStyle(
+                                textDecoration = TextDecoration.Underline,
+                            ),
                         ) {
-                            withStyle(
-                                style =
-                                    SpanStyle(
-                                        textDecoration = TextDecoration.Underline,
-                                    ),
-                            ) {
-                                append(text = "Check it out →")
-                            }
+                            append(text = "Check it out →")
                         }
-                    },
+                    }
+                },
                 color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 18.sp,
                 overflow = TextOverflow.Clip,
@@ -205,7 +217,9 @@ private fun HomeScreenNotification() {
 @Composable
 private fun HomeScreenCardItem(uxLaw: UXLaw) {
     Card(
-        modifier = Modifier.fillMaxWidth().padding(all = 14.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(all = 14.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
     ) {
         Column(
