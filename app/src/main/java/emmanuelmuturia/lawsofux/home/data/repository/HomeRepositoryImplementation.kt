@@ -19,6 +19,12 @@ class HomeRepositoryImplementation(
                         uxLawThumbnail = localUXLaw.localUxLawThumbnail,
                         uxLawTitle = localUXLaw.localUxLawTitle,
                         uxLawDescription = localUXLaw.localUxLawDescription,
+                        uXLawTakeaways = localUXLaw.localUXLawTakeaways,
+                        uXLawOrigins = localUXLaw.localUXLawOrigins,
+                        uXLawFurtherReading = localUXLaw.localUXLawFurtherReading,
+                        uXLawSource = localUXLaw.localUXLawSource,
+                        uXLawLargeFormatPoster = localUXLaw.localUXLawLargeFormatPoster,
+                        uXLawFreePoster = localUXLaw.localUXLawFreePoster
                     )
                 }
             }
