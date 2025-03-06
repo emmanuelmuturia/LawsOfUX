@@ -24,7 +24,7 @@ class HomeRepositoryImplementation(
                         uXLawFurtherReading = localUXLaw.localUXLawFurtherReading,
                         uXLawSource = localUXLaw.localUXLawSource,
                         uXLawLargeFormatPoster = localUXLaw.localUXLawLargeFormatPoster,
-                        uXLawFreePoster = localUXLaw.localUXLawFreePoster
+                        uXLawFreePoster = localUXLaw.localUXLawFreePoster,
                     )
                 }
             }

@@ -8,14 +8,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowDropDown
 import androidx.compose.material.icons.rounded.Clear
@@ -48,20 +45,19 @@ import emmanuelmuturia.lawsofux.R
 
 @Composable
 fun LawsOfUXTopAppBar() {
-
     var screensMenuExpanded by remember { mutableStateOf(false) }
     var languagesMenuExpanded by remember { mutableStateOf(false) }
 
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(height = 140.dp)
-            .background(color = MaterialTheme.colorScheme.background)
-            .padding(start = 14.dp),
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .height(height = 140.dp)
+                .background(color = MaterialTheme.colorScheme.background)
+                .padding(start = 14.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceBetween,
     ) {
-
         // Left section: Logo...
         Image(
             modifier = Modifier.size(size = 35.dp),
@@ -74,17 +70,26 @@ fun LawsOfUXTopAppBar() {
         Box {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(start = 14.dp)
+                modifier = Modifier.padding(start = 14.dp),
             ) {
                 // Menu icon that toggles the Dropdown...
                 Icon(
-                    imageVector = if (screensMenuExpanded) Icons.Rounded.Clear else
-                                                                                Icons.Rounded.Menu,
-                    contentDescription = if (screensMenuExpanded) "Close Menu Button" else
-                                                                                "Open Menu Button",
-                    modifier = Modifier
-                        .size(size = 24.dp)
-                        .clickable { screensMenuExpanded = !screensMenuExpanded },
+                    imageVector =
+                        if (screensMenuExpanded) {
+                            Icons.Rounded.Clear
+                        } else {
+                            Icons.Rounded.Menu
+                        },
+                    contentDescription =
+                        if (screensMenuExpanded) {
+                            "Close Menu Button"
+                        } else {
+                            "Open Menu Button"
+                        },
+                    modifier =
+                        Modifier
+                            .size(size = 24.dp)
+                            .clickable { screensMenuExpanded = !screensMenuExpanded },
                     tint = MaterialTheme.colorScheme.onPrimary,
                 )
                 Spacer(modifier = Modifier.width(8.dp))
@@ -94,22 +99,26 @@ fun LawsOfUXTopAppBar() {
                     fontFamily = FontFamily(Font(resId = R.font.ibm_plex_mono_regular)),
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp,
-                    modifier = Modifier.clickable { screensMenuExpanded = !screensMenuExpanded }
+                    modifier = Modifier.clickable { screensMenuExpanded = !screensMenuExpanded },
                 )
             }
             // Dropdown Menu for Screens...
             DropdownMenu(
                 expanded = screensMenuExpanded,
                 onDismissRequest = { screensMenuExpanded = false },
-                modifier = Modifier.background(color = MaterialTheme.colorScheme.primary)
+                modifier = Modifier.background(color = MaterialTheme.colorScheme.primary),
             ) {
                 DropdownMenuItem(
                     text = {
                         Text(
                             text = "ARTICLES",
-                            fontFamily = FontFamily(fonts = listOf(
-                                Font(resId = R.font.ibm_plex_mono_regular)
-                            )),
+                            fontFamily =
+                                FontFamily(
+                                    fonts =
+                                        listOf(
+                                            Font(resId = R.font.ibm_plex_mono_regular),
+                                        ),
+                                ),
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.onPrimary,
                             fontSize = 21.sp,
@@ -139,9 +148,13 @@ fun LawsOfUXTopAppBar() {
                     text = {
                         Text(
                             text = "CARDS",
-                            fontFamily = FontFamily(fonts = listOf(
-                                Font(resId = R.font.ibm_plex_mono_regular)
-                            )),
+                            fontFamily =
+                                FontFamily(
+                                    fonts =
+                                        listOf(
+                                            Font(resId = R.font.ibm_plex_mono_regular),
+                                        ),
+                                ),
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.onPrimary,
                             fontSize = 21.sp,
@@ -171,9 +184,13 @@ fun LawsOfUXTopAppBar() {
                     text = {
                         Text(
                             text = "STORE",
-                            fontFamily = FontFamily(fonts = listOf(
-                                Font(resId = R.font.ibm_plex_mono_regular)
-                            )),
+                            fontFamily =
+                                FontFamily(
+                                    fonts =
+                                        listOf(
+                                            Font(resId = R.font.ibm_plex_mono_regular),
+                                        ),
+                                ),
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.onPrimary,
                             fontSize = 21.sp,
@@ -198,23 +215,25 @@ fun LawsOfUXTopAppBar() {
         Box {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(end = 16.dp)
+                modifier = Modifier.padding(end = 16.dp),
             ) {
                 IconButton(onClick = {
                     // Toggle Dark Mode and Light Mode...
                 }) {
                     Icon(
-                        imageVector = if (isSystemInDarkTheme())
-                            ImageVector.vectorResource(id = R.drawable.light_mode)
-                        else
-                            ImageVector.vectorResource(id = R.drawable.dark_mode),
+                        imageVector =
+                            if (isSystemInDarkTheme()) {
+                                ImageVector.vectorResource(id = R.drawable.light_mode)
+                            } else {
+                                ImageVector.vectorResource(id = R.drawable.dark_mode)
+                            },
                         contentDescription = "Toggle Dark Mode and Light Mode",
                         tint = MaterialTheme.colorScheme.onPrimary,
                     )
                 }
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.clickable { languagesMenuExpanded = !languagesMenuExpanded }
+                    modifier = Modifier.clickable { languagesMenuExpanded = !languagesMenuExpanded },
                 ) {
                     Icon(
                         imageVector = ImageVector.vectorResource(id = R.drawable.language),
@@ -227,15 +246,23 @@ fun LawsOfUXTopAppBar() {
                         // This should be dynamic...
                         text = "ENGLISH",
                         color = MaterialTheme.colorScheme.onPrimary,
-                        fontFamily = FontFamily(fonts = listOf(
-                            Font(resId = R.font.ibm_plex_mono_regular)
-                        )),
+                        fontFamily =
+                            FontFamily(
+                                fonts =
+                                    listOf(
+                                        Font(resId = R.font.ibm_plex_mono_regular),
+                                    ),
+                            ),
                         fontWeight = FontWeight.Bold,
                         fontSize = 16.sp,
                     )
                     Icon(
-                        imageVector = if (languagesMenuExpanded) Icons.Rounded.KeyboardArrowUp else
-                                                                        Icons.Rounded.ArrowDropDown,
+                        imageVector =
+                            if (languagesMenuExpanded) {
+                                Icons.Rounded.KeyboardArrowUp
+                            } else {
+                                Icons.Rounded.ArrowDropDown
+                            },
                         contentDescription = "Dropdown Icon",
                         modifier = Modifier.size(size = 24.dp),
                         tint = MaterialTheme.colorScheme.onPrimary,
@@ -246,15 +273,19 @@ fun LawsOfUXTopAppBar() {
             DropdownMenu(
                 expanded = languagesMenuExpanded,
                 onDismissRequest = { languagesMenuExpanded = false },
-                modifier = Modifier.background(color = MaterialTheme.colorScheme.primary)
+                modifier = Modifier.background(color = MaterialTheme.colorScheme.primary),
             ) {
                 DropdownMenuItem(
                     text = {
                         Text(
                             text = "Español",
-                            fontFamily = FontFamily(fonts = listOf(
-                                Font(resId = R.font.ibm_plex_mono_regular)
-                            )),
+                            fontFamily =
+                                FontFamily(
+                                    fonts =
+                                        listOf(
+                                            Font(resId = R.font.ibm_plex_mono_regular),
+                                        ),
+                                ),
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.onPrimary,
                             fontSize = 21.sp,
@@ -269,9 +300,13 @@ fun LawsOfUXTopAppBar() {
                     text = {
                         Text(
                             text = "Français",
-                            fontFamily = FontFamily(fonts = listOf(
-                                Font(resId = R.font.ibm_plex_mono_regular)
-                            )),
+                            fontFamily =
+                                FontFamily(
+                                    fonts =
+                                        listOf(
+                                            Font(resId = R.font.ibm_plex_mono_regular),
+                                        ),
+                                ),
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.onPrimary,
                             fontSize = 21.sp,

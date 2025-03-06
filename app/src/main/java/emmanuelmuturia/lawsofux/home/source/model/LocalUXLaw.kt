@@ -8,8 +8,8 @@ data class LocalUXLaw(
     val localUXLawOrigins: String,
     val localUXLawFurtherReading: List<Triple<String, String, String>>,
     // There should be a nullable field[s] for Examples like in Hick's Law...
-    //Display the content only if it is not null [Source]...
+    // Display the content only if it is not null [Source]...
     val localUXLawSource: String?,
     val localUXLawLargeFormatPoster: String,
-    val localUXLawFreePoster: String
+    val localUXLawFreePoster: String,
 )

@@ -41,7 +41,6 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun HomeDetailsScreen() {
-
     val homeDetailsScreenListState = rememberLazyListState()
 
     val showScrollToTopButton by remember {
@@ -54,9 +53,9 @@ fun HomeDetailsScreen() {
 
     Scaffold(
         modifier =
-        Modifier
-            .fillMaxSize()
-            .background(color = MaterialTheme.colorScheme.background),
+            Modifier
+                .fillMaxSize()
+                .background(color = MaterialTheme.colorScheme.background),
         topBar = {
             // Custom Top App Bar...
         },
@@ -78,26 +77,22 @@ fun HomeDetailsScreen() {
                     )
                 }
             }
-        }
+        },
     ) { paddingValues ->
         HomeDetailsScreenContent(modifier = Modifier.padding(paddingValues = paddingValues))
     }
-
 }
 
 @Composable
 private fun HomeDetailsScreenContent(modifier: Modifier) {
-
 }
 
 @Composable
-private fun HomeDetailsScreenTitleAndImage(
-    uxLaw: UXLaw
-) {
+private fun HomeDetailsScreenTitleAndImage(uxLaw: UXLaw) {
     // I will refine this later...
     Column(
         modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
             modifier = Modifier.padding(all = 14.dp),
@@ -106,7 +101,7 @@ private fun HomeDetailsScreenTitleAndImage(
             color = MaterialTheme.colorScheme.onBackground,
             overflow = TextOverflow.Clip,
             fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
-            fontWeight = FontWeight.ExtraBold
+            fontWeight = FontWeight.ExtraBold,
         )
 
         Image(
@@ -127,7 +122,7 @@ private fun HomeDetailsScreenDefinition(uxLaw: UXLaw) {
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
-        fontWeight = FontWeight.Bold
+        fontWeight = FontWeight.Bold,
     )
 }
 
@@ -140,7 +135,7 @@ private fun HomeDetailsScreenTakeaways(modifier: Modifier = Modifier) {
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
-        fontWeight = FontWeight.ExtraBold
+        fontWeight = FontWeight.ExtraBold,
     )
 }
 
@@ -153,7 +148,7 @@ private fun HomeDetailsScreenOrigins(modifier: Modifier = Modifier) {
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
-        fontWeight = FontWeight.ExtraBold
+        fontWeight = FontWeight.ExtraBold,
     )
 }
 
@@ -161,23 +156,24 @@ private fun HomeDetailsScreenOrigins(modifier: Modifier = Modifier) {
 fun HomeDetailsScreenSource(uxLaw: UXLaw) {
     Text(
         modifier = Modifier.padding(all = 14.dp),
-        text = buildAnnotatedString {
-            uxLaw.uXLawSource?.let {
-                LinkAnnotation.Url(
-                    url = it
-                )
-            }?.let {
-                withLink(
-                    link = it
-                ) {
-                    append(text = "Source")
+        text =
+            buildAnnotatedString {
+                uxLaw.uXLawSource?.let {
+                    LinkAnnotation.Url(
+                        url = it,
+                    )
+                }?.let {
+                    withLink(
+                        link = it,
+                    ) {
+                        append(text = "Source")
+                    }
                 }
-            }
-        },
+            },
         fontSize = 14.sp,
         color = MaterialTheme.colorScheme.onBackground,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
-        textDecoration = TextDecoration.Underline
+        textDecoration = TextDecoration.Underline,
     )
 }
 
@@ -190,7 +186,7 @@ private fun HomeDetailsScreenFurtherReading(modifier: Modifier = Modifier) {
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
-        fontWeight = FontWeight.ExtraBold
+        fontWeight = FontWeight.ExtraBold,
     )
 }
 
@@ -203,11 +199,10 @@ private fun HomeDetailsScreenRelated(modifier: Modifier = Modifier) {
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
-        fontWeight = FontWeight.ExtraBold
+        fontWeight = FontWeight.ExtraBold,
     )
 }
 
 @Composable
 private fun HomeDetailsScreenNext(modifier: Modifier = Modifier) {
-
 }

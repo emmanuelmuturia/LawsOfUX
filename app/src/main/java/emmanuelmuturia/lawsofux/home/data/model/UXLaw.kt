@@ -9,5 +9,5 @@ data class UXLaw(
     val uXLawFurtherReading: List<Triple<String, String, String>>,
     val uXLawSource: String?,
     val uXLawLargeFormatPoster: String,
-    val uXLawFreePoster: String
+    val uXLawFreePoster: String,
 )
