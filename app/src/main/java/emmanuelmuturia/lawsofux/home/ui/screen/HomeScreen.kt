@@ -67,7 +67,7 @@ import org.koin.androidx.compose.koinViewModel
  */
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navigateToHomeDetailsScreen: (UXLaw) -> Unit) {
     val homeScreenListState = rememberLazyListState()
 
     val showScrollToTopButton by remember {
@@ -80,9 +80,9 @@ fun HomeScreen() {
 
     Scaffold(
         modifier =
-            Modifier
-                .fillMaxSize()
-                .background(color = MaterialTheme.colorScheme.background),
+        Modifier
+            .fillMaxSize()
+            .background(color = MaterialTheme.colorScheme.background),
         topBar = {
             LawsOfUXTopAppBar()
         },
@@ -108,11 +108,12 @@ fun HomeScreen() {
     ) { paddingValues ->
         val homeScreenViewModel: HomeScreenViewModel = koinViewModel()
         val homeScreenUIState: HomeScreenUIState by
-            homeScreenViewModel.homeScreenUIState.collectAsStateWithLifecycle()
+        homeScreenViewModel.homeScreenUIState.collectAsStateWithLifecycle()
         HomeScreenContent(
             modifier = Modifier.padding(paddingValues = paddingValues),
             homeScreenUIState = homeScreenUIState,
             homeScreenListState = homeScreenListState,
+            navigateToHomeDetailsScreen = navigateToHomeDetailsScreen
         )
     }
 }
@@ -122,6 +123,7 @@ private fun HomeScreenContent(
     modifier: Modifier,
     homeScreenUIState: HomeScreenUIState,
     homeScreenListState: LazyListState,
+    navigateToHomeDetailsScreen: (UXLaw) -> Unit
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
@@ -130,7 +132,12 @@ private fun HomeScreenContent(
         item { HomeScreenText() }
         item { HomeScreenNotification() }
         items(items = homeScreenUIState.uxLaws) { uxLaw ->
-            LawsOfUXCardItem(uxLaw = uxLaw)
+            LawsOfUXCardItem(
+                uxLaw = uxLaw,
+                navigateToHomeDetailsScreen = {
+                    navigateToHomeDetailsScreen(uxLaw)
+                }
+            )
         }
         item { Spacer(modifier = Modifier.height(height = 21.dp)) }
         item { LawsOfUXFooter() }
@@ -153,9 +160,9 @@ private fun HomeScreenText() {
 private fun HomeScreenNotification() {
     Card(
         modifier =
-            Modifier
-                .fillMaxWidth()
-                .padding(all = 14.dp),
+        Modifier
+            .fillMaxWidth()
+            .padding(all = 14.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
     ) {
         Row(
@@ -179,32 +186,32 @@ private fun HomeScreenNotification() {
             Text(
                 modifier = Modifier.padding(all = 14.dp),
                 text =
-                    buildAnnotatedString {
-                        append(
-                            text =
-                                "The updated Laws of UX large format index poster is now " +
-                                    "available! Additions include Paradox of the Active User, " +
-                                    "Selection Attention, Cognitive Bias, and more. ",
-                        )
+                buildAnnotatedString {
+                    append(
+                        text =
+                        "The updated Laws of UX large format index poster is now " +
+                            "available! Additions include Paradox of the Active User, " +
+                            "Selection Attention, Cognitive Bias, and more. ",
+                    )
 
-                        withLink(
-                            link =
-                                LinkAnnotation.Url(
-                                    url =
-                                        "https://jonyablonski.bigcartel.com/product/" +
-                                            "laws-of-ux-index-poster",
-                                ),
+                    withLink(
+                        link =
+                        LinkAnnotation.Url(
+                            url =
+                            "https://jonyablonski.bigcartel.com/product/" +
+                                "laws-of-ux-index-poster",
+                        ),
+                    ) {
+                        withStyle(
+                            style =
+                            SpanStyle(
+                                textDecoration = TextDecoration.Underline,
+                            ),
                         ) {
-                            withStyle(
-                                style =
-                                    SpanStyle(
-                                        textDecoration = TextDecoration.Underline,
-                                    ),
-                            ) {
-                                append(text = "Check it out →")
-                            }
+                            append(text = "Check it out →")
                         }
-                    },
+                    }
+                },
                 color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 18.sp,
                 overflow = TextOverflow.Clip,

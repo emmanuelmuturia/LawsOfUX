@@ -1,6 +1,7 @@
 package emmanuelmuturia.lawsofux.commons.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,12 +24,15 @@ import emmanuelmuturia.lawsofux.R
 import emmanuelmuturia.lawsofux.home.data.model.UXLaw
 
 @Composable
-fun LawsOfUXCardItem(uxLaw: UXLaw) {
+fun LawsOfUXCardItem(uxLaw: UXLaw, navigateToHomeDetailsScreen: (UXLaw) -> Unit) {
     Card(
         modifier =
         Modifier
             .fillMaxWidth()
-            .padding(all = 14.dp),
+            .padding(all = 14.dp)
+            .clickable {
+                navigateToHomeDetailsScreen(uxLaw)
+            },
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
     ) {
         Column(

@@ -1,5 +1,8 @@
 package emmanuelmuturia.lawsofux.home.data.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class UXLaw(
     val uxLawThumbnail: Int,
     val uxLawTitle: String,
