@@ -53,6 +53,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import emmanuelmuturia.lawsofux.R
+import emmanuelmuturia.lawsofux.commons.components.LawsOfUXCardItem
 import emmanuelmuturia.lawsofux.commons.components.LawsOfUXFooter
 import emmanuelmuturia.lawsofux.commons.components.LawsOfUXTopAppBar
 import emmanuelmuturia.lawsofux.home.data.model.UXLaw
@@ -129,7 +130,7 @@ private fun HomeScreenContent(
         item { HomeScreenText() }
         item { HomeScreenNotification() }
         items(items = homeScreenUIState.uxLaws) { uxLaw ->
-            HomeScreenCardItem(uxLaw = uxLaw)
+            LawsOfUXCardItem(uxLaw = uxLaw)
         }
         item { Spacer(modifier = Modifier.height(height = 21.dp)) }
         item { LawsOfUXFooter() }
@@ -206,47 +207,6 @@ private fun HomeScreenNotification() {
                     },
                 color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 18.sp,
-                overflow = TextOverflow.Clip,
-                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
-            )
-        }
-    }
-}
-
-@Composable
-private fun HomeScreenCardItem(uxLaw: UXLaw) {
-    Card(
-        modifier =
-            Modifier
-                .fillMaxWidth()
-                .padding(all = 14.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-    ) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-        ) {
-            Image(
-                modifier = Modifier.fillMaxSize(),
-                painter = painterResource(id = uxLaw.uxLawThumbnail),
-                contentDescription = "Home Screen Content Thumbnail",
-                contentScale = ContentScale.Crop,
-            )
-
-            Text(
-                modifier = Modifier.padding(all = 14.dp),
-                text = uxLaw.uxLawTitle,
-                fontSize = 25.sp,
-                color = MaterialTheme.colorScheme.onSurface,
-                overflow = TextOverflow.Clip,
-                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
-                fontWeight = FontWeight.ExtraBold,
-            )
-
-            Text(
-                modifier = Modifier.padding(all = 14.dp),
-                text = uxLaw.uxLawDescription,
-                fontSize = 18.sp,
-                color = MaterialTheme.colorScheme.onSurface,
                 overflow = TextOverflow.Clip,
                 fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
             )

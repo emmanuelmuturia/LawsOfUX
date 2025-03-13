@@ -5,23 +5,33 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowDropDown
 import androidx.compose.material.icons.rounded.KeyboardArrowUp
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -61,6 +71,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomeDetailsScreen(
     navigateBack: () -> Unit,
+    uxLaw: UXLaw,
+    navigateToPosterShop: () -> Unit
 ) {
     val homeDetailsScreenListState = rememberLazyListState()
 
@@ -217,13 +229,14 @@ fun HomeDetailsScreen(
                 },
                 title = {
                     Text(
-                        text = "Home Details Screen",
+                        modifier = Modifier.padding(all = 14.dp),
+                        text = uxLaw.uxLawTitle,
+                        fontSize = 28.sp,
                         color = MaterialTheme.colorScheme.onBackground,
-                        fontFamily = FontFamily(
-                            fonts = listOf(
-                                Font(resId = R.font.ibm_plex_sans_regular)
-                            )
-                        ),
+                        overflow = TextOverflow.Clip,
+                        fontFamily = FontFamily(fonts = listOf(
+                            Font(resId = R.font.ibm_plex_sans_regular))),
+                        fontWeight = FontWeight.ExtraBold,
                     )
                 }
             )
@@ -248,38 +261,123 @@ fun HomeDetailsScreen(
             }
         },
     ) { paddingValues ->
-        HomeDetailsScreenContent(modifier = Modifier.padding(paddingValues = paddingValues))
+        HomeDetailsScreenContent(
+            modifier = Modifier.padding(paddingValues = paddingValues),
+            homeDetailsScreenListState = homeDetailsScreenListState,
+            uxLaw = uxLaw,
+            navigateToPosterShop = navigateToPosterShop
+        )
     }
 }
 
 @Composable
-private fun HomeDetailsScreenContent(modifier: Modifier) {
+private fun HomeDetailsScreenContent(
+    modifier: Modifier,
+    homeDetailsScreenListState: LazyListState,
+    uxLaw: UXLaw,
+    navigateToPosterShop: () -> Unit
+) {
+
+    LazyColumn(
+        modifier = modifier.fillMaxSize(),
+        state = homeDetailsScreenListState,
+    ) {
+
+        item {
+            HomeDetailsScreenTitleAndImage(uxLaw = uxLaw)
+        }
+
+        item {
+            HomeDetailsScreenDefinition(uxLaw = uxLaw)
+        }
+
+        item {
+            HomeDetailsScreenTakeawayTitle()
+        }
+
+        items(items = uxLaw.uXLawTakeaways) { uxLawTakeAway ->
+            Text(
+                modifier = Modifier.padding(all = 14.dp),
+                text = "1]",
+                fontSize = 14.sp,
+                color = MaterialTheme.colorScheme.onBackground,
+                overflow = TextOverflow.Clip,
+                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+                fontWeight = FontWeight.Bold,
+            )
+
+            Text(
+                modifier = Modifier.padding(all = 14.dp),
+                text = uxLawTakeAway,
+                fontSize = 18.sp,
+                color = MaterialTheme.colorScheme.onBackground,
+                overflow = TextOverflow.Clip,
+                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+                fontWeight = FontWeight.Bold,
+            )
+        }
+
+        item {
+            HomeDetailsScreenOriginsTitle()
+        }
+
+        item {
+            HomeDetailsScreenOriginsContent(uxLaw = uxLaw)
+        }
+
+        item {
+            HomeDetailsScreenSource(uxLaw = uxLaw)
+        }
+
+        item {
+            HomeDetailsScreenFurtherReadingTitle()
+        }
+
+        items(count = 7) {
+            // I will get the list of Further Reading later...
+            HomeDetailsScreenFurtherReadingItem(uxLaw = uxLaw)
+        }
+
+        item {
+            HomeDetailsScreenLargePosterButton(
+                navigateToPosterShop = navigateToPosterShop
+            )
+        }
+
+        item {
+            HomeDetailsScreenSmallPosterText(uxLaw = uxLaw)
+        }
+
+        item {
+            HomeDetailsScreenDivider()
+        }
+
+        item {
+            HomeDetailsScreenRelatedTitle()
+        }
+
+        /*items(items = ) {
+            LawsOfUXCardItem(uxLaw = )
+        }
+
+        item {
+            HomeDetailsScreenNext()
+        }*/
+
+    }
+
 }
 
 @Composable
 private fun HomeDetailsScreenTitleAndImage(uxLaw: UXLaw) {
     // I will refine this later...
-    Column(
+    Image(
         modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        Text(
-            modifier = Modifier.padding(all = 14.dp),
-            text = uxLaw.uxLawTitle,
-            fontSize = 28.sp,
-            color = MaterialTheme.colorScheme.onBackground,
-            overflow = TextOverflow.Clip,
-            fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
-            fontWeight = FontWeight.ExtraBold,
-        )
+        painter = painterResource(id = uxLaw.uxLawThumbnail),
+        contentDescription = "Home Details Screen Content Thumbnail",
+        contentScale = ContentScale.Crop,
+    )
 
-        Image(
-            modifier = Modifier.fillMaxSize(),
-            painter = painterResource(id = uxLaw.uxLawThumbnail),
-            contentDescription = "Home Details Screen Content Thumbnail",
-            contentScale = ContentScale.Crop,
-        )
-    }
 }
 
 @Composable
@@ -296,7 +394,8 @@ private fun HomeDetailsScreenDefinition(uxLaw: UXLaw) {
 }
 
 @Composable
-private fun HomeDetailsScreenTakeaways(modifier: Modifier = Modifier) {
+private fun HomeDetailsScreenTakeawayTitle(modifier: Modifier = Modifier) {
+    // I will check on this later...
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "Takeaways",
@@ -309,7 +408,7 @@ private fun HomeDetailsScreenTakeaways(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun HomeDetailsScreenOrigins(modifier: Modifier = Modifier) {
+private fun HomeDetailsScreenOriginsTitle(modifier: Modifier = Modifier) {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "Origins",
@@ -322,7 +421,19 @@ private fun HomeDetailsScreenOrigins(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun HomeDetailsScreenSource(uxLaw: UXLaw) {
+private fun HomeDetailsScreenOriginsContent(uxLaw: UXLaw) {
+    Text(
+        modifier = Modifier.padding(all = 14.dp),
+        text = uxLaw.uXLawOrigins,
+        fontSize = 14.sp,
+        color = MaterialTheme.colorScheme.onBackground,
+        overflow = TextOverflow.Clip,
+        fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+    )
+}
+
+@Composable
+private fun HomeDetailsScreenSource(uxLaw: UXLaw) {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text =
@@ -347,7 +458,7 @@ fun HomeDetailsScreenSource(uxLaw: UXLaw) {
 }
 
 @Composable
-private fun HomeDetailsScreenFurtherReading(modifier: Modifier = Modifier) {
+private fun HomeDetailsScreenFurtherReadingTitle(modifier: Modifier = Modifier) {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "Further Reading",
@@ -360,7 +471,109 @@ private fun HomeDetailsScreenFurtherReading(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun HomeDetailsScreenRelated(modifier: Modifier = Modifier) {
+private fun HomeDetailsScreenFurtherReadingItem(uxLaw: UXLaw) {
+
+    Card(
+        modifier =
+        Modifier
+            .fillMaxWidth()
+            .padding(all = 14.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+    ) {
+
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+
+            Text(
+                modifier = Modifier.padding(all = 14.dp),
+                // I am not sure how to handle this [Title]...
+                text = "Further Reading",
+                fontSize = 21.sp,
+                color = MaterialTheme.colorScheme.onBackground,
+                overflow = TextOverflow.Clip,
+                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+                fontWeight = FontWeight.ExtraBold,
+            )
+
+            Text(
+                modifier = Modifier.padding(all = 14.dp),
+                // I am not sure how to handle this [Content]...
+                text = "Further Reading",
+                fontSize = 21.sp,
+                color = MaterialTheme.colorScheme.onBackground,
+                overflow = TextOverflow.Clip,
+                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+                fontWeight = FontWeight.ExtraBold,
+            )
+
+        }
+
+    }
+
+}
+
+@Composable
+private fun HomeDetailsScreenLargePosterButton(
+    navigateToPosterShop: () -> Unit
+) {
+
+    Button(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(all = 7.dp),
+        onClick = navigateToPosterShop,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.primary,
+        )
+    ) {
+        Text(
+            text = "BUY LARGE FORMAT POSTER",
+            color = MaterialTheme.colorScheme.onPrimary,
+            fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
+        )
+    }
+
+}
+
+@Composable
+private fun HomeDetailsScreenSmallPosterText(uxLaw: UXLaw) {
+    Text(
+        modifier = Modifier.padding(all = 14.dp),
+        text =
+        buildAnnotatedString {
+            uxLaw.uXLawFreePoster.let {
+                LinkAnnotation.Url(
+                    url = it,
+                )
+            }.let {
+                withLink(
+                    link = it,
+                ) {
+                    append(text = "Download free poster")
+                }
+            }
+        },
+        fontSize = 14.sp,
+        color = MaterialTheme.colorScheme.onBackground,
+        fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+        textDecoration = TextDecoration.Underline,
+    )
+}
+
+@Composable
+private fun HomeDetailsScreenDivider() {
+    HorizontalDivider(
+        modifier = Modifier.padding(all = 14.dp),
+        thickness = 7.dp,
+        color = MaterialTheme.colorScheme.onBackground,
+    )
+}
+
+@Composable
+private fun HomeDetailsScreenRelatedTitle(modifier: Modifier = Modifier) {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "Related",
@@ -374,4 +587,13 @@ private fun HomeDetailsScreenRelated(modifier: Modifier = Modifier) {
 
 @Composable
 private fun HomeDetailsScreenNext(modifier: Modifier = Modifier) {
+    Text(
+        modifier = Modifier.padding(all = 14.dp),
+        text = "Next",
+        fontSize = 21.sp,
+        color = MaterialTheme.colorScheme.onBackground,
+        overflow = TextOverflow.Clip,
+        fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+        fontWeight = FontWeight.ExtraBold,
+    )
 }
