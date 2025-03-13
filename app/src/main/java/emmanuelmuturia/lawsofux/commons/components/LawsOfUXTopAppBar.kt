@@ -45,8 +45,8 @@ import emmanuelmuturia.lawsofux.R
 
 @Composable
 fun LawsOfUXTopAppBar() {
-    var screensMenuExpanded by remember { mutableStateOf(false) }
-    var languagesMenuExpanded by remember { mutableStateOf(false) }
+    var screensMenuExpanded by remember { mutableStateOf(value = false) }
+    var languagesMenuExpanded by remember { mutableStateOf(value = false) }
 
     Row(
         modifier =
