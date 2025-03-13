@@ -9,12 +9,10 @@ import kotlinx.serialization.Serializable
 @Serializable
 object HomeScreen
 
-fun NavGraphBuilder.homeScreen(
-    navigateToHomeDetailsScreen: (UXLaw) -> Unit
-) {
+fun NavGraphBuilder.homeScreen(navigateToHomeDetailsScreen: (UXLaw) -> Unit) {
     composable<HomeScreen> {
         HomeScreen(
-            navigateToHomeDetailsScreen = navigateToHomeDetailsScreen
+            navigateToHomeDetailsScreen = navigateToHomeDetailsScreen,
         )
     }
 }

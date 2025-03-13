@@ -24,15 +24,18 @@ import emmanuelmuturia.lawsofux.R
 import emmanuelmuturia.lawsofux.home.data.model.UXLaw
 
 @Composable
-fun LawsOfUXCardItem(uxLaw: UXLaw, navigateToHomeDetailsScreen: (UXLaw) -> Unit) {
+fun LawsOfUXCardItem(
+    uxLaw: UXLaw,
+    navigateToHomeDetailsScreen: (UXLaw) -> Unit,
+) {
     Card(
         modifier =
-        Modifier
-            .fillMaxWidth()
-            .padding(all = 14.dp)
-            .clickable {
-                navigateToHomeDetailsScreen(uxLaw)
-            },
+            Modifier
+                .fillMaxWidth()
+                .padding(all = 14.dp)
+                .clickable {
+                    navigateToHomeDetailsScreen(uxLaw)
+                },
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
     ) {
         Column(

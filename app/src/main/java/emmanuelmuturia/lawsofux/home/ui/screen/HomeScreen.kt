@@ -1,9 +1,7 @@
 package emmanuelmuturia.lawsofux.home.ui.screen
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -36,15 +34,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withLink
@@ -80,9 +75,9 @@ fun HomeScreen(navigateToHomeDetailsScreen: (UXLaw) -> Unit) {
 
     Scaffold(
         modifier =
-        Modifier
-            .fillMaxSize()
-            .background(color = MaterialTheme.colorScheme.background),
+            Modifier
+                .fillMaxSize()
+                .background(color = MaterialTheme.colorScheme.background),
         topBar = {
             LawsOfUXTopAppBar()
         },
@@ -108,12 +103,12 @@ fun HomeScreen(navigateToHomeDetailsScreen: (UXLaw) -> Unit) {
     ) { paddingValues ->
         val homeScreenViewModel: HomeScreenViewModel = koinViewModel()
         val homeScreenUIState: HomeScreenUIState by
-        homeScreenViewModel.homeScreenUIState.collectAsStateWithLifecycle()
+            homeScreenViewModel.homeScreenUIState.collectAsStateWithLifecycle()
         HomeScreenContent(
             modifier = Modifier.padding(paddingValues = paddingValues),
             homeScreenUIState = homeScreenUIState,
             homeScreenListState = homeScreenListState,
-            navigateToHomeDetailsScreen = navigateToHomeDetailsScreen
+            navigateToHomeDetailsScreen = navigateToHomeDetailsScreen,
         )
     }
 }
@@ -123,7 +118,7 @@ private fun HomeScreenContent(
     modifier: Modifier,
     homeScreenUIState: HomeScreenUIState,
     homeScreenListState: LazyListState,
-    navigateToHomeDetailsScreen: (UXLaw) -> Unit
+    navigateToHomeDetailsScreen: (UXLaw) -> Unit,
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
@@ -136,7 +131,7 @@ private fun HomeScreenContent(
                 uxLaw = uxLaw,
                 navigateToHomeDetailsScreen = {
                     navigateToHomeDetailsScreen(uxLaw)
-                }
+                },
             )
         }
         item { Spacer(modifier = Modifier.height(height = 21.dp)) }
@@ -160,9 +155,9 @@ private fun HomeScreenText() {
 private fun HomeScreenNotification() {
     Card(
         modifier =
-        Modifier
-            .fillMaxWidth()
-            .padding(all = 14.dp),
+            Modifier
+                .fillMaxWidth()
+                .padding(all = 14.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
     ) {
         Row(
@@ -186,32 +181,32 @@ private fun HomeScreenNotification() {
             Text(
                 modifier = Modifier.padding(all = 14.dp),
                 text =
-                buildAnnotatedString {
-                    append(
-                        text =
-                        "The updated Laws of UX large format index poster is now " +
-                            "available! Additions include Paradox of the Active User, " +
-                            "Selection Attention, Cognitive Bias, and more. ",
-                    )
+                    buildAnnotatedString {
+                        append(
+                            text =
+                                "The updated Laws of UX large format index poster is now " +
+                                    "available! Additions include Paradox of the Active User, " +
+                                    "Selection Attention, Cognitive Bias, and more. ",
+                        )
 
-                    withLink(
-                        link =
-                        LinkAnnotation.Url(
-                            url =
-                            "https://jonyablonski.bigcartel.com/product/" +
-                                "laws-of-ux-index-poster",
-                        ),
-                    ) {
-                        withStyle(
-                            style =
-                            SpanStyle(
-                                textDecoration = TextDecoration.Underline,
-                            ),
+                        withLink(
+                            link =
+                                LinkAnnotation.Url(
+                                    url =
+                                        "https://jonyablonski.bigcartel.com/product/" +
+                                            "laws-of-ux-index-poster",
+                                ),
                         ) {
-                            append(text = "Check it out →")
+                            withStyle(
+                                style =
+                                    SpanStyle(
+                                        textDecoration = TextDecoration.Underline,
+                                    ),
+                            ) {
+                                append(text = "Check it out →")
+                            }
                         }
-                    }
-                },
+                    },
                 color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 18.sp,
                 overflow = TextOverflow.Clip,

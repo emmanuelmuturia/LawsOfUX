@@ -6,7 +6,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -22,7 +21,6 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.ArrowDropDown
 import androidx.compose.material.icons.rounded.KeyboardArrowUp
 import androidx.compose.material3.Button
@@ -80,7 +78,7 @@ fun HomeDetailsScreen(
     navigateBack: () -> Unit,
     uxLaw: UXLaw,
     navigateToPosterShop: () -> Unit,
-    homeScreenViewModel: HomeScreenViewModel
+    homeScreenViewModel: HomeScreenViewModel,
 ) {
     val homeDetailsScreenListState = rememberLazyListState()
 
@@ -98,16 +96,16 @@ fun HomeDetailsScreen(
 
     Scaffold(
         modifier =
-        Modifier
-            .fillMaxSize()
-            .background(color = MaterialTheme.colorScheme.background),
+            Modifier
+                .fillMaxSize()
+                .background(color = MaterialTheme.colorScheme.background),
         topBar = {
             CenterAlignedTopAppBar(
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.background,
-                ),
+                colors =
+                    TopAppBarDefaults.centerAlignedTopAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.background,
+                    ),
                 actions = {
-
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier.padding(end = 16.dp),
@@ -117,20 +115,21 @@ fun HomeDetailsScreen(
                         }) {
                             Icon(
                                 imageVector =
-                                if (isSystemInDarkTheme()) {
-                                    ImageVector.vectorResource(id = R.drawable.light_mode)
-                                } else {
-                                    ImageVector.vectorResource(id = R.drawable.dark_mode)
-                                },
+                                    if (isSystemInDarkTheme()) {
+                                        ImageVector.vectorResource(id = R.drawable.light_mode)
+                                    } else {
+                                        ImageVector.vectorResource(id = R.drawable.dark_mode)
+                                    },
                                 contentDescription = "Toggle Dark Mode and Light Mode",
                                 tint = MaterialTheme.colorScheme.onPrimary,
                             )
                         }
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.clickable {
-                                languagesMenuExpanded = !languagesMenuExpanded
-                            },
+                            modifier =
+                                Modifier.clickable {
+                                    languagesMenuExpanded = !languagesMenuExpanded
+                                },
                         ) {
                             Icon(
                                 imageVector = ImageVector.vectorResource(id = R.drawable.language),
@@ -144,22 +143,22 @@ fun HomeDetailsScreen(
                                 text = "ENGLISH",
                                 color = MaterialTheme.colorScheme.onPrimary,
                                 fontFamily =
-                                FontFamily(
-                                    fonts =
-                                    listOf(
-                                        Font(resId = R.font.ibm_plex_mono_regular),
+                                    FontFamily(
+                                        fonts =
+                                            listOf(
+                                                Font(resId = R.font.ibm_plex_mono_regular),
+                                            ),
                                     ),
-                                ),
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 16.sp,
                             )
                             Icon(
                                 imageVector =
-                                if (languagesMenuExpanded) {
-                                    Icons.Rounded.KeyboardArrowUp
-                                } else {
-                                    Icons.Rounded.ArrowDropDown
-                                },
+                                    if (languagesMenuExpanded) {
+                                        Icons.Rounded.KeyboardArrowUp
+                                    } else {
+                                        Icons.Rounded.ArrowDropDown
+                                    },
                                 contentDescription = "Dropdown Icon",
                                 modifier = Modifier.size(size = 24.dp),
                                 tint = MaterialTheme.colorScheme.onPrimary,
@@ -177,12 +176,12 @@ fun HomeDetailsScreen(
                                 Text(
                                     text = "Español",
                                     fontFamily =
-                                    FontFamily(
-                                        fonts =
-                                        listOf(
-                                            Font(resId = R.font.ibm_plex_mono_regular),
+                                        FontFamily(
+                                            fonts =
+                                                listOf(
+                                                    Font(resId = R.font.ibm_plex_mono_regular),
+                                                ),
                                         ),
-                                    ),
                                     fontWeight = FontWeight.Bold,
                                     color = MaterialTheme.colorScheme.onPrimary,
                                     fontSize = 21.sp,
@@ -198,12 +197,12 @@ fun HomeDetailsScreen(
                                 Text(
                                     text = "Français",
                                     fontFamily =
-                                    FontFamily(
-                                        fonts =
-                                        listOf(
-                                            Font(resId = R.font.ibm_plex_mono_regular),
+                                        FontFamily(
+                                            fonts =
+                                                listOf(
+                                                    Font(resId = R.font.ibm_plex_mono_regular),
+                                                ),
                                         ),
-                                    ),
                                     fontWeight = FontWeight.Bold,
                                     color = MaterialTheme.colorScheme.onPrimary,
                                     fontSize = 21.sp,
@@ -215,16 +214,14 @@ fun HomeDetailsScreen(
                             },
                         )
                     }
-
                 },
                 navigationIcon = {
                     LawsOfUXNavigationBackButton(
-                        navigateBack = navigateBack
+                        navigateBack = navigateBack,
                     )
                 },
                 title = {
-
-                }
+                },
             )
         },
         floatingActionButton = {
@@ -252,7 +249,7 @@ fun HomeDetailsScreen(
             homeDetailsScreenListState = homeDetailsScreenListState,
             uxLaw = uxLaw,
             navigateToPosterShop = navigateToPosterShop,
-            uxLaws = homeScreenUIState.uxLaws
+            uxLaws = homeScreenUIState.uxLaws,
         )
     }
 }
@@ -263,16 +260,14 @@ private fun HomeDetailsScreenContent(
     homeDetailsScreenListState: LazyListState,
     uxLaw: UXLaw,
     navigateToPosterShop: () -> Unit,
-    uxLaws: List<UXLaw>
+    uxLaws: List<UXLaw>,
 ) {
-
     val randomLawsOfUX = remember { uxLaws.shuffled().take(n = 3) }
 
     LazyColumn(
         modifier = modifier.fillMaxSize(),
         state = homeDetailsScreenListState,
     ) {
-
         item {
             HomeDetailsScreenTitle(uxLaw = uxLaw)
         }
@@ -337,13 +332,13 @@ private fun HomeDetailsScreenContent(
         items(items = uxLaw.uXLawFurtherReading) { furtherReading ->
             HomeDetailsScreenFurtherReadingItem(
                 furtherReadingTitle = furtherReading.first,
-                furtherReadingContent = furtherReading.second
+                furtherReadingContent = furtherReading.second,
             )
         }
 
         item {
             HomeDetailsScreenLargePosterButton(
-                navigateToPosterShop = navigateToPosterShop
+                navigateToPosterShop = navigateToPosterShop,
             )
         }
 
@@ -366,12 +361,10 @@ private fun HomeDetailsScreenContent(
         item {
             HomeDetailsScreenNext(
                 uxLaws = uxLaws,
-                currentUXLaw = uxLaw
+                currentUXLaw = uxLaw,
             )
         }
-
     }
-
 }
 
 @Composable
@@ -382,13 +375,15 @@ private fun HomeDetailsScreenTitle(uxLaw: UXLaw) {
         fontSize = 28.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
-        fontFamily = FontFamily(
-            fonts = listOf(
-                Font(resId = R.font.ibm_plex_sans_regular)
-            )
-        ),
+        fontFamily =
+            FontFamily(
+                fonts =
+                    listOf(
+                        Font(resId = R.font.ibm_plex_sans_regular),
+                    ),
+            ),
         fontWeight = FontWeight.ExtraBold,
-        textAlign = TextAlign.Center
+        textAlign = TextAlign.Center,
     )
 }
 
@@ -400,7 +395,6 @@ private fun HomeDetailsScreenImage(uxLaw: UXLaw) {
         contentDescription = "Home Details Screen Content Thumbnail",
         contentScale = ContentScale.Crop,
     )
-
 }
 
 @Composable
@@ -459,19 +453,19 @@ private fun HomeDetailsScreenSource(uxLaw: UXLaw) {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text =
-        buildAnnotatedString {
-            uxLaw.uXLawSource?.let {
-                LinkAnnotation.Url(
-                    url = it,
-                )
-            }?.let {
-                withLink(
-                    link = it,
-                ) {
-                    append(text = "Source")
+            buildAnnotatedString {
+                uxLaw.uXLawSource?.let {
+                    LinkAnnotation.Url(
+                        url = it,
+                    )
+                }?.let {
+                    withLink(
+                        link = it,
+                    ) {
+                        append(text = "Source")
+                    }
                 }
-            }
-        },
+            },
         fontSize = 18.sp,
         color = MaterialTheme.colorScheme.onBackground,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
@@ -495,23 +489,20 @@ private fun HomeDetailsScreenFurtherReadingTitle() {
 @Composable
 private fun HomeDetailsScreenFurtherReadingItem(
     furtherReadingTitle: String,
-    furtherReadingContent: String
+    furtherReadingContent: String,
 ) {
-
     Card(
         modifier =
-        Modifier
-            .fillMaxWidth()
-            .padding(all = 14.dp),
+            Modifier
+                .fillMaxWidth()
+                .padding(all = 14.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
     ) {
-
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center,
         ) {
-
             Text(
                 modifier = Modifier.padding(all = 14.dp),
                 text = furtherReadingTitle,
@@ -533,34 +524,30 @@ private fun HomeDetailsScreenFurtherReadingItem(
 
             Row(
                 modifier = Modifier.fillMaxWidth().padding(end = 14.dp),
-                horizontalArrangement = Arrangement.End
+                horizontalArrangement = Arrangement.End,
             ) {
                 Icon(
                     imageVector = ImageVector.vectorResource(id = R.drawable.further_reading),
                     contentDescription = "Further Reading Icon",
                     modifier = Modifier.padding(all = 14.dp),
-                    tint = MaterialTheme.colorScheme.onBackground
+                    tint = MaterialTheme.colorScheme.onBackground,
                 )
             }
-
         }
-
     }
-
 }
 
 @Composable
-private fun HomeDetailsScreenLargePosterButton(
-    navigateToPosterShop: () -> Unit
-) {
-
+private fun HomeDetailsScreenLargePosterButton(navigateToPosterShop: () -> Unit) {
     Button(
-        modifier = Modifier
-            .padding(all = 7.dp),
+        modifier =
+            Modifier
+                .padding(all = 7.dp),
         onClick = navigateToPosterShop,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primary,
-        )
+        colors =
+            ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+            ),
     ) {
         Text(
             text = "BUY LARGE FORMAT POSTER",
@@ -568,7 +555,6 @@ private fun HomeDetailsScreenLargePosterButton(
             fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
         )
     }
-
 }
 
 @Composable
@@ -576,19 +562,19 @@ private fun HomeDetailsScreenSmallPosterText(uxLaw: UXLaw) {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text =
-        buildAnnotatedString {
-            uxLaw.uXLawFreePoster.let {
-                LinkAnnotation.Url(
-                    url = it,
-                )
-            }.let {
-                withLink(
-                    link = it,
-                ) {
-                    append(text = "Download free poster")
+            buildAnnotatedString {
+                uxLaw.uXLawFreePoster.let {
+                    LinkAnnotation.Url(
+                        url = it,
+                    )
+                }.let {
+                    withLink(
+                        link = it,
+                    ) {
+                        append(text = "Download free poster")
+                    }
                 }
-            }
-        },
+            },
         fontSize = 14.sp,
         color = MaterialTheme.colorScheme.onBackground,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
@@ -621,33 +607,30 @@ private fun HomeDetailsScreenRelatedTitle(modifier: Modifier = Modifier) {
 @Composable
 private fun HomeDetailsScreenNext(
     uxLaws: List<UXLaw>,
-    currentUXLaw: UXLaw
+    currentUXLaw: UXLaw,
 ) {
-
     val currentUXLawIndex = uxLaws.indexOf(element = currentUXLaw)
 
     Card(
         modifier =
-        Modifier
-            .fillMaxWidth()
-            .clickable {
-                //navigateToHomeDetailsScreen(uxLaw)
-            },
+            Modifier
+                .fillMaxWidth()
+                .clickable {
+                    // navigateToHomeDetailsScreen(uxLaw)
+                },
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
     ) {
-
         Column(modifier = Modifier.fillMaxSize().padding(all = 14.dp)) {
-
             Button(
                 modifier = Modifier.padding(all = 7.dp),
                 onClick = {
-                    //navigateToHomeDetailsScreen(uxLaw)
+                    // navigateToHomeDetailsScreen(uxLaw)
                 },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                )
+                colors =
+                    ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.primary,
+                    ),
             ) {
-
                 Text(
                     text = "NEXT",
                     fontSize = 14.sp,
@@ -663,8 +646,6 @@ private fun HomeDetailsScreenNext(
                 fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
                 fontWeight = FontWeight.ExtraBold,
             )
-
         }
-
     }
 }

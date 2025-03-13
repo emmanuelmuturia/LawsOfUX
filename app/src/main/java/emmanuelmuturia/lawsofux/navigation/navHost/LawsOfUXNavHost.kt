@@ -18,27 +18,27 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun LawsOfUXNavHost() {
-
     val navController = rememberNavController()
 
     val homeScreenViewModel: HomeScreenViewModel = koinViewModel()
 
     LawsOfUXTheme {
         Surface(
-            modifier = Modifier
-                .background(color = MaterialTheme.colorScheme.background)
-                .fillMaxSize()
+            modifier =
+                Modifier
+                    .background(color = MaterialTheme.colorScheme.background)
+                    .fillMaxSize(),
         ) {
             NavHost(navController = navController, startDestination = HomeScreen) {
-
                 homeScreen(
                     navigateToHomeDetailsScreen = { uxLaw ->
                         navController.navigate(
-                            route = HomeDetailsScreen(
-                                uxLaw = uxLaw
-                            )
+                            route =
+                                HomeDetailsScreen(
+                                    uxLaw = uxLaw,
+                                ),
                         )
-                    }
+                    },
                 )
 
                 homeDetailsScreen(
@@ -46,11 +46,9 @@ fun LawsOfUXNavHost() {
                     navigateToPosterShop = {
                         // Navigate to the Poster Shop...
                     },
-                    homeScreenViewModel = homeScreenViewModel
+                    homeScreenViewModel = homeScreenViewModel,
                 )
-
             }
         }
     }
-
 }
