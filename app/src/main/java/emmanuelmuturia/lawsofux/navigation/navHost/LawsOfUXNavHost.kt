@@ -1,4 +1,4 @@
-package emmanuelmuturia.lawsofux.navigation
+package emmanuelmuturia.lawsofux.navigation.navHost
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,11 +13,15 @@ import emmanuelmuturia.lawsofux.home.ui.navigation.HomeDetailsScreen
 import emmanuelmuturia.lawsofux.home.ui.navigation.HomeScreen
 import emmanuelmuturia.lawsofux.home.ui.navigation.homeDetailsScreen
 import emmanuelmuturia.lawsofux.home.ui.navigation.homeScreen
+import emmanuelmuturia.lawsofux.home.ui.viewmodel.HomeScreenViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun LawsOfUXNavHost() {
 
     val navController = rememberNavController()
+
+    val homeScreenViewModel: HomeScreenViewModel = koinViewModel()
 
     LawsOfUXTheme {
         Surface(
@@ -29,9 +33,11 @@ fun LawsOfUXNavHost() {
 
                 homeScreen(
                     navigateToHomeDetailsScreen = { uxLaw ->
-                        navController.navigate(route = HomeDetailsScreen(
-                            uxLaw = uxLaw
-                        ))
+                        navController.navigate(
+                            route = HomeDetailsScreen(
+                                uxLaw = uxLaw
+                            )
+                        )
                     }
                 )
 
@@ -39,7 +45,8 @@ fun LawsOfUXNavHost() {
                     navigateBack = { navController.popBackStack() },
                     navigateToPosterShop = {
                         // Navigate to the Poster Shop...
-                    }
+                    },
+                    homeScreenViewModel = homeScreenViewModel
                 )
 
             }

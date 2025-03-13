@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -17,9 +18,11 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.ArrowDropDown
 import androidx.compose.material.icons.rounded.KeyboardArrowUp
 import androidx.compose.material3.Button
@@ -57,14 +60,18 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import emmanuelmuturia.lawsofux.R
+import emmanuelmuturia.lawsofux.commons.components.LawsOfUXCardItem
 import emmanuelmuturia.lawsofux.commons.components.LawsOfUXNavigationBackButton
 import emmanuelmuturia.lawsofux.home.data.model.UXLaw
+import emmanuelmuturia.lawsofux.home.ui.viewmodel.HomeScreenViewModel
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -72,7 +79,8 @@ import kotlinx.coroutines.launch
 fun HomeDetailsScreen(
     navigateBack: () -> Unit,
     uxLaw: UXLaw,
-    navigateToPosterShop: () -> Unit
+    navigateToPosterShop: () -> Unit,
+    homeScreenViewModel: HomeScreenViewModel
 ) {
     val homeDetailsScreenListState = rememberLazyListState()
 
@@ -86,6 +94,8 @@ fun HomeDetailsScreen(
 
     var languagesMenuExpanded by remember { mutableStateOf(value = false) }
 
+    val homeScreenUIState by homeScreenViewModel.homeScreenUIState.collectAsStateWithLifecycle()
+
     Scaffold(
         modifier =
         Modifier
@@ -97,21 +107,6 @@ fun HomeDetailsScreen(
                     containerColor = MaterialTheme.colorScheme.background,
                 ),
                 actions = {
-
-                    IconButton(onClick = {
-                        // Toggle Dark Mode and Light Mode...
-                    }) {
-                        Icon(
-                            imageVector =
-                            if (isSystemInDarkTheme()) {
-                                ImageVector.vectorResource(id = R.drawable.light_mode)
-                            } else {
-                                ImageVector.vectorResource(id = R.drawable.dark_mode)
-                            },
-                            contentDescription = "Toggle Dark Mode and Light Mode",
-                            tint = MaterialTheme.colorScheme.onPrimary,
-                        )
-                    }
 
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
@@ -228,16 +223,7 @@ fun HomeDetailsScreen(
                     )
                 },
                 title = {
-                    Text(
-                        modifier = Modifier.padding(all = 14.dp),
-                        text = uxLaw.uxLawTitle,
-                        fontSize = 28.sp,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        overflow = TextOverflow.Clip,
-                        fontFamily = FontFamily(fonts = listOf(
-                            Font(resId = R.font.ibm_plex_sans_regular))),
-                        fontWeight = FontWeight.ExtraBold,
-                    )
+
                 }
             )
         },
@@ -265,7 +251,8 @@ fun HomeDetailsScreen(
             modifier = Modifier.padding(paddingValues = paddingValues),
             homeDetailsScreenListState = homeDetailsScreenListState,
             uxLaw = uxLaw,
-            navigateToPosterShop = navigateToPosterShop
+            navigateToPosterShop = navigateToPosterShop,
+            uxLaws = homeScreenUIState.uxLaws
         )
     }
 }
@@ -275,8 +262,11 @@ private fun HomeDetailsScreenContent(
     modifier: Modifier,
     homeDetailsScreenListState: LazyListState,
     uxLaw: UXLaw,
-    navigateToPosterShop: () -> Unit
+    navigateToPosterShop: () -> Unit,
+    uxLaws: List<UXLaw>
 ) {
+
+    val randomLawsOfUX = remember { uxLaws.shuffled().take(n = 3) }
 
     LazyColumn(
         modifier = modifier.fillMaxSize(),
@@ -284,7 +274,11 @@ private fun HomeDetailsScreenContent(
     ) {
 
         item {
-            HomeDetailsScreenTitleAndImage(uxLaw = uxLaw)
+            HomeDetailsScreenTitle(uxLaw = uxLaw)
+        }
+
+        item {
+            HomeDetailsScreenImage(uxLaw = uxLaw)
         }
 
         item {
@@ -295,15 +289,22 @@ private fun HomeDetailsScreenContent(
             HomeDetailsScreenTakeawayTitle()
         }
 
-        items(items = uxLaw.uXLawTakeaways) { uxLawTakeAway ->
+        itemsIndexed(items = uxLaw.uXLawTakeaways) { index, uxLawTakeAway ->
+
             Text(
-                modifier = Modifier.padding(all = 14.dp),
-                text = "1]",
+                modifier = Modifier.padding(start = 14.dp),
+                text = "${index + 1}",
                 fontSize = 14.sp,
                 color = MaterialTheme.colorScheme.onBackground,
                 overflow = TextOverflow.Clip,
                 fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
                 fontWeight = FontWeight.Bold,
+            )
+
+            HorizontalDivider(
+                modifier = Modifier.padding(all = 14.dp),
+                thickness = 3.dp,
+                color = MaterialTheme.colorScheme.onBackground,
             )
 
             Text(
@@ -333,9 +334,11 @@ private fun HomeDetailsScreenContent(
             HomeDetailsScreenFurtherReadingTitle()
         }
 
-        items(count = 7) {
-            // I will get the list of Further Reading later...
-            HomeDetailsScreenFurtherReadingItem(uxLaw = uxLaw)
+        items(items = uxLaw.uXLawFurtherReading) { furtherReading ->
+            HomeDetailsScreenFurtherReadingItem(
+                furtherReadingTitle = furtherReading.first,
+                furtherReadingContent = furtherReading.second
+            )
         }
 
         item {
@@ -356,21 +359,41 @@ private fun HomeDetailsScreenContent(
             HomeDetailsScreenRelatedTitle()
         }
 
-        /*items(items = ) {
-            LawsOfUXCardItem(uxLaw = )
+        items(items = randomLawsOfUX) { uxLaw ->
+            LawsOfUXCardItem(uxLaw = uxLaw, navigateToHomeDetailsScreen = {})
         }
 
         item {
-            HomeDetailsScreenNext()
-        }*/
+            HomeDetailsScreenNext(
+                uxLaws = uxLaws,
+                currentUXLaw = uxLaw
+            )
+        }
 
     }
 
 }
 
 @Composable
-private fun HomeDetailsScreenTitleAndImage(uxLaw: UXLaw) {
-    // I will refine this later...
+private fun HomeDetailsScreenTitle(uxLaw: UXLaw) {
+    Text(
+        modifier = Modifier.padding(all = 14.dp),
+        text = uxLaw.uxLawTitle,
+        fontSize = 28.sp,
+        color = MaterialTheme.colorScheme.onBackground,
+        overflow = TextOverflow.Clip,
+        fontFamily = FontFamily(
+            fonts = listOf(
+                Font(resId = R.font.ibm_plex_sans_regular)
+            )
+        ),
+        fontWeight = FontWeight.ExtraBold,
+        textAlign = TextAlign.Center
+    )
+}
+
+@Composable
+private fun HomeDetailsScreenImage(uxLaw: UXLaw) {
     Image(
         modifier = Modifier.fillMaxSize(),
         painter = painterResource(id = uxLaw.uxLawThumbnail),
@@ -389,7 +412,6 @@ private fun HomeDetailsScreenDefinition(uxLaw: UXLaw) {
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
-        fontWeight = FontWeight.Bold,
     )
 }
 
@@ -399,7 +421,7 @@ private fun HomeDetailsScreenTakeawayTitle(modifier: Modifier = Modifier) {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "Takeaways",
-        fontSize = 21.sp,
+        fontSize = 28.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
@@ -408,11 +430,11 @@ private fun HomeDetailsScreenTakeawayTitle(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun HomeDetailsScreenOriginsTitle(modifier: Modifier = Modifier) {
+private fun HomeDetailsScreenOriginsTitle() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "Origins",
-        fontSize = 21.sp,
+        fontSize = 28.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
@@ -425,7 +447,7 @@ private fun HomeDetailsScreenOriginsContent(uxLaw: UXLaw) {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = uxLaw.uXLawOrigins,
-        fontSize = 14.sp,
+        fontSize = 18.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
@@ -450,7 +472,7 @@ private fun HomeDetailsScreenSource(uxLaw: UXLaw) {
                 }
             }
         },
-        fontSize = 14.sp,
+        fontSize = 18.sp,
         color = MaterialTheme.colorScheme.onBackground,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
         textDecoration = TextDecoration.Underline,
@@ -458,11 +480,11 @@ private fun HomeDetailsScreenSource(uxLaw: UXLaw) {
 }
 
 @Composable
-private fun HomeDetailsScreenFurtherReadingTitle(modifier: Modifier = Modifier) {
+private fun HomeDetailsScreenFurtherReadingTitle() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "Further Reading",
-        fontSize = 21.sp,
+        fontSize = 28.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
@@ -471,7 +493,10 @@ private fun HomeDetailsScreenFurtherReadingTitle(modifier: Modifier = Modifier) 
 }
 
 @Composable
-private fun HomeDetailsScreenFurtherReadingItem(uxLaw: UXLaw) {
+private fun HomeDetailsScreenFurtherReadingItem(
+    furtherReadingTitle: String,
+    furtherReadingContent: String
+) {
 
     Card(
         modifier =
@@ -489,8 +514,7 @@ private fun HomeDetailsScreenFurtherReadingItem(uxLaw: UXLaw) {
 
             Text(
                 modifier = Modifier.padding(all = 14.dp),
-                // I am not sure how to handle this [Title]...
-                text = "Further Reading",
+                text = furtherReadingTitle,
                 fontSize = 21.sp,
                 color = MaterialTheme.colorScheme.onBackground,
                 overflow = TextOverflow.Clip,
@@ -500,14 +524,24 @@ private fun HomeDetailsScreenFurtherReadingItem(uxLaw: UXLaw) {
 
             Text(
                 modifier = Modifier.padding(all = 14.dp),
-                // I am not sure how to handle this [Content]...
-                text = "Further Reading",
-                fontSize = 21.sp,
+                text = furtherReadingContent,
+                fontSize = 14.sp,
                 color = MaterialTheme.colorScheme.onBackground,
                 overflow = TextOverflow.Clip,
-                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
-                fontWeight = FontWeight.ExtraBold,
+                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
             )
+
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(end = 14.dp),
+                horizontalArrangement = Arrangement.End
+            ) {
+                Icon(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.further_reading),
+                    contentDescription = "Further Reading Icon",
+                    modifier = Modifier.padding(all = 14.dp),
+                    tint = MaterialTheme.colorScheme.onBackground
+                )
+            }
 
         }
 
@@ -522,7 +556,6 @@ private fun HomeDetailsScreenLargePosterButton(
 
     Button(
         modifier = Modifier
-            .fillMaxWidth()
             .padding(all = 7.dp),
         onClick = navigateToPosterShop,
         colors = ButtonDefaults.buttonColors(
@@ -567,7 +600,7 @@ private fun HomeDetailsScreenSmallPosterText(uxLaw: UXLaw) {
 private fun HomeDetailsScreenDivider() {
     HorizontalDivider(
         modifier = Modifier.padding(all = 14.dp),
-        thickness = 7.dp,
+        thickness = 3.dp,
         color = MaterialTheme.colorScheme.onBackground,
     )
 }
@@ -577,7 +610,7 @@ private fun HomeDetailsScreenRelatedTitle(modifier: Modifier = Modifier) {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "Related",
-        fontSize = 21.sp,
+        fontSize = 28.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
@@ -586,14 +619,52 @@ private fun HomeDetailsScreenRelatedTitle(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun HomeDetailsScreenNext(modifier: Modifier = Modifier) {
-    Text(
-        modifier = Modifier.padding(all = 14.dp),
-        text = "Next",
-        fontSize = 21.sp,
-        color = MaterialTheme.colorScheme.onBackground,
-        overflow = TextOverflow.Clip,
-        fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
-        fontWeight = FontWeight.ExtraBold,
-    )
+private fun HomeDetailsScreenNext(
+    uxLaws: List<UXLaw>,
+    currentUXLaw: UXLaw
+) {
+
+    val currentUXLawIndex = uxLaws.indexOf(element = currentUXLaw)
+
+    Card(
+        modifier =
+        Modifier
+            .fillMaxWidth()
+            .clickable {
+                //navigateToHomeDetailsScreen(uxLaw)
+            },
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+    ) {
+
+        Column(modifier = Modifier.fillMaxSize().padding(all = 14.dp)) {
+
+            Button(
+                modifier = Modifier.padding(all = 7.dp),
+                onClick = {
+                    //navigateToHomeDetailsScreen(uxLaw)
+                },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                )
+            ) {
+
+                Text(
+                    text = "NEXT",
+                    fontSize = 14.sp,
+                    color = MaterialTheme.colorScheme.onPrimary,
+                    fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
+                )
+            }
+
+            Text(
+                text = uxLaws[currentUXLawIndex + 1].uxLawTitle,
+                fontSize = 28.sp,
+                color = MaterialTheme.colorScheme.onPrimary,
+                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+                fontWeight = FontWeight.ExtraBold,
+            )
+
+        }
+
+    }
 }
