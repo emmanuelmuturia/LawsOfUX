@@ -6,6 +6,7 @@ import emmanuelmuturia.lawsofux.articles.ui.dependencyInjection.articlesUIKoinMo
 import emmanuelmuturia.lawsofux.cards.ui.dependencyInjection.cardsUIKoinModule
 import emmanuelmuturia.lawsofux.commons.dependencyInjection.commonsKoinModule
 import emmanuelmuturia.lawsofux.home.ui.dependencyInjection.homeUIKoinModule
+import emmanuelmuturia.lawsofux.info.ui.dependencyInjection.projectInfoUIKoinModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import timber.log.Timber
@@ -23,6 +24,7 @@ class LawsOfUXApplication : Application() {
                         commonsKoinModule,
                         articlesUIKoinModule,
                         cardsUIKoinModule,
+                        projectInfoUIKoinModule,
                     ),
             )
         }

@@ -235,7 +235,7 @@ private fun CardsScreenButton(navigateToDeckShop: () -> Unit) {
             ),
     ) {
         Text(
-            text = "BUY LARGE FORMAT POSTER",
+            text = "ORDER DECK",
             color = MaterialTheme.colorScheme.onPrimary,
             fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
         )

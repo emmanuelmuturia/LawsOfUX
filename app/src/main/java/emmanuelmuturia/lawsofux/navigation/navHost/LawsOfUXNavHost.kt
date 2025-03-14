@@ -20,6 +20,8 @@ import emmanuelmuturia.lawsofux.home.ui.navigation.HomeScreen
 import emmanuelmuturia.lawsofux.home.ui.navigation.homeDetailsScreen
 import emmanuelmuturia.lawsofux.home.ui.navigation.homeScreen
 import emmanuelmuturia.lawsofux.home.ui.viewmodel.HomeScreenViewModel
+import emmanuelmuturia.lawsofux.info.ui.navigation.projectInfoScreen
+import emmanuelmuturia.lawsofux.info.ui.viewmodel.ProjectInfoScreenViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -31,6 +33,8 @@ fun LawsOfUXNavHost() {
     val articlesScreenViewModel: ArticlesScreenViewModel = koinViewModel()
 
     val cardsScreenViewModel: CardsScreenViewModel = koinViewModel()
+
+    val projectInfoScreenViewModel: ProjectInfoScreenViewModel = koinViewModel()
 
     LawsOfUXTheme {
         Surface(
@@ -89,6 +93,19 @@ fun LawsOfUXNavHost() {
                     navigateToCardsScreen = {
                         navController.navigate(route = CardsScreen)
                     },
+                )
+
+                projectInfoScreen(
+                    navigateToArticlesScreen = {
+                        navController.navigate(route = ArticlesScreen)
+                    },
+                    navigateToCardsScreen = {
+                        navController.navigate(route = CardsScreen)
+                    },
+                    navigateToPosterShop = {
+                        // Navigate to the Poster Shop...
+                    },
+                    projectInfoScreenViewModel = projectInfoScreenViewModel,
                 )
             }
         }
