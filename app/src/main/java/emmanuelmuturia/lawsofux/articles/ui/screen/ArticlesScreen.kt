@@ -95,9 +95,9 @@ fun ArticlesScreen(
                 }
             }
         },
-    ) { innerPadding ->
+    ) { paddingValues ->
         ArticlesScreenContent(
-            modifier = modifier.padding(paddingValues = innerPadding),
+            modifier = modifier.padding(paddingValues = paddingValues),
             articlesScreenUIState = articlesScreenUIState,
             articlesScreenListState = articlesScreenListState,
             navigateToArticlesDetailsPage = navigateToArticlesDetailsPage,

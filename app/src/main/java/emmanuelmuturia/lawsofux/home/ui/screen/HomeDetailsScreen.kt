@@ -67,6 +67,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import emmanuelmuturia.lawsofux.R
 import emmanuelmuturia.lawsofux.commons.components.LawsOfUXCardItem
+import emmanuelmuturia.lawsofux.commons.components.LawsOfUXExtraCardItem
 import emmanuelmuturia.lawsofux.commons.components.LawsOfUXNavigationBackButton
 import emmanuelmuturia.lawsofux.home.data.model.UXLaw
 import emmanuelmuturia.lawsofux.home.ui.viewmodel.HomeScreenViewModel
@@ -330,9 +331,9 @@ private fun HomeDetailsScreenContent(
         }
 
         items(items = uxLaw.uXLawFurtherReading) { furtherReading ->
-            HomeDetailsScreenFurtherReadingItem(
-                furtherReadingTitle = furtherReading.first,
-                furtherReadingContent = furtherReading.second,
+            LawsOfUXExtraCardItem(
+                title = furtherReading.first,
+                content = furtherReading.second,
             )
         }
 
@@ -484,57 +485,6 @@ private fun HomeDetailsScreenFurtherReadingTitle() {
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
         fontWeight = FontWeight.ExtraBold,
     )
-}
-
-@Composable
-private fun HomeDetailsScreenFurtherReadingItem(
-    furtherReadingTitle: String,
-    furtherReadingContent: String,
-) {
-    Card(
-        modifier =
-            Modifier
-                .fillMaxWidth()
-                .padding(all = 14.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-    ) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-        ) {
-            Text(
-                modifier = Modifier.padding(all = 14.dp),
-                text = furtherReadingTitle,
-                fontSize = 21.sp,
-                color = MaterialTheme.colorScheme.onBackground,
-                overflow = TextOverflow.Clip,
-                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
-                fontWeight = FontWeight.ExtraBold,
-            )
-
-            Text(
-                modifier = Modifier.padding(all = 14.dp),
-                text = furtherReadingContent,
-                fontSize = 14.sp,
-                color = MaterialTheme.colorScheme.onBackground,
-                overflow = TextOverflow.Clip,
-                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
-            )
-
-            Row(
-                modifier = Modifier.fillMaxWidth().padding(end = 14.dp),
-                horizontalArrangement = Arrangement.End,
-            ) {
-                Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.further_reading),
-                    contentDescription = "Further Reading Icon",
-                    modifier = Modifier.padding(all = 14.dp),
-                    tint = MaterialTheme.colorScheme.onBackground,
-                )
-            }
-        }
-    }
 }
 
 @Composable

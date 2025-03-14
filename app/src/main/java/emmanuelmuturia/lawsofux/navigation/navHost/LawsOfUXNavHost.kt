@@ -11,6 +11,8 @@ import androidx.navigation.compose.rememberNavController
 import emmanuelmuturia.lawsofux.articles.ui.navigation.ArticlesScreen
 import emmanuelmuturia.lawsofux.articles.ui.navigation.articlesScreen
 import emmanuelmuturia.lawsofux.articles.ui.viewmodel.ArticlesScreenViewModel
+import emmanuelmuturia.lawsofux.cards.ui.navigation.cardsScreen
+import emmanuelmuturia.lawsofux.cards.ui.viewmodel.CardsScreenViewModel
 import emmanuelmuturia.lawsofux.commons.theme.LawsOfUXTheme
 import emmanuelmuturia.lawsofux.home.ui.navigation.HomeDetailsScreen
 import emmanuelmuturia.lawsofux.home.ui.navigation.HomeScreen
@@ -26,6 +28,8 @@ fun LawsOfUXNavHost() {
     val homeScreenViewModel: HomeScreenViewModel = koinViewModel()
 
     val articlesScreenViewModel: ArticlesScreenViewModel = koinViewModel()
+
+    val cardsScreenViewModel: CardsScreenViewModel = koinViewModel()
 
     LawsOfUXTheme {
         Surface(
@@ -65,6 +69,16 @@ fun LawsOfUXNavHost() {
                     navigateToArticlesDetailsPage = {
                         // Navigate to the Articles Details Page...
                     },
+                )
+
+                cardsScreen(
+                    navigateToArticlesScreen = {
+                        navController.navigate(route = ArticlesScreen)
+                    },
+                    navigateToDeckShop = {
+                        // Navigate to the Deck Shop...
+                    },
+                    cardsScreenViewModel = cardsScreenViewModel
                 )
             }
         }
