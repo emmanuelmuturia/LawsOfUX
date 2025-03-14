@@ -11,9 +11,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class CardsScreenViewModel(
-    private val cardsRepository: CardsRepository
+    private val cardsRepository: CardsRepository,
 ) : ViewModel() {
-
     val cardsScreenUIState = MutableStateFlow(value = CardsScreenUIState())
 
     init {
@@ -25,7 +24,6 @@ class CardsScreenViewModel(
         viewModelScope.launch {
             cardsRepository.getAllCards().asResult().collect { result ->
                 when (result) {
-
                     is LawsOfUXState.Success -> {
                         cardsScreenUIState.update {
                             it.copy(
@@ -43,10 +41,8 @@ class CardsScreenViewModel(
                             )
                         }
                     }
-
                 }
             }
         }
     }
-
 }

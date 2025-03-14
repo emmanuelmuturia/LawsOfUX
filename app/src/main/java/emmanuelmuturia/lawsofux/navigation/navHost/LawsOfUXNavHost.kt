@@ -54,7 +54,7 @@ fun LawsOfUXNavHost() {
                     },
                     navigateToCardsScreen = {
                         navController.navigate(route = CardsScreen)
-                    }
+                    },
                 )
 
                 homeDetailsScreen(
@@ -75,7 +75,7 @@ fun LawsOfUXNavHost() {
                     },
                     navigateToCardsScreen = {
                         navController.navigate(route = CardsScreen)
-                    }
+                    },
                 )
 
                 cardsScreen(
@@ -88,7 +88,7 @@ fun LawsOfUXNavHost() {
                     cardsScreenViewModel = cardsScreenViewModel,
                     navigateToCardsScreen = {
                         navController.navigate(route = CardsScreen)
-                    }
+                    },
                 )
             }
         }

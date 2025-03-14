@@ -56,7 +56,6 @@ fun CardsScreen(
     cardsScreenViewModel: CardsScreenViewModel,
     navigateToCardsScreen: () -> Unit,
 ) {
-
     val cardsScreenListState = rememberLazyListState()
 
     val showScrollToTopButton by remember {
@@ -71,13 +70,13 @@ fun CardsScreen(
 
     Scaffold(
         modifier =
-        Modifier
-            .fillMaxSize()
-            .background(color = MaterialTheme.colorScheme.background),
+            Modifier
+                .fillMaxSize()
+                .background(color = MaterialTheme.colorScheme.background),
         topBar = {
             LawsOfUXTopAppBar(
                 navigateToArticlesScreen = navigateToArticlesScreen,
-                navigateToCardsScreen = navigateToCardsScreen
+                navigateToCardsScreen = navigateToCardsScreen,
             )
         },
         floatingActionButton = {
@@ -104,10 +103,9 @@ fun CardsScreen(
             modifier = Modifier.padding(paddingValues = paddingValues),
             cardsScreenListState = cardsScreenListState,
             navigateToDeckShop = navigateToDeckShop,
-            cardsScreenUIState = cardsScreenUIState
+            cardsScreenUIState = cardsScreenUIState,
         )
     }
-
 }
 
 @Composable
@@ -115,13 +113,12 @@ private fun CardsScreenContent(
     modifier: Modifier = Modifier,
     cardsScreenListState: LazyListState,
     cardsScreenUIState: CardsScreenUIState,
-    navigateToDeckShop: () -> Unit
+    navigateToDeckShop: () -> Unit,
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
-        state = cardsScreenListState
+        state = cardsScreenListState,
     ) {
-
         item {
             CardsScreenText()
         }
@@ -149,14 +146,13 @@ private fun CardsScreenContent(
         items(items = cardsScreenUIState.cards) { card ->
             LawsOfUXExtraCardItem(
                 title = card.cardTitle,
-                content = card.cardDescription
+                content = card.cardDescription,
             )
         }
 
         item {
             LawsOfUXFooter()
         }
-
     }
 }
 
@@ -164,8 +160,9 @@ private fun CardsScreenContent(
 private fun CardsScreenText() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
-        text = "A card deck of psychological principles that help you design and justify your " +
-            "user interfaces.",
+        text =
+            "A card deck of psychological principles that help you design and justify your " +
+                "user interfaces.",
         fontSize = 28.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
@@ -191,33 +188,33 @@ private fun CardsScreenContentTitle() {
 private fun CardsScreenContentText() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
-        text = buildAnnotatedString {
+        text =
+            buildAnnotatedString {
+                append(text = "The UX Designer’s secret weapon, brought to you by Laws of UX & ")
 
-            append(text = "The UX Designer’s secret weapon, brought to you by Laws of UX & ")
-
-            withLink(
-                link =
-                LinkAnnotation.Url(
-                    url = "https://pipdecks.com/",
-                ),
-            ) {
-                withStyle(
-                    style =
-                    SpanStyle(
-                        textDecoration = TextDecoration.Underline,
-                    ),
+                withLink(
+                    link =
+                        LinkAnnotation.Url(
+                            url = "https://pipdecks.com/",
+                        ),
                 ) {
-                    append(text = "Pip Decks")
+                    withStyle(
+                        style =
+                            SpanStyle(
+                                textDecoration = TextDecoration.Underline,
+                            ),
+                    ) {
+                        append(text = "Pip Decks")
+                    }
                 }
-            }
 
-            append(
-                text = ". Each deck includes 54 psychological principles and UX methods that " +
-                    "help you design and justify your user interfaces, get buy-in from stakeholders " +
-                    "and empower your design team."
-            )
-
-        },
+                append(
+                    text =
+                        ". Each deck includes 54 psychological principles and UX methods that " +
+                            "help you design and justify your user interfaces, get buy-in from stakeholders " +
+                            "and empower your design team.",
+                )
+            },
         fontSize = 18.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
@@ -229,13 +226,13 @@ private fun CardsScreenContentText() {
 private fun CardsScreenButton(navigateToDeckShop: () -> Unit) {
     Button(
         modifier =
-        Modifier
-            .padding(all = 7.dp),
+            Modifier
+                .padding(all = 7.dp),
         onClick = navigateToDeckShop,
         colors =
-        ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primary,
-        ),
+            ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+            ),
     ) {
         Text(
             text = "BUY LARGE FORMAT POSTER",
@@ -251,7 +248,7 @@ private fun CardsScreenImage() {
         painter = painterResource(id = R.drawable.card_screen_image),
         contentDescription = "Cards Screen Image",
         modifier = Modifier.padding(all = 14.dp).fillMaxSize(),
-        contentScale = ContentScale.Crop
+        contentScale = ContentScale.Crop,
     )
 }
 

@@ -75,7 +75,7 @@ fun ArticlesScreen(
         topBar = {
             LawsOfUXTopAppBar(
                 navigateToArticlesScreen = navigateToArticlesScreen,
-                navigateToCardsScreen = navigateToCardsScreen
+                navigateToCardsScreen = navigateToCardsScreen,
             )
         },
         floatingActionButton = {

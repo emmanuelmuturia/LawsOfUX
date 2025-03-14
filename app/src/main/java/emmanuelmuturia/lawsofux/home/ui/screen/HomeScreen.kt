@@ -85,7 +85,7 @@ fun HomeScreen(
         topBar = {
             LawsOfUXTopAppBar(
                 navigateToArticlesScreen = navigateToArticlesScreen,
-                navigateToCardsScreen = navigateToCardsScreen
+                navigateToCardsScreen = navigateToCardsScreen,
             )
         },
         floatingActionButton = {

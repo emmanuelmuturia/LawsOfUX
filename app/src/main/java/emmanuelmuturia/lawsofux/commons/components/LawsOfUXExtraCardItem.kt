@@ -31,9 +31,9 @@ fun LawsOfUXExtraCardItem(
 ) {
     Card(
         modifier =
-        Modifier
-            .fillMaxWidth()
-            .padding(all = 14.dp),
+            Modifier
+                .fillMaxWidth()
+                .padding(all = 14.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
     ) {
         Column(

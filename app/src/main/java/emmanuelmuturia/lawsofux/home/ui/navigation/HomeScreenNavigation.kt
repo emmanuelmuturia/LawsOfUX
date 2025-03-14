@@ -18,7 +18,7 @@ fun NavGraphBuilder.homeScreen(
         HomeScreen(
             navigateToHomeDetailsScreen = navigateToHomeDetailsScreen,
             navigateToArticlesScreen = navigateToArticlesScreen,
-            navigateToCardsScreen = navigateToCardsScreen
+            navigateToCardsScreen = navigateToCardsScreen,
         )
     }
 }

@@ -5,14 +5,14 @@ import emmanuelmuturia.lawsofux.cards.ui.viewmodel.CardsScreenViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
-val cardsUIKoinModule = module {
+val cardsUIKoinModule =
+    module {
 
-    viewModel {
-        CardsScreenViewModel(
-            cardsRepository = get(),
-        )
+        viewModel {
+            CardsScreenViewModel(
+                cardsRepository = get(),
+            )
+        }
+
+        includes(module = listOf(cardsDataKoinModule))
     }
-
-    includes(module = listOf(cardsDataKoinModule))
-
-}

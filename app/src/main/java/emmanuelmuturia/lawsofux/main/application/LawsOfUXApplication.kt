@@ -22,7 +22,7 @@ class LawsOfUXApplication : Application() {
                         homeUIKoinModule,
                         commonsKoinModule,
                         articlesUIKoinModule,
-                        cardsUIKoinModule
+                        cardsUIKoinModule,
                     ),
             )
         }

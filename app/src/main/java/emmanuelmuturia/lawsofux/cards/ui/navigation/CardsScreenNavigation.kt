@@ -20,7 +20,7 @@ fun NavGraphBuilder.cardsScreen(
             navigateToArticlesScreen = navigateToArticlesScreen,
             cardsScreenViewModel = cardsScreenViewModel,
             navigateToDeckShop = navigateToDeckShop,
-            navigateToCardsScreen = navigateToCardsScreen
+            navigateToCardsScreen = navigateToCardsScreen,
         )
     }
 }

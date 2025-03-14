@@ -5,15 +5,15 @@ import emmanuelmuturia.lawsofux.cards.data.repository.CardsRepositoryImplementat
 import emmanuelmuturia.lawsofux.cards.source.dependencyInjection.cardsSourceKoinModule
 import org.koin.dsl.module
 
-val cardsDataKoinModule = module {
+val cardsDataKoinModule =
+    module {
 
-    single<CardsRepository> {
-        CardsRepositoryImplementation(
-            localCardSource = get(),
-            ioDispatcher = get(),
-        )
+        single<CardsRepository> {
+            CardsRepositoryImplementation(
+                localCardSource = get(),
+                ioDispatcher = get(),
+            )
+        }
+
+        includes(module = listOf(cardsSourceKoinModule))
     }
-
-    includes(module = listOf(cardsSourceKoinModule))
-
-}
