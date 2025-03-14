@@ -5,15 +5,15 @@ import emmanuelmuturia.lawsofux.info.data.repository.ProjectInfoRepositoryImplem
 import emmanuelmuturia.lawsofux.info.source.dependencyInjection.projectInfoSourceKoinModule
 import org.koin.dsl.module
 
-val projectInfoDataKoinModule = module {
+val projectInfoDataKoinModule =
+    module {
 
-    single<ProjectInfoRepository> {
-        ProjectInfoRepositoryImplementation(
-            localProjectInfoSource = get(),
-            ioDispatcher = get(),
-        )
+        single<ProjectInfoRepository> {
+            ProjectInfoRepositoryImplementation(
+                localProjectInfoSource = get(),
+                ioDispatcher = get(),
+            )
+        }
+
+        includes(module = listOf(projectInfoSourceKoinModule))
     }
-
-    includes(module = listOf(projectInfoSourceKoinModule))
-
-}

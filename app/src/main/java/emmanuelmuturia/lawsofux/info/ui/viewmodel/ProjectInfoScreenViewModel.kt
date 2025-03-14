@@ -11,9 +11,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class ProjectInfoScreenViewModel(
-    private val projectInfoRepository: ProjectInfoRepository
+    private val projectInfoRepository: ProjectInfoRepository,
 ) : ViewModel() {
-
     val projectInfoScreenUIState = MutableStateFlow(value = ProjectInfoScreenUIState())
 
     init {
@@ -26,12 +25,11 @@ class ProjectInfoScreenViewModel(
             projectInfoRepository.getAllProjectInfos().asResult().collect { result ->
 
                 when (result) {
-
                     is LawsOfUXState.Success -> {
                         projectInfoScreenUIState.update {
                             it.copy(
                                 projectInfos = result.data,
-                                isLoading = false
+                                isLoading = false,
                             )
                         }
                     }
@@ -40,15 +38,12 @@ class ProjectInfoScreenViewModel(
                         projectInfoScreenUIState.update {
                             it.copy(
                                 isError = true,
-                                isLoading = false
+                                isLoading = false,
                             )
                         }
                     }
-
                 }
-
             }
         }
     }
-
 }

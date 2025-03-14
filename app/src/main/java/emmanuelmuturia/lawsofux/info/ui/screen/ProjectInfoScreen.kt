@@ -55,9 +55,8 @@ fun ProjectInfoScreen(
     navigateToArticlesScreen: () -> Unit,
     navigateToCardsScreen: () -> Unit,
     navigateToPosterShop: () -> Unit,
-    projectInfoScreenViewModel: ProjectInfoScreenViewModel
+    projectInfoScreenViewModel: ProjectInfoScreenViewModel,
 ) {
-
     val projectInfoScreenListState = rememberLazyListState()
 
     val showScrollToTopButton by remember {
@@ -69,13 +68,13 @@ fun ProjectInfoScreen(
     val projectInfoScreenCoroutineScope = rememberCoroutineScope()
 
     val projectInfoScreenUIState by
-                projectInfoScreenViewModel.projectInfoScreenUIState.collectAsStateWithLifecycle()
+        projectInfoScreenViewModel.projectInfoScreenUIState.collectAsStateWithLifecycle()
 
     Scaffold(
         modifier =
-        Modifier
-            .fillMaxSize()
-            .background(color = MaterialTheme.colorScheme.background),
+            Modifier
+                .fillMaxSize()
+                .background(color = MaterialTheme.colorScheme.background),
         topBar = {
             LawsOfUXTopAppBar(
                 navigateToArticlesScreen = navigateToArticlesScreen,
@@ -105,23 +104,20 @@ fun ProjectInfoScreen(
         ProjectInfoScreenContent(
             modifier = Modifier.padding(paddingValues = paddingValues),
             navigateToPosterShop = navigateToPosterShop,
-            projectInfoScreenUIState = projectInfoScreenUIState
+            projectInfoScreenUIState = projectInfoScreenUIState,
         )
     }
-
 }
 
 @Composable
 private fun ProjectInfoScreenContent(
     modifier: Modifier = Modifier,
     navigateToPosterShop: () -> Unit,
-    projectInfoScreenUIState: ProjectInfoScreenUIState
+    projectInfoScreenUIState: ProjectInfoScreenUIState,
 ) {
-
     LazyColumn(
-        modifier = modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize(),
     ) {
-
         item {
             ProjectInfoScreenText()
         }
@@ -164,7 +160,7 @@ private fun ProjectInfoScreenContent(
 
         item {
             ProjectInfoScreenIndexPosterButton(
-                navigateToPosterShop = navigateToPosterShop
+                navigateToPosterShop = navigateToPosterShop,
             )
         }
 
@@ -175,7 +171,7 @@ private fun ProjectInfoScreenContent(
         items(items = projectInfoScreenUIState.projectInfos) { projectInfo ->
             LawsOfUXExtraCardItem(
                 title = projectInfo.projectInfoTitle,
-                content = projectInfo.projectInfoDescription
+                content = projectInfo.projectInfoDescription,
             )
         }
 
@@ -201,61 +197,54 @@ private fun ProjectInfoScreenContent(
 
         item {
             ProjectInfoScreenContactBoxTitle(
-                title = "NAME"
+                title = "NAME",
             )
         }
 
         item {
-            ProjectInfoScreenContactBox(
-
-            )
-        }
-
-        item {
-            ProjectInfoScreenContactBoxTitle(
-                title = "EMAIL"
-            )
-        }
-
-        item {
-            ProjectInfoScreenContactBox(
-
-            )
+            ProjectInfoScreenContactBox()
         }
 
         item {
             ProjectInfoScreenContactBoxTitle(
-                title = "SUBJECT"
+                title = "EMAIL",
             )
         }
 
         item {
-            ProjectInfoScreenContactBox(
-
-            )
+            ProjectInfoScreenContactBox()
         }
 
         item {
             ProjectInfoScreenContactBoxTitle(
-                title = "MESSAGE"
+                title = "SUBJECT",
+            )
+        }
+
+        item {
+            ProjectInfoScreenContactBox()
+        }
+
+        item {
+            ProjectInfoScreenContactBoxTitle(
+                title = "MESSAGE",
             )
         }
 
         item {
             ProjectInfoScreenContactButton()
         }
-
     }
-
 }
 
 @Composable
 private fun ProjectInfoScreenText() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
-        text = "Laws of UX is focused on making complex psychology heuristics accessible to " +
-            "more designers through an interactive resource that collects those that are " +
-            "relevant to user experience design.",
+        text =
+            "Laws of UX is focused on making complex psychology heuristics accessible to " +
+                "more designers through an interactive resource that collects those that are " +
+                "relevant to user experience design.",
         fontSize = 28.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
@@ -269,9 +258,10 @@ private fun ProjectInfoScreenImage() {
     Image(
         painter = painterResource(id = R.drawable.info_screen_image),
         contentDescription = "Project Info Screen Image",
-        modifier = Modifier
-            .padding(all = 14.dp)
-            .fillMaxSize(),
+        modifier =
+            Modifier
+                .padding(all = 14.dp)
+                .fillMaxSize(),
         contentScale = ContentScale.Crop,
     )
 }
@@ -281,43 +271,45 @@ private fun ProjectInfoScreenContentText() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text =
-        buildAnnotatedString {
-            append(
-                text = "As humans, we have an underlying “blueprint” for how we perceive and " +
-                    "process the world around us, and the study of psychology helps us decipher " +
-                    "this blueprint. Designers can use this knowledge to build more intuitive, " +
-                    "human-centered products and experiences. Instead of forcing users to adapt to " +
-                    "the design of a product or experience, we can use some key principles from " +
-                    "psychology as a guide for designing in a way that is adapted to people.\n" +
-                    "\n" +
-                    "This website seeks to make complex psychology heuristics accessible to more " +
-                    "designers through an interactive resource that collects those that are " +
-                    "relevant to user experience design and presents them in a visually engaging " +
-                    "way. " +
-                    "It was created by "
-            )
+            buildAnnotatedString {
+                append(
+                    text =
+                        "As humans, we have an underlying “blueprint” for how we perceive and " +
+                            "process the world around us, and the study of psychology helps us decipher " +
+                            "this blueprint. Designers can use this knowledge to build more intuitive, " +
+                            "human-centered products and experiences. Instead of forcing users to adapt to " +
+                            "the design of a product or experience, we can use some key principles from " +
+                            "psychology as a guide for designing in a way that is adapted to people.\n" +
+                            "\n" +
+                            "This website seeks to make complex psychology heuristics accessible to more " +
+                            "designers through an interactive resource that collects those that are " +
+                            "relevant to user experience design and presents them in a visually engaging " +
+                            "way. " +
+                            "It was created by ",
+                )
 
-            withLink(
-                link =
-                LinkAnnotation.Url(
-                    url = "https://jonyablonski.com/",
-                ),
-            ) {
-                withStyle(
-                    style =
-                    SpanStyle(
-                        textDecoration = TextDecoration.Underline,
-                    ),
+                withLink(
+                    link =
+                        LinkAnnotation.Url(
+                            url = "https://jonyablonski.com/",
+                        ),
                 ) {
-                    append(text = "Jon Yablonski")
+                    withStyle(
+                        style =
+                            SpanStyle(
+                                textDecoration = TextDecoration.Underline,
+                            ),
+                    ) {
+                        append(text = "Jon Yablonski")
+                    }
                 }
-            }
 
-            append(
-                text = "Have some feedback you’d like to share? I’m always open to suggestions " +
-                    "and ideas. Feel free to reach out via the contact form below.",
-            )
-        },
+                append(
+                    text =
+                        "Have some feedback you’d like to share? I’m always open to suggestions " +
+                            "and ideas. Feel free to reach out via the contact form below.",
+                )
+            },
         fontSize = 18.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
@@ -353,51 +345,52 @@ private fun ProjectInfoScreenPostersContent() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text =
-        buildAnnotatedString {
-            append(text = "High-resolution posters are available for purchase via ")
+            buildAnnotatedString {
+                append(text = "High-resolution posters are available for purchase via ")
 
-            withLink(
-                link =
-                LinkAnnotation.Url(
-                    url = "https://jonyablonski.bigcartel.com/",
-                ),
-            ) {
-                withStyle(
-                    style =
-                    SpanStyle(
-                        textDecoration = TextDecoration.Underline,
-                    ),
+                withLink(
+                    link =
+                        LinkAnnotation.Url(
+                            url = "https://jonyablonski.bigcartel.com/",
+                        ),
                 ) {
-                    append(text = "The Online Store of Jon Yablonski")
+                    withStyle(
+                        style =
+                            SpanStyle(
+                                textDecoration = TextDecoration.Underline,
+                            ),
+                    ) {
+                        append(text = "The Online Store of Jon Yablonski")
+                    }
                 }
-            }
 
-            append(
-                text = ". In addition, there are 11\"×17” posters available for free. Posters " +
-                    "are " +
-                    "licensed under the " +
-                    "Creative Commons Attribution-NonCommercial-NoDerivatives " +
-                    "4.0 International License. To view a copy of this license, visit ",
-            )
+                append(
+                    text =
+                        ". In addition, there are 11\"×17” posters available for free. Posters " +
+                            "are " +
+                            "licensed under the " +
+                            "Creative Commons Attribution-NonCommercial-NoDerivatives " +
+                            "4.0 International License. To view a copy of this license, visit ",
+                )
 
-            withLink(
-                link =
-                LinkAnnotation.Url(
-                    url = "https://creativecommons.org/licenses/by-nc-nd/4.0/",
-                ),
-            ) {
-                withStyle(
-                    style =
-                    SpanStyle(
-                        textDecoration = TextDecoration.Underline,
-                    ),
+                withLink(
+                    link =
+                        LinkAnnotation.Url(
+                            url = "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+                        ),
                 ) {
-                    append(text = "http://creativecommons.org/licenses/by-nc-nd/4.0/")
+                    withStyle(
+                        style =
+                            SpanStyle(
+                                textDecoration = TextDecoration.Underline,
+                            ),
+                    ) {
+                        append(text = "http://creativecommons.org/licenses/by-nc-nd/4.0/")
+                    }
                 }
-            }
 
-            append(text = ".")
-        },
+                append(text = ".")
+            },
         fontSize = 18.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
@@ -423,9 +416,10 @@ private fun ProjectInfoScreenIndexPosterImage() {
     Image(
         painter = painterResource(id = R.drawable.index_poster_image),
         contentDescription = "Cards Screen Image",
-        modifier = Modifier
-            .padding(all = 14.dp)
-            .fillMaxSize(),
+        modifier =
+            Modifier
+                .padding(all = 14.dp)
+                .fillMaxSize(),
         contentScale = ContentScale.Crop,
     )
 }
@@ -443,18 +437,16 @@ private fun ProjectInfoScreenIndexPosterCaption() {
 }
 
 @Composable
-private fun ProjectInfoScreenIndexPosterButton(
-    navigateToPosterShop: () -> Unit,
-) {
+private fun ProjectInfoScreenIndexPosterButton(navigateToPosterShop: () -> Unit) {
     Button(
         modifier =
-        Modifier
-            .padding(all = 7.dp),
+            Modifier
+                .padding(all = 7.dp),
         onClick = navigateToPosterShop,
         colors =
-        ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primary,
-        ),
+            ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+            ),
     ) {
         Text(
             text = "BUY LARGE FORMAT POSTER",
@@ -495,87 +487,87 @@ private fun ProjectInfoScreenColophonContent() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text =
-        buildAnnotatedString {
-            append(
-                text = "Tools used to create this site include "
-            )
+            buildAnnotatedString {
+                append(
+                    text = "Tools used to create this site include ",
+                )
 
-            withLink(
-                link =
-                LinkAnnotation.Url(
-                    url = "https://www.sketch.com/",
-                ),
-            ) {
-                withStyle(
-                    style =
-                    SpanStyle(
-                        textDecoration = TextDecoration.Underline,
-                    ),
+                withLink(
+                    link =
+                        LinkAnnotation.Url(
+                            url = "https://www.sketch.com/",
+                        ),
                 ) {
-                    append(text = "Sketch App")
+                    withStyle(
+                        style =
+                            SpanStyle(
+                                textDecoration = TextDecoration.Underline,
+                            ),
+                    ) {
+                        append(text = "Sketch App")
+                    }
                 }
-            }
 
-            append(
-                text = " for design, ",
-            )
+                append(
+                    text = " for design, ",
+                )
 
-            withLink(
-                link =
-                LinkAnnotation.Url(
-                    url = "https://gohugo.io/",
-                ),
-            ) {
-                withStyle(
-                    style =
-                    SpanStyle(
-                        textDecoration = TextDecoration.Underline,
-                    ),
+                withLink(
+                    link =
+                        LinkAnnotation.Url(
+                            url = "https://gohugo.io/",
+                        ),
                 ) {
-                    append(text = "Hugo")
+                    withStyle(
+                        style =
+                            SpanStyle(
+                                textDecoration = TextDecoration.Underline,
+                            ),
+                    ) {
+                        append(text = "Hugo")
+                    }
                 }
-            }
 
-            append(
-                text = " for static site generation, and ",
-            )
+                append(
+                    text = " for static site generation, and ",
+                )
 
-            withLink(
-                link =
-                LinkAnnotation.Url(
-                    url = "https://gohugo.io/hugo-pipes/introduction/",
-                ),
-            ) {
-                withStyle(
-                    style =
-                    SpanStyle(
-                        textDecoration = TextDecoration.Underline,
-                    ),
+                withLink(
+                    link =
+                        LinkAnnotation.Url(
+                            url = "https://gohugo.io/hugo-pipes/introduction/",
+                        ),
                 ) {
-                    append(text = "Hugo Pipes")
+                    withStyle(
+                        style =
+                            SpanStyle(
+                                textDecoration = TextDecoration.Underline,
+                            ),
+                    ) {
+                        append(text = "Hugo Pipes")
+                    }
                 }
-            }
 
-            append(text = " for asset processing. Typography is set in ")
+                append(text = " for asset processing. Typography is set in ")
 
-            withLink(
-                link =
-                LinkAnnotation.Url(
-                    url = "https://www.ibm.com/plex/",
-                ),
-            ) {
-                withStyle(
-                    style =
-                    SpanStyle(
-                        textDecoration = TextDecoration.Underline,
-                    ),
+                withLink(
+                    link =
+                        LinkAnnotation.Url(
+                            url = "https://www.ibm.com/plex/",
+                        ),
                 ) {
-                    append(text = "IBM Plex Sans and Plex Mono")
+                    withStyle(
+                        style =
+                            SpanStyle(
+                                textDecoration = TextDecoration.Underline,
+                            ),
+                    ) {
+                        append(text = "IBM Plex Sans and Plex Mono")
+                    }
                 }
-            }
 
-            append(text = ", an open-source typeface by IBM.")
-        },
+                append(text = ", an open-source typeface by IBM.")
+            },
         fontSize = 18.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
@@ -618,9 +610,7 @@ private fun ProjectInfoScreenContactCaption() {
 }
 
 @Composable
-private fun ProjectInfoScreenContactBoxTitle(
-    title: String
-) {
+private fun ProjectInfoScreenContactBoxTitle(title: String) {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = title,
@@ -635,16 +625,17 @@ private fun ProjectInfoScreenContactBoxTitle(
 @Composable
 private fun ProjectInfoScreenContactBox(
     value: String,
-    onValueChange: (String) -> Unit
+    onValueChange: (String) -> Unit,
 ) {
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
         modifier = Modifier.padding(all = 14.dp),
-        colors = TextFieldDefaults.colors(
-            cursorColor = MaterialTheme.colorScheme.onBackground
-        ),
-        shape = RoundedCornerShape(size = 21.dp)
+        colors =
+            TextFieldDefaults.colors(
+                cursorColor = MaterialTheme.colorScheme.onBackground,
+            ),
+        shape = RoundedCornerShape(size = 21.dp),
     )
 }
 
@@ -652,15 +643,15 @@ private fun ProjectInfoScreenContactBox(
 private fun ProjectInfoScreenContactButton() {
     Button(
         modifier =
-        Modifier
-            .padding(all = 7.dp),
+            Modifier
+                .padding(all = 7.dp),
         onClick = {
             TODO("Send email")
         },
         colors =
-        ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primary,
-        ),
+            ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+            ),
     ) {
         Text(
             text = "SEND",

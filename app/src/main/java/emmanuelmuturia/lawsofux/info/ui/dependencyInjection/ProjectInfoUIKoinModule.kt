@@ -5,14 +5,14 @@ import emmanuelmuturia.lawsofux.info.ui.viewmodel.ProjectInfoScreenViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
-val projectInfoUIKoinModule = module {
+val projectInfoUIKoinModule =
+    module {
 
-    viewModel {
-        ProjectInfoScreenViewModel(
-            projectInfoRepository = get(),
-        )
+        viewModel {
+            ProjectInfoScreenViewModel(
+                projectInfoRepository = get(),
+            )
+        }
+
+        includes(module = listOf(projectInfoDataKoinModule))
     }
-
-    includes(module = listOf(projectInfoDataKoinModule))
-
-}

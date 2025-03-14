@@ -17,7 +17,7 @@ class ProjectInfoRepositoryImplementation(
                 localProjectInfos.map { localProjectInfo ->
                     ProjectInfo(
                         projectInfoTitle = localProjectInfo.localProjectInfoTitle,
-                        projectInfoDescription = localProjectInfo.localProjectInfoDescription
+                        projectInfoDescription = localProjectInfo.localProjectInfoDescription,
                     )
                 }
             }

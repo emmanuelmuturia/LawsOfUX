@@ -13,14 +13,14 @@ fun NavGraphBuilder.projectInfoScreen(
     navigateToArticlesScreen: () -> Unit,
     navigateToCardsScreen: () -> Unit,
     navigateToPosterShop: () -> Unit,
-    projectInfoScreenViewModel: ProjectInfoScreenViewModel
+    projectInfoScreenViewModel: ProjectInfoScreenViewModel,
 ) {
     composable<ProjectInfoScreen> {
         ProjectInfoScreen(
             navigateToCardsScreen = navigateToCardsScreen,
             navigateToArticlesScreen = navigateToArticlesScreen,
             navigateToPosterShop = navigateToPosterShop,
-            projectInfoScreenViewModel = projectInfoScreenViewModel
+            projectInfoScreenViewModel = projectInfoScreenViewModel,
         )
     }
 }
