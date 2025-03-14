@@ -11,6 +11,8 @@ import androidx.navigation.compose.rememberNavController
 import emmanuelmuturia.lawsofux.articles.ui.navigation.ArticlesScreen
 import emmanuelmuturia.lawsofux.articles.ui.navigation.articlesScreen
 import emmanuelmuturia.lawsofux.articles.ui.viewmodel.ArticlesScreenViewModel
+import emmanuelmuturia.lawsofux.book.ui.navigation.bookScreen
+import emmanuelmuturia.lawsofux.book.ui.viewmodel.BookScreenViewModel
 import emmanuelmuturia.lawsofux.cards.ui.navigation.CardsScreen
 import emmanuelmuturia.lawsofux.cards.ui.navigation.cardsScreen
 import emmanuelmuturia.lawsofux.cards.ui.viewmodel.CardsScreenViewModel
@@ -35,6 +37,8 @@ fun LawsOfUXNavHost() {
     val cardsScreenViewModel: CardsScreenViewModel = koinViewModel()
 
     val projectInfoScreenViewModel: ProjectInfoScreenViewModel = koinViewModel()
+
+    val bookScreenViewModel: BookScreenViewModel = koinViewModel()
 
     LawsOfUXTheme {
         Surface(
@@ -106,6 +110,25 @@ fun LawsOfUXNavHost() {
                         // Navigate to the Poster Shop...
                     },
                     projectInfoScreenViewModel = projectInfoScreenViewModel,
+                )
+
+                bookScreen(
+                    navigateToArticlesScreen = {
+                        navController.navigate(route = ArticlesScreen)
+                    },
+                    navigateToCardsScreen = {
+                        navController.navigate(route = CardsScreen)
+                    },
+                    navigateToAmazon = {
+                        // Navigate to the Amazon...
+                    },
+                    navigateToOreilly = {
+                        // Navigate to the Oreilly...
+                    },
+                    navigateToBootcamp = {
+                        // Navigate to the Bootcamp...
+                    },
+                    bookScreenViewModel = bookScreenViewModel,
                 )
             }
         }
