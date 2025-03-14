@@ -51,9 +51,8 @@ fun ArticlesScreen(
     modifier: Modifier = Modifier,
     articlesScreenViewModel: ArticlesScreenViewModel,
     navigateToArticlesScreen: () -> Unit,
-    navigateToArticlesDetailsPage: () -> Unit
+    navigateToArticlesDetailsPage: () -> Unit,
 ) {
-
     val articlesScreenListState = rememberLazyListState()
 
     val showScrollToTopButton by remember {
@@ -65,15 +64,16 @@ fun ArticlesScreen(
     val articlesScreenCoroutineScope = rememberCoroutineScope()
 
     val articlesScreenUIState by
-    articlesScreenViewModel.articlesScreenUIState.collectAsStateWithLifecycle()
+        articlesScreenViewModel.articlesScreenUIState.collectAsStateWithLifecycle()
 
     Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = MaterialTheme.colorScheme.background),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .background(color = MaterialTheme.colorScheme.background),
         topBar = {
             LawsOfUXTopAppBar(
-                navigateToArticlesScreen = navigateToArticlesScreen
+                navigateToArticlesScreen = navigateToArticlesScreen,
             )
         },
         floatingActionButton = {
@@ -94,13 +94,13 @@ fun ArticlesScreen(
                     )
                 }
             }
-        }
+        },
     ) { innerPadding ->
         ArticlesScreenContent(
             modifier = modifier.padding(paddingValues = innerPadding),
             articlesScreenUIState = articlesScreenUIState,
             articlesScreenListState = articlesScreenListState,
-            navigateToArticlesDetailsPage = navigateToArticlesDetailsPage
+            navigateToArticlesDetailsPage = navigateToArticlesDetailsPage,
         )
     }
 }
@@ -110,11 +110,11 @@ private fun ArticlesScreenContent(
     modifier: Modifier = Modifier,
     articlesScreenListState: LazyListState,
     articlesScreenUIState: ArticlesScreenUIState,
-    navigateToArticlesDetailsPage: () -> Unit
+    navigateToArticlesDetailsPage: () -> Unit,
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
-        state = articlesScreenListState
+        state = articlesScreenListState,
     ) {
         item {
             ArticlesScreenText()
@@ -123,7 +123,7 @@ private fun ArticlesScreenContent(
         items(items = articlesScreenUIState.articles) { article ->
             ArticlesCardItem(
                 article = article,
-                navigateToArticlesDetailsPage = navigateToArticlesDetailsPage
+                navigateToArticlesDetailsPage = navigateToArticlesDetailsPage,
             )
         }
 
@@ -142,23 +142,23 @@ private fun ArticlesScreenText() {
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
-        fontWeight = FontWeight.Bold
+        fontWeight = FontWeight.Bold,
     )
 }
 
 @Composable
 private fun ArticlesCardItem(
     article: Article,
-    navigateToArticlesDetailsPage: () -> Unit
+    navigateToArticlesDetailsPage: () -> Unit,
 ) {
     Card(
         modifier =
-        Modifier
-            .fillMaxWidth()
-            .padding(all = 14.dp)
-            .clickable {
-                navigateToArticlesDetailsPage()
-            },
+            Modifier
+                .fillMaxWidth()
+                .padding(all = 14.dp)
+                .clickable {
+                    navigateToArticlesDetailsPage()
+                },
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
     ) {
         Column(

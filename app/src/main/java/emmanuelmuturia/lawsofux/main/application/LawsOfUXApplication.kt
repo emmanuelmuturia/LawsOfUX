@@ -20,7 +20,7 @@ class LawsOfUXApplication : Application() {
                     listOf(
                         homeUIKoinModule,
                         commonsKoinModule,
-                        articlesUIKoinModule
+                        articlesUIKoinModule,
                     ),
             )
         }

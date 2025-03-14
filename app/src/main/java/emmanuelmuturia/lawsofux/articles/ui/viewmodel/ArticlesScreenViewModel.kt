@@ -11,9 +11,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class ArticlesScreenViewModel(
-    private val articleRepository: ArticleRepository
+    private val articleRepository: ArticleRepository,
 ) : ViewModel() {
-
     val articlesScreenUIState = MutableStateFlow(value = ArticlesScreenUIState())
 
     init {
@@ -21,13 +20,11 @@ class ArticlesScreenViewModel(
     }
 
     private fun getAllArticles() {
-
         articlesScreenUIState.value = articlesScreenUIState.value.copy(isLoading = true)
 
         viewModelScope.launch {
             articleRepository.getAllArticles().asResult().collect { result ->
                 when (result) {
-
                     is LawsOfUXState.Success -> {
                         articlesScreenUIState.update {
                             it.copy(
@@ -45,11 +42,8 @@ class ArticlesScreenViewModel(
                             )
                         }
                     }
-
                 }
             }
         }
-
     }
-
 }

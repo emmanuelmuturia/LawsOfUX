@@ -9,18 +9,18 @@ import kotlinx.coroutines.withContext
 
 class ArticleRepositoryImplementation(
     private val ioDispatcher: CoroutineDispatcher,
-    private val localArticleSource: LocalArticleSource
+    private val localArticleSource: LocalArticleSource,
 ) : ArticleRepository {
     override suspend fun getAllArticles(): Flow<List<Article>> {
         return withContext(
-            context = ioDispatcher
+            context = ioDispatcher,
         ) {
             localArticleSource.getAllLocalArticles().map { localArticles ->
                 localArticles.map { localArticle ->
                     Article(
                         articleTitle = localArticle.localArticleTitle,
                         articleDescription = localArticle.localArticleDescription,
-                        articleThumbnail = localArticle.localArticleThumbnail
+                        articleThumbnail = localArticle.localArticleThumbnail,
                     )
                 }
             }

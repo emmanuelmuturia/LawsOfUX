@@ -46,7 +46,7 @@ fun LawsOfUXNavHost() {
                     },
                     navigateToArticlesScreen = {
                         navController.navigate(route = ArticlesScreen)
-                    }
+                    },
                 )
 
                 homeDetailsScreen(
@@ -64,7 +64,7 @@ fun LawsOfUXNavHost() {
                     },
                     navigateToArticlesDetailsPage = {
                         // Navigate to the Articles Details Page...
-                    }
+                    },
                 )
             }
         }

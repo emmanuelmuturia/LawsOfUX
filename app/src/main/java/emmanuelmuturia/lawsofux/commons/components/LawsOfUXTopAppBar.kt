@@ -44,9 +44,7 @@ import androidx.compose.ui.unit.sp
 import emmanuelmuturia.lawsofux.R
 
 @Composable
-fun LawsOfUXTopAppBar(
-    navigateToArticlesScreen: () -> Unit
-) {
+fun LawsOfUXTopAppBar(navigateToArticlesScreen: () -> Unit) {
     var screensMenuExpanded by remember { mutableStateOf(value = false) }
     var languagesMenuExpanded by remember { mutableStateOf(value = false) }
 

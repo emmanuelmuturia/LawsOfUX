@@ -5,14 +5,14 @@ import emmanuelmuturia.lawsofux.articles.ui.viewmodel.ArticlesScreenViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
-val articlesUIKoinModule = module {
+val articlesUIKoinModule =
+    module {
 
-    viewModel {
-        ArticlesScreenViewModel(
-            articleRepository = get()
-        )
+        viewModel {
+            ArticlesScreenViewModel(
+                articleRepository = get(),
+            )
+        }
+
+        includes(module = listOf(articlesDataKoinModule))
     }
-
-    includes(module = listOf(articlesDataKoinModule))
-
-}
