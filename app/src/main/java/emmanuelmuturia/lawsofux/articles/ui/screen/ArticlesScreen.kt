@@ -52,6 +52,7 @@ fun ArticlesScreen(
     articlesScreenViewModel: ArticlesScreenViewModel,
     navigateToArticlesScreen: () -> Unit,
     navigateToArticlesDetailsPage: () -> Unit,
+    navigateToCardsScreen: () -> Unit,
 ) {
     val articlesScreenListState = rememberLazyListState()
 
@@ -74,6 +75,7 @@ fun ArticlesScreen(
         topBar = {
             LawsOfUXTopAppBar(
                 navigateToArticlesScreen = navigateToArticlesScreen,
+                navigateToCardsScreen = navigateToCardsScreen,
             )
         },
         floatingActionButton = {
@@ -95,9 +97,9 @@ fun ArticlesScreen(
                 }
             }
         },
-    ) { innerPadding ->
+    ) { paddingValues ->
         ArticlesScreenContent(
-            modifier = modifier.padding(paddingValues = innerPadding),
+            modifier = modifier.padding(paddingValues = paddingValues),
             articlesScreenUIState = articlesScreenUIState,
             articlesScreenListState = articlesScreenListState,
             navigateToArticlesDetailsPage = navigateToArticlesDetailsPage,
