@@ -54,7 +54,7 @@ class LocalArticleSourceImplementation(
         ),
     )
 
-    override suspend fun getAllArticles(): Flow<List<LocalArticle>> {
+    override suspend fun getAllLocalArticles(): Flow<List<LocalArticle>> {
         return withContext(context = ioDispatcher) {
             flowOf(value = localArticles)
         }
