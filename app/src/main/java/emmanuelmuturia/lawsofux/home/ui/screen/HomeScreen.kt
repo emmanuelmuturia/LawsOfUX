@@ -62,7 +62,10 @@ import org.koin.androidx.compose.koinViewModel
  */
 
 @Composable
-fun HomeScreen(navigateToHomeDetailsScreen: (UXLaw) -> Unit) {
+fun HomeScreen(
+    navigateToHomeDetailsScreen: (UXLaw) -> Unit,
+    navigateToArticlesScreen: () -> Unit,
+) {
     val homeScreenListState = rememberLazyListState()
 
     val showScrollToTopButton by remember {
@@ -79,7 +82,9 @@ fun HomeScreen(navigateToHomeDetailsScreen: (UXLaw) -> Unit) {
                 .fillMaxSize()
                 .background(color = MaterialTheme.colorScheme.background),
         topBar = {
-            LawsOfUXTopAppBar()
+            LawsOfUXTopAppBar(
+                navigateToArticlesScreen = navigateToArticlesScreen,
+            )
         },
         floatingActionButton = {
             AnimatedVisibility(visible = showScrollToTopButton) {
