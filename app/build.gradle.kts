@@ -2,6 +2,7 @@ plugins {
     alias(notation = libs.plugins.android.application)
     alias(notation = libs.plugins.kotlin.android)
     alias(notation = libs.plugins.kotlin.compose)
+    alias(notation = libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -64,6 +65,7 @@ dependencies {
     implementation(dependencyNotation = libs.splash)
     implementation(dependencyNotation = libs.kotlinx.coroutines)
     implementation(dependencyNotation = libs.timber)
+    implementation(dependencyNotation = libs.serialization.json)
 
     testImplementation(dependencyNotation = libs.junit)
     testImplementation(dependencyNotation = libs.bundles.test)
