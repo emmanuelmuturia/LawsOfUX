@@ -2,6 +2,7 @@ package emmanuelmuturia.lawsofux.main.application
 
 import android.app.Application
 import emmanuelmuturia.lawsofux.BuildConfig
+import emmanuelmuturia.lawsofux.articles.ui.dependencyInjection.articlesUIKoinModule
 import emmanuelmuturia.lawsofux.commons.dependencyInjection.commonsKoinModule
 import emmanuelmuturia.lawsofux.home.ui.dependencyInjection.homeUIKoinModule
 import org.koin.android.ext.koin.androidContext
@@ -19,6 +20,7 @@ class LawsOfUXApplication : Application() {
                     listOf(
                         homeUIKoinModule,
                         commonsKoinModule,
+                        articlesUIKoinModule
                     ),
             )
         }
