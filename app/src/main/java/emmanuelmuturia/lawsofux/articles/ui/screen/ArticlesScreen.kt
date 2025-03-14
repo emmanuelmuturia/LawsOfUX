@@ -128,8 +128,16 @@ private fun ArticlesScreenContent(
 }
 
 @Composable
-private fun ArticlesScreenText(modifier: Modifier = Modifier) {
-
+private fun ArticlesScreenText() {
+    Text(
+        modifier = Modifier.padding(all = 14.dp),
+        text = "Selected articles on the intersection of psychology and user experience.",
+        fontSize = 28.sp,
+        color = MaterialTheme.colorScheme.onBackground,
+        overflow = TextOverflow.Clip,
+        fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+        fontWeight = FontWeight.Bold
+    )
 }
 
 @Composable
