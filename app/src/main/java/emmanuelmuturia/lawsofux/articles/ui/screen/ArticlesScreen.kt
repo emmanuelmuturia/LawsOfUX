@@ -72,7 +72,7 @@ fun ArticlesScreen(
             .background(color = MaterialTheme.colorScheme.background),
         topBar = {
             LawsOfUXTopAppBar(
-                navigateToArticlesScreen =
+                navigateToArticlesScreen = navigateToArticlesScreen
             )
         },
         floatingActionButton = {
