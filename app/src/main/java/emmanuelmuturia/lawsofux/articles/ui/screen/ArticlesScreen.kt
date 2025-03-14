@@ -50,7 +50,8 @@ import kotlinx.coroutines.launch
 fun ArticlesScreen(
     modifier: Modifier = Modifier,
     articlesScreenViewModel: ArticlesScreenViewModel,
-    navigateToArticlesScreen: () -> Unit
+    navigateToArticlesScreen: () -> Unit,
+    navigateToArticlesDetailsPage: () -> Unit
 ) {
 
     val articlesScreenListState = rememberLazyListState()
@@ -98,7 +99,8 @@ fun ArticlesScreen(
         ArticlesScreenContent(
             modifier = modifier.padding(paddingValues = innerPadding),
             articlesScreenUIState = articlesScreenUIState,
-            articlesScreenListState = articlesScreenListState
+            articlesScreenListState = articlesScreenListState,
+            navigateToArticlesDetailsPage = navigateToArticlesDetailsPage
         )
     }
 }
@@ -107,7 +109,8 @@ fun ArticlesScreen(
 private fun ArticlesScreenContent(
     modifier: Modifier = Modifier,
     articlesScreenListState: LazyListState,
-    articlesScreenUIState: ArticlesScreenUIState
+    articlesScreenUIState: ArticlesScreenUIState,
+    navigateToArticlesDetailsPage: () -> Unit
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
@@ -118,7 +121,10 @@ private fun ArticlesScreenContent(
         }
 
         items(items = articlesScreenUIState.articles) { article ->
-            ArticlesCardItem(article = article)
+            ArticlesCardItem(
+                article = article,
+                navigateToArticlesDetailsPage = navigateToArticlesDetailsPage
+            )
         }
 
         item {
@@ -143,7 +149,7 @@ private fun ArticlesScreenText() {
 @Composable
 private fun ArticlesCardItem(
     article: Article,
-    //navigateToHomeDetailsScreen: (UXLaw) -> Unit,
+    navigateToArticlesDetailsPage: () -> Unit
 ) {
     Card(
         modifier =
@@ -151,7 +157,7 @@ private fun ArticlesCardItem(
             .fillMaxWidth()
             .padding(all = 14.dp)
             .clickable {
-                //navigateToHomeDetailsScreen(uxLaw)
+                navigateToArticlesDetailsPage()
             },
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
     ) {

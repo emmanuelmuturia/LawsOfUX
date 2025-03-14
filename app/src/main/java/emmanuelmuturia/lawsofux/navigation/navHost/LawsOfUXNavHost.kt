@@ -61,6 +61,9 @@ fun LawsOfUXNavHost() {
                     articlesScreenViewModel = articlesScreenViewModel,
                     navigateToArticlesScreen = {
                         navController.navigate(route = ArticlesScreen)
+                    },
+                    navigateToArticlesDetailsPage = {
+                        // Navigate to the Articles Details Page...
                     }
                 )
             }
