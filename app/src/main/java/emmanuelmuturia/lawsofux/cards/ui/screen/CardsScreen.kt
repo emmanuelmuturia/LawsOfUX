@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
@@ -44,6 +45,7 @@ import emmanuelmuturia.lawsofux.R
 import emmanuelmuturia.lawsofux.cards.ui.state.CardsScreenUIState
 import emmanuelmuturia.lawsofux.cards.ui.viewmodel.CardsScreenViewModel
 import emmanuelmuturia.lawsofux.commons.components.LawsOfUXExtraCardItem
+import emmanuelmuturia.lawsofux.commons.components.LawsOfUXFooter
 import emmanuelmuturia.lawsofux.commons.components.LawsOfUXTopAppBar
 import kotlinx.coroutines.launch
 
@@ -51,7 +53,8 @@ import kotlinx.coroutines.launch
 fun CardsScreen(
     navigateToArticlesScreen: () -> Unit,
     navigateToDeckShop: () -> Unit,
-    cardsScreenViewModel: CardsScreenViewModel
+    cardsScreenViewModel: CardsScreenViewModel,
+    navigateToCardsScreen: () -> Unit,
 ) {
 
     val cardsScreenListState = rememberLazyListState()
@@ -74,6 +77,7 @@ fun CardsScreen(
         topBar = {
             LawsOfUXTopAppBar(
                 navigateToArticlesScreen = navigateToArticlesScreen,
+                navigateToCardsScreen = navigateToCardsScreen
             )
         },
         floatingActionButton = {
@@ -127,7 +131,7 @@ private fun CardsScreenContent(
         }
 
         item {
-            CardsScreenContentText()
+            CardsScreenContentTitle()
         }
 
         item {
@@ -149,6 +153,10 @@ private fun CardsScreenContent(
             )
         }
 
+        item {
+            LawsOfUXFooter()
+        }
+
     }
 }
 
@@ -167,7 +175,7 @@ private fun CardsScreenText() {
 }
 
 @Composable
-private fun CardsScreenContentTitle(modifier: Modifier = Modifier) {
+private fun CardsScreenContentTitle() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "The UX Designer’s secret weapon",
@@ -180,7 +188,7 @@ private fun CardsScreenContentTitle(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun CardsScreenContentText(modifier: Modifier = Modifier) {
+private fun CardsScreenContentText() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = buildAnnotatedString {
@@ -218,7 +226,7 @@ private fun CardsScreenContentText(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun CardsScreenButton(modifier: Modifier = Modifier, navigateToDeckShop: () -> Unit) {
+private fun CardsScreenButton(navigateToDeckShop: () -> Unit) {
     Button(
         modifier =
         Modifier
@@ -238,17 +246,17 @@ private fun CardsScreenButton(modifier: Modifier = Modifier, navigateToDeckShop:
 }
 
 @Composable
-private fun CardsScreenImage(modifier: Modifier = Modifier) {
+private fun CardsScreenImage() {
     Image(
-        painter =,
+        painter = painterResource(id = R.drawable.card_screen_image),
         contentDescription = "Cards Screen Image",
-        modifier = Modifier.padding(all = 14.dp),
+        modifier = Modifier.padding(all = 14.dp).fillMaxSize(),
         contentScale = ContentScale.Crop
     )
 }
 
 @Composable
-private fun CardsScreenRelatedTitle(modifier: Modifier = Modifier) {
+private fun CardsScreenRelatedTitle() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "Related",

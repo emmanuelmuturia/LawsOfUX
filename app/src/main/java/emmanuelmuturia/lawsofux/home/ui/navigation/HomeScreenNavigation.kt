@@ -12,11 +12,13 @@ object HomeScreen
 fun NavGraphBuilder.homeScreen(
     navigateToHomeDetailsScreen: (UXLaw) -> Unit,
     navigateToArticlesScreen: () -> Unit,
+    navigateToCardsScreen: () -> Unit,
 ) {
     composable<HomeScreen> {
         HomeScreen(
             navigateToHomeDetailsScreen = navigateToHomeDetailsScreen,
             navigateToArticlesScreen = navigateToArticlesScreen,
+            navigateToCardsScreen = navigateToCardsScreen
         )
     }
 }

@@ -13,12 +13,14 @@ fun NavGraphBuilder.articlesScreen(
     articlesScreenViewModel: ArticlesScreenViewModel,
     navigateToArticlesScreen: () -> Unit,
     navigateToArticlesDetailsPage: () -> Unit,
+    navigateToCardsScreen: () -> Unit,
 ) {
     composable<ArticlesScreen> {
         ArticlesScreen(
             articlesScreenViewModel = articlesScreenViewModel,
             navigateToArticlesScreen = navigateToArticlesScreen,
             navigateToArticlesDetailsPage = navigateToArticlesDetailsPage,
+            navigateToCardsScreen = navigateToCardsScreen
         )
     }
 }

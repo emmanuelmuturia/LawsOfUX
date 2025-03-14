@@ -11,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import emmanuelmuturia.lawsofux.articles.ui.navigation.ArticlesScreen
 import emmanuelmuturia.lawsofux.articles.ui.navigation.articlesScreen
 import emmanuelmuturia.lawsofux.articles.ui.viewmodel.ArticlesScreenViewModel
+import emmanuelmuturia.lawsofux.cards.ui.navigation.CardsScreen
 import emmanuelmuturia.lawsofux.cards.ui.navigation.cardsScreen
 import emmanuelmuturia.lawsofux.cards.ui.viewmodel.CardsScreenViewModel
 import emmanuelmuturia.lawsofux.commons.theme.LawsOfUXTheme
@@ -51,6 +52,9 @@ fun LawsOfUXNavHost() {
                     navigateToArticlesScreen = {
                         navController.navigate(route = ArticlesScreen)
                     },
+                    navigateToCardsScreen = {
+                        navController.navigate(route = CardsScreen)
+                    }
                 )
 
                 homeDetailsScreen(
@@ -69,6 +73,9 @@ fun LawsOfUXNavHost() {
                     navigateToArticlesDetailsPage = {
                         // Navigate to the Articles Details Page...
                     },
+                    navigateToCardsScreen = {
+                        navController.navigate(route = CardsScreen)
+                    }
                 )
 
                 cardsScreen(
@@ -78,7 +85,10 @@ fun LawsOfUXNavHost() {
                     navigateToDeckShop = {
                         // Navigate to the Deck Shop...
                     },
-                    cardsScreenViewModel = cardsScreenViewModel
+                    cardsScreenViewModel = cardsScreenViewModel,
+                    navigateToCardsScreen = {
+                        navController.navigate(route = CardsScreen)
+                    }
                 )
             }
         }

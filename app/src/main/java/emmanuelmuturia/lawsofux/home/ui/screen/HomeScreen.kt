@@ -65,6 +65,7 @@ import org.koin.androidx.compose.koinViewModel
 fun HomeScreen(
     navigateToHomeDetailsScreen: (UXLaw) -> Unit,
     navigateToArticlesScreen: () -> Unit,
+    navigateToCardsScreen: () -> Unit,
 ) {
     val homeScreenListState = rememberLazyListState()
 
@@ -84,6 +85,7 @@ fun HomeScreen(
         topBar = {
             LawsOfUXTopAppBar(
                 navigateToArticlesScreen = navigateToArticlesScreen,
+                navigateToCardsScreen = navigateToCardsScreen
             )
         },
         floatingActionButton = {

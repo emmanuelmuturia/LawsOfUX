@@ -12,13 +12,15 @@ object CardsScreen
 fun NavGraphBuilder.cardsScreen(
     navigateToArticlesScreen: () -> Unit,
     navigateToDeckShop: () -> Unit,
-    cardsScreenViewModel: CardsScreenViewModel
+    cardsScreenViewModel: CardsScreenViewModel,
+    navigateToCardsScreen: () -> Unit,
 ) {
     composable<CardsScreen> {
         CardsScreen(
             navigateToArticlesScreen = navigateToArticlesScreen,
             cardsScreenViewModel = cardsScreenViewModel,
-            navigateToDeckShop = navigateToDeckShop
+            navigateToDeckShop = navigateToDeckShop,
+            navigateToCardsScreen = navigateToCardsScreen
         )
     }
 }
