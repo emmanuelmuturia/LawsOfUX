@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FloatingActionButton
@@ -22,8 +23,10 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -36,6 +39,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withLink
@@ -115,6 +119,12 @@ private fun ProjectInfoScreenContent(
     navigateToPosterShop: () -> Unit,
     projectInfoScreenUIState: ProjectInfoScreenUIState,
 ) {
+
+    var userName by remember { mutableStateOf(value = "") }
+    var userEmail by remember { mutableStateOf(value = "") }
+    var userSubject by remember { mutableStateOf(value = "") }
+    var userMessage by remember { mutableStateOf(value = "") }
+
     LazyColumn(
         modifier = modifier.fillMaxSize(),
     ) {
@@ -202,7 +212,11 @@ private fun ProjectInfoScreenContent(
         }
 
         item {
-            ProjectInfoScreenContactBox()
+            ProjectInfoScreenContactBox(
+                value = userName,
+                onValueChange = { userName = it },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+            )
         }
 
         item {
@@ -212,7 +226,11 @@ private fun ProjectInfoScreenContent(
         }
 
         item {
-            ProjectInfoScreenContactBox()
+            ProjectInfoScreenContactBox(
+                value = userEmail,
+                onValueChange = { userEmail = it },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
+            )
         }
 
         item {
@@ -222,12 +240,24 @@ private fun ProjectInfoScreenContent(
         }
 
         item {
-            ProjectInfoScreenContactBox()
+            ProjectInfoScreenContactBox(
+                value = userSubject,
+                onValueChange = { userSubject = it },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+            )
         }
 
         item {
             ProjectInfoScreenContactBoxTitle(
                 title = "MESSAGE",
+            )
+        }
+
+        item {
+            ProjectInfoScreenContactBox(
+                value = userMessage,
+                onValueChange = { userMessage = it },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
             )
         }
 
@@ -626,6 +656,7 @@ private fun ProjectInfoScreenContactBoxTitle(title: String) {
 private fun ProjectInfoScreenContactBox(
     value: String,
     onValueChange: (String) -> Unit,
+    keyboardOptions: KeyboardOptions,
 ) {
     OutlinedTextField(
         value = value,
@@ -636,6 +667,7 @@ private fun ProjectInfoScreenContactBox(
                 cursorColor = MaterialTheme.colorScheme.onBackground,
             ),
         shape = RoundedCornerShape(size = 21.dp),
+        keyboardOptions = keyboardOptions
     )
 }
 
