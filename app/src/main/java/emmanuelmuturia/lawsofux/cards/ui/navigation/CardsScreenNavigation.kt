@@ -14,6 +14,8 @@ fun NavGraphBuilder.cardsScreen(
     navigateToDeckShop: () -> Unit,
     cardsScreenViewModel: CardsScreenViewModel,
     navigateToCardsScreen: () -> Unit,
+    navigateToBookScreen: () -> Unit,
+    navigateToInfoScreen: () -> Unit,
 ) {
     composable<CardsScreen> {
         CardsScreen(
@@ -21,6 +23,8 @@ fun NavGraphBuilder.cardsScreen(
             cardsScreenViewModel = cardsScreenViewModel,
             navigateToDeckShop = navigateToDeckShop,
             navigateToCardsScreen = navigateToCardsScreen,
+            navigateToBookScreen = navigateToBookScreen,
+            navigateToInfoScreen = navigateToInfoScreen,
         )
     }
 }

@@ -60,6 +60,8 @@ fun ProjectInfoScreen(
     navigateToCardsScreen: () -> Unit,
     navigateToPosterShop: () -> Unit,
     projectInfoScreenViewModel: ProjectInfoScreenViewModel,
+    navigateToBookScreen: () -> Unit,
+    navigateToInfoScreen: () -> Unit,
 ) {
     val projectInfoScreenListState = rememberLazyListState()
 
@@ -83,6 +85,8 @@ fun ProjectInfoScreen(
             LawsOfUXTopAppBar(
                 navigateToArticlesScreen = navigateToArticlesScreen,
                 navigateToCardsScreen = navigateToCardsScreen,
+                navigateToBookScreen = navigateToBookScreen,
+                navigateToInfoScreen = navigateToInfoScreen
             )
         },
         floatingActionButton = {

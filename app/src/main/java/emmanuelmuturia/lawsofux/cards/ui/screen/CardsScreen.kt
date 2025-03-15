@@ -55,6 +55,8 @@ fun CardsScreen(
     navigateToDeckShop: () -> Unit,
     cardsScreenViewModel: CardsScreenViewModel,
     navigateToCardsScreen: () -> Unit,
+    navigateToBookScreen: () -> Unit,
+    navigateToInfoScreen: () -> Unit,
 ) {
     val cardsScreenListState = rememberLazyListState()
 
@@ -77,6 +79,8 @@ fun CardsScreen(
             LawsOfUXTopAppBar(
                 navigateToArticlesScreen = navigateToArticlesScreen,
                 navigateToCardsScreen = navigateToCardsScreen,
+                navigateToBookScreen = navigateToBookScreen,
+                navigateToInfoScreen = navigateToInfoScreen
             )
         },
         floatingActionButton = {

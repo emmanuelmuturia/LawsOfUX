@@ -14,6 +14,8 @@ fun NavGraphBuilder.projectInfoScreen(
     navigateToCardsScreen: () -> Unit,
     navigateToPosterShop: () -> Unit,
     projectInfoScreenViewModel: ProjectInfoScreenViewModel,
+    navigateToBookScreen: () -> Unit,
+    navigateToInfoScreen: () -> Unit,
 ) {
     composable<ProjectInfoScreen> {
         ProjectInfoScreen(
@@ -21,6 +23,8 @@ fun NavGraphBuilder.projectInfoScreen(
             navigateToArticlesScreen = navigateToArticlesScreen,
             navigateToPosterShop = navigateToPosterShop,
             projectInfoScreenViewModel = projectInfoScreenViewModel,
+            navigateToBookScreen = navigateToBookScreen,
+            navigateToInfoScreen = navigateToInfoScreen,
         )
     }
 }

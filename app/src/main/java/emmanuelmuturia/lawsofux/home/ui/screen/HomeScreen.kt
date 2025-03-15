@@ -66,6 +66,8 @@ fun HomeScreen(
     navigateToHomeDetailsScreen: (UXLaw) -> Unit,
     navigateToArticlesScreen: () -> Unit,
     navigateToCardsScreen: () -> Unit,
+    navigateToBookScreen: () -> Unit,
+    navigateToInfoScreen: () -> Unit,
 ) {
     val homeScreenListState = rememberLazyListState()
 
@@ -86,6 +88,8 @@ fun HomeScreen(
             LawsOfUXTopAppBar(
                 navigateToArticlesScreen = navigateToArticlesScreen,
                 navigateToCardsScreen = navigateToCardsScreen,
+                navigateToBookScreen = navigateToBookScreen,
+                navigateToInfoScreen = navigateToInfoScreen,
             )
         },
         floatingActionButton = {

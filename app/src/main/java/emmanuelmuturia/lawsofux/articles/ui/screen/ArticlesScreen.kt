@@ -53,6 +53,8 @@ fun ArticlesScreen(
     navigateToArticlesScreen: () -> Unit,
     navigateToArticlesDetailsPage: () -> Unit,
     navigateToCardsScreen: () -> Unit,
+    navigateToBookScreen: () -> Unit,
+    navigateToInfoScreen: () -> Unit,
 ) {
     val articlesScreenListState = rememberLazyListState()
 
@@ -76,6 +78,8 @@ fun ArticlesScreen(
             LawsOfUXTopAppBar(
                 navigateToArticlesScreen = navigateToArticlesScreen,
                 navigateToCardsScreen = navigateToCardsScreen,
+                navigateToBookScreen = navigateToBookScreen,
+                navigateToInfoScreen = navigateToInfoScreen,
             )
         },
         floatingActionButton = {

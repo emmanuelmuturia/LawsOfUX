@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -38,6 +40,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import emmanuelmuturia.lawsofux.R
 import emmanuelmuturia.lawsofux.book.ui.state.BookScreenUIState
 import emmanuelmuturia.lawsofux.book.ui.viewmodel.BookScreenViewModel
+import emmanuelmuturia.lawsofux.commons.components.LawsOfUXExtraCardItem
 import emmanuelmuturia.lawsofux.commons.components.LawsOfUXTopAppBar
 import kotlinx.coroutines.launch
 
@@ -49,7 +52,9 @@ fun BookScreen(
     navigateToAmazon: () -> Unit,
     navigateToOreilly: () -> Unit,
     navigateToBootcamp: () -> Unit,
-    bookScreenViewModel: BookScreenViewModel
+    bookScreenViewModel: BookScreenViewModel,
+    navigateToBookScreen: () -> Unit,
+    navigateToInfoScreen: () -> Unit,
 ) {
 
     val bookScreenListState = rememberLazyListState()
@@ -74,6 +79,8 @@ fun BookScreen(
             LawsOfUXTopAppBar(
                 navigateToArticlesScreen = navigateToArticlesScreen,
                 navigateToCardsScreen = navigateToCardsScreen,
+                navigateToBookScreen = navigateToBookScreen,
+                navigateToInfoScreen = navigateToInfoScreen,
             )
         },
         floatingActionButton = {
@@ -156,24 +163,80 @@ fun BookScreenContent(
             BookScreenLessonsTitle()
         }
 
-        items(items = ) {
+        itemsIndexed(items = bookScreenUIState.bookLessons) { index, bookLesson ->
+            Text(
+                modifier = Modifier.padding(start = 14.dp),
+                text = "${index + 1}",
+                fontSize = 14.sp,
+                color = MaterialTheme.colorScheme.onBackground,
+                overflow = TextOverflow.Clip,
+                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+                fontWeight = FontWeight.Bold,
+            )
 
+            HorizontalDivider(
+                modifier = Modifier.padding(all = 14.dp),
+                thickness = 3.dp,
+                color = MaterialTheme.colorScheme.onBackground,
+            )
+
+            Text(
+                modifier = Modifier.padding(all = 14.dp),
+                text = bookLesson.bookLessonDescription,
+                fontSize = 18.sp,
+                color = MaterialTheme.colorScheme.onBackground,
+                overflow = TextOverflow.Clip,
+                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+                fontWeight = FontWeight.Bold,
+            )
         }
 
         item {
             BookScreenReviewsTitle()
         }
 
-        items(items = ) {
+        items(items = bookScreenUIState.bookReviews) { bookReview ->
+            Text(
+                modifier = Modifier.padding(start = 14.dp),
+                text = bookReview.bookReviewCaption,
+                fontSize = 28.sp,
+                color = MaterialTheme.colorScheme.onBackground,
+                overflow = TextOverflow.Clip,
+                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+                fontWeight = FontWeight.Bold,
+            )
 
+            HorizontalDivider(
+                modifier = Modifier.padding(all = 14.dp),
+                thickness = 3.dp,
+                color = MaterialTheme.colorScheme.onBackground,
+            )
+
+            Text(
+                modifier = Modifier.padding(all = 14.dp),
+                text = bookReview.bookReviewAuthor,
+                fontSize = 18.sp,
+                color = MaterialTheme.colorScheme.onBackground,
+                overflow = TextOverflow.Clip,
+                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
+                fontWeight = FontWeight.Bold,
+            )
         }
 
         item {
             BookScreenGalleryTitle()
         }
 
-        items(items = ) {
-
+        items(items = bookScreenUIState.bookGalleries) { bookGallery ->
+            Image(
+                painter = painterResource(id = bookGallery.bookGalleryImage),
+                contentDescription = "Project Info Screen Image",
+                modifier =
+                Modifier
+                    .padding(all = 14.dp)
+                    .fillMaxSize(),
+                contentScale = ContentScale.Crop,
+            )
         }
 
         item {
@@ -188,8 +251,11 @@ fun BookScreenContent(
             BookScreenSecondEditionTitle()
         }
 
-        items(items = ) {
-
+        items(items = bookScreenUIState.bookSecondEditions) { bookSecondEdition ->
+            LawsOfUXExtraCardItem(
+                title = bookSecondEdition.bookSecondEditionTitle,
+                content = bookSecondEdition.bookSecondEditionSeller
+            )
         }
 
         item {
@@ -214,8 +280,11 @@ fun BookScreenContent(
             BookScreenFirstEditionTitle()
         }
 
-        items(items = ) {
-
+        items(items = bookScreenUIState.bookFirstEditions) { bookFirstEdition ->
+            LawsOfUXExtraCardItem(
+                title = bookFirstEdition.bookFirstEditionTitle,
+                content = bookFirstEdition.bookFirstEditionSeller
+            )
         }
 
         item {
@@ -226,16 +295,22 @@ fun BookScreenContent(
             BookScreenTranslatedSecondEditionTitle()
         }
 
-        items(items = ) {
-
+        items(items = bookScreenUIState.bookTranslatedSecondEditions) { bookTranslatedSecondEdition ->
+            LawsOfUXExtraCardItem(
+                title = bookTranslatedSecondEdition.bookTranslatedSecondEditionTitle,
+                content = bookTranslatedSecondEdition.bookTranslatedSecondEditionSeller
+            )
         }
 
         item {
             BookScreenTranslatedFirstEditionTitle()
         }
 
-        items(items = ) {
-
+        items(items = bookScreenUIState.bookTranslatedFirstEditions) { bookTranslatedFirstEdition ->
+            LawsOfUXExtraCardItem(
+                title = bookTranslatedFirstEdition.bookTranslatedFirstEditionTitle,
+                content = bookTranslatedFirstEdition.bookTranslatedFirstEditionSeller
+            )
         }
 
         item {

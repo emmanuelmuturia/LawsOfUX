@@ -47,6 +47,8 @@ import emmanuelmuturia.lawsofux.R
 fun LawsOfUXTopAppBar(
     navigateToArticlesScreen: () -> Unit,
     navigateToCardsScreen: () -> Unit,
+    navigateToBookScreen: () -> Unit,
+    navigateToInfoScreen: () -> Unit,
 ) {
     var screensMenuExpanded by remember { mutableStateOf(value = false) }
     var languagesMenuExpanded by remember { mutableStateOf(value = false) }
@@ -143,7 +145,7 @@ fun LawsOfUXTopAppBar(
                         )
                     },
                     onClick = {
-                        // Navigate to BOOK...
+                        navigateToBookScreen()
                         screensMenuExpanded = false
                     },
                 )
@@ -179,7 +181,7 @@ fun LawsOfUXTopAppBar(
                         )
                     },
                     onClick = {
-                        // Navigate to INFO...
+                        navigateToInfoScreen()
                         screensMenuExpanded = false
                     },
                 )
