@@ -3,6 +3,7 @@ package emmanuelmuturia.lawsofux.main.application
 import android.app.Application
 import emmanuelmuturia.lawsofux.BuildConfig
 import emmanuelmuturia.lawsofux.articles.ui.dependencyInjection.articlesUIKoinModule
+import emmanuelmuturia.lawsofux.book.ui.dependencyInjection.bookUIKoinModule
 import emmanuelmuturia.lawsofux.cards.ui.dependencyInjection.cardsUIKoinModule
 import emmanuelmuturia.lawsofux.commons.dependencyInjection.commonsKoinModule
 import emmanuelmuturia.lawsofux.home.ui.dependencyInjection.homeUIKoinModule
@@ -25,6 +26,7 @@ class LawsOfUXApplication : Application() {
                         articlesUIKoinModule,
                         cardsUIKoinModule,
                         projectInfoUIKoinModule,
+                        bookUIKoinModule
                     ),
             )
         }
