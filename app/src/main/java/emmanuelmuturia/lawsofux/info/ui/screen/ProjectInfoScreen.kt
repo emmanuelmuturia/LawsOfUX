@@ -3,9 +3,15 @@ package emmanuelmuturia.lawsofux.info.ui.screen
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
@@ -157,6 +163,10 @@ private fun ProjectInfoScreenContent(
         }
 
         item {
+            ProjectInfoScreenShareTitle()
+        }
+
+        item {
             ProjectInfoScreenShareContent()
         }
 
@@ -270,7 +280,7 @@ private fun ProjectInfoScreenContent(
                 value = userMessage,
                 onValueChange = { userMessage = it },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                height = 140.dp
+                height = 210.dp
             )
         }
 
@@ -366,12 +376,107 @@ private fun ProjectInfoScreenContentText() {
 
 @Composable
 private fun ProjectInfoScreenContentTextNote() {
+    Box(
+        modifier = Modifier.fillMaxSize().padding(all = 7.dp).border(
+            width = 1.dp,
+            color = MaterialTheme.colorScheme.onBackground,
+            shape = RoundedCornerShape(size = 7.dp)
+        )
+    ) {
+        Text(
+            modifier = Modifier.padding(all = 14.dp),
+            text = buildAnnotatedString {
+                withStyle(style = SpanStyle(
+                    fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+                )
+                ) {
+                    append(text = "----------------------------------------")
+                    append(text = "NOTE\n")
+                }
+                append(text = "----------------------------------------")
+                append(text = "All content on this website is licensed under the Creative Commons " +
+                    "Attribution-NonCommercial-NoDerivatives 4.0 International License. To view a " +
+                    "copy of this license, visit ")
+                withLink(
+                    link =
+                    LinkAnnotation.Url(
+                        url = "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+                    ),
+                ) {
+                    withStyle(
+                        style =
+                        SpanStyle(
+                            textDecoration = TextDecoration.Underline,
+                        ),
+                    ) {
+                        append(text = "https://creativecommons.org/licenses/by-nc-nd/4.0/")
+                    }
+                }
+                append(text = ".")
+            },
+            fontSize = 18.sp,
+            color = MaterialTheme.colorScheme.onBackground,
+            overflow = TextOverflow.Clip,
+            fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+        )
+    }
+}
 
+@Composable
+private fun ProjectInfoScreenShareTitle() {
+    Text(
+        modifier = Modifier.padding(all = 14.dp),
+        text = "Share this project",
+        fontSize = 25.sp,
+        color = MaterialTheme.colorScheme.onBackground,
+        overflow = TextOverflow.Clip,
+        fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+        fontWeight = FontWeight.ExtraBold,
+    )
 }
 
 @Composable
 private fun ProjectInfoScreenShareContent() {
+    Row(
+        //modifier = Modifier.padding(all = 14.dp),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.x),
+            contentDescription = "X Image",
+            modifier =
+            Modifier
+                .size(size = 70.dp),
+            contentScale = ContentScale.Crop,
+        )
 
+        Image(
+            painter = painterResource(id = R.drawable.meta),
+            contentDescription = "Meta Image",
+            modifier =
+            Modifier
+                .size(size = 70.dp),
+            contentScale = ContentScale.Crop,
+        )
+
+        Image(
+            painter = painterResource(id = R.drawable.linkedin),
+            contentDescription = "LinkedIn Image",
+            modifier =
+            Modifier
+                .size(size = 70.dp),
+            contentScale = ContentScale.Crop,
+        )
+
+        Image(
+            painter = painterResource(id = R.drawable.pinterest),
+            contentDescription = "Pinterest Image",
+            modifier =
+            Modifier
+                .size(size = 70.dp),
+            contentScale = ContentScale.Crop,
+        )
+    }
 }
 
 @Composable
@@ -679,7 +784,7 @@ private fun ProjectInfoScreenContactBox(
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
-        modifier = Modifier.padding(all = 14.dp).height(height = height),
+        modifier = Modifier.padding(all = 14.dp).height(height = height).fillMaxWidth(),
         colors =
             TextFieldDefaults.colors(
                 cursorColor = MaterialTheme.colorScheme.onBackground,
