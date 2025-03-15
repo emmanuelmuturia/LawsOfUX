@@ -61,7 +61,6 @@ fun BookScreen(
     navigateToBookScreen: () -> Unit,
     navigateToInfoScreen: () -> Unit,
 ) {
-
     val bookScreenListState = rememberLazyListState()
 
     val showScrollToTopButton by remember {
@@ -73,13 +72,13 @@ fun BookScreen(
     val bookScreenCoroutineScope = rememberCoroutineScope()
 
     val bookScreenUIState by
-    bookScreenViewModel.bookScreenUIState.collectAsStateWithLifecycle()
+        bookScreenViewModel.bookScreenUIState.collectAsStateWithLifecycle()
 
     Scaffold(
         modifier =
-        Modifier
-            .fillMaxSize()
-            .background(color = MaterialTheme.colorScheme.background),
+            Modifier
+                .fillMaxSize()
+                .background(color = MaterialTheme.colorScheme.background),
         topBar = {
             LawsOfUXTopAppBar(
                 navigateToArticlesScreen = navigateToArticlesScreen,
@@ -114,10 +113,9 @@ fun BookScreen(
             navigateToAmazon = navigateToAmazon,
             navigateToOreilly = navigateToOreilly,
             navigateToBootcamp = navigateToBootcamp,
-            bookScreenUIState = bookScreenUIState
+            bookScreenUIState = bookScreenUIState,
         )
     }
-
 }
 
 @Composable
@@ -127,13 +125,12 @@ fun BookScreenContent(
     navigateToAmazon: () -> Unit,
     navigateToOreilly: () -> Unit,
     navigateToBootcamp: () -> Unit,
-    bookScreenUIState: BookScreenUIState
+    bookScreenUIState: BookScreenUIState,
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
         state = bookScreenListState,
     ) {
-
         item {
             BookScreenText()
         }
@@ -160,7 +157,7 @@ fun BookScreenContent(
 
         item {
             BookScreenViewOnAmazonButton(
-                navigateToAmazon = navigateToAmazon
+                navigateToAmazon = navigateToAmazon,
             )
         }
 
@@ -268,10 +265,10 @@ fun BookScreenContent(
                 painter = painterResource(id = bookGallery.bookGalleryImage),
                 contentDescription = "Project Info Screen Image",
                 modifier =
-                Modifier
-                    .padding(all = 14.dp)
-                    .fillMaxSize()
-                    .clip(shape = RoundedCornerShape(size = 21.dp)),
+                    Modifier
+                        .padding(all = 14.dp)
+                        .fillMaxSize()
+                        .clip(shape = RoundedCornerShape(size = 21.dp)),
                 contentScale = ContentScale.Crop,
             )
         }
@@ -291,7 +288,7 @@ fun BookScreenContent(
         items(items = bookScreenUIState.bookSecondEditions) { bookSecondEdition ->
             LawsOfUXExtraCardItem(
                 title = bookSecondEdition.bookSecondEditionTitle,
-                content = bookSecondEdition.bookSecondEditionSeller
+                content = bookSecondEdition.bookSecondEditionSeller,
             )
         }
 
@@ -309,7 +306,7 @@ fun BookScreenContent(
 
         item {
             BookScreenSecondEditionBookButton(
-                navigateToOreilly = navigateToOreilly
+                navigateToOreilly = navigateToOreilly,
             )
         }
 
@@ -320,7 +317,7 @@ fun BookScreenContent(
         items(items = bookScreenUIState.bookFirstEditions) { bookFirstEdition ->
             LawsOfUXExtraCardItem(
                 title = bookFirstEdition.bookFirstEditionTitle,
-                content = bookFirstEdition.bookFirstEditionSeller
+                content = bookFirstEdition.bookFirstEditionSeller,
             )
         }
 
@@ -335,7 +332,7 @@ fun BookScreenContent(
         items(items = bookScreenUIState.bookTranslatedSecondEditions) { bookTranslatedSecondEdition ->
             LawsOfUXExtraCardItem(
                 title = bookTranslatedSecondEdition.bookTranslatedSecondEditionTitle,
-                content = bookTranslatedSecondEdition.bookTranslatedSecondEditionSeller
+                content = bookTranslatedSecondEdition.bookTranslatedSecondEditionSeller,
             )
         }
 
@@ -346,7 +343,7 @@ fun BookScreenContent(
         items(items = bookScreenUIState.bookTranslatedFirstEditions) { bookTranslatedFirstEdition ->
             LawsOfUXExtraCardItem(
                 title = bookTranslatedFirstEdition.bookTranslatedFirstEditionTitle,
-                content = bookTranslatedFirstEdition.bookTranslatedFirstEditionSeller
+                content = bookTranslatedFirstEdition.bookTranslatedFirstEditionSeller,
             )
         }
 
@@ -364,14 +361,13 @@ fun BookScreenContent(
 
         item {
             BookScreenRelatedButton(
-                navigateToBootcamp = navigateToBootcamp
+                navigateToBootcamp = navigateToBootcamp,
             )
         }
 
         item {
             LawsOfUXFooter()
         }
-
     }
 }
 
@@ -379,8 +375,9 @@ fun BookScreenContent(
 fun BookScreenText() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
-        text = "A designer’s guide to using psychology to design better digital products and " +
-            "services.",
+        text =
+            "A designer’s guide to using psychology to design better digital products and " +
+                "services.",
         fontSize = 25.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
@@ -394,10 +391,10 @@ fun BookScreenImage() {
         painter = painterResource(id = R.drawable.laws_of_ux_book),
         contentDescription = "Project Info Screen Image",
         modifier =
-        Modifier
-            .padding(all = 14.dp)
-            .fillMaxSize()
-            .clip(shape = RoundedCornerShape(size = 21.dp)),
+            Modifier
+                .padding(all = 14.dp)
+                .fillMaxSize()
+                .clip(shape = RoundedCornerShape(size = 21.dp)),
         contentScale = ContentScale.Crop,
     )
 }
@@ -419,17 +416,18 @@ fun BookScreenOverviewTitle() {
 fun BookScreenOverviewContent() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
-        text = "An understanding of psychology-specifically the psychology behind how users " +
-            "behave and interact with digital interfaces-is perhaps the single most valuable " +
-            "non-design skill a designer can have. The most elegant design can fail if it " +
-            "forces users to conform to the design instead of working within the “blueprint” of " +
-            "how humans perceive and process the world around them. This practical guide " +
-            "explains " +
-            "how you can apply key principles of psychology to build products and experiences " +
-            "that " +
-            "are more human-centered and intuitive. It deconstructs familiar apps and " +
-            "experiences to provide clear examples of how UX designers can build interfaces " +
-            "that adapt to how users perceive and process digital interfaces.",
+        text =
+            "An understanding of psychology-specifically the psychology behind how users " +
+                "behave and interact with digital interfaces-is perhaps the single most valuable " +
+                "non-design skill a designer can have. The most elegant design can fail if it " +
+                "forces users to conform to the design instead of working within the “blueprint” of " +
+                "how humans perceive and process the world around them. This practical guide " +
+                "explains " +
+                "how you can apply key principles of psychology to build products and experiences " +
+                "that " +
+                "are more human-centered and intuitive. It deconstructs familiar apps and " +
+                "experiences to provide clear examples of how UX designers can build interfaces " +
+                "that adapt to how users perceive and process digital interfaces.",
         fontSize = 18.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
@@ -454,16 +452,22 @@ fun BookScreenNewBookTitle() {
 fun BookScreenNewBookContent() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
-        text = "The craft of design has a dynamic nature that keeps evolving along with " +
-            "technology. With every new technological advancement, new constraints and " +
-            "possibilities are introduced. Since the first edition of this book, " +
-            "LLMs (Large Language Models) have undergone significant advancements, AI-powered " +
-            "image generation tools have emerged, spatial computing has entered the mainstream, " +
-            "and smartphones have become even more powerful. However, the principles and " +
-            "concepts covered in this book remain timeless, and they provide a solid " +
-            "foundation for every designer, regardless of their level of expertise.\n" +
-            "\n" +
-            "To enhance the reader’s experience, the second edition includes additional information linking these principles and concepts to psychology concepts, techniques, and key considerations. This edition also features updated examples throughout, making it a practical guide for designers who want to stay up-to-date with the latest trends and best practices in the field of design.",
+        text =
+            "The craft of design has a dynamic nature that keeps evolving along with " +
+                "technology. With every new technological advancement, new constraints and " +
+                "possibilities are introduced. Since the first edition of this book, " +
+                "LLMs (Large Language Models) have undergone significant advancements, AI-powered " +
+                "image generation tools have emerged, spatial computing has entered the mainstream, " +
+                "and smartphones have become even more powerful. However, the principles and " +
+                "concepts covered in this book remain timeless, and they provide a solid " +
+                "foundation for every designer, regardless of their level of expertise.\n" +
+                "\n" +
+                "To enhance the reader’s experience, the second edition includes additional " +
+                "information linking these principles and concepts to psychology concepts, " +
+                "techniques, and key considerations. This edition also features updated examples " +
+                "throughout, making it a practical guide for designers who want to stay " +
+                "up-to-date " +
+                "with the latest trends and best practices in the field of design.",
         fontSize = 18.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
@@ -472,18 +476,16 @@ fun BookScreenNewBookContent() {
 }
 
 @Composable
-fun BookScreenViewOnAmazonButton(
-    navigateToAmazon: () -> Unit
-) {
+fun BookScreenViewOnAmazonButton(navigateToAmazon: () -> Unit) {
     Button(
         modifier =
-        Modifier
-            .padding(all = 7.dp),
+            Modifier
+                .padding(all = 7.dp),
         onClick = navigateToAmazon,
         colors =
-        ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primary,
-        ),
+            ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+            ),
     ) {
         Text(
             text = "VIEW ON AMAZON",
@@ -528,34 +530,37 @@ private fun BookScreenNewConceptsImage() {
         painter = painterResource(id = R.drawable.new_concepts),
         contentDescription = "New Concepts Image",
         modifier =
-        Modifier
-            .padding(all = 14.dp)
-            .size(size = 70.dp),
+            Modifier
+                .padding(all = 14.dp)
+                .size(size = 70.dp),
         contentScale = ContentScale.Crop,
     )
 }
 
 @Composable
 private fun BookScreenNewConcepts() {
-    val newConcepts = listOf(
-        "Paradox of Choice",
-        "Complexity Bias",
-        "Flow"
-    )
+    val newConcepts =
+        listOf(
+            "Paradox of Choice",
+            "Complexity Bias",
+            "Flow",
+        )
     Text(
         modifier = Modifier.padding(all = 14.dp),
-        text = buildAnnotatedString {
-            withStyle(
-                style = SpanStyle(
-                    fontWeight = FontWeight.ExtraBold
-                )
-            ) {
-                appendLine(value = "New Concepts")
-            }
-            newConcepts.forEach { newConcept ->
-                appendLine(value = "\u2022 $newConcept")
-            }
-        },
+        text =
+            buildAnnotatedString {
+                withStyle(
+                    style =
+                        SpanStyle(
+                            fontWeight = FontWeight.ExtraBold,
+                        ),
+                ) {
+                    appendLine(value = "New Concepts")
+                }
+                newConcepts.forEach { newConcept ->
+                    appendLine(value = "\u2022 $newConcept")
+                }
+            },
         fontSize = 18.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
@@ -569,35 +574,38 @@ private fun BookScreenNewConsiderationsImage() {
         painter = painterResource(id = R.drawable.new_considerations),
         contentDescription = "New Concepts Image",
         modifier =
-        Modifier
-            .padding(all = 14.dp)
-            .size(size = 70.dp),
+            Modifier
+                .padding(all = 14.dp)
+                .size(size = 70.dp),
         contentScale = ContentScale.Crop,
     )
 }
 
 @Composable
 private fun BookScreenNewConsiderations() {
-    val newConsiderations = listOf(
-        "The Human Factor",
-        "Accessibility",
-        "Paradox of the Active User",
-        "Personalization"
-    )
+    val newConsiderations =
+        listOf(
+            "The Human Factor",
+            "Accessibility",
+            "Paradox of the Active User",
+            "Personalization",
+        )
     Text(
         modifier = Modifier.padding(all = 14.dp),
-        text = buildAnnotatedString {
-            withStyle(
-                style = SpanStyle(
-                    fontWeight = FontWeight.ExtraBold
-                )
-            ) {
-                appendLine(value = "New Concepts")
-            }
-            newConsiderations.forEach { newConsideration ->
-                appendLine(value = "\u2022 $newConsideration")
-            }
-        },
+        text =
+            buildAnnotatedString {
+                withStyle(
+                    style =
+                        SpanStyle(
+                            fontWeight = FontWeight.ExtraBold,
+                        ),
+                ) {
+                    appendLine(value = "New Concepts")
+                }
+                newConsiderations.forEach { newConsideration ->
+                    appendLine(value = "\u2022 $newConsideration")
+                }
+            },
         fontSize = 18.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
@@ -611,34 +619,37 @@ private fun BookScreenNewTechniquesImage() {
         painter = painterResource(id = R.drawable.new_techniques),
         contentDescription = "New Concepts Image",
         modifier =
-        Modifier
-            .padding(all = 14.dp)
-            .size(size = 70.dp),
+            Modifier
+                .padding(all = 14.dp)
+                .size(size = 70.dp),
         contentScale = ContentScale.Crop,
     )
 }
 
 @Composable
 private fun BookScreenNewTechniques() {
-    val newTechniques = listOf(
-        "Contextual Inquiry",
+    val newTechniques =
+        listOf(
+            "Contextual Inquiry",
             "User Interviews",
-            "Eye-tracking"
-    )
+            "Eye-tracking",
+        )
     Text(
         modifier = Modifier.padding(all = 14.dp),
-        text = buildAnnotatedString {
-            withStyle(
-                style = SpanStyle(
-                    fontWeight = FontWeight.ExtraBold
-                )
-            ) {
-                appendLine(value = "New Concepts")
-            }
-            newTechniques.forEach { newTechnique ->
-                appendLine(value = "\u2022 $newTechnique")
-            }
-        },
+        text =
+            buildAnnotatedString {
+                withStyle(
+                    style =
+                        SpanStyle(
+                            fontWeight = FontWeight.ExtraBold,
+                        ),
+                ) {
+                    appendLine(value = "New Concepts")
+                }
+                newTechniques.forEach { newTechnique ->
+                    appendLine(value = "\u2022 $newTechnique")
+                }
+            },
         fontSize = 18.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
@@ -726,10 +737,10 @@ fun BookScreenSecondEditionBookImage() {
         painter = painterResource(id = R.drawable.laws_of_ux_book),
         contentDescription = "Project Info Screen Image",
         modifier =
-        Modifier
-            .padding(all = 14.dp)
-            .fillMaxSize()
-            .clip(shape = RoundedCornerShape(size = 21.dp)),
+            Modifier
+                .padding(all = 14.dp)
+                .fillMaxSize()
+                .clip(shape = RoundedCornerShape(size = 21.dp)),
         contentScale = ContentScale.Crop,
     )
 }
@@ -751,8 +762,9 @@ fun BookScreenSecondEditionBookTitle() {
 fun BookScreenSecondEditionBookContent() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
-        text = "Review the book online with this 30-day free membership to the O’Reilly " +
-            "Learning Platform.",
+        text =
+            "Review the book online with this 30-day free membership to the O’Reilly " +
+                "Learning Platform.",
         fontSize = 18.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
@@ -761,18 +773,16 @@ fun BookScreenSecondEditionBookContent() {
 }
 
 @Composable
-fun BookScreenSecondEditionBookButton(
-    navigateToOreilly: () -> Unit
-) {
+fun BookScreenSecondEditionBookButton(navigateToOreilly: () -> Unit) {
     Button(
         modifier =
-        Modifier
-            .padding(all = 7.dp),
+            Modifier
+                .padding(all = 7.dp),
         onClick = navigateToOreilly,
         colors =
-        ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primary,
-        ),
+            ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+            ),
     ) {
         Text(
             text = "ACCESS NOW",
@@ -853,10 +863,10 @@ fun BookScreenRelatedImage() {
         painter = painterResource(id = R.drawable.book_related),
         contentDescription = "Related Image",
         modifier =
-        Modifier
-            .padding(all = 14.dp)
-            .fillMaxSize()
-            .clip(shape = RoundedCornerShape(size = 21.dp)),
+            Modifier
+                .padding(all = 14.dp)
+                .fillMaxSize()
+                .clip(shape = RoundedCornerShape(size = 21.dp)),
         contentScale = ContentScale.Crop,
     )
 }
@@ -865,8 +875,9 @@ fun BookScreenRelatedImage() {
 fun BookScreenRelatedContent() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
-        text = "A discussion with Andrés Zapata, D.Sc. that dives into the details around the " +
-            "second edition of the “Laws of UX” book.",
+        text =
+            "A discussion with Andrés Zapata, D.Sc. that dives into the details around the " +
+                "second edition of the “Laws of UX” book.",
         fontSize = 18.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
@@ -875,18 +886,16 @@ fun BookScreenRelatedContent() {
 }
 
 @Composable
-fun BookScreenRelatedButton(
-    navigateToBootcamp: () -> Unit
-) {
+fun BookScreenRelatedButton(navigateToBootcamp: () -> Unit) {
     Button(
         modifier =
-        Modifier
-            .padding(all = 7.dp),
+            Modifier
+                .padding(all = 7.dp),
         onClick = navigateToBootcamp,
         colors =
-        ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primary,
-        ),
+            ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+            ),
     ) {
         Text(
             text = "READ ON BOOTCAMP",

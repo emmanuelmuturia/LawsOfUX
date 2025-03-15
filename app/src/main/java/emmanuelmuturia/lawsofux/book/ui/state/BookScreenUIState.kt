@@ -17,5 +17,5 @@ data class BookScreenUIState(
     val bookTranslatedFirstEditions: List<BookTranslatedFirstEdition> = emptyList(),
     val bookTranslatedSecondEditions: List<BookTranslatedSecondEdition> = emptyList(),
     val isLoading: Boolean = false,
-    val error: String? = null
-    )
+    val error: String? = null,
+)

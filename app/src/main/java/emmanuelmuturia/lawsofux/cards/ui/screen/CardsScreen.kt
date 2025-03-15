@@ -80,7 +80,7 @@ fun CardsScreen(
                 navigateToArticlesScreen = navigateToArticlesScreen,
                 navigateToCardsScreen = navigateToCardsScreen,
                 navigateToBookScreen = navigateToBookScreen,
-                navigateToInfoScreen = navigateToInfoScreen
+                navigateToInfoScreen = navigateToInfoScreen,
             )
         },
         floatingActionButton = {

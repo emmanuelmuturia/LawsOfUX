@@ -11,12 +11,16 @@ import kotlinx.coroutines.flow.Flow
 
 interface LocalBookSource {
     suspend fun getAllLocalBookFirstEditions(): Flow<List<LocalBookFirstEdition>>
+
     suspend fun getAllLocalBookGalleries(): Flow<List<LocalBookGallery>>
+
     suspend fun getAllLocalBookLessons(): Flow<List<LocalBookLesson>>
+
     suspend fun getAllLocalBookReviews(): Flow<List<LocalBookReview>>
+
     suspend fun getAllLocalBookSecondEditions(): Flow<List<LocalBookSecondEdition>>
-    suspend fun getAllLocalBookTranslatedFirstEditions():
-                                                    Flow<List<LocalBookTranslatedFirstEdition>>
-    suspend fun getAllLocalBookTranslatedSecondEditions():
-                                                    Flow<List<LocalBookTranslatedSecondEdition>>
+
+    suspend fun getAllLocalBookTranslatedFirstEditions(): Flow<List<LocalBookTranslatedFirstEdition>>
+
+    suspend fun getAllLocalBookTranslatedSecondEditions(): Flow<List<LocalBookTranslatedSecondEdition>>
 }

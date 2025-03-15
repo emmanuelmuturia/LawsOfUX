@@ -70,7 +70,7 @@ fun LawsOfUXNavHost() {
                     },
                     navigateToInfoScreen = {
                         navController.navigate(route = ProjectInfoScreen)
-                    }
+                    },
                 )
 
                 homeDetailsScreen(
@@ -97,7 +97,7 @@ fun LawsOfUXNavHost() {
                     },
                     navigateToInfoScreen = {
                         navController.navigate(route = ProjectInfoScreen)
-                    }
+                    },
                 )
 
                 cardsScreen(
@@ -116,7 +116,7 @@ fun LawsOfUXNavHost() {
                     },
                     navigateToInfoScreen = {
                         navController.navigate(route = ProjectInfoScreen)
-                    }
+                    },
                 )
 
                 projectInfoScreen(
@@ -135,7 +135,7 @@ fun LawsOfUXNavHost() {
                     },
                     navigateToInfoScreen = {
                         navController.navigate(route = ProjectInfoScreen)
-                    }
+                    },
                 )
 
                 bookScreen(
@@ -160,7 +160,7 @@ fun LawsOfUXNavHost() {
                     },
                     navigateToInfoScreen = {
                         navController.navigate(route = ProjectInfoScreen)
-                    }
+                    },
                 )
             }
         }

@@ -97,7 +97,7 @@ fun ProjectInfoScreen(
                 navigateToArticlesScreen = navigateToArticlesScreen,
                 navigateToCardsScreen = navigateToCardsScreen,
                 navigateToBookScreen = navigateToBookScreen,
-                navigateToInfoScreen = navigateToInfoScreen
+                navigateToInfoScreen = navigateToInfoScreen,
             )
         },
         floatingActionButton = {
@@ -124,7 +124,7 @@ fun ProjectInfoScreen(
             modifier = Modifier.padding(paddingValues = paddingValues),
             navigateToPosterShop = navigateToPosterShop,
             projectInfoScreenUIState = projectInfoScreenUIState,
-            projectInfoScreenListState = projectInfoScreenListState
+            projectInfoScreenListState = projectInfoScreenListState,
         )
     }
 }
@@ -136,7 +136,6 @@ private fun ProjectInfoScreenContent(
     projectInfoScreenUIState: ProjectInfoScreenUIState,
     projectInfoScreenListState: LazyListState,
 ) {
-
     var userName by remember { mutableStateOf(value = "") }
     var userEmail by remember { mutableStateOf(value = "") }
     var userSubject by remember { mutableStateOf(value = "") }
@@ -144,7 +143,7 @@ private fun ProjectInfoScreenContent(
 
     LazyColumn(
         modifier = modifier.fillMaxSize(),
-        state = projectInfoScreenListState
+        state = projectInfoScreenListState,
     ) {
         item {
             ProjectInfoScreenText()
@@ -237,7 +236,7 @@ private fun ProjectInfoScreenContent(
             ProjectInfoScreenContactBox(
                 value = userName,
                 onValueChange = { userName = it },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
             )
         }
 
@@ -251,7 +250,7 @@ private fun ProjectInfoScreenContent(
             ProjectInfoScreenContactBox(
                 value = userEmail,
                 onValueChange = { userEmail = it },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
             )
         }
 
@@ -265,7 +264,7 @@ private fun ProjectInfoScreenContent(
             ProjectInfoScreenContactBox(
                 value = userSubject,
                 onValueChange = { userSubject = it },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
             )
         }
 
@@ -280,7 +279,7 @@ private fun ProjectInfoScreenContent(
                 value = userMessage,
                 onValueChange = { userMessage = it },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                height = 210.dp
+                height = 210.dp,
             )
         }
 
@@ -377,43 +376,50 @@ private fun ProjectInfoScreenContentText() {
 @Composable
 private fun ProjectInfoScreenContentTextNote() {
     Box(
-        modifier = Modifier.fillMaxSize().padding(all = 7.dp).border(
-            width = 1.dp,
-            color = MaterialTheme.colorScheme.onBackground,
-            shape = RoundedCornerShape(size = 7.dp)
-        )
+        modifier =
+            Modifier.fillMaxSize().padding(all = 7.dp).border(
+                width = 1.dp,
+                color = MaterialTheme.colorScheme.onBackground,
+                shape = RoundedCornerShape(size = 7.dp),
+            ),
     ) {
         Text(
             modifier = Modifier.padding(all = 14.dp),
-            text = buildAnnotatedString {
-                withStyle(style = SpanStyle(
-                    fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
-                )
-                ) {
-                    append(text = "----------------------------------------")
-                    append(text = "NOTE\n")
-                }
-                append(text = "----------------------------------------")
-                append(text = "All content on this website is licensed under the Creative Commons " +
-                    "Attribution-NonCommercial-NoDerivatives 4.0 International License. To view a " +
-                    "copy of this license, visit ")
-                withLink(
-                    link =
-                    LinkAnnotation.Url(
-                        url = "https://creativecommons.org/licenses/by-nc-nd/4.0/",
-                    ),
-                ) {
+            text =
+                buildAnnotatedString {
                     withStyle(
                         style =
-                        SpanStyle(
-                            textDecoration = TextDecoration.Underline,
-                        ),
+                            SpanStyle(
+                                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+                            ),
                     ) {
-                        append(text = "https://creativecommons.org/licenses/by-nc-nd/4.0/")
+                        append(text = "----------------------------------------")
+                        append(text = "NOTE\n")
                     }
-                }
-                append(text = ".")
-            },
+                    append(text = "----------------------------------------")
+                    append(
+                        text =
+                            "All content on this website is licensed under the Creative Commons " +
+                                "Attribution-NonCommercial-NoDerivatives 4.0 International License. To view a " +
+                                "copy of this license, visit ",
+                    )
+                    withLink(
+                        link =
+                            LinkAnnotation.Url(
+                                url = "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+                            ),
+                    ) {
+                        withStyle(
+                            style =
+                                SpanStyle(
+                                    textDecoration = TextDecoration.Underline,
+                                ),
+                        ) {
+                            append(text = "https://creativecommons.org/licenses/by-nc-nd/4.0/")
+                        }
+                    }
+                    append(text = ".")
+                },
             fontSize = 18.sp,
             color = MaterialTheme.colorScheme.onBackground,
             overflow = TextOverflow.Clip,
@@ -438,15 +444,15 @@ private fun ProjectInfoScreenShareTitle() {
 @Composable
 private fun ProjectInfoScreenShareContent() {
     Row(
-        //modifier = Modifier.padding(all = 14.dp),
-        horizontalArrangement = Arrangement.SpaceEvenly
+        // modifier = Modifier.padding(all = 14.dp),
+        horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
         Image(
             painter = painterResource(id = R.drawable.x),
             contentDescription = "X Image",
             modifier =
-            Modifier
-                .size(size = 70.dp),
+                Modifier
+                    .size(size = 70.dp),
             contentScale = ContentScale.Crop,
         )
 
@@ -454,8 +460,8 @@ private fun ProjectInfoScreenShareContent() {
             painter = painterResource(id = R.drawable.meta),
             contentDescription = "Meta Image",
             modifier =
-            Modifier
-                .size(size = 70.dp),
+                Modifier
+                    .size(size = 70.dp),
             contentScale = ContentScale.Crop,
         )
 
@@ -463,8 +469,8 @@ private fun ProjectInfoScreenShareContent() {
             painter = painterResource(id = R.drawable.linkedin),
             contentDescription = "LinkedIn Image",
             modifier =
-            Modifier
-                .size(size = 70.dp),
+                Modifier
+                    .size(size = 70.dp),
             contentScale = ContentScale.Crop,
         )
 
@@ -472,8 +478,8 @@ private fun ProjectInfoScreenShareContent() {
             painter = painterResource(id = R.drawable.pinterest),
             contentDescription = "Pinterest Image",
             modifier =
-            Modifier
-                .size(size = 70.dp),
+                Modifier
+                    .size(size = 70.dp),
             contentScale = ContentScale.Crop,
         )
     }
@@ -779,7 +785,7 @@ private fun ProjectInfoScreenContactBox(
     value: String,
     onValueChange: (String) -> Unit,
     keyboardOptions: KeyboardOptions,
-    height: Dp = 56.dp
+    height: Dp = 56.dp,
 ) {
     OutlinedTextField(
         value = value,
@@ -795,11 +801,12 @@ private fun ProjectInfoScreenContactBox(
             ),
         shape = RoundedCornerShape(size = 21.dp),
         keyboardOptions = keyboardOptions,
-        textStyle = TextStyle(
-            fontSize = 18.sp,
-            color = MaterialTheme.colorScheme.onBackground,
-            fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
-        )
+        textStyle =
+            TextStyle(
+                fontSize = 18.sp,
+                color = MaterialTheme.colorScheme.onBackground,
+                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+            ),
     )
 }
 
@@ -810,7 +817,6 @@ private fun ProjectInfoScreenContactButton() {
             Modifier
                 .padding(all = 14.dp),
         onClick = {
-
         },
         colors =
             ButtonDefaults.buttonColors(

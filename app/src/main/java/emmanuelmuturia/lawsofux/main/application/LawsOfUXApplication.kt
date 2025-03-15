@@ -26,7 +26,7 @@ class LawsOfUXApplication : Application() {
                         articlesUIKoinModule,
                         cardsUIKoinModule,
                         projectInfoUIKoinModule,
-                        bookUIKoinModule
+                        bookUIKoinModule,
                     ),
             )
         }

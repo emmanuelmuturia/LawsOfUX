@@ -1,5 +1,5 @@
 package emmanuelmuturia.lawsofux.book.data.model
 
 data class BookLesson(
-    val bookLessonDescription: String
+    val bookLessonDescription: String,
 )
