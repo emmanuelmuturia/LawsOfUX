@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
@@ -30,10 +31,13 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -69,7 +73,7 @@ fun BookScreen(
     val bookScreenCoroutineScope = rememberCoroutineScope()
 
     val bookScreenUIState by
-        bookScreenViewModel.bookScreenUIState.collectAsStateWithLifecycle()
+    bookScreenViewModel.bookScreenUIState.collectAsStateWithLifecycle()
 
     Scaffold(
         modifier =
@@ -158,6 +162,30 @@ fun BookScreenContent(
             BookScreenViewOnAmazonButton(
                 navigateToAmazon = navigateToAmazon
             )
+        }
+
+        item {
+            BookScreenNewConceptsImage()
+        }
+
+        item {
+            BookScreenNewConcepts()
+        }
+
+        item {
+            BookScreenNewConsiderationsImage()
+        }
+
+        item {
+            BookScreenNewConsiderations()
+        }
+
+        item {
+            BookScreenNewTechniquesImage()
+        }
+
+        item {
+            BookScreenNewTechniques()
         }
 
         item {
@@ -495,12 +523,131 @@ fun BookScreenViewMoreBuyingOptionsText() {
 }*/
 
 @Composable
-fun BookScreenNewStuff() {
-    TODO()
+private fun BookScreenNewConceptsImage() {
+    Image(
+        painter = painterResource(id = R.drawable.new_concepts),
+        contentDescription = "New Concepts Image",
+        modifier =
+        Modifier
+            .padding(all = 14.dp)
+            .size(size = 70.dp),
+        contentScale = ContentScale.Crop,
+    )
 }
 
 @Composable
-fun BookScreenLessonsTitle() {
+private fun BookScreenNewConcepts() {
+    val newConcepts = listOf(
+        "Paradox of Choice",
+        "Complexity Bias",
+        "Flow"
+    )
+    Text(
+        modifier = Modifier.padding(all = 14.dp),
+        text = buildAnnotatedString {
+            withStyle(
+                style = SpanStyle(
+                    fontWeight = FontWeight.ExtraBold
+                )
+            ) {
+                appendLine(value = "New Concepts")
+            }
+            newConcepts.forEach { newConcept ->
+                appendLine(value = "\u2022 $newConcept")
+            }
+        },
+        fontSize = 18.sp,
+        color = MaterialTheme.colorScheme.onBackground,
+        overflow = TextOverflow.Clip,
+        fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+    )
+}
+
+@Composable
+private fun BookScreenNewConsiderationsImage() {
+    Image(
+        painter = painterResource(id = R.drawable.new_considerations),
+        contentDescription = "New Concepts Image",
+        modifier =
+        Modifier
+            .padding(all = 14.dp)
+            .size(size = 70.dp),
+        contentScale = ContentScale.Crop,
+    )
+}
+
+@Composable
+private fun BookScreenNewConsiderations() {
+    val newConsiderations = listOf(
+        "The Human Factor",
+        "Accessibility",
+        "Paradox of the Active User",
+        "Personalization"
+    )
+    Text(
+        modifier = Modifier.padding(all = 14.dp),
+        text = buildAnnotatedString {
+            withStyle(
+                style = SpanStyle(
+                    fontWeight = FontWeight.ExtraBold
+                )
+            ) {
+                appendLine(value = "New Concepts")
+            }
+            newConsiderations.forEach { newConsideration ->
+                appendLine(value = "\u2022 $newConsideration")
+            }
+        },
+        fontSize = 18.sp,
+        color = MaterialTheme.colorScheme.onBackground,
+        overflow = TextOverflow.Clip,
+        fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+    )
+}
+
+@Composable
+private fun BookScreenNewTechniquesImage() {
+    Image(
+        painter = painterResource(id = R.drawable.new_techniques),
+        contentDescription = "New Concepts Image",
+        modifier =
+        Modifier
+            .padding(all = 14.dp)
+            .size(size = 70.dp),
+        contentScale = ContentScale.Crop,
+    )
+}
+
+@Composable
+private fun BookScreenNewTechniques() {
+    val newTechniques = listOf(
+        "Contextual Inquiry",
+            "User Interviews",
+            "Eye-tracking"
+    )
+    Text(
+        modifier = Modifier.padding(all = 14.dp),
+        text = buildAnnotatedString {
+            withStyle(
+                style = SpanStyle(
+                    fontWeight = FontWeight.ExtraBold
+                )
+            ) {
+                appendLine(value = "New Concepts")
+            }
+            newTechniques.forEach { newTechnique ->
+                appendLine(value = "\u2022 $newTechnique")
+            }
+        },
+        fontSize = 18.sp,
+        color = MaterialTheme.colorScheme.onBackground,
+        overflow = TextOverflow.Clip,
+        fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+    )
+}
+
+@Composable
+private fun BookScreenLessonsTitle() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "What you’ll learn",
