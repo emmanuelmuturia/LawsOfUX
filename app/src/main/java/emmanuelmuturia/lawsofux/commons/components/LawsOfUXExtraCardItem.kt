@@ -61,7 +61,7 @@ fun LawsOfUXExtraCardItem(
             )
 
             Row(
-                modifier = Modifier.fillMaxWidth().padding(end = 14.dp),
+                modifier = Modifier.padding(end = 14.dp),
                 horizontalArrangement = Arrangement.End,
             ) {
                 Icon(

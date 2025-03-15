@@ -4,8 +4,10 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -35,6 +37,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -44,11 +47,13 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import emmanuelmuturia.lawsofux.R
 import emmanuelmuturia.lawsofux.commons.components.LawsOfUXExtraCardItem
+import emmanuelmuturia.lawsofux.commons.components.LawsOfUXFooter
 import emmanuelmuturia.lawsofux.commons.components.LawsOfUXTopAppBar
 import emmanuelmuturia.lawsofux.info.ui.state.ProjectInfoScreenUIState
 import emmanuelmuturia.lawsofux.info.ui.viewmodel.ProjectInfoScreenViewModel
@@ -113,6 +118,7 @@ fun ProjectInfoScreen(
             modifier = Modifier.padding(paddingValues = paddingValues),
             navigateToPosterShop = navigateToPosterShop,
             projectInfoScreenUIState = projectInfoScreenUIState,
+            projectInfoScreenListState = projectInfoScreenListState
         )
     }
 }
@@ -122,6 +128,7 @@ private fun ProjectInfoScreenContent(
     modifier: Modifier = Modifier,
     navigateToPosterShop: () -> Unit,
     projectInfoScreenUIState: ProjectInfoScreenUIState,
+    projectInfoScreenListState: LazyListState,
 ) {
 
     var userName by remember { mutableStateOf(value = "") }
@@ -131,6 +138,7 @@ private fun ProjectInfoScreenContent(
 
     LazyColumn(
         modifier = modifier.fillMaxSize(),
+        state = projectInfoScreenListState
     ) {
         item {
             ProjectInfoScreenText()
@@ -261,12 +269,17 @@ private fun ProjectInfoScreenContent(
             ProjectInfoScreenContactBox(
                 value = userMessage,
                 onValueChange = { userMessage = it },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+                height = 140.dp
             )
         }
 
         item {
             ProjectInfoScreenContactButton()
+        }
+
+        item {
+            LawsOfUXFooter()
         }
     }
 }
@@ -353,12 +366,12 @@ private fun ProjectInfoScreenContentText() {
 
 @Composable
 private fun ProjectInfoScreenContentTextNote() {
-    TODO("Not yet implemented")
+
 }
 
 @Composable
 private fun ProjectInfoScreenShareContent() {
-    TODO("Not yet implemented")
+
 }
 
 @Composable
@@ -648,10 +661,10 @@ private fun ProjectInfoScreenContactBoxTitle(title: String) {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = title,
-        fontSize = 25.sp,
+        fontSize = 18.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
-        fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+        fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
         fontWeight = FontWeight.ExtraBold,
     )
 }
@@ -661,17 +674,27 @@ private fun ProjectInfoScreenContactBox(
     value: String,
     onValueChange: (String) -> Unit,
     keyboardOptions: KeyboardOptions,
+    height: Dp = 56.dp
 ) {
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
-        modifier = Modifier.padding(all = 14.dp),
+        modifier = Modifier.padding(all = 14.dp).height(height = height),
         colors =
             TextFieldDefaults.colors(
                 cursorColor = MaterialTheme.colorScheme.onBackground,
+                focusedContainerColor = MaterialTheme.colorScheme.background,
+                unfocusedContainerColor = MaterialTheme.colorScheme.background,
+                focusedIndicatorColor = MaterialTheme.colorScheme.onBackground,
+                unfocusedIndicatorColor = MaterialTheme.colorScheme.onBackground,
             ),
         shape = RoundedCornerShape(size = 21.dp),
-        keyboardOptions = keyboardOptions
+        keyboardOptions = keyboardOptions,
+        textStyle = TextStyle(
+            fontSize = 18.sp,
+            color = MaterialTheme.colorScheme.onBackground,
+            fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+        )
     )
 }
 
@@ -680,9 +703,9 @@ private fun ProjectInfoScreenContactButton() {
     Button(
         modifier =
             Modifier
-                .padding(all = 7.dp),
+                .padding(all = 14.dp),
         onClick = {
-            TODO("Send email")
+
         },
         colors =
             ButtonDefaults.buttonColors(

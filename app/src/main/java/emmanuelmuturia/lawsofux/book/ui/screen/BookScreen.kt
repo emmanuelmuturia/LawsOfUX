@@ -41,6 +41,7 @@ import emmanuelmuturia.lawsofux.R
 import emmanuelmuturia.lawsofux.book.ui.state.BookScreenUIState
 import emmanuelmuturia.lawsofux.book.ui.viewmodel.BookScreenViewModel
 import emmanuelmuturia.lawsofux.commons.components.LawsOfUXExtraCardItem
+import emmanuelmuturia.lawsofux.commons.components.LawsOfUXFooter
 import emmanuelmuturia.lawsofux.commons.components.LawsOfUXTopAppBar
 import kotlinx.coroutines.launch
 
@@ -160,6 +161,14 @@ fun BookScreenContent(
         }
 
         item {
+            HorizontalDivider(
+                modifier = Modifier.padding(all = 14.dp),
+                thickness = 3.dp,
+                color = MaterialTheme.colorScheme.onBackground,
+            )
+        }
+
+        item {
             BookScreenLessonsTitle()
         }
 
@@ -198,18 +207,11 @@ fun BookScreenContent(
         items(items = bookScreenUIState.bookReviews) { bookReview ->
             Text(
                 modifier = Modifier.padding(start = 14.dp),
-                text = bookReview.bookReviewCaption,
+                text = "\"${bookReview.bookReviewCaption}\"",
                 fontSize = 28.sp,
                 color = MaterialTheme.colorScheme.onBackground,
                 overflow = TextOverflow.Clip,
                 fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
-                fontWeight = FontWeight.Bold,
-            )
-
-            HorizontalDivider(
-                modifier = Modifier.padding(all = 14.dp),
-                thickness = 3.dp,
-                color = MaterialTheme.colorScheme.onBackground,
             )
 
             Text(
@@ -220,6 +222,12 @@ fun BookScreenContent(
                 overflow = TextOverflow.Clip,
                 fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
                 fontWeight = FontWeight.Bold,
+            )
+
+            HorizontalDivider(
+                modifier = Modifier.padding(all = 14.dp),
+                thickness = 3.dp,
+                color = MaterialTheme.colorScheme.onBackground,
             )
         }
 
@@ -234,7 +242,8 @@ fun BookScreenContent(
                 modifier =
                 Modifier
                     .padding(all = 14.dp)
-                    .fillMaxSize(),
+                    .fillMaxSize()
+                    .clip(shape = RoundedCornerShape(size = 21.dp)),
                 contentScale = ContentScale.Crop,
             )
         }
@@ -331,6 +340,10 @@ fun BookScreenContent(
             )
         }
 
+        item {
+            LawsOfUXFooter()
+        }
+
     }
 }
 
@@ -340,7 +353,7 @@ fun BookScreenText() {
         modifier = Modifier.padding(all = 14.dp),
         text = "A designer’s guide to using psychology to design better digital products and " +
             "services.",
-        fontSize = 21.sp,
+        fontSize = 25.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
@@ -355,7 +368,8 @@ fun BookScreenImage() {
         modifier =
         Modifier
             .padding(all = 14.dp)
-            .fillMaxSize(),
+            .fillMaxSize()
+            .clip(shape = RoundedCornerShape(size = 21.dp)),
         contentScale = ContentScale.Crop,
     )
 }
@@ -567,7 +581,8 @@ fun BookScreenSecondEditionBookImage() {
         modifier =
         Modifier
             .padding(all = 14.dp)
-            .fillMaxSize(),
+            .fillMaxSize()
+            .clip(shape = RoundedCornerShape(size = 21.dp)),
         contentScale = ContentScale.Crop,
     )
 }
@@ -693,7 +708,8 @@ fun BookScreenRelatedImage() {
         modifier =
         Modifier
             .padding(all = 14.dp)
-            .fillMaxSize(),
+            .fillMaxSize()
+            .clip(shape = RoundedCornerShape(size = 21.dp)),
         contentScale = ContentScale.Crop,
     )
 }

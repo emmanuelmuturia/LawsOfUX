@@ -65,6 +65,12 @@ fun LawsOfUXNavHost() {
                     navigateToCardsScreen = {
                         navController.navigate(route = CardsScreen)
                     },
+                    navigateToBookScreen = {
+                        navController.navigate(route = BookScreen)
+                    },
+                    navigateToInfoScreen = {
+                        navController.navigate(route = ProjectInfoScreen)
+                    }
                 )
 
                 homeDetailsScreen(
