@@ -53,6 +53,8 @@ fun ArticlesScreen(
     navigateToArticlesScreen: () -> Unit,
     navigateToArticlesDetailsPage: () -> Unit,
     navigateToCardsScreen: () -> Unit,
+    navigateToBookScreen: () -> Unit,
+    navigateToInfoScreen: () -> Unit,
 ) {
     val articlesScreenListState = rememberLazyListState()
 
@@ -76,6 +78,8 @@ fun ArticlesScreen(
             LawsOfUXTopAppBar(
                 navigateToArticlesScreen = navigateToArticlesScreen,
                 navigateToCardsScreen = navigateToCardsScreen,
+                navigateToBookScreen = navigateToBookScreen,
+                navigateToInfoScreen = navigateToInfoScreen,
             )
         },
         floatingActionButton = {
@@ -103,6 +107,7 @@ fun ArticlesScreen(
             articlesScreenUIState = articlesScreenUIState,
             articlesScreenListState = articlesScreenListState,
             navigateToArticlesDetailsPage = navigateToArticlesDetailsPage,
+            navigateToInfoScreen = navigateToInfoScreen,
         )
     }
 }
@@ -113,6 +118,7 @@ private fun ArticlesScreenContent(
     articlesScreenListState: LazyListState,
     articlesScreenUIState: ArticlesScreenUIState,
     navigateToArticlesDetailsPage: () -> Unit,
+    navigateToInfoScreen: () -> Unit,
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
@@ -130,7 +136,9 @@ private fun ArticlesScreenContent(
         }
 
         item {
-            LawsOfUXFooter()
+            LawsOfUXFooter(
+                navigateToInfoScreen = navigateToInfoScreen,
+            )
         }
     }
 }
@@ -145,6 +153,7 @@ private fun ArticlesScreenText() {
         overflow = TextOverflow.Clip,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
         fontWeight = FontWeight.Bold,
+        lineHeight = 37.sp,
     )
 }
 

@@ -3,10 +3,15 @@ package emmanuelmuturia.lawsofux.book.ui.screen
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -28,16 +33,21 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import emmanuelmuturia.lawsofux.R
 import emmanuelmuturia.lawsofux.book.ui.state.BookScreenUIState
 import emmanuelmuturia.lawsofux.book.ui.viewmodel.BookScreenViewModel
+import emmanuelmuturia.lawsofux.commons.components.LawsOfUXExtraCardItem
+import emmanuelmuturia.lawsofux.commons.components.LawsOfUXFooter
 import emmanuelmuturia.lawsofux.commons.components.LawsOfUXTopAppBar
 import kotlinx.coroutines.launch
 
@@ -49,9 +59,10 @@ fun BookScreen(
     navigateToAmazon: () -> Unit,
     navigateToOreilly: () -> Unit,
     navigateToBootcamp: () -> Unit,
-    bookScreenViewModel: BookScreenViewModel
+    bookScreenViewModel: BookScreenViewModel,
+    navigateToBookScreen: () -> Unit,
+    navigateToInfoScreen: () -> Unit,
 ) {
-
     val bookScreenListState = rememberLazyListState()
 
     val showScrollToTopButton by remember {
@@ -67,13 +78,15 @@ fun BookScreen(
 
     Scaffold(
         modifier =
-        Modifier
-            .fillMaxSize()
-            .background(color = MaterialTheme.colorScheme.background),
+            Modifier
+                .fillMaxSize()
+                .background(color = MaterialTheme.colorScheme.background),
         topBar = {
             LawsOfUXTopAppBar(
                 navigateToArticlesScreen = navigateToArticlesScreen,
                 navigateToCardsScreen = navigateToCardsScreen,
+                navigateToBookScreen = navigateToBookScreen,
+                navigateToInfoScreen = navigateToInfoScreen,
             )
         },
         floatingActionButton = {
@@ -102,10 +115,10 @@ fun BookScreen(
             navigateToAmazon = navigateToAmazon,
             navigateToOreilly = navigateToOreilly,
             navigateToBootcamp = navigateToBootcamp,
-            bookScreenUIState = bookScreenUIState
+            bookScreenUIState = bookScreenUIState,
+            navigateToInfoScreen = navigateToInfoScreen,
         )
     }
-
 }
 
 @Composable
@@ -115,13 +128,13 @@ fun BookScreenContent(
     navigateToAmazon: () -> Unit,
     navigateToOreilly: () -> Unit,
     navigateToBootcamp: () -> Unit,
-    bookScreenUIState: BookScreenUIState
+    bookScreenUIState: BookScreenUIState,
+    navigateToInfoScreen: () -> Unit,
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
         state = bookScreenListState,
     ) {
-
         item {
             BookScreenText()
         }
@@ -148,32 +161,129 @@ fun BookScreenContent(
 
         item {
             BookScreenViewOnAmazonButton(
-                navigateToAmazon = navigateToAmazon
+                navigateToAmazon = navigateToAmazon,
             )
+        }
+
+        item {
+            HorizontalDivider(
+                modifier = Modifier.padding(all = 14.dp),
+                thickness = 3.dp,
+                color = MaterialTheme.colorScheme.onBackground,
+            )
+        }
+
+        item {
+            BookScreenNewConceptsImage()
+        }
+
+        item {
+            BookScreenNewConcepts()
+        }
+
+        item {
+            BookScreenNewConsiderationsImage()
+        }
+
+        item {
+            BookScreenNewConsiderations()
+        }
+
+        item {
+            BookScreenNewTechniquesImage()
+        }
+
+        item {
+            BookScreenNewTechniques()
         }
 
         item {
             BookScreenLessonsTitle()
         }
 
-        items(items = ) {
+        itemsIndexed(items = bookScreenUIState.bookLessons) { index, bookLesson ->
+            Text(
+                modifier = Modifier.padding(start = 14.dp),
+                text = "${index + 1}",
+                fontSize = 14.sp,
+                color = MaterialTheme.colorScheme.onBackground,
+                overflow = TextOverflow.Clip,
+                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+                fontWeight = FontWeight.Bold,
+            )
 
+            HorizontalDivider(
+                modifier = Modifier.padding(all = 14.dp),
+                thickness = 3.dp,
+                color = MaterialTheme.colorScheme.onBackground,
+            )
+
+            Text(
+                modifier = Modifier.padding(all = 14.dp),
+                text = bookLesson.bookLessonDescription,
+                fontSize = 18.sp,
+                color = MaterialTheme.colorScheme.onBackground,
+                overflow = TextOverflow.Clip,
+                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+                fontWeight = FontWeight.Bold,
+            )
+        }
+
+        item {
+            Spacer(modifier = Modifier.height(height = 56.dp))
         }
 
         item {
             BookScreenReviewsTitle()
         }
 
-        items(items = ) {
+        itemsIndexed(items = bookScreenUIState.bookReviews) { index, bookReview ->
+            Text(
+                modifier = Modifier.padding(start = 14.dp),
+                text = "\"${bookReview.bookReviewCaption}\"",
+                fontSize = 28.sp,
+                color = MaterialTheme.colorScheme.onBackground,
+                overflow = TextOverflow.Clip,
+                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+            )
 
+            Text(
+                modifier = Modifier.padding(all = 14.dp),
+                text = bookReview.bookReviewAuthor,
+                fontSize = 14.sp,
+                color = MaterialTheme.colorScheme.onBackground,
+                overflow = TextOverflow.Clip,
+                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
+            )
+
+            if (index < bookScreenUIState.bookReviews.lastIndex) {
+                HorizontalDivider(
+                    modifier = Modifier.padding(all = 14.dp),
+                    thickness = 3.dp,
+                    color = MaterialTheme.colorScheme.onBackground,
+                )
+            }
+        }
+
+        item {
+            Spacer(modifier = Modifier.height(height = 56.dp))
         }
 
         item {
             BookScreenGalleryTitle()
         }
 
-        items(items = ) {
-
+        items(items = bookScreenUIState.bookGalleries) { bookGallery ->
+            Image(
+                painter = painterResource(id = bookGallery.bookGalleryImage),
+                contentDescription = "Project Info Screen Image",
+                modifier =
+                    Modifier
+                        .padding(all = 14.dp)
+                        .fillMaxSize()
+                        .clip(shape = RoundedCornerShape(size = 21.dp)),
+                contentScale = ContentScale.Crop,
+            )
         }
 
         item {
@@ -188,8 +298,11 @@ fun BookScreenContent(
             BookScreenSecondEditionTitle()
         }
 
-        items(items = ) {
-
+        items(items = bookScreenUIState.bookSecondEditions) { bookSecondEdition ->
+            LawsOfUXExtraCardItem(
+                title = bookSecondEdition.bookSecondEditionTitle,
+                content = bookSecondEdition.bookSecondEditionSeller,
+            )
         }
 
         item {
@@ -206,7 +319,7 @@ fun BookScreenContent(
 
         item {
             BookScreenSecondEditionBookButton(
-                navigateToOreilly = navigateToOreilly
+                navigateToOreilly = navigateToOreilly,
             )
         }
 
@@ -214,8 +327,11 @@ fun BookScreenContent(
             BookScreenFirstEditionTitle()
         }
 
-        items(items = ) {
-
+        items(items = bookScreenUIState.bookFirstEditions) { bookFirstEdition ->
+            LawsOfUXExtraCardItem(
+                title = bookFirstEdition.bookFirstEditionTitle,
+                content = bookFirstEdition.bookFirstEditionSeller,
+            )
         }
 
         item {
@@ -226,16 +342,34 @@ fun BookScreenContent(
             BookScreenTranslatedSecondEditionTitle()
         }
 
-        items(items = ) {
-
+        items(items = bookScreenUIState.bookTranslatedSecondEditions) { bookTranslatedSecondEdition ->
+            LawsOfUXExtraCardItem(
+                title = bookTranslatedSecondEdition.bookTranslatedSecondEditionTitle,
+                content = bookTranslatedSecondEdition.bookTranslatedSecondEditionSeller,
+            )
         }
 
         item {
             BookScreenTranslatedFirstEditionTitle()
         }
 
-        items(items = ) {
+        items(items = bookScreenUIState.bookTranslatedFirstEditions) { bookTranslatedFirstEdition ->
+            LawsOfUXExtraCardItem(
+                title = bookTranslatedFirstEdition.bookTranslatedFirstEditionTitle,
+                content = bookTranslatedFirstEdition.bookTranslatedFirstEditionSeller,
+            )
+        }
 
+        item {
+            HorizontalDivider(
+                modifier = Modifier.padding(all = 14.dp),
+                thickness = 3.dp,
+                color = MaterialTheme.colorScheme.onBackground,
+            )
+        }
+
+        item {
+            Spacer(modifier = Modifier.height(height = 49.dp))
         }
 
         item {
@@ -252,10 +386,15 @@ fun BookScreenContent(
 
         item {
             BookScreenRelatedButton(
-                navigateToBootcamp = navigateToBootcamp
+                navigateToBootcamp = navigateToBootcamp,
             )
         }
 
+        item {
+            LawsOfUXFooter(
+                navigateToInfoScreen = navigateToInfoScreen,
+            )
+        }
     }
 }
 
@@ -263,12 +402,15 @@ fun BookScreenContent(
 fun BookScreenText() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
-        text = "A designer’s guide to using psychology to design better digital products and " +
-            "services.",
-        fontSize = 21.sp,
+        text =
+            "A designer’s guide to using psychology to design better digital products and " +
+                "services.",
+        fontSize = 25.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+        fontWeight = FontWeight.Bold,
+        lineHeight = 37.sp,
     )
 }
 
@@ -278,9 +420,10 @@ fun BookScreenImage() {
         painter = painterResource(id = R.drawable.laws_of_ux_book),
         contentDescription = "Project Info Screen Image",
         modifier =
-        Modifier
-            .padding(all = 14.dp)
-            .fillMaxSize(),
+            Modifier
+                .padding(all = 14.dp)
+                .fillMaxSize()
+                .clip(shape = RoundedCornerShape(size = 21.dp)),
         contentScale = ContentScale.Crop,
     )
 }
@@ -302,17 +445,18 @@ fun BookScreenOverviewTitle() {
 fun BookScreenOverviewContent() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
-        text = "An understanding of psychology-specifically the psychology behind how users " +
-            "behave and interact with digital interfaces-is perhaps the single most valuable " +
-            "non-design skill a designer can have. The most elegant design can fail if it " +
-            "forces users to conform to the design instead of working within the “blueprint” of " +
-            "how humans perceive and process the world around them. This practical guide " +
-            "explains " +
-            "how you can apply key principles of psychology to build products and experiences " +
-            "that " +
-            "are more human-centered and intuitive. It deconstructs familiar apps and " +
-            "experiences to provide clear examples of how UX designers can build interfaces " +
-            "that adapt to how users perceive and process digital interfaces.",
+        text =
+            "An understanding of psychology-specifically the psychology behind how users " +
+                "behave and interact with digital interfaces-is perhaps the single most valuable " +
+                "non-design skill a designer can have. The most elegant design can fail if it " +
+                "forces users to conform to the design instead of working within the “blueprint” of " +
+                "how humans perceive and process the world around them. This practical guide " +
+                "explains " +
+                "how you can apply key principles of psychology to build products and experiences " +
+                "that " +
+                "are more human-centered and intuitive. It deconstructs familiar apps and " +
+                "experiences to provide clear examples of how UX designers can build interfaces " +
+                "that adapt to how users perceive and process digital interfaces.",
         fontSize = 18.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
@@ -337,16 +481,22 @@ fun BookScreenNewBookTitle() {
 fun BookScreenNewBookContent() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
-        text = "The craft of design has a dynamic nature that keeps evolving along with " +
-            "technology. With every new technological advancement, new constraints and " +
-            "possibilities are introduced. Since the first edition of this book, " +
-            "LLMs (Large Language Models) have undergone significant advancements, AI-powered " +
-            "image generation tools have emerged, spatial computing has entered the mainstream, " +
-            "and smartphones have become even more powerful. However, the principles and " +
-            "concepts covered in this book remain timeless, and they provide a solid " +
-            "foundation for every designer, regardless of their level of expertise.\n" +
-            "\n" +
-            "To enhance the reader’s experience, the second edition includes additional information linking these principles and concepts to psychology concepts, techniques, and key considerations. This edition also features updated examples throughout, making it a practical guide for designers who want to stay up-to-date with the latest trends and best practices in the field of design.",
+        text =
+            "The craft of design has a dynamic nature that keeps evolving along with " +
+                "technology. With every new technological advancement, new constraints and " +
+                "possibilities are introduced. Since the first edition of this book, " +
+                "LLMs (Large Language Models) have undergone significant advancements, AI-powered " +
+                "image generation tools have emerged, spatial computing has entered the mainstream, " +
+                "and smartphones have become even more powerful. However, the principles and " +
+                "concepts covered in this book remain timeless, and they provide a solid " +
+                "foundation for every designer, regardless of their level of expertise.\n" +
+                "\n" +
+                "To enhance the reader’s experience, the second edition includes additional " +
+                "information linking these principles and concepts to psychology concepts, " +
+                "techniques, and key considerations. This edition also features updated examples " +
+                "throughout, making it a practical guide for designers who want to stay " +
+                "up-to-date " +
+                "with the latest trends and best practices in the field of design.",
         fontSize = 18.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
@@ -355,18 +505,16 @@ fun BookScreenNewBookContent() {
 }
 
 @Composable
-fun BookScreenViewOnAmazonButton(
-    navigateToAmazon: () -> Unit
-) {
+fun BookScreenViewOnAmazonButton(navigateToAmazon: () -> Unit) {
     Button(
         modifier =
-        Modifier
-            .padding(all = 7.dp),
+            Modifier
+                .padding(all = 7.dp),
         onClick = navigateToAmazon,
         colors =
-        ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primary,
-        ),
+            ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+            ),
     ) {
         Text(
             text = "VIEW ON AMAZON",
@@ -406,12 +554,140 @@ fun BookScreenViewMoreBuyingOptionsText() {
 }*/
 
 @Composable
-fun BookScreenNewStuff() {
-    TODO()
+private fun BookScreenNewConceptsImage() {
+    Image(
+        painter = painterResource(id = R.drawable.new_concepts),
+        contentDescription = "New Concepts Image",
+        modifier =
+            Modifier
+                .padding(all = 14.dp)
+                .size(size = 70.dp),
+        contentScale = ContentScale.Crop,
+    )
 }
 
 @Composable
-fun BookScreenLessonsTitle() {
+private fun BookScreenNewConcepts() {
+    val newConcepts =
+        listOf(
+            "Paradox of Choice",
+            "Complexity Bias",
+            "Flow",
+        )
+    Text(
+        modifier = Modifier.padding(all = 14.dp),
+        text =
+            buildAnnotatedString {
+                withStyle(
+                    style =
+                        SpanStyle(
+                            fontWeight = FontWeight.ExtraBold,
+                        ),
+                ) {
+                    appendLine(value = "New Concepts")
+                }
+                newConcepts.forEach { newConcept ->
+                    appendLine(value = "\u2022 $newConcept")
+                }
+            },
+        fontSize = 18.sp,
+        color = MaterialTheme.colorScheme.onBackground,
+        overflow = TextOverflow.Clip,
+        fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+    )
+}
+
+@Composable
+private fun BookScreenNewConsiderationsImage() {
+    Image(
+        painter = painterResource(id = R.drawable.new_considerations),
+        contentDescription = "New Concepts Image",
+        modifier =
+            Modifier
+                .padding(all = 14.dp)
+                .size(size = 70.dp),
+        contentScale = ContentScale.Crop,
+    )
+}
+
+@Composable
+private fun BookScreenNewConsiderations() {
+    val newConsiderations =
+        listOf(
+            "The Human Factor",
+            "Accessibility",
+            "Paradox of the Active User",
+            "Personalization",
+        )
+    Text(
+        modifier = Modifier.padding(all = 14.dp),
+        text =
+            buildAnnotatedString {
+                withStyle(
+                    style =
+                        SpanStyle(
+                            fontWeight = FontWeight.ExtraBold,
+                        ),
+                ) {
+                    appendLine(value = "New Concepts")
+                }
+                newConsiderations.forEach { newConsideration ->
+                    appendLine(value = "\u2022 $newConsideration")
+                }
+            },
+        fontSize = 18.sp,
+        color = MaterialTheme.colorScheme.onBackground,
+        overflow = TextOverflow.Clip,
+        fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+    )
+}
+
+@Composable
+private fun BookScreenNewTechniquesImage() {
+    Image(
+        painter = painterResource(id = R.drawable.new_techniques),
+        contentDescription = "New Concepts Image",
+        modifier =
+            Modifier
+                .padding(all = 14.dp)
+                .size(size = 70.dp),
+        contentScale = ContentScale.Crop,
+    )
+}
+
+@Composable
+private fun BookScreenNewTechniques() {
+    val newTechniques =
+        listOf(
+            "Contextual Inquiry",
+            "User Interviews",
+            "Eye-tracking",
+        )
+    Text(
+        modifier = Modifier.padding(all = 14.dp),
+        text =
+            buildAnnotatedString {
+                withStyle(
+                    style =
+                        SpanStyle(
+                            fontWeight = FontWeight.ExtraBold,
+                        ),
+                ) {
+                    appendLine(value = "New Concepts")
+                }
+                newTechniques.forEach { newTechnique ->
+                    appendLine(value = "\u2022 $newTechnique")
+                }
+            },
+        fontSize = 18.sp,
+        color = MaterialTheme.colorScheme.onBackground,
+        overflow = TextOverflow.Clip,
+        fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+    )
+}
+
+@Composable
+private fun BookScreenLessonsTitle() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "What you’ll learn",
@@ -428,7 +704,7 @@ fun BookScreenReviewsTitle() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "Reviews",
-        fontSize = 25.sp,
+        fontSize = 28.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
@@ -490,9 +766,10 @@ fun BookScreenSecondEditionBookImage() {
         painter = painterResource(id = R.drawable.laws_of_ux_book),
         contentDescription = "Project Info Screen Image",
         modifier =
-        Modifier
-            .padding(all = 14.dp)
-            .fillMaxSize(),
+            Modifier
+                .padding(all = 14.dp)
+                .fillMaxSize()
+                .clip(shape = RoundedCornerShape(size = 21.dp)),
         contentScale = ContentScale.Crop,
     )
 }
@@ -514,8 +791,9 @@ fun BookScreenSecondEditionBookTitle() {
 fun BookScreenSecondEditionBookContent() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
-        text = "Review the book online with this 30-day free membership to the O’Reilly " +
-            "Learning Platform.",
+        text =
+            "Review the book online with this 30-day free membership to the O’Reilly " +
+                "Learning Platform.",
         fontSize = 18.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
@@ -524,18 +802,16 @@ fun BookScreenSecondEditionBookContent() {
 }
 
 @Composable
-fun BookScreenSecondEditionBookButton(
-    navigateToOreilly: () -> Unit
-) {
+fun BookScreenSecondEditionBookButton(navigateToOreilly: () -> Unit) {
     Button(
         modifier =
-        Modifier
-            .padding(all = 7.dp),
+            Modifier
+                .padding(all = 7.dp),
         onClick = navigateToOreilly,
         colors =
-        ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primary,
-        ),
+            ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+            ),
     ) {
         Text(
             text = "ACCESS NOW",
@@ -616,9 +892,10 @@ fun BookScreenRelatedImage() {
         painter = painterResource(id = R.drawable.book_related),
         contentDescription = "Related Image",
         modifier =
-        Modifier
-            .padding(all = 14.dp)
-            .fillMaxSize(),
+            Modifier
+                .padding(all = 14.dp)
+                .fillMaxSize()
+                .clip(shape = RoundedCornerShape(size = 21.dp)),
         contentScale = ContentScale.Crop,
     )
 }
@@ -627,8 +904,9 @@ fun BookScreenRelatedImage() {
 fun BookScreenRelatedContent() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
-        text = "A discussion with Andrés Zapata, D.Sc. that dives into the details around the " +
-            "second edition of the “Laws of UX” book.",
+        text =
+            "A discussion with Andrés Zapata, D.Sc. that dives into the details around the " +
+                "second edition of the “Laws of UX” book.",
         fontSize = 18.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
@@ -637,18 +915,16 @@ fun BookScreenRelatedContent() {
 }
 
 @Composable
-fun BookScreenRelatedButton(
-    navigateToBootcamp: () -> Unit
-) {
+fun BookScreenRelatedButton(navigateToBootcamp: () -> Unit) {
     Button(
         modifier =
-        Modifier
-            .padding(all = 7.dp),
+            Modifier
+                .padding(all = 7.dp),
         onClick = navigateToBootcamp,
         colors =
-        ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primary,
-        ),
+            ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+            ),
     ) {
         Text(
             text = "READ ON BOOTCAMP",

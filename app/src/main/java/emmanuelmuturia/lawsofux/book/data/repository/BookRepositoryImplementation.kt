@@ -15,7 +15,7 @@ import kotlinx.coroutines.withContext
 
 class BookRepositoryImplementation(
     private val ioDispatcher: CoroutineDispatcher,
-    private val localBookSource: LocalBookSource
+    private val localBookSource: LocalBookSource,
 ) : BookRepository {
     override suspend fun getAllBookFirstEditions(): Flow<List<BookFirstEdition>> {
         return withContext(context = ioDispatcher) {
@@ -23,7 +23,7 @@ class BookRepositoryImplementation(
                 localBookFirstEditions.map { localBookFirstEdition ->
                     BookFirstEdition(
                         bookFirstEditionTitle = localBookFirstEdition.localBookFirstEditionTitle,
-                        bookFirstEditionSeller = localBookFirstEdition.localBookFirstEditionSeller
+                        bookFirstEditionSeller = localBookFirstEdition.localBookFirstEditionSeller,
                     )
                 }
             }
@@ -35,7 +35,7 @@ class BookRepositoryImplementation(
             localBookSource.getAllLocalBookGalleries().map { localBookGalleries ->
                 localBookGalleries.map { localBookGallery ->
                     BookGallery(
-                        bookGalleryImage = localBookGallery.localBookGalleryImage
+                        bookGalleryImage = localBookGallery.localBookGalleryImage,
                     )
                 }
             }
@@ -47,7 +47,7 @@ class BookRepositoryImplementation(
             localBookSource.getAllLocalBookLessons().map { localBookLessons ->
                 localBookLessons.map { localBookLesson ->
                     BookLesson(
-                        bookLessonDescription = localBookLesson.localBookLessonDescription
+                        bookLessonDescription = localBookLesson.localBookLessonDescription,
                     )
                 }
             }
@@ -60,7 +60,7 @@ class BookRepositoryImplementation(
                 localBookReviews.map { localBookReview ->
                     BookReview(
                         bookReviewCaption = localBookReview.localBookReviewCaption,
-                        bookReviewAuthor = localBookReview.localBookReviewAuthor
+                        bookReviewAuthor = localBookReview.localBookReviewAuthor,
                     )
                 }
             }
@@ -73,7 +73,7 @@ class BookRepositoryImplementation(
                 localBookSecondEditions.map { localBookSecondEdition ->
                     BookSecondEdition(
                         bookSecondEditionTitle = localBookSecondEdition.localBookSecondEditionTitle,
-                        bookSecondEditionSeller = localBookSecondEdition.localBookSecondEditionSeller
+                        bookSecondEditionSeller = localBookSecondEdition.localBookSecondEditionSeller,
                     )
                 }
             }
@@ -86,7 +86,7 @@ class BookRepositoryImplementation(
                 localBookTranslatedFirstEditions.map { localBookTranslatedFirstEdition ->
                     BookTranslatedFirstEdition(
                         bookTranslatedFirstEditionTitle = localBookTranslatedFirstEdition.localBookTranslatedFirstEditionTitle,
-                        bookTranslatedFirstEditionSeller = localBookTranslatedFirstEdition.localBookTranslatedFirstEditionSeller
+                        bookTranslatedFirstEditionSeller = localBookTranslatedFirstEdition.localBookTranslatedFirstEditionSeller,
                     )
                 }
             }
@@ -99,7 +99,7 @@ class BookRepositoryImplementation(
                 localBookTranslatedSecondEditions.map { localBookTranslatedSecondEdition ->
                     BookTranslatedSecondEdition(
                         bookTranslatedSecondEditionTitle = localBookTranslatedSecondEdition.localBookTranslatedSecondEditionTitle,
-                        bookTranslatedSecondEditionSeller = localBookTranslatedSecondEdition.localBookTranslatedSecondEditionSeller
+                        bookTranslatedSecondEditionSeller = localBookTranslatedSecondEdition.localBookTranslatedSecondEditionSeller,
                     )
                 }
             }

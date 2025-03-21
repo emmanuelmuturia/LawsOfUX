@@ -61,11 +61,11 @@ fun LawsOfUXExtraCardItem(
             )
 
             Row(
-                modifier = Modifier.fillMaxWidth().padding(end = 14.dp),
+                modifier = Modifier.padding(end = 14.dp),
                 horizontalArrangement = Arrangement.End,
             ) {
                 Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.further_reading),
+                    imageVector = ImageVector.vectorResource(id = R.drawable.diagonal_arrow),
                     contentDescription = "Further Reading Icon",
                     modifier = Modifier.padding(all = 14.dp),
                     tint = MaterialTheme.colorScheme.onBackground,

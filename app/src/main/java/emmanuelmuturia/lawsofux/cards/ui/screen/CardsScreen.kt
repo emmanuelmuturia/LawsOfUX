@@ -3,7 +3,9 @@ package emmanuelmuturia.lawsofux.cards.ui.screen
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
@@ -55,6 +57,8 @@ fun CardsScreen(
     navigateToDeckShop: () -> Unit,
     cardsScreenViewModel: CardsScreenViewModel,
     navigateToCardsScreen: () -> Unit,
+    navigateToBookScreen: () -> Unit,
+    navigateToInfoScreen: () -> Unit,
 ) {
     val cardsScreenListState = rememberLazyListState()
 
@@ -77,6 +81,8 @@ fun CardsScreen(
             LawsOfUXTopAppBar(
                 navigateToArticlesScreen = navigateToArticlesScreen,
                 navigateToCardsScreen = navigateToCardsScreen,
+                navigateToBookScreen = navigateToBookScreen,
+                navigateToInfoScreen = navigateToInfoScreen,
             )
         },
         floatingActionButton = {
@@ -104,6 +110,7 @@ fun CardsScreen(
             cardsScreenListState = cardsScreenListState,
             navigateToDeckShop = navigateToDeckShop,
             cardsScreenUIState = cardsScreenUIState,
+            navigateToInfoScreen = navigateToInfoScreen,
         )
     }
 }
@@ -114,6 +121,7 @@ private fun CardsScreenContent(
     cardsScreenListState: LazyListState,
     cardsScreenUIState: CardsScreenUIState,
     navigateToDeckShop: () -> Unit,
+    navigateToInfoScreen: () -> Unit,
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
@@ -124,7 +132,15 @@ private fun CardsScreenContent(
         }
 
         item {
+            Spacer(modifier = Modifier.height(height = 28.dp))
+        }
+
+        item {
             CardsScreenImage()
+        }
+
+        item {
+            Spacer(modifier = Modifier.height(height = 28.dp))
         }
 
         item {
@@ -140,6 +156,10 @@ private fun CardsScreenContent(
         }
 
         item {
+            Spacer(modifier = Modifier.height(height = 28.dp))
+        }
+
+        item {
             CardsScreenRelatedTitle()
         }
 
@@ -151,7 +171,9 @@ private fun CardsScreenContent(
         }
 
         item {
-            LawsOfUXFooter()
+            LawsOfUXFooter(
+                navigateToInfoScreen = navigateToInfoScreen,
+            )
         }
     }
 }
@@ -168,6 +190,7 @@ private fun CardsScreenText() {
         overflow = TextOverflow.Clip,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
         fontWeight = FontWeight.Bold,
+        lineHeight = 37.sp,
     )
 }
 
@@ -247,7 +270,13 @@ private fun CardsScreenImage() {
     Image(
         painter = painterResource(id = R.drawable.card_screen_image),
         contentDescription = "Cards Screen Image",
-        modifier = Modifier.padding(all = 14.dp).fillMaxSize(),
+        modifier =
+            Modifier.padding(all = 14.dp).fillMaxSize().clip(
+                shape =
+                    RoundedCornerShape(
+                        size = 21.dp,
+                    ),
+            ),
         contentScale = ContentScale.Crop,
     )
 }

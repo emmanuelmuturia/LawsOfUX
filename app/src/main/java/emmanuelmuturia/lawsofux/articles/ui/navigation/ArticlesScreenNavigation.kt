@@ -14,6 +14,8 @@ fun NavGraphBuilder.articlesScreen(
     navigateToArticlesScreen: () -> Unit,
     navigateToArticlesDetailsPage: () -> Unit,
     navigateToCardsScreen: () -> Unit,
+    navigateToBookScreen: () -> Unit,
+    navigateToInfoScreen: () -> Unit,
 ) {
     composable<ArticlesScreen> {
         ArticlesScreen(
@@ -21,6 +23,8 @@ fun NavGraphBuilder.articlesScreen(
             navigateToArticlesScreen = navigateToArticlesScreen,
             navigateToArticlesDetailsPage = navigateToArticlesDetailsPage,
             navigateToCardsScreen = navigateToCardsScreen,
+            navigateToBookScreen = navigateToBookScreen,
+            navigateToInfoScreen = navigateToInfoScreen,
         )
     }
 }

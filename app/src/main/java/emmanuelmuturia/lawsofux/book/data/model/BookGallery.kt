@@ -1,5 +1,5 @@
 package emmanuelmuturia.lawsofux.book.data.model
 
 data class BookGallery(
-    val bookGalleryImage: Int
+    val bookGalleryImage: Int,
 )

@@ -15,7 +15,9 @@ fun NavGraphBuilder.bookScreen(
     navigateToAmazon: () -> Unit,
     navigateToOreilly: () -> Unit,
     navigateToBootcamp: () -> Unit,
-    bookScreenViewModel: BookScreenViewModel
+    bookScreenViewModel: BookScreenViewModel,
+    navigateToBookScreen: () -> Unit,
+    navigateToInfoScreen: () -> Unit,
 ) {
     composable<BookScreen> {
         BookScreen(
@@ -25,6 +27,8 @@ fun NavGraphBuilder.bookScreen(
             navigateToOreilly = navigateToOreilly,
             navigateToBootcamp = navigateToBootcamp,
             bookScreenViewModel = bookScreenViewModel,
+            navigateToBookScreen = navigateToBookScreen,
+            navigateToInfoScreen = navigateToInfoScreen,
         )
     }
 }

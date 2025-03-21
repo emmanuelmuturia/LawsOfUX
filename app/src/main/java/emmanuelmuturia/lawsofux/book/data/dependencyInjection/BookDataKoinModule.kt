@@ -5,15 +5,15 @@ import emmanuelmuturia.lawsofux.book.data.repository.BookRepositoryImplementatio
 import emmanuelmuturia.lawsofux.book.source.dependencyInjection.bookSourceKoinModule
 import org.koin.dsl.module
 
-val bookDataKoinModule = module {
+val bookDataKoinModule =
+    module {
 
-    single<BookRepository> {
-        BookRepositoryImplementation(
-            ioDispatcher = get(),
-            localBookSource = get()
-        )
+        single<BookRepository> {
+            BookRepositoryImplementation(
+                ioDispatcher = get(),
+                localBookSource = get(),
+            )
+        }
+
+        includes(module = listOf(bookSourceKoinModule))
     }
-
-    includes(module = listOf(bookSourceKoinModule))
-
-}

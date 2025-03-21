@@ -2,9 +2,10 @@ package emmanuelmuturia.lawsofux.home.ui.screen
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -32,7 +33,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.LinkAnnotation
@@ -66,6 +66,8 @@ fun HomeScreen(
     navigateToHomeDetailsScreen: (UXLaw) -> Unit,
     navigateToArticlesScreen: () -> Unit,
     navigateToCardsScreen: () -> Unit,
+    navigateToBookScreen: () -> Unit,
+    navigateToInfoScreen: () -> Unit,
 ) {
     val homeScreenListState = rememberLazyListState()
 
@@ -86,6 +88,8 @@ fun HomeScreen(
             LawsOfUXTopAppBar(
                 navigateToArticlesScreen = navigateToArticlesScreen,
                 navigateToCardsScreen = navigateToCardsScreen,
+                navigateToBookScreen = navigateToBookScreen,
+                navigateToInfoScreen = navigateToInfoScreen,
             )
         },
         floatingActionButton = {
@@ -116,6 +120,7 @@ fun HomeScreen(
             homeScreenUIState = homeScreenUIState,
             homeScreenListState = homeScreenListState,
             navigateToHomeDetailsScreen = navigateToHomeDetailsScreen,
+            navigateToInfoScreen = navigateToInfoScreen,
         )
     }
 }
@@ -126,6 +131,7 @@ private fun HomeScreenContent(
     homeScreenUIState: HomeScreenUIState,
     homeScreenListState: LazyListState,
     navigateToHomeDetailsScreen: (UXLaw) -> Unit,
+    navigateToInfoScreen: () -> Unit,
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
@@ -142,7 +148,11 @@ private fun HomeScreenContent(
             )
         }
         item { Spacer(modifier = Modifier.height(height = 21.dp)) }
-        item { LawsOfUXFooter() }
+        item {
+            LawsOfUXFooter(
+                navigateToInfoScreen = navigateToInfoScreen,
+            )
+        }
     }
 }
 
@@ -168,8 +178,9 @@ private fun HomeScreenNotification() {
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().height(intrinsicSize = IntrinsicSize.Min),
             verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
             Icon(
                 modifier = Modifier.padding(all = 21.dp),
@@ -179,14 +190,12 @@ private fun HomeScreenNotification() {
             )
 
             VerticalDivider(
-                modifier = Modifier.fillMaxHeight(),
-                // I need to display it...
                 thickness = 3.dp,
-                color = Color.Black,
+                color = MaterialTheme.colorScheme.background,
             )
 
             Text(
-                modifier = Modifier.padding(all = 14.dp),
+                modifier = Modifier.padding(all = 10.dp),
                 text =
                     buildAnnotatedString {
                         append(
@@ -215,7 +224,7 @@ private fun HomeScreenNotification() {
                         }
                     },
                 color = MaterialTheme.colorScheme.onSurface,
-                fontSize = 18.sp,
+                fontSize = 14.sp,
                 overflow = TextOverflow.Clip,
                 fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
             )

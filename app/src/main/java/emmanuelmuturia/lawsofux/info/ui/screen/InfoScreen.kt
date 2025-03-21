@@ -3,12 +3,23 @@ package emmanuelmuturia.lawsofux.info.ui.screen
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FloatingActionButton
@@ -22,8 +33,10 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -32,43 +45,49 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import emmanuelmuturia.lawsofux.R
 import emmanuelmuturia.lawsofux.commons.components.LawsOfUXExtraCardItem
+import emmanuelmuturia.lawsofux.commons.components.LawsOfUXFooter
 import emmanuelmuturia.lawsofux.commons.components.LawsOfUXTopAppBar
-import emmanuelmuturia.lawsofux.info.ui.state.ProjectInfoScreenUIState
-import emmanuelmuturia.lawsofux.info.ui.viewmodel.ProjectInfoScreenViewModel
+import emmanuelmuturia.lawsofux.info.ui.state.InfoScreenUIState
+import emmanuelmuturia.lawsofux.info.ui.viewmodel.InfoScreenViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun ProjectInfoScreen(
+fun InfoScreen(
     navigateToArticlesScreen: () -> Unit,
     navigateToCardsScreen: () -> Unit,
     navigateToPosterShop: () -> Unit,
-    projectInfoScreenViewModel: ProjectInfoScreenViewModel,
+    infoScreenViewModel: InfoScreenViewModel,
+    navigateToBookScreen: () -> Unit,
+    navigateToInfoScreen: () -> Unit,
 ) {
-    val projectInfoScreenListState = rememberLazyListState()
+    val infoScreenListState = rememberLazyListState()
 
     val showScrollToTopButton by remember {
         derivedStateOf {
-            projectInfoScreenListState.firstVisibleItemIndex > 0
+            infoScreenListState.firstVisibleItemIndex > 0
         }
     }
 
-    val projectInfoScreenCoroutineScope = rememberCoroutineScope()
+    val infoScreenCoroutineScope = rememberCoroutineScope()
 
-    val projectInfoScreenUIState by
-        projectInfoScreenViewModel.projectInfoScreenUIState.collectAsStateWithLifecycle()
+    val infoScreenUIState by
+        infoScreenViewModel.infoScreenUIState.collectAsStateWithLifecycle()
 
     Scaffold(
         modifier =
@@ -79,6 +98,8 @@ fun ProjectInfoScreen(
             LawsOfUXTopAppBar(
                 navigateToArticlesScreen = navigateToArticlesScreen,
                 navigateToCardsScreen = navigateToCardsScreen,
+                navigateToBookScreen = navigateToBookScreen,
+                navigateToInfoScreen = navigateToInfoScreen,
             )
         },
         floatingActionButton = {
@@ -86,8 +107,8 @@ fun ProjectInfoScreen(
                 FloatingActionButton(
                     modifier = Modifier.clip(shape = RoundedCornerShape(size = 21.dp)),
                     onClick = {
-                        projectInfoScreenCoroutineScope.launch {
-                            projectInfoScreenListState.animateScrollToItem(index = 0)
+                        infoScreenCoroutineScope.launch {
+                            infoScreenListState.animateScrollToItem(index = 0)
                         }
                     },
                     containerColor = MaterialTheme.colorScheme.primary,
@@ -101,144 +122,221 @@ fun ProjectInfoScreen(
             }
         },
     ) { paddingValues ->
-        ProjectInfoScreenContent(
+        InfoScreenContent(
             modifier = Modifier.padding(paddingValues = paddingValues),
             navigateToPosterShop = navigateToPosterShop,
-            projectInfoScreenUIState = projectInfoScreenUIState,
+            infoScreenUIState = infoScreenUIState,
+            infoScreenListState = infoScreenListState,
+            navigateToInfoScreen = navigateToInfoScreen,
         )
     }
 }
 
 @Composable
-private fun ProjectInfoScreenContent(
+private fun InfoScreenContent(
     modifier: Modifier = Modifier,
     navigateToPosterShop: () -> Unit,
-    projectInfoScreenUIState: ProjectInfoScreenUIState,
+    infoScreenUIState: InfoScreenUIState,
+    infoScreenListState: LazyListState,
+    navigateToInfoScreen: () -> Unit,
 ) {
+    var userName by remember { mutableStateOf(value = "") }
+    var userEmail by remember { mutableStateOf(value = "") }
+    var userSubject by remember { mutableStateOf(value = "") }
+    var userMessage by remember { mutableStateOf(value = "") }
+
     LazyColumn(
         modifier = modifier.fillMaxSize(),
+        state = infoScreenListState,
     ) {
         item {
-            ProjectInfoScreenText()
+            InfoScreenText()
         }
 
         item {
-            ProjectInfoScreenImage()
+            InfoScreenImage()
         }
 
         item {
-            ProjectInfoScreenContentText()
+            InfoScreenContentText()
         }
 
         item {
-            ProjectInfoScreenContentTextNote()
+            InfoScreenNoteBox()
         }
 
         item {
-            ProjectInfoScreenShareContent()
+            Spacer(
+                modifier = Modifier.height(height = 56.dp),
+            )
         }
 
         item {
-            ProjectInfoScreenPostersTitle()
+            InfoScreenShareTitle()
         }
 
         item {
-            ProjectInfoScreenPostersContent()
+            InfoScreenShareContent()
         }
 
         item {
-            ProjectInfoScreenIndexPosterTitle()
+            Spacer(
+                modifier = Modifier.height(height = 56.dp),
+            )
         }
 
         item {
-            ProjectInfoScreenIndexPosterImage()
+            InfoScreenPostersTitle()
         }
 
         item {
-            ProjectInfoScreenIndexPosterCaption()
+            InfoScreenPostersContent()
         }
 
         item {
-            ProjectInfoScreenIndexPosterButton(
+            Spacer(
+                modifier = Modifier.height(height = 42.dp),
+            )
+        }
+
+        item {
+            InfoScreenIndexPosterTitle()
+        }
+
+        item {
+            InfoScreenIndexPosterImage()
+        }
+
+        item {
+            InfoScreenIndexPosterCaption()
+        }
+
+        item {
+            InfoScreenIndexPosterButton(
                 navigateToPosterShop = navigateToPosterShop,
             )
         }
 
         item {
-            ProjectInfoScreenInfoTitle()
-        }
-
-        items(items = projectInfoScreenUIState.projectInfos) { projectInfo ->
-            LawsOfUXExtraCardItem(
-                title = projectInfo.projectInfoTitle,
-                content = projectInfo.projectInfoDescription,
+            Spacer(
+                modifier = Modifier.height(height = 56.dp),
             )
         }
 
         item {
-            ProjectInfoScreenColophonTitle()
+            InfoScreenInfoTitle()
+        }
+
+        items(items = infoScreenUIState.infos) { info ->
+            LawsOfUXExtraCardItem(
+                title = info.infoTitle,
+                content = info.infoDescription,
+            )
         }
 
         item {
-            ProjectInfoScreenColophonContent()
+            Spacer(
+                modifier = Modifier.height(height = 56.dp),
+            )
         }
 
         item {
-            ProjectInfoScreenDivider()
+            InfoScreenColophonTitle()
         }
 
         item {
-            ProjectInfoScreenContactTitle()
+            InfoScreenColophonContent()
         }
 
         item {
-            ProjectInfoScreenContactCaption()
+            Spacer(
+                modifier = Modifier.height(height = 36.dp),
+            )
         }
 
         item {
-            ProjectInfoScreenContactBoxTitle(
+            InfoScreenDivider()
+        }
+
+        item {
+            InfoScreenContactTitle()
+        }
+
+        item {
+            InfoScreenContactCaption()
+        }
+
+        item {
+            InfoScreenContactBoxTitle(
                 title = "NAME",
             )
         }
 
         item {
-            ProjectInfoScreenContactBox()
+            InfoScreenContactBox(
+                value = userName,
+                onValueChange = { userName = it },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+            )
         }
 
         item {
-            ProjectInfoScreenContactBoxTitle(
+            InfoScreenContactBoxTitle(
                 title = "EMAIL",
             )
         }
 
         item {
-            ProjectInfoScreenContactBox()
+            InfoScreenContactBox(
+                value = userEmail,
+                onValueChange = { userEmail = it },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+            )
         }
 
         item {
-            ProjectInfoScreenContactBoxTitle(
+            InfoScreenContactBoxTitle(
                 title = "SUBJECT",
             )
         }
 
         item {
-            ProjectInfoScreenContactBox()
+            InfoScreenContactBox(
+                value = userSubject,
+                onValueChange = { userSubject = it },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+            )
         }
 
         item {
-            ProjectInfoScreenContactBoxTitle(
+            InfoScreenContactBoxTitle(
                 title = "MESSAGE",
             )
         }
 
         item {
-            ProjectInfoScreenContactButton()
+            InfoScreenContactBox(
+                value = userMessage,
+                onValueChange = { userMessage = it },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+                height = 210.dp,
+            )
+        }
+
+        item {
+            InfoScreenContactButton()
+        }
+
+        item {
+            LawsOfUXFooter(
+                navigateToInfoScreen = navigateToInfoScreen,
+            )
         }
     }
 }
 
 @Composable
-private fun ProjectInfoScreenText() {
+private fun InfoScreenText() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text =
@@ -250,24 +348,31 @@ private fun ProjectInfoScreenText() {
         overflow = TextOverflow.Clip,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
         fontWeight = FontWeight.Bold,
+        lineHeight = 37.sp,
     )
 }
 
 @Composable
-private fun ProjectInfoScreenImage() {
+private fun InfoScreenImage() {
     Image(
         painter = painterResource(id = R.drawable.info_screen_image),
-        contentDescription = "Project Info Screen Image",
+        contentDescription = "Info Screen Image",
         modifier =
             Modifier
                 .padding(all = 14.dp)
-                .fillMaxSize(),
+                .fillMaxSize()
+                .clip(
+                    shape =
+                        RoundedCornerShape(
+                            size = 21.dp,
+                        ),
+                ),
         contentScale = ContentScale.Crop,
     )
 }
 
 @Composable
-private fun ProjectInfoScreenContentText() {
+private fun InfoScreenContentText() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text =
@@ -300,13 +405,13 @@ private fun ProjectInfoScreenContentText() {
                                 textDecoration = TextDecoration.Underline,
                             ),
                     ) {
-                        append(text = "Jon Yablonski")
+                        append(text = "Jon Yablonski\n")
                     }
                 }
 
                 append(
                     text =
-                        "Have some feedback you’d like to share? I’m always open to suggestions " +
+                        "\nHave some feedback you’d like to share? I’m always open to suggestions " +
                             "and ideas. Feel free to reach out via the contact form below.",
                 )
             },
@@ -318,17 +423,141 @@ private fun ProjectInfoScreenContentText() {
 }
 
 @Composable
-private fun ProjectInfoScreenContentTextNote() {
-    TODO("Not yet implemented")
+private fun InfoScreenNoteBox() {
+    Box(
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(all = 7.dp)
+                .border(
+                    width = 1.dp,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    shape = RoundedCornerShape(size = 21.dp),
+                ),
+    ) {
+        Column {
+            InfoScreenNoteTitle()
+            InfoScreenNoteDivider()
+            InfoScreenNoteContent()
+        }
+    }
 }
 
 @Composable
-private fun ProjectInfoScreenShareContent() {
-    TODO("Not yet implemented")
+private fun InfoScreenNoteTitle(modifier: Modifier = Modifier) {
+    Text(
+        modifier = modifier.padding(all = 14.dp),
+        text = "NOTE",
+        fontSize = 18.sp,
+        color = MaterialTheme.colorScheme.onBackground,
+        overflow = TextOverflow.Clip,
+        fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
+    )
 }
 
 @Composable
-private fun ProjectInfoScreenPostersTitle() {
+private fun InfoScreenNoteDivider(modifier: Modifier = Modifier) {
+    HorizontalDivider(
+        modifier = modifier.fillMaxWidth(),
+        color = MaterialTheme.colorScheme.onBackground,
+        thickness = 1.dp,
+    )
+}
+
+@Composable
+private fun InfoScreenNoteContent(modifier: Modifier = Modifier) {
+    Text(
+        modifier = modifier.padding(all = 14.dp),
+        text =
+            buildAnnotatedString {
+                append(
+                    text =
+                        "All content on this website is licensed under the Creative Commons " +
+                            "Attribution-NonCommercial-NoDerivatives 4.0 International License. To view a " +
+                            "copy of this license, visit ",
+                )
+                withLink(
+                    link =
+                        LinkAnnotation.Url(
+                            url = "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+                        ),
+                ) {
+                    withStyle(
+                        style =
+                            SpanStyle(
+                                textDecoration = TextDecoration.Underline,
+                            ),
+                    ) {
+                        append(text = "https://creativecommons.org/licenses/by-nc-nd/4.0/")
+                    }
+                }
+                append(text = ".")
+            },
+        fontSize = 18.sp,
+        color = MaterialTheme.colorScheme.onBackground,
+        overflow = TextOverflow.Clip,
+        fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+    )
+}
+
+@Composable
+private fun InfoScreenShareTitle() {
+    Text(
+        modifier = Modifier.padding(all = 14.dp),
+        text = "Share this project",
+        fontSize = 25.sp,
+        color = MaterialTheme.colorScheme.onBackground,
+        overflow = TextOverflow.Clip,
+        fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+        fontWeight = FontWeight.ExtraBold,
+    )
+}
+
+@Composable
+private fun InfoScreenShareContent() {
+    Row(
+        horizontalArrangement = Arrangement.SpaceEvenly,
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.x),
+            contentDescription = "X Image",
+            modifier =
+                Modifier
+                    .size(size = 70.dp),
+            contentScale = ContentScale.Crop,
+        )
+
+        Image(
+            painter = painterResource(id = R.drawable.meta),
+            contentDescription = "Meta Image",
+            modifier =
+                Modifier
+                    .size(size = 70.dp),
+            contentScale = ContentScale.Crop,
+        )
+
+        Image(
+            painter = painterResource(id = R.drawable.linkedin),
+            contentDescription = "LinkedIn Image",
+            modifier =
+                Modifier
+                    .size(size = 70.dp),
+            contentScale = ContentScale.Crop,
+        )
+
+        Image(
+            painter = painterResource(id = R.drawable.pinterest),
+            contentDescription = "Pinterest Image",
+            modifier =
+                Modifier
+                    .size(size = 70.dp),
+            contentScale = ContentScale.Crop,
+        )
+    }
+}
+
+@Composable
+private fun InfoScreenPostersTitle() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "Posters",
@@ -341,7 +570,7 @@ private fun ProjectInfoScreenPostersTitle() {
 }
 
 @Composable
-private fun ProjectInfoScreenPostersContent() {
+private fun InfoScreenPostersContent() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text =
@@ -399,7 +628,7 @@ private fun ProjectInfoScreenPostersContent() {
 }
 
 @Composable
-private fun ProjectInfoScreenIndexPosterTitle() {
+private fun InfoScreenIndexPosterTitle() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "Index Poster",
@@ -412,7 +641,7 @@ private fun ProjectInfoScreenIndexPosterTitle() {
 }
 
 @Composable
-private fun ProjectInfoScreenIndexPosterImage() {
+private fun InfoScreenIndexPosterImage() {
     Image(
         painter = painterResource(id = R.drawable.index_poster_image),
         contentDescription = "Cards Screen Image",
@@ -425,7 +654,7 @@ private fun ProjectInfoScreenIndexPosterImage() {
 }
 
 @Composable
-private fun ProjectInfoScreenIndexPosterCaption() {
+private fun InfoScreenIndexPosterCaption() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "A museum-quality poster made on thick and durable matte paper.",
@@ -437,7 +666,7 @@ private fun ProjectInfoScreenIndexPosterCaption() {
 }
 
 @Composable
-private fun ProjectInfoScreenIndexPosterButton(navigateToPosterShop: () -> Unit) {
+private fun InfoScreenIndexPosterButton(navigateToPosterShop: () -> Unit) {
     Button(
         modifier =
             Modifier
@@ -457,7 +686,7 @@ private fun ProjectInfoScreenIndexPosterButton(navigateToPosterShop: () -> Unit)
 }
 
 @Composable
-private fun ProjectInfoScreenInfoTitle() {
+private fun InfoScreenInfoTitle() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "More about this project",
@@ -470,7 +699,7 @@ private fun ProjectInfoScreenInfoTitle() {
 }
 
 @Composable
-private fun ProjectInfoScreenColophonTitle() {
+private fun InfoScreenColophonTitle() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "Colophon",
@@ -483,7 +712,7 @@ private fun ProjectInfoScreenColophonTitle() {
 }
 
 @Composable
-private fun ProjectInfoScreenColophonContent() {
+private fun InfoScreenColophonContent() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text =
@@ -576,7 +805,7 @@ private fun ProjectInfoScreenColophonContent() {
 }
 
 @Composable
-private fun ProjectInfoScreenDivider() {
+private fun InfoScreenDivider() {
     HorizontalDivider(
         modifier = Modifier.padding(all = 14.dp),
         thickness = 3.dp,
@@ -585,7 +814,7 @@ private fun ProjectInfoScreenDivider() {
 }
 
 @Composable
-private fun ProjectInfoScreenContactTitle() {
+private fun InfoScreenContactTitle() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "Contact",
@@ -598,7 +827,7 @@ private fun ProjectInfoScreenContactTitle() {
 }
 
 @Composable
-private fun ProjectInfoScreenContactCaption() {
+private fun InfoScreenContactCaption() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "Feel free to reach out with feedback, questions or just to say hello.",
@@ -610,43 +839,59 @@ private fun ProjectInfoScreenContactCaption() {
 }
 
 @Composable
-private fun ProjectInfoScreenContactBoxTitle(title: String) {
+private fun InfoScreenContactBoxTitle(title: String) {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = title,
-        fontSize = 25.sp,
+        fontSize = 18.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
-        fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+        fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
         fontWeight = FontWeight.ExtraBold,
     )
 }
 
 @Composable
-private fun ProjectInfoScreenContactBox(
+private fun InfoScreenContactBox(
     value: String,
     onValueChange: (String) -> Unit,
+    keyboardOptions: KeyboardOptions,
+    height: Dp = 56.dp,
 ) {
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
-        modifier = Modifier.padding(all = 14.dp),
+        modifier =
+            Modifier
+                .padding(all = 14.dp)
+                .height(height = height)
+                .fillMaxWidth(),
         colors =
             TextFieldDefaults.colors(
                 cursorColor = MaterialTheme.colorScheme.onBackground,
+                focusedContainerColor = MaterialTheme.colorScheme.background,
+                unfocusedContainerColor = MaterialTheme.colorScheme.background,
+                focusedIndicatorColor = MaterialTheme.colorScheme.onBackground,
+                unfocusedIndicatorColor = MaterialTheme.colorScheme.onBackground,
             ),
         shape = RoundedCornerShape(size = 21.dp),
+        keyboardOptions = keyboardOptions,
+        textStyle =
+            TextStyle(
+                fontSize = 18.sp,
+                color = MaterialTheme.colorScheme.onBackground,
+                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+            ),
     )
 }
 
 @Composable
-private fun ProjectInfoScreenContactButton() {
+private fun InfoScreenContactButton() {
     Button(
         modifier =
             Modifier
-                .padding(all = 7.dp),
+                .padding(all = 14.dp),
         onClick = {
-            TODO("Send email")
         },
         colors =
             ButtonDefaults.buttonColors(

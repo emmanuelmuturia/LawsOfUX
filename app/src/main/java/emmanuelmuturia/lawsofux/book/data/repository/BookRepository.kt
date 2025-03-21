@@ -11,12 +11,16 @@ import kotlinx.coroutines.flow.Flow
 
 interface BookRepository {
     suspend fun getAllBookFirstEditions(): Flow<List<BookFirstEdition>>
+
     suspend fun getAllBookGalleries(): Flow<List<BookGallery>>
+
     suspend fun getAllBookLessons(): Flow<List<BookLesson>>
+
     suspend fun getAllBookReviews(): Flow<List<BookReview>>
+
     suspend fun getAllBookSecondEditions(): Flow<List<BookSecondEdition>>
-    suspend fun getAllBookTranslatedFirstEditions():
-        Flow<List<BookTranslatedFirstEdition>>
-    suspend fun getAllBookTranslatedSecondEditions():
-        Flow<List<BookTranslatedSecondEdition>>
+
+    suspend fun getAllBookTranslatedFirstEditions(): Flow<List<BookTranslatedFirstEdition>>
+
+    suspend fun getAllBookTranslatedSecondEditions(): Flow<List<BookTranslatedSecondEdition>>
 }
