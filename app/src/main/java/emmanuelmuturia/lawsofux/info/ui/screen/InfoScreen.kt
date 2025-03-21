@@ -63,31 +63,31 @@ import emmanuelmuturia.lawsofux.R
 import emmanuelmuturia.lawsofux.commons.components.LawsOfUXExtraCardItem
 import emmanuelmuturia.lawsofux.commons.components.LawsOfUXFooter
 import emmanuelmuturia.lawsofux.commons.components.LawsOfUXTopAppBar
-import emmanuelmuturia.lawsofux.info.ui.state.ProjectInfoScreenUIState
-import emmanuelmuturia.lawsofux.info.ui.viewmodel.ProjectInfoScreenViewModel
+import emmanuelmuturia.lawsofux.info.ui.state.InfoScreenUIState
+import emmanuelmuturia.lawsofux.info.ui.viewmodel.InfoScreenViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun ProjectInfoScreen(
+fun InfoScreen(
     navigateToArticlesScreen: () -> Unit,
     navigateToCardsScreen: () -> Unit,
     navigateToPosterShop: () -> Unit,
-    projectInfoScreenViewModel: ProjectInfoScreenViewModel,
+    infoScreenViewModel: InfoScreenViewModel,
     navigateToBookScreen: () -> Unit,
     navigateToInfoScreen: () -> Unit,
 ) {
-    val projectInfoScreenListState = rememberLazyListState()
+    val infoScreenListState = rememberLazyListState()
 
     val showScrollToTopButton by remember {
         derivedStateOf {
-            projectInfoScreenListState.firstVisibleItemIndex > 0
+            infoScreenListState.firstVisibleItemIndex > 0
         }
     }
 
-    val projectInfoScreenCoroutineScope = rememberCoroutineScope()
+    val infoScreenCoroutineScope = rememberCoroutineScope()
 
-    val projectInfoScreenUIState by
-        projectInfoScreenViewModel.projectInfoScreenUIState.collectAsStateWithLifecycle()
+    val infoScreenUIState by
+        infoScreenViewModel.infoScreenUIState.collectAsStateWithLifecycle()
 
     Scaffold(
         modifier =
@@ -107,8 +107,8 @@ fun ProjectInfoScreen(
                 FloatingActionButton(
                     modifier = Modifier.clip(shape = RoundedCornerShape(size = 21.dp)),
                     onClick = {
-                        projectInfoScreenCoroutineScope.launch {
-                            projectInfoScreenListState.animateScrollToItem(index = 0)
+                        infoScreenCoroutineScope.launch {
+                            infoScreenListState.animateScrollToItem(index = 0)
                         }
                     },
                     containerColor = MaterialTheme.colorScheme.primary,
@@ -122,21 +122,21 @@ fun ProjectInfoScreen(
             }
         },
     ) { paddingValues ->
-        ProjectInfoScreenContent(
+        InfoScreenContent(
             modifier = Modifier.padding(paddingValues = paddingValues),
             navigateToPosterShop = navigateToPosterShop,
-            projectInfoScreenUIState = projectInfoScreenUIState,
-            projectInfoScreenListState = projectInfoScreenListState,
+            infoScreenUIState = infoScreenUIState,
+            infoScreenListState = infoScreenListState,
         )
     }
 }
 
 @Composable
-private fun ProjectInfoScreenContent(
+private fun InfoScreenContent(
     modifier: Modifier = Modifier,
     navigateToPosterShop: () -> Unit,
-    projectInfoScreenUIState: ProjectInfoScreenUIState,
-    projectInfoScreenListState: LazyListState,
+    infoScreenUIState: InfoScreenUIState,
+    infoScreenListState: LazyListState,
 ) {
     var userName by remember { mutableStateOf(value = "") }
     var userEmail by remember { mutableStateOf(value = "") }
@@ -145,18 +145,18 @@ private fun ProjectInfoScreenContent(
 
     LazyColumn(
         modifier = modifier.fillMaxSize(),
-        state = projectInfoScreenListState,
+        state = infoScreenListState,
     ) {
         item {
-            ProjectInfoScreenText()
+            InfoScreenText()
         }
 
         item {
-            ProjectInfoScreenImage()
+            InfoScreenImage()
         }
 
         item {
-            ProjectInfoScreenContentText()
+            InfoScreenContentText()
         }
 
         item {
@@ -170,11 +170,11 @@ private fun ProjectInfoScreenContent(
         }
 
         item {
-            ProjectInfoScreenShareTitle()
+            InfoScreenShareTitle()
         }
 
         item {
-            ProjectInfoScreenShareContent()
+            InfoScreenShareContent()
         }
 
         item {
@@ -184,11 +184,11 @@ private fun ProjectInfoScreenContent(
         }
 
         item {
-            ProjectInfoScreenPostersTitle()
+            InfoScreenPostersTitle()
         }
 
         item {
-            ProjectInfoScreenPostersContent()
+            InfoScreenPostersContent()
         }
 
         item {
@@ -198,19 +198,19 @@ private fun ProjectInfoScreenContent(
         }
 
         item {
-            ProjectInfoScreenIndexPosterTitle()
+            InfoScreenIndexPosterTitle()
         }
 
         item {
-            ProjectInfoScreenIndexPosterImage()
+            InfoScreenIndexPosterImage()
         }
 
         item {
-            ProjectInfoScreenIndexPosterCaption()
+            InfoScreenIndexPosterCaption()
         }
 
         item {
-            ProjectInfoScreenIndexPosterButton(
+            InfoScreenIndexPosterButton(
                 navigateToPosterShop = navigateToPosterShop,
             )
         }
@@ -222,13 +222,13 @@ private fun ProjectInfoScreenContent(
         }
 
         item {
-            ProjectInfoScreenInfoTitle()
+            InfoScreenInfoTitle()
         }
 
-        items(items = projectInfoScreenUIState.projectInfos) { projectInfo ->
+        items(items = infoScreenUIState.infos) { info ->
             LawsOfUXExtraCardItem(
-                title = projectInfo.projectInfoTitle,
-                content = projectInfo.projectInfoDescription,
+                title = info.infoTitle,
+                content = info.infoDescription,
             )
         }
 
@@ -239,11 +239,11 @@ private fun ProjectInfoScreenContent(
         }
 
         item {
-            ProjectInfoScreenColophonTitle()
+            InfoScreenColophonTitle()
         }
 
         item {
-            ProjectInfoScreenColophonContent()
+            InfoScreenColophonContent()
         }
 
         item {
@@ -253,25 +253,25 @@ private fun ProjectInfoScreenContent(
         }
 
         item {
-            ProjectInfoScreenDivider()
+            InfoScreenDivider()
         }
 
         item {
-            ProjectInfoScreenContactTitle()
+            InfoScreenContactTitle()
         }
 
         item {
-            ProjectInfoScreenContactCaption()
+            InfoScreenContactCaption()
         }
 
         item {
-            ProjectInfoScreenContactBoxTitle(
+            InfoScreenContactBoxTitle(
                 title = "NAME",
             )
         }
 
         item {
-            ProjectInfoScreenContactBox(
+            InfoScreenContactBox(
                 value = userName,
                 onValueChange = { userName = it },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
@@ -279,13 +279,13 @@ private fun ProjectInfoScreenContent(
         }
 
         item {
-            ProjectInfoScreenContactBoxTitle(
+            InfoScreenContactBoxTitle(
                 title = "EMAIL",
             )
         }
 
         item {
-            ProjectInfoScreenContactBox(
+            InfoScreenContactBox(
                 value = userEmail,
                 onValueChange = { userEmail = it },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
@@ -293,13 +293,13 @@ private fun ProjectInfoScreenContent(
         }
 
         item {
-            ProjectInfoScreenContactBoxTitle(
+            InfoScreenContactBoxTitle(
                 title = "SUBJECT",
             )
         }
 
         item {
-            ProjectInfoScreenContactBox(
+            InfoScreenContactBox(
                 value = userSubject,
                 onValueChange = { userSubject = it },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
@@ -307,13 +307,13 @@ private fun ProjectInfoScreenContent(
         }
 
         item {
-            ProjectInfoScreenContactBoxTitle(
+            InfoScreenContactBoxTitle(
                 title = "MESSAGE",
             )
         }
 
         item {
-            ProjectInfoScreenContactBox(
+            InfoScreenContactBox(
                 value = userMessage,
                 onValueChange = { userMessage = it },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
@@ -322,7 +322,7 @@ private fun ProjectInfoScreenContent(
         }
 
         item {
-            ProjectInfoScreenContactButton()
+            InfoScreenContactButton()
         }
 
         item {
@@ -332,7 +332,7 @@ private fun ProjectInfoScreenContent(
 }
 
 @Composable
-private fun ProjectInfoScreenText() {
+private fun InfoScreenText() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text =
@@ -349,10 +349,10 @@ private fun ProjectInfoScreenText() {
 }
 
 @Composable
-private fun ProjectInfoScreenImage() {
+private fun InfoScreenImage() {
     Image(
         painter = painterResource(id = R.drawable.info_screen_image),
-        contentDescription = "Project Info Screen Image",
+        contentDescription = "Info Screen Image",
         modifier =
             Modifier
                 .padding(all = 14.dp)
@@ -367,7 +367,7 @@ private fun ProjectInfoScreenImage() {
 }
 
 @Composable
-private fun ProjectInfoScreenContentText() {
+private fun InfoScreenContentText() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text =
@@ -495,7 +495,7 @@ private fun InfoScreenNoteContent(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun ProjectInfoScreenShareTitle() {
+private fun InfoScreenShareTitle() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "Share this project",
@@ -508,9 +508,8 @@ private fun ProjectInfoScreenShareTitle() {
 }
 
 @Composable
-private fun ProjectInfoScreenShareContent() {
+private fun InfoScreenShareContent() {
     Row(
-        // modifier = Modifier.padding(all = 14.dp),
         horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
         Image(
@@ -552,7 +551,7 @@ private fun ProjectInfoScreenShareContent() {
 }
 
 @Composable
-private fun ProjectInfoScreenPostersTitle() {
+private fun InfoScreenPostersTitle() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "Posters",
@@ -565,7 +564,7 @@ private fun ProjectInfoScreenPostersTitle() {
 }
 
 @Composable
-private fun ProjectInfoScreenPostersContent() {
+private fun InfoScreenPostersContent() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text =
@@ -623,7 +622,7 @@ private fun ProjectInfoScreenPostersContent() {
 }
 
 @Composable
-private fun ProjectInfoScreenIndexPosterTitle() {
+private fun InfoScreenIndexPosterTitle() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "Index Poster",
@@ -636,7 +635,7 @@ private fun ProjectInfoScreenIndexPosterTitle() {
 }
 
 @Composable
-private fun ProjectInfoScreenIndexPosterImage() {
+private fun InfoScreenIndexPosterImage() {
     Image(
         painter = painterResource(id = R.drawable.index_poster_image),
         contentDescription = "Cards Screen Image",
@@ -649,7 +648,7 @@ private fun ProjectInfoScreenIndexPosterImage() {
 }
 
 @Composable
-private fun ProjectInfoScreenIndexPosterCaption() {
+private fun InfoScreenIndexPosterCaption() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "A museum-quality poster made on thick and durable matte paper.",
@@ -661,7 +660,7 @@ private fun ProjectInfoScreenIndexPosterCaption() {
 }
 
 @Composable
-private fun ProjectInfoScreenIndexPosterButton(navigateToPosterShop: () -> Unit) {
+private fun InfoScreenIndexPosterButton(navigateToPosterShop: () -> Unit) {
     Button(
         modifier =
             Modifier
@@ -681,7 +680,7 @@ private fun ProjectInfoScreenIndexPosterButton(navigateToPosterShop: () -> Unit)
 }
 
 @Composable
-private fun ProjectInfoScreenInfoTitle() {
+private fun InfoScreenInfoTitle() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "More about this project",
@@ -694,7 +693,7 @@ private fun ProjectInfoScreenInfoTitle() {
 }
 
 @Composable
-private fun ProjectInfoScreenColophonTitle() {
+private fun InfoScreenColophonTitle() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "Colophon",
@@ -707,7 +706,7 @@ private fun ProjectInfoScreenColophonTitle() {
 }
 
 @Composable
-private fun ProjectInfoScreenColophonContent() {
+private fun InfoScreenColophonContent() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text =
@@ -800,7 +799,7 @@ private fun ProjectInfoScreenColophonContent() {
 }
 
 @Composable
-private fun ProjectInfoScreenDivider() {
+private fun InfoScreenDivider() {
     HorizontalDivider(
         modifier = Modifier.padding(all = 14.dp),
         thickness = 3.dp,
@@ -809,7 +808,7 @@ private fun ProjectInfoScreenDivider() {
 }
 
 @Composable
-private fun ProjectInfoScreenContactTitle() {
+private fun InfoScreenContactTitle() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "Contact",
@@ -822,7 +821,7 @@ private fun ProjectInfoScreenContactTitle() {
 }
 
 @Composable
-private fun ProjectInfoScreenContactCaption() {
+private fun InfoScreenContactCaption() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "Feel free to reach out with feedback, questions or just to say hello.",
@@ -834,7 +833,7 @@ private fun ProjectInfoScreenContactCaption() {
 }
 
 @Composable
-private fun ProjectInfoScreenContactBoxTitle(title: String) {
+private fun InfoScreenContactBoxTitle(title: String) {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = title,
@@ -847,7 +846,7 @@ private fun ProjectInfoScreenContactBoxTitle(title: String) {
 }
 
 @Composable
-private fun ProjectInfoScreenContactBox(
+private fun InfoScreenContactBox(
     value: String,
     onValueChange: (String) -> Unit,
     keyboardOptions: KeyboardOptions,
@@ -880,7 +879,7 @@ private fun ProjectInfoScreenContactBox(
 }
 
 @Composable
-private fun ProjectInfoScreenContactButton() {
+private fun InfoScreenContactButton() {
     Button(
         modifier =
             Modifier

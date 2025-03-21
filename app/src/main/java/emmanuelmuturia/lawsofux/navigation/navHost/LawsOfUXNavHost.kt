@@ -23,9 +23,9 @@ import emmanuelmuturia.lawsofux.home.ui.navigation.HomeScreen
 import emmanuelmuturia.lawsofux.home.ui.navigation.homeDetailsScreen
 import emmanuelmuturia.lawsofux.home.ui.navigation.homeScreen
 import emmanuelmuturia.lawsofux.home.ui.viewmodel.HomeScreenViewModel
-import emmanuelmuturia.lawsofux.info.ui.navigation.ProjectInfoScreen
-import emmanuelmuturia.lawsofux.info.ui.navigation.projectInfoScreen
-import emmanuelmuturia.lawsofux.info.ui.viewmodel.ProjectInfoScreenViewModel
+import emmanuelmuturia.lawsofux.info.ui.navigation.InfoScreen
+import emmanuelmuturia.lawsofux.info.ui.navigation.infoScreen
+import emmanuelmuturia.lawsofux.info.ui.viewmodel.InfoScreenViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -38,7 +38,7 @@ fun LawsOfUXNavHost() {
 
     val cardsScreenViewModel: CardsScreenViewModel = koinViewModel()
 
-    val projectInfoScreenViewModel: ProjectInfoScreenViewModel = koinViewModel()
+    val infoScreenViewModel: InfoScreenViewModel = koinViewModel()
 
     val bookScreenViewModel: BookScreenViewModel = koinViewModel()
 
@@ -69,7 +69,7 @@ fun LawsOfUXNavHost() {
                         navController.navigate(route = BookScreen)
                     },
                     navigateToInfoScreen = {
-                        navController.navigate(route = ProjectInfoScreen)
+                        navController.navigate(route = InfoScreen)
                     },
                 )
 
@@ -96,7 +96,7 @@ fun LawsOfUXNavHost() {
                         navController.navigate(route = BookScreen)
                     },
                     navigateToInfoScreen = {
-                        navController.navigate(route = ProjectInfoScreen)
+                        navController.navigate(route = InfoScreen)
                     },
                 )
 
@@ -115,11 +115,11 @@ fun LawsOfUXNavHost() {
                         navController.navigate(route = BookScreen)
                     },
                     navigateToInfoScreen = {
-                        navController.navigate(route = ProjectInfoScreen)
+                        navController.navigate(route = InfoScreen)
                     },
                 )
 
-                projectInfoScreen(
+                infoScreen(
                     navigateToArticlesScreen = {
                         navController.navigate(route = ArticlesScreen)
                     },
@@ -129,12 +129,12 @@ fun LawsOfUXNavHost() {
                     navigateToPosterShop = {
                         // Navigate to the Poster Shop...
                     },
-                    projectInfoScreenViewModel = projectInfoScreenViewModel,
+                    infoScreenViewModel = infoScreenViewModel,
                     navigateToBookScreen = {
                         navController.navigate(route = BookScreen)
                     },
                     navigateToInfoScreen = {
-                        navController.navigate(route = ProjectInfoScreen)
+                        navController.navigate(route = InfoScreen)
                     },
                 )
 
@@ -159,7 +159,7 @@ fun LawsOfUXNavHost() {
                         navController.navigate(route = BookScreen)
                     },
                     navigateToInfoScreen = {
-                        navController.navigate(route = ProjectInfoScreen)
+                        navController.navigate(route = InfoScreen)
                     },
                 )
             }

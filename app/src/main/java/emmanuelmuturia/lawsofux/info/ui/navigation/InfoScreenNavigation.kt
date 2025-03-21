@@ -2,27 +2,27 @@ package emmanuelmuturia.lawsofux.info.ui.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import emmanuelmuturia.lawsofux.info.ui.screen.ProjectInfoScreen
-import emmanuelmuturia.lawsofux.info.ui.viewmodel.ProjectInfoScreenViewModel
+import emmanuelmuturia.lawsofux.info.ui.screen.InfoScreen
+import emmanuelmuturia.lawsofux.info.ui.viewmodel.InfoScreenViewModel
 import kotlinx.serialization.Serializable
 
 @Serializable
-object ProjectInfoScreen
+object InfoScreen
 
-fun NavGraphBuilder.projectInfoScreen(
+fun NavGraphBuilder.infoScreen(
     navigateToArticlesScreen: () -> Unit,
     navigateToCardsScreen: () -> Unit,
     navigateToPosterShop: () -> Unit,
-    projectInfoScreenViewModel: ProjectInfoScreenViewModel,
+    infoScreenViewModel: InfoScreenViewModel,
     navigateToBookScreen: () -> Unit,
     navigateToInfoScreen: () -> Unit,
 ) {
-    composable<ProjectInfoScreen> {
-        ProjectInfoScreen(
+    composable<InfoScreen> {
+        InfoScreen(
             navigateToCardsScreen = navigateToCardsScreen,
             navigateToArticlesScreen = navigateToArticlesScreen,
             navigateToPosterShop = navigateToPosterShop,
-            projectInfoScreenViewModel = projectInfoScreenViewModel,
+            infoScreenViewModel = infoScreenViewModel,
             navigateToBookScreen = navigateToBookScreen,
             navigateToInfoScreen = navigateToInfoScreen,
         )
