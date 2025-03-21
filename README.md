@@ -95,8 +95,8 @@
 
 - [Timber](https://github.com/JakeWharton/timber) has been used for logging...
 
-### Trivia
+## Trivia
 
 
-### Future
+## Future
 
