@@ -74,13 +74,15 @@ fun LawsOfUXTopAppBar(
 
         // Center section: Menu Icon and Text with its Dropdown Menu...
         Box(
-            modifier = Modifier.clip(
-                shape = RoundedCornerShape(
-                    size = 21.dp
-                )
-            ).background(
-                color = MaterialTheme.colorScheme.surface
-            )
+            modifier =
+                Modifier.clip(
+                    shape =
+                        RoundedCornerShape(
+                            size = 21.dp,
+                        ),
+                ).background(
+                    color = MaterialTheme.colorScheme.surface,
+                ),
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -120,12 +122,14 @@ fun LawsOfUXTopAppBar(
             DropdownMenu(
                 expanded = screensMenuExpanded,
                 onDismissRequest = { screensMenuExpanded = false },
-                modifier = Modifier.background(color = MaterialTheme.colorScheme.primary)
-                    .padding(all = 14.dp).clip(
-                        shape = RoundedCornerShape(
-                            size = 21.dp
-                        )
-                    ),
+                modifier =
+                    Modifier.background(color = MaterialTheme.colorScheme.primary)
+                        .padding(all = 14.dp).clip(
+                            shape =
+                                RoundedCornerShape(
+                                    size = 21.dp,
+                                ),
+                        ),
             ) {
                 DropdownMenuItem(
                     text = {
@@ -221,9 +225,10 @@ fun LawsOfUXTopAppBar(
                     },
                     trailingIcon = {
                         Icon(
-                            imageVector = ImageVector.vectorResource(
-                                id = R.drawable.diagonal_arrow
-                            ),
+                            imageVector =
+                                ImageVector.vectorResource(
+                                    id = R.drawable.diagonal_arrow,
+                                ),
                             contentDescription = "Store Icon",
                             tint = MaterialTheme.colorScheme.onPrimary,
                         )

@@ -26,9 +26,7 @@ import emmanuelmuturia.lawsofux.R
 import java.util.Calendar
 
 @Composable
-fun LawsOfUXFooter(
-    navigateToInfoScreen: () -> Unit,
-) {
+fun LawsOfUXFooter(navigateToInfoScreen: () -> Unit) {
     Column(
         modifier = Modifier.fillMaxSize().padding(all = 21.dp),
         horizontalAlignment = Alignment.Start,
@@ -44,19 +42,21 @@ fun LawsOfUXFooter(
 
         Row {
             Text(
-                modifier = Modifier.clickable {
-                    navigateToInfoScreen()
-                },
-                text = buildAnnotatedString {
-                    withStyle(
-                        style =
-                        SpanStyle(
-                            textDecoration = TextDecoration.Underline,
-                        ),
-                    ) {
-                        append(text = "Contact")
-                    }
-                },
+                modifier =
+                    Modifier.clickable {
+                        navigateToInfoScreen()
+                    },
+                text =
+                    buildAnnotatedString {
+                        withStyle(
+                            style =
+                                SpanStyle(
+                                    textDecoration = TextDecoration.Underline,
+                                ),
+                        ) {
+                            append(text = "Contact")
+                        }
+                    },
                 color = MaterialTheme.colorScheme.onPrimary,
                 fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
                 fontWeight = FontWeight.Bold,
@@ -72,24 +72,25 @@ fun LawsOfUXFooter(
             )
 
             Text(
-                text = buildAnnotatedString {
-                    withLink(
-                        link =
-                        LinkAnnotation.Url(
-                            url = "https://creativecommons.org/licenses/by-nc-nd/4.0/",
-                        ),
-                    ) {
-                        withStyle(
-                            style =
-                            SpanStyle(
-                                textDecoration = TextDecoration.Underline,
-                            ),
+                text =
+                    buildAnnotatedString {
+                        withLink(
+                            link =
+                                LinkAnnotation.Url(
+                                    url = "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+                                ),
                         ) {
-                            append("Licence")
-                            // I need to figure out how to append the Click icon...
+                            withStyle(
+                                style =
+                                    SpanStyle(
+                                        textDecoration = TextDecoration.Underline,
+                                    ),
+                            ) {
+                                append("Licence")
+                                // I need to figure out how to append the Click icon...
+                            }
                         }
-                    }
-                },
+                    },
                 color = MaterialTheme.colorScheme.onPrimary,
                 fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
                 fontWeight = FontWeight.Bold,

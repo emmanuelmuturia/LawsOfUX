@@ -410,7 +410,7 @@ fun BookScreenText() {
         overflow = TextOverflow.Clip,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
         fontWeight = FontWeight.Bold,
-        lineHeight = 37.sp
+        lineHeight = 37.sp,
     )
 }
 

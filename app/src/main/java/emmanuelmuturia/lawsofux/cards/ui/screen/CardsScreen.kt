@@ -190,7 +190,7 @@ private fun CardsScreenText() {
         overflow = TextOverflow.Clip,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
         fontWeight = FontWeight.Bold,
-        lineHeight = 37.sp
+        lineHeight = 37.sp,
     )
 }
 
@@ -270,9 +270,13 @@ private fun CardsScreenImage() {
     Image(
         painter = painterResource(id = R.drawable.card_screen_image),
         contentDescription = "Cards Screen Image",
-        modifier = Modifier.padding(all = 14.dp).fillMaxSize().clip(shape = RoundedCornerShape(
-            size = 21.dp
-        )),
+        modifier =
+            Modifier.padding(all = 14.dp).fillMaxSize().clip(
+                shape =
+                    RoundedCornerShape(
+                        size = 21.dp,
+                    ),
+            ),
         contentScale = ContentScale.Crop,
     )
 }

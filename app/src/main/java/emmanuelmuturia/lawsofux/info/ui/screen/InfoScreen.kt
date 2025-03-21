@@ -167,7 +167,7 @@ private fun InfoScreenContent(
 
         item {
             Spacer(
-                modifier = Modifier.height(height = 56.dp)
+                modifier = Modifier.height(height = 56.dp),
             )
         }
 
@@ -181,7 +181,7 @@ private fun InfoScreenContent(
 
         item {
             Spacer(
-                modifier = Modifier.height(height = 56.dp)
+                modifier = Modifier.height(height = 56.dp),
             )
         }
 
@@ -195,7 +195,7 @@ private fun InfoScreenContent(
 
         item {
             Spacer(
-                modifier = Modifier.height(height = 42.dp)
+                modifier = Modifier.height(height = 42.dp),
             )
         }
 
@@ -219,7 +219,7 @@ private fun InfoScreenContent(
 
         item {
             Spacer(
-                modifier = Modifier.height(height = 56.dp)
+                modifier = Modifier.height(height = 56.dp),
             )
         }
 
@@ -236,7 +236,7 @@ private fun InfoScreenContent(
 
         item {
             Spacer(
-                modifier = Modifier.height(height = 56.dp)
+                modifier = Modifier.height(height = 56.dp),
             )
         }
 
@@ -250,7 +250,7 @@ private fun InfoScreenContent(
 
         item {
             Spacer(
-                modifier = Modifier.height(height = 36.dp)
+                modifier = Modifier.height(height = 36.dp),
             )
         }
 
@@ -348,7 +348,7 @@ private fun InfoScreenText() {
         overflow = TextOverflow.Clip,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
         fontWeight = FontWeight.Bold,
-        lineHeight = 37.sp
+        lineHeight = 37.sp,
     )
 }
 
@@ -362,9 +362,10 @@ private fun InfoScreenImage() {
                 .padding(all = 14.dp)
                 .fillMaxSize()
                 .clip(
-                    shape = RoundedCornerShape(
-                        size = 21.dp
-                    )
+                    shape =
+                        RoundedCornerShape(
+                            size = 21.dp,
+                        ),
                 ),
         contentScale = ContentScale.Crop,
     )
@@ -467,30 +468,31 @@ private fun InfoScreenNoteDivider(modifier: Modifier = Modifier) {
 private fun InfoScreenNoteContent(modifier: Modifier = Modifier) {
     Text(
         modifier = modifier.padding(all = 14.dp),
-        text = buildAnnotatedString {
-            append(
-                text =
-                "All content on this website is licensed under the Creative Commons " +
-                    "Attribution-NonCommercial-NoDerivatives 4.0 International License. To view a " +
-                    "copy of this license, visit ",
-            )
-            withLink(
-                link =
-                LinkAnnotation.Url(
-                    url = "https://creativecommons.org/licenses/by-nc-nd/4.0/",
-                ),
-            ) {
-                withStyle(
-                    style =
-                    SpanStyle(
-                        textDecoration = TextDecoration.Underline,
-                    ),
+        text =
+            buildAnnotatedString {
+                append(
+                    text =
+                        "All content on this website is licensed under the Creative Commons " +
+                            "Attribution-NonCommercial-NoDerivatives 4.0 International License. To view a " +
+                            "copy of this license, visit ",
+                )
+                withLink(
+                    link =
+                        LinkAnnotation.Url(
+                            url = "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+                        ),
                 ) {
-                    append(text = "https://creativecommons.org/licenses/by-nc-nd/4.0/")
+                    withStyle(
+                        style =
+                            SpanStyle(
+                                textDecoration = TextDecoration.Underline,
+                            ),
+                    ) {
+                        append(text = "https://creativecommons.org/licenses/by-nc-nd/4.0/")
+                    }
                 }
-            }
-            append(text = ".")
-        },
+                append(text = ".")
+            },
         fontSize = 18.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
@@ -859,10 +861,11 @@ private fun InfoScreenContactBox(
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
-        modifier = Modifier
-            .padding(all = 14.dp)
-            .height(height = height)
-            .fillMaxWidth(),
+        modifier =
+            Modifier
+                .padding(all = 14.dp)
+                .height(height = height)
+                .fillMaxWidth(),
         colors =
             TextFieldDefaults.colors(
                 cursorColor = MaterialTheme.colorScheme.onBackground,

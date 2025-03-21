@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -34,7 +33,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.LinkAnnotation
@@ -150,9 +148,11 @@ private fun HomeScreenContent(
             )
         }
         item { Spacer(modifier = Modifier.height(height = 21.dp)) }
-        item { LawsOfUXFooter(
-            navigateToInfoScreen = navigateToInfoScreen
-        ) }
+        item {
+            LawsOfUXFooter(
+                navigateToInfoScreen = navigateToInfoScreen,
+            )
+        }
     }
 }
 
@@ -180,7 +180,7 @@ private fun HomeScreenNotification() {
         Row(
             modifier = Modifier.fillMaxWidth().height(intrinsicSize = IntrinsicSize.Min),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceEvenly
+            horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
             Icon(
                 modifier = Modifier.padding(all = 21.dp),
