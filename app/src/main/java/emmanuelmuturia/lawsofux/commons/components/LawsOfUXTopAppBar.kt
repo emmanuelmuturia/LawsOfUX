@@ -13,12 +13,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowDropDown
 import androidx.compose.material.icons.rounded.Clear
 import androidx.compose.material.icons.rounded.KeyboardArrowUp
 import androidx.compose.material.icons.rounded.Menu
-import androidx.compose.material.icons.rounded.ShoppingCart
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -32,6 +32,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -72,10 +73,18 @@ fun LawsOfUXTopAppBar(
         )
 
         // Center section: Menu Icon and Text with its Dropdown Menu...
-        Box {
+        Box(
+            modifier = Modifier.clip(
+                shape = RoundedCornerShape(
+                    size = 21.dp
+                )
+            ).background(
+                color = MaterialTheme.colorScheme.surface
+            )
+        ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(start = 14.dp),
+                modifier = Modifier.padding(all = 14.dp),
             ) {
                 // Menu icon that toggles the Dropdown...
                 Icon(
@@ -103,7 +112,7 @@ fun LawsOfUXTopAppBar(
                     color = MaterialTheme.colorScheme.onPrimary,
                     fontFamily = FontFamily(Font(resId = R.font.ibm_plex_mono_regular)),
                     fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp,
+                    fontSize = 14.sp,
                     modifier = Modifier.clickable { screensMenuExpanded = !screensMenuExpanded },
                 )
             }
@@ -111,7 +120,12 @@ fun LawsOfUXTopAppBar(
             DropdownMenu(
                 expanded = screensMenuExpanded,
                 onDismissRequest = { screensMenuExpanded = false },
-                modifier = Modifier.background(color = MaterialTheme.colorScheme.primary),
+                modifier = Modifier.background(color = MaterialTheme.colorScheme.primary)
+                    .padding(all = 14.dp).clip(
+                        shape = RoundedCornerShape(
+                            size = 21.dp
+                        )
+                    ),
             ) {
                 DropdownMenuItem(
                     text = {
@@ -207,7 +221,9 @@ fun LawsOfUXTopAppBar(
                     },
                     trailingIcon = {
                         Icon(
-                            imageVector = Icons.Rounded.ShoppingCart,
+                            imageVector = ImageVector.vectorResource(
+                                id = R.drawable.diagonal_arrow
+                            ),
                             contentDescription = "Store Icon",
                             tint = MaterialTheme.colorScheme.onPrimary,
                         )
@@ -259,7 +275,7 @@ fun LawsOfUXTopAppBar(
                                     ),
                             ),
                         fontWeight = FontWeight.Bold,
-                        fontSize = 16.sp,
+                        fontSize = 14.sp,
                     )
                     Icon(
                         imageVector =

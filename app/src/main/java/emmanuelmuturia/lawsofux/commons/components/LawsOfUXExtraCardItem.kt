@@ -65,7 +65,7 @@ fun LawsOfUXExtraCardItem(
                 horizontalArrangement = Arrangement.End,
             ) {
                 Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.further_reading),
+                    imageVector = ImageVector.vectorResource(id = R.drawable.diagonal_arrow),
                     contentDescription = "Further Reading Icon",
                     modifier = Modifier.padding(all = 14.dp),
                     tint = MaterialTheme.colorScheme.onBackground,

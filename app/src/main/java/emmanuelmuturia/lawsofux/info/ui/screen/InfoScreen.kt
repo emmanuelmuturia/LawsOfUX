@@ -127,6 +127,7 @@ fun InfoScreen(
             navigateToPosterShop = navigateToPosterShop,
             infoScreenUIState = infoScreenUIState,
             infoScreenListState = infoScreenListState,
+            navigateToInfoScreen = navigateToInfoScreen,
         )
     }
 }
@@ -137,6 +138,7 @@ private fun InfoScreenContent(
     navigateToPosterShop: () -> Unit,
     infoScreenUIState: InfoScreenUIState,
     infoScreenListState: LazyListState,
+    navigateToInfoScreen: () -> Unit,
 ) {
     var userName by remember { mutableStateOf(value = "") }
     var userEmail by remember { mutableStateOf(value = "") }
@@ -326,7 +328,9 @@ private fun InfoScreenContent(
         }
 
         item {
-            LawsOfUXFooter()
+            LawsOfUXFooter(
+                navigateToInfoScreen = navigateToInfoScreen,
+            )
         }
     }
 }

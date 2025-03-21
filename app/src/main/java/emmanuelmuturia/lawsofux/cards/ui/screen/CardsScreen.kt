@@ -110,6 +110,7 @@ fun CardsScreen(
             cardsScreenListState = cardsScreenListState,
             navigateToDeckShop = navigateToDeckShop,
             cardsScreenUIState = cardsScreenUIState,
+            navigateToInfoScreen = navigateToInfoScreen,
         )
     }
 }
@@ -120,6 +121,7 @@ private fun CardsScreenContent(
     cardsScreenListState: LazyListState,
     cardsScreenUIState: CardsScreenUIState,
     navigateToDeckShop: () -> Unit,
+    navigateToInfoScreen: () -> Unit,
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
@@ -169,7 +171,9 @@ private fun CardsScreenContent(
         }
 
         item {
-            LawsOfUXFooter()
+            LawsOfUXFooter(
+                navigateToInfoScreen = navigateToInfoScreen,
+            )
         }
     }
 }

@@ -122,6 +122,7 @@ fun HomeScreen(
             homeScreenUIState = homeScreenUIState,
             homeScreenListState = homeScreenListState,
             navigateToHomeDetailsScreen = navigateToHomeDetailsScreen,
+            navigateToInfoScreen = navigateToInfoScreen,
         )
     }
 }
@@ -132,6 +133,7 @@ private fun HomeScreenContent(
     homeScreenUIState: HomeScreenUIState,
     homeScreenListState: LazyListState,
     navigateToHomeDetailsScreen: (UXLaw) -> Unit,
+    navigateToInfoScreen: () -> Unit,
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
@@ -148,7 +150,9 @@ private fun HomeScreenContent(
             )
         }
         item { Spacer(modifier = Modifier.height(height = 21.dp)) }
-        item { LawsOfUXFooter() }
+        item { LawsOfUXFooter(
+            navigateToInfoScreen = navigateToInfoScreen
+        ) }
     }
 }
 

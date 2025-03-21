@@ -1,7 +1,9 @@
 package emmanuelmuturia.lawsofux.commons.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -24,7 +26,9 @@ import emmanuelmuturia.lawsofux.R
 import java.util.Calendar
 
 @Composable
-fun LawsOfUXFooter() {
+fun LawsOfUXFooter(
+    navigateToInfoScreen: () -> Unit,
+) {
     Column(
         modifier = Modifier.fillMaxSize().padding(all = 21.dp),
         horizontalAlignment = Alignment.Start,
@@ -38,41 +42,60 @@ fun LawsOfUXFooter() {
             fontSize = 14.sp,
         )
 
-        Text(
-            text =
-                buildAnnotatedString {
+        Row {
+            Text(
+                modifier = Modifier.clickable {
+                    navigateToInfoScreen()
+                },
+                text = buildAnnotatedString {
                     withStyle(
                         style =
-                            SpanStyle(
-                                textDecoration = TextDecoration.Underline,
-                            ),
+                        SpanStyle(
+                            textDecoration = TextDecoration.Underline,
+                        ),
                     ) {
                         append(text = "Contact")
-                        // I need to figure out how to make this clickable and navigate to the Contact screen...
                     }
-                    append(text = " | ")
+                },
+                color = MaterialTheme.colorScheme.onPrimary,
+                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+                fontWeight = FontWeight.Bold,
+                fontSize = 14.sp,
+            )
+
+            Text(
+                text = " | ",
+                color = MaterialTheme.colorScheme.onPrimary,
+                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+                fontWeight = FontWeight.Bold,
+                fontSize = 14.sp,
+            )
+
+            Text(
+                text = buildAnnotatedString {
                     withLink(
                         link =
-                            LinkAnnotation.Url(
-                                url = "https://creativecommons.org/licenses/by-nc-nd/4.0/",
-                            ),
+                        LinkAnnotation.Url(
+                            url = "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+                        ),
                     ) {
                         withStyle(
                             style =
-                                SpanStyle(
-                                    textDecoration = TextDecoration.Underline,
-                                ),
+                            SpanStyle(
+                                textDecoration = TextDecoration.Underline,
+                            ),
                         ) {
                             append("Licence")
                             // I need to figure out how to append the Click icon...
                         }
                     }
                 },
-            color = MaterialTheme.colorScheme.onPrimary,
-            fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
-            fontWeight = FontWeight.Bold,
-            fontSize = 14.sp,
-        )
+                color = MaterialTheme.colorScheme.onPrimary,
+                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+                fontWeight = FontWeight.Bold,
+                fontSize = 14.sp,
+            )
+        }
     }
 }
 

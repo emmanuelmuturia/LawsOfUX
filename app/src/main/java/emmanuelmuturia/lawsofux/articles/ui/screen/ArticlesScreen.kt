@@ -107,6 +107,7 @@ fun ArticlesScreen(
             articlesScreenUIState = articlesScreenUIState,
             articlesScreenListState = articlesScreenListState,
             navigateToArticlesDetailsPage = navigateToArticlesDetailsPage,
+            navigateToInfoScreen = navigateToInfoScreen,
         )
     }
 }
@@ -117,6 +118,7 @@ private fun ArticlesScreenContent(
     articlesScreenListState: LazyListState,
     articlesScreenUIState: ArticlesScreenUIState,
     navigateToArticlesDetailsPage: () -> Unit,
+    navigateToInfoScreen: () -> Unit,
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
@@ -134,7 +136,9 @@ private fun ArticlesScreenContent(
         }
 
         item {
-            LawsOfUXFooter()
+            LawsOfUXFooter(
+                navigateToInfoScreen = navigateToInfoScreen,
+            )
         }
     }
 }

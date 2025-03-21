@@ -116,6 +116,7 @@ fun BookScreen(
             navigateToOreilly = navigateToOreilly,
             navigateToBootcamp = navigateToBootcamp,
             bookScreenUIState = bookScreenUIState,
+            navigateToInfoScreen = navigateToInfoScreen,
         )
     }
 }
@@ -128,6 +129,7 @@ fun BookScreenContent(
     navigateToOreilly: () -> Unit,
     navigateToBootcamp: () -> Unit,
     bookScreenUIState: BookScreenUIState,
+    navigateToInfoScreen: () -> Unit,
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
@@ -389,7 +391,9 @@ fun BookScreenContent(
         }
 
         item {
-            LawsOfUXFooter()
+            LawsOfUXFooter(
+                navigateToInfoScreen = navigateToInfoScreen,
+            )
         }
     }
 }
