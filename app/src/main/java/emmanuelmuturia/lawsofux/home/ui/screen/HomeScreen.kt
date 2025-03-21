@@ -2,6 +2,8 @@ package emmanuelmuturia.lawsofux.home.ui.screen
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -172,8 +174,9 @@ private fun HomeScreenNotification() {
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().height(intrinsicSize = IntrinsicSize.Min),
             verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             Icon(
                 modifier = Modifier.padding(all = 21.dp),
@@ -183,14 +186,12 @@ private fun HomeScreenNotification() {
             )
 
             VerticalDivider(
-                modifier = Modifier.fillMaxHeight(),
-                // I need to display it...
                 thickness = 3.dp,
-                color = Color.Black,
+                color = MaterialTheme.colorScheme.background,
             )
 
             Text(
-                modifier = Modifier.padding(all = 14.dp),
+                modifier = Modifier.padding(all = 10.dp),
                 text =
                     buildAnnotatedString {
                         append(
@@ -219,7 +220,7 @@ private fun HomeScreenNotification() {
                         }
                     },
                 color = MaterialTheme.colorScheme.onSurface,
-                fontSize = 18.sp,
+                fontSize = 14.sp,
                 overflow = TextOverflow.Clip,
                 fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
             )
