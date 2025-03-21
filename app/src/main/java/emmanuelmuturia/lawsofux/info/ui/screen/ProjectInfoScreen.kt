@@ -6,7 +6,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -158,7 +160,13 @@ private fun ProjectInfoScreenContent(
         }
 
         item {
-            ProjectInfoScreenContentTextNote()
+            InfoScreenNoteBox()
+        }
+
+        item {
+            Spacer(
+                modifier = Modifier.height(height = 56.dp)
+            )
         }
 
         item {
@@ -170,11 +178,23 @@ private fun ProjectInfoScreenContent(
         }
 
         item {
+            Spacer(
+                modifier = Modifier.height(height = 56.dp)
+            )
+        }
+
+        item {
             ProjectInfoScreenPostersTitle()
         }
 
         item {
             ProjectInfoScreenPostersContent()
+        }
+
+        item {
+            Spacer(
+                modifier = Modifier.height(height = 42.dp)
+            )
         }
 
         item {
@@ -196,6 +216,12 @@ private fun ProjectInfoScreenContent(
         }
 
         item {
+            Spacer(
+                modifier = Modifier.height(height = 56.dp)
+            )
+        }
+
+        item {
             ProjectInfoScreenInfoTitle()
         }
 
@@ -207,11 +233,23 @@ private fun ProjectInfoScreenContent(
         }
 
         item {
+            Spacer(
+                modifier = Modifier.height(height = 56.dp)
+            )
+        }
+
+        item {
             ProjectInfoScreenColophonTitle()
         }
 
         item {
             ProjectInfoScreenColophonContent()
+        }
+
+        item {
+            Spacer(
+                modifier = Modifier.height(height = 36.dp)
+            )
         }
 
         item {
@@ -306,6 +344,7 @@ private fun ProjectInfoScreenText() {
         overflow = TextOverflow.Clip,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
         fontWeight = FontWeight.Bold,
+        lineHeight = 37.sp
     )
 }
 
@@ -317,7 +356,12 @@ private fun ProjectInfoScreenImage() {
         modifier =
             Modifier
                 .padding(all = 14.dp)
-                .fillMaxSize(),
+                .fillMaxSize()
+                .clip(
+                    shape = RoundedCornerShape(
+                        size = 21.dp
+                    )
+                ),
         contentScale = ContentScale.Crop,
     )
 }
@@ -356,13 +400,13 @@ private fun ProjectInfoScreenContentText() {
                                 textDecoration = TextDecoration.Underline,
                             ),
                     ) {
-                        append(text = "Jon Yablonski")
+                        append(text = "Jon Yablonski\n")
                     }
                 }
 
                 append(
                     text =
-                        "Have some feedback you’d like to share? I’m always open to suggestions " +
+                        "\nHave some feedback you’d like to share? I’m always open to suggestions " +
                             "and ideas. Feel free to reach out via the contact form below.",
                 )
             },
@@ -374,58 +418,80 @@ private fun ProjectInfoScreenContentText() {
 }
 
 @Composable
-private fun ProjectInfoScreenContentTextNote() {
+private fun InfoScreenNoteBox() {
     Box(
         modifier =
-            Modifier.fillMaxSize().padding(all = 7.dp).border(
-                width = 1.dp,
-                color = MaterialTheme.colorScheme.onBackground,
-                shape = RoundedCornerShape(size = 7.dp),
-            ),
+            Modifier
+                .fillMaxSize()
+                .padding(all = 7.dp)
+                .border(
+                    width = 1.dp,
+                    color = MaterialTheme.colorScheme.onBackground,
+                    shape = RoundedCornerShape(size = 21.dp),
+                ),
     ) {
-        Text(
-            modifier = Modifier.padding(all = 14.dp),
-            text =
-                buildAnnotatedString {
-                    withStyle(
-                        style =
-                            SpanStyle(
-                                fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
-                            ),
-                    ) {
-                        append(text = "----------------------------------------")
-                        append(text = "NOTE\n")
-                    }
-                    append(text = "----------------------------------------")
-                    append(
-                        text =
-                            "All content on this website is licensed under the Creative Commons " +
-                                "Attribution-NonCommercial-NoDerivatives 4.0 International License. To view a " +
-                                "copy of this license, visit ",
-                    )
-                    withLink(
-                        link =
-                            LinkAnnotation.Url(
-                                url = "https://creativecommons.org/licenses/by-nc-nd/4.0/",
-                            ),
-                    ) {
-                        withStyle(
-                            style =
-                                SpanStyle(
-                                    textDecoration = TextDecoration.Underline,
-                                ),
-                        ) {
-                            append(text = "https://creativecommons.org/licenses/by-nc-nd/4.0/")
-                        }
-                    }
-                    append(text = ".")
-                },
-            fontSize = 18.sp,
-            color = MaterialTheme.colorScheme.onBackground,
-            overflow = TextOverflow.Clip,
-            fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
-        )
+        Column {
+            InfoScreenNoteTitle()
+            InfoScreenNoteDivider()
+            InfoScreenNoteContent()
+        }
     }
+}
+
+@Composable
+private fun InfoScreenNoteTitle(modifier: Modifier = Modifier) {
+    Text(
+        modifier = modifier.padding(all = 14.dp),
+        text = "NOTE",
+        fontSize = 18.sp,
+        color = MaterialTheme.colorScheme.onBackground,
+        overflow = TextOverflow.Clip,
+        fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
+    )
+}
+
+@Composable
+private fun InfoScreenNoteDivider(modifier: Modifier = Modifier) {
+    HorizontalDivider(
+        modifier = modifier.fillMaxWidth(),
+        color = MaterialTheme.colorScheme.onBackground,
+        thickness = 1.dp,
+    )
+}
+
+@Composable
+private fun InfoScreenNoteContent(modifier: Modifier = Modifier) {
+    Text(
+        modifier = modifier.padding(all = 14.dp),
+        text = buildAnnotatedString {
+            append(
+                text =
+                "All content on this website is licensed under the Creative Commons " +
+                    "Attribution-NonCommercial-NoDerivatives 4.0 International License. To view a " +
+                    "copy of this license, visit ",
+            )
+            withLink(
+                link =
+                LinkAnnotation.Url(
+                    url = "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+                ),
+            ) {
+                withStyle(
+                    style =
+                    SpanStyle(
+                        textDecoration = TextDecoration.Underline,
+                    ),
+                ) {
+                    append(text = "https://creativecommons.org/licenses/by-nc-nd/4.0/")
+                }
+            }
+            append(text = ".")
+        },
+        fontSize = 18.sp,
+        color = MaterialTheme.colorScheme.onBackground,
+        overflow = TextOverflow.Clip,
+        fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+    )
 }
 
 @Composable
@@ -790,7 +856,10 @@ private fun ProjectInfoScreenContactBox(
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
-        modifier = Modifier.padding(all = 14.dp).height(height = height).fillMaxWidth(),
+        modifier = Modifier
+            .padding(all = 14.dp)
+            .height(height = height)
+            .fillMaxWidth(),
         colors =
             TextFieldDefaults.colors(
                 cursorColor = MaterialTheme.colorScheme.onBackground,
