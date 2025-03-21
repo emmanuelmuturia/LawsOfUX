@@ -4,7 +4,7 @@
 
 ## Overview
 
-
+- This project is a mock Android app that was inspired by the [Laws of UX](https://lawsofux.com/) website...
 
 ## Table of Contents
 
@@ -18,42 +18,52 @@
 
 ## Background
 
-
+- Owing to the value provided by the [Laws of UX](https://lawsofux.com/) website, this project was built as a Proof of Concept for a Mobile App that would accompany it...
 
 ## Architecture
 
-- The app uses a Multi-Module Architecture based on the Model-View-ViewModel (MVVM) Architectural Pattern...
-- The product is divided into the following modules:
+- The app uses the Model-View-ViewModel (MVVM) Architectural Pattern...
+- The product is divided into the following packages that represent Feature Modules:
 
 ### 1. :app
 
-- This module contains the MainActivity, Manifest, and the Application class...
+- This module contains the MainActivity and the Application class...
 
 ### 2. :commons
 
-- This module has the Shared Components (UI) that are used by the other modules in the app...
+- This package contains the Shared Components (UI) that are used within the app...
 
 ### 3. :home
 
-- This module represents the Home feature...
+- This package represents the [Home](https://lawsofux.com/) feature...
 
-### 4. :merchandise
+### 4. :articles
 
-- This module will provide the Merchandise feature...
+- This package represents the [Articles](https://lawsofux.com/articles/) feature...
 
-### 5. :settings
+### 5. :book
 
-- This module represents the Settings feature...
+- This package represents the [Book](https://lawsofux.com/book/) feature...
 
-### 6. :notifications
+### 6. :cards
 
-- This module represents the Notifications feature...
+- This package represents the [Cards](https://lawsofux.com/cards/) feature...
+
+### 7. :info
+
+- This package represents the [Info](https://lawsofux.com/info/) feature...
+
+### 8. :navigation
+
+- This package contains the app's NavHost...
 
 ## Tests
 
 
 
 ## Screenshots
+
+
 
 ## Tools and Libraries
 
@@ -64,52 +74,26 @@
 - The app's User Interface (UI) has been built using [Jetpack Compose](https://developer.android.com/compose) which is Google's Kotlin-first UI toolkit...
 - The app also has other Compose-specific dependencies such as [Type-Safe Compose Navigation](https://developer.android.com/guide/navigation/design/type-safety) that provides a simple and type-safe way to enable Navigation in the app using Kotlin...
 
-### 2. Firebase
-
-- The app's backend is provided by [Firebase](https://firebase.google.com/docs/android/setup)...
-
-### 3. MockK, Compose UI Test, and Kotlin Coroutines Test
-
-- [MockK](https://mockk.io/) has been used to mock various dependencies that were required during the Unit Tests in an efficient and Kotlin-first manner...
-- [Compose UI Test](https://developer.android.com/develop/ui/compose/testing) has been used to test the User Interfaces (UIs)...
-- [Kotlin Coroutines Test](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-test/) enables the testing of dependencies that involved Kotlin Coroutines...
-
-### 4. Coil
-
-- [Coil](https://coil-kt.github.io/coil/) has been used for Image Loading...
-
-### 5. Koin
+### 2. Koin
 
 - [Koin](https://insert-koin.io) was used for Dependency Injection due to its simplicity and seamless integration with Kotlin...
 
-### 6. KSP
-
-- [Kotlin Symbol Processor (KSP)](https://kotlinlang.org/docs/ksp-overview.html) was used to handle the annotations used for example in the Room Entities with Performance as the priority...
-
-### 7. Kotlin Serialisation Plugin
+### 3. Kotlin Serialisation Plugin
 
 - [Kotlin Serialisation Plugin](https://github.com/Kotlin/kotlinx.serialization) was used to serialise and deserialise the Navigation routes...
 
-### 8. LeakCanary
+### 4. LeakCanary
 
 - To detect and fix Memory Leaks, the product utilises [LeakCanary](https://square.github.io/leakcanary/)...
 
-### 9. AppSweep
-
-- After the release variant is built and the app bundle generated and signed, it gets scanned by [AppSweep](https://www.guardsquare.com/appsweep-mobile-application-security-testing) to check for and patch up Security Vulnerabilities...
-
-### 10. ktlint, detekt, and spotless
+### 5. ktlint, detekt, and spotless
 
 - [ktlint](https://github.com/JLLeitschuh/ktlint-gradle) and [spotless](https://github.com/diffplug/spotless) has been used to format the code...
 - [detekt](https://detekt.dev/) has been used to perform Static Code Analysis...
 
-### 11. Timber
+### 6. Timber
 
 - [Timber](https://github.com/JakeWharton/timber) has been used for logging...
-
-### 12. Splash Screen
-
-- [AndroidX Splash Screen](https://developer.android.com/develop/ui/views/launch/splash-screen) has been used to easily configure the Splash Screen...
 
 ### Trivia
 
