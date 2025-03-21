@@ -3,7 +3,9 @@ package emmanuelmuturia.lawsofux.book.ui.screen
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -162,6 +164,14 @@ fun BookScreenContent(
         }
 
         item {
+            HorizontalDivider(
+                modifier = Modifier.padding(all = 14.dp),
+                thickness = 3.dp,
+                color = MaterialTheme.colorScheme.onBackground,
+            )
+        }
+
+        item {
             BookScreenNewConceptsImage()
         }
 
@@ -183,14 +193,6 @@ fun BookScreenContent(
 
         item {
             BookScreenNewTechniques()
-        }
-
-        item {
-            HorizontalDivider(
-                modifier = Modifier.padding(all = 14.dp),
-                thickness = 3.dp,
-                color = MaterialTheme.colorScheme.onBackground,
-            )
         }
 
         item {
@@ -226,10 +228,14 @@ fun BookScreenContent(
         }
 
         item {
+            Spacer(modifier = Modifier.height(height = 56.dp))
+        }
+
+        item {
             BookScreenReviewsTitle()
         }
 
-        items(items = bookScreenUIState.bookReviews) { bookReview ->
+        itemsIndexed(items = bookScreenUIState.bookReviews) { index, bookReview ->
             Text(
                 modifier = Modifier.padding(start = 14.dp),
                 text = "\"${bookReview.bookReviewCaption}\"",
@@ -242,18 +248,23 @@ fun BookScreenContent(
             Text(
                 modifier = Modifier.padding(all = 14.dp),
                 text = bookReview.bookReviewAuthor,
-                fontSize = 18.sp,
+                fontSize = 14.sp,
                 color = MaterialTheme.colorScheme.onBackground,
                 overflow = TextOverflow.Clip,
                 fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
-                fontWeight = FontWeight.Bold,
             )
 
-            HorizontalDivider(
-                modifier = Modifier.padding(all = 14.dp),
-                thickness = 3.dp,
-                color = MaterialTheme.colorScheme.onBackground,
-            )
+            if (index < bookScreenUIState.bookReviews.lastIndex) {
+                HorizontalDivider(
+                    modifier = Modifier.padding(all = 14.dp),
+                    thickness = 3.dp,
+                    color = MaterialTheme.colorScheme.onBackground,
+                )
+            }
+        }
+
+        item {
+            Spacer(modifier = Modifier.height(height = 56.dp))
         }
 
         item {
@@ -348,6 +359,18 @@ fun BookScreenContent(
         }
 
         item {
+            HorizontalDivider(
+                modifier = Modifier.padding(all = 14.dp),
+                thickness = 3.dp,
+                color = MaterialTheme.colorScheme.onBackground,
+            )
+        }
+
+        item {
+            Spacer(modifier = Modifier.height(height = 49.dp))
+        }
+
+        item {
             BookScreenRelatedTitle()
         }
 
@@ -382,6 +405,8 @@ fun BookScreenText() {
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+        fontWeight = FontWeight.Bold,
+        lineHeight = 37.sp
     )
 }
 
@@ -675,7 +700,7 @@ fun BookScreenReviewsTitle() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "Reviews",
-        fontSize = 25.sp,
+        fontSize = 28.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
