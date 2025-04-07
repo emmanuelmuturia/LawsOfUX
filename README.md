@@ -1,6 +1,10 @@
 # Laws Of UX
 
+<div style="text-align: center;">
+
 ![The Project Logo](assets/photos/play_store.png)
+
+</div>
 
 ## Overview
 
@@ -62,7 +66,7 @@
 - No tests have been written for this project as it is a mock project...
 
 ## Screenshots
-                                                           |                                                              |
+
 | The Splash Screen                                            | The Home Screen                                              | The Home Details Screen [Sample]                             |
 |--------------------------------------------------------------|--------------------------------------------------------------|--------------------------------------------------------------|
 | <img src="assets/screenshots/laws_of_ux_1.png" width="200"/> | <img src="assets/screenshots/laws_of_ux_2.png" width="200"/> | <img src="assets/screenshots/laws_of_ux_7.png" width="200"/> |
