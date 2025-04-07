@@ -97,10 +97,6 @@
 - [ktlint](https://github.com/JLLeitschuh/ktlint-gradle) and [spotless](https://github.com/diffplug/spotless) has been used to format the code...
 - [detekt](https://detekt.dev/) has been used to perform Static Code Analysis...
 
-### 6. Timber
-
-- [Timber](https://github.com/JakeWharton/timber) has been used for logging...
-
 ## Trivia
 
 - This is a mock version of [The Laws of UX Project](https://lawsofux.com/) and all credits go to [Jon Yablonski](https://jonyablonski.com/)
