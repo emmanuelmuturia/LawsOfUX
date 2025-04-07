@@ -103,6 +103,8 @@
 
 ## Trivia
 
+- This is a mock version of [The Laws of UX Project](https://lawsofux.com/) and all credits go to [Jon Yablonski](https://jonyablonski.com/)
 
 ## Future
 
+- The project is still in development...
