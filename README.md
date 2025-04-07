@@ -1,6 +1,8 @@
 # Laws Of UX
 
-![The Project Logo](assets/photos/play_store.png)
+<p align="center">
+  <img src="assets/photos/play_store.png" width="200" alt="The Project Logo">
+</p>
 
 ## Overview
 
