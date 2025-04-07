@@ -1,14 +1,10 @@
 # Laws Of UX
 
-<div style="text-align: center;">
-
 ![The Project Logo](assets/photos/play_store.png)
-
-</div>
 
 ## Overview
 
-- This project is a mock Android app that was inspired by the [Laws of UX](https://lawsofux.com/) website...
+- This project is a mock Android app that was inspired by [The Laws of UX Project](https://lawsofux.com/)...
 
 ## Table of Contents
 
