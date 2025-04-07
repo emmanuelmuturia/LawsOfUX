@@ -82,7 +82,7 @@ fun LawsOfUXTopAppBar(
                         ),
                 ).background(
                     color = MaterialTheme.colorScheme.surface,
-                ),
+                ).clickable { screensMenuExpanded = !screensMenuExpanded },
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -104,8 +104,7 @@ fun LawsOfUXTopAppBar(
                         },
                     modifier =
                         Modifier
-                            .size(size = 24.dp)
-                            .clickable { screensMenuExpanded = !screensMenuExpanded },
+                            .size(size = 24.dp),
                     tint = MaterialTheme.colorScheme.onPrimary,
                 )
                 Spacer(modifier = Modifier.width(8.dp))
@@ -115,7 +114,6 @@ fun LawsOfUXTopAppBar(
                     fontFamily = FontFamily(Font(resId = R.font.ibm_plex_mono_regular)),
                     fontWeight = FontWeight.Bold,
                     fontSize = 14.sp,
-                    modifier = Modifier.clickable { screensMenuExpanded = !screensMenuExpanded },
                 )
             }
             // Dropdown Menu for Screens...
