@@ -1,8 +1,6 @@
 package emmanuelmuturia.lawsofux.home.ui.screen
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.EnterTransition
-import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.slideInHorizontally
@@ -15,6 +13,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -396,7 +395,7 @@ private fun HomeDetailsScreenContent(
 
             HorizontalDivider(
                 modifier = Modifier.padding(all = 14.dp),
-                thickness = 3.dp,
+                thickness = 1.4.dp,
                 color = MaterialTheme.colorScheme.onBackground,
             )
 
@@ -411,52 +410,80 @@ private fun HomeDetailsScreenContent(
             )
         }
 
-        item {
+        item(
+            key = 5
+        ) {
             HomeDetailsScreenOriginsTitle()
         }
 
-        item {
+        item(
+            key = 6
+        ) {
             HomeDetailsScreenOriginsContent(uxLaw = uxLaw)
         }
 
-        item {
+        item(
+            key = 7
+        ) {
             HomeDetailsScreenSource(uxLaw = uxLaw)
         }
 
-        item {
+        item(
+            key = 8
+        ) {
+            Spacer(modifier = Modifier.height(height = 42.dp))
+        }
+
+        item(
+            key = 9
+        ) {
             HomeDetailsScreenFurtherReadingTitle()
         }
 
-        items(items = uxLaw.uXLawFurtherReading) { furtherReading ->
+        items(items = uxLaw.uXLawFurtherReading, key = {
+            uxLaw.uXLawFurtherReading.indexOf(element = it)
+        }) { furtherReading ->
             LawsOfUXExtraCardItem(
                 title = furtherReading.first,
                 content = furtherReading.second,
             )
         }
 
-        item {
+        item(
+            key = 10
+        ) {
             HomeDetailsScreenLargePosterButton(
                 navigateToPosterShop = navigateToPosterShop,
             )
         }
 
-        item {
+        item(
+            key = 11
+        ) {
             HomeDetailsScreenSmallPosterText(uxLaw = uxLaw)
         }
 
-        item {
+        item(
+            key = 12
+        ) {
             HomeDetailsScreenDivider()
         }
 
-        item {
+        item(
+            key = 13
+        ) {
             HomeDetailsScreenRelatedTitle()
         }
 
-        items(items = randomLawsOfUX) { uxLaw ->
+        items(items = randomLawsOfUX, key = {
+            uxLaw.uxLawTitle
+        }) { uxLaw ->
             LawsOfUXCardItem(uxLaw = uxLaw, navigateToHomeDetailsScreen = {})
         }
 
-        item {
+        item(
+            key = 14
+        ) {
             HomeDetailsScreenNext(
                 uxLaws = uxLaws,
                 currentUXLaw = uxLaw,
@@ -483,7 +510,7 @@ private fun HomeDetailsScreenTitle(uxLaw: UXLaw) {
             ),
             fontWeight = FontWeight.ExtraBold,
             textAlign = TextAlign.Center,
-            lineHeight = 30.sp
+            lineHeight = 42.sp
         )
 }
 
@@ -506,6 +533,7 @@ private fun HomeDetailsScreenDefinition(uxLaw: UXLaw) {
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+        lineHeight = 30.sp,
     )
 }
 
@@ -635,13 +663,13 @@ private fun HomeDetailsScreenSmallPosterText(uxLaw: UXLaw) {
 private fun HomeDetailsScreenDivider() {
     HorizontalDivider(
         modifier = Modifier.padding(all = 14.dp),
-        thickness = 3.dp,
+        thickness = 1.4.dp,
         color = MaterialTheme.colorScheme.onBackground,
     )
 }
 
 @Composable
-private fun HomeDetailsScreenRelatedTitle(modifier: Modifier = Modifier) {
+private fun HomeDetailsScreenRelatedTitle() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "Related",

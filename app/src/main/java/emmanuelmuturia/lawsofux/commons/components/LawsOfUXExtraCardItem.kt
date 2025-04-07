@@ -3,6 +3,7 @@ package emmanuelmuturia.lawsofux.commons.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -42,7 +43,7 @@ fun LawsOfUXExtraCardItem(
             verticalArrangement = Arrangement.Center,
         ) {
             Text(
-                modifier = Modifier.padding(all = 14.dp),
+                modifier = Modifier.padding(start = 21.dp, top = 21.dp, end = 35.dp),
                 text = title,
                 fontSize = 21.sp,
                 color = MaterialTheme.colorScheme.onBackground,
@@ -52,7 +53,7 @@ fun LawsOfUXExtraCardItem(
             )
 
             Text(
-                modifier = Modifier.padding(all = 14.dp),
+                modifier = Modifier.padding(start = 21.dp, top = 21.dp, bottom = 21.dp, end = 35.dp),
                 text = content,
                 fontSize = 14.sp,
                 color = MaterialTheme.colorScheme.onBackground,
@@ -61,9 +62,12 @@ fun LawsOfUXExtraCardItem(
             )
 
             Row(
-                modifier = Modifier.padding(end = 14.dp),
-                horizontalArrangement = Arrangement.End,
+               modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
             ) {
+                Spacer(modifier = Modifier.weight(weight = 1f))
+
                 Icon(
                     imageVector = ImageVector.vectorResource(id = R.drawable.diagonal_arrow),
                     contentDescription = "Further Reading Icon",
