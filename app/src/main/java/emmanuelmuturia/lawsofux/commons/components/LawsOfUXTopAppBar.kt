@@ -302,6 +302,27 @@ fun LawsOfUXTopAppBar(
                 DropdownMenuItem(
                     text = {
                         Text(
+                            text = "-> English",
+                            fontFamily =
+                                FontFamily(
+                                    fonts =
+                                        listOf(
+                                            Font(resId = R.font.ibm_plex_mono_regular),
+                                        ),
+                                ),
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onPrimary,
+                            fontSize = 21.sp,
+                        )
+                    },
+                    onClick = {
+                        // Change language to English...
+                        languagesMenuExpanded = false
+                    },
+                )
+                DropdownMenuItem(
+                    text = {
+                        Text(
                             text = "Español",
                             fontFamily =
                                 FontFamily(
@@ -338,6 +359,49 @@ fun LawsOfUXTopAppBar(
                     },
                     onClick = {
                         // Change language to French...
+                        languagesMenuExpanded = false
+                    },
+                )
+                DropdownMenuItem(
+                    text = {
+                        Text(
+                            text = "عربي",
+                            fontFamily =
+                                FontFamily(
+                                    fonts =
+                                        listOf(
+                                            Font(resId = R.font.ibm_plex_mono_regular),
+                                        ),
+                                ),
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onPrimary,
+                            fontSize = 21.sp,
+                        )
+                    },
+                    onClick = {
+                        // Change language to Arabic...
+                        languagesMenuExpanded = false
+                    },
+                )
+
+                DropdownMenuItem(
+                    text = {
+                        Text(
+                            text = "فارسی",
+                            fontFamily =
+                                FontFamily(
+                                    fonts =
+                                        listOf(
+                                            Font(resId = R.font.ibm_plex_mono_regular),
+                                        ),
+                                ),
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onPrimary,
+                            fontSize = 21.sp,
+                        )
+                    },
+                    onClick = {
+                        // Change language to Arabic...
                         languagesMenuExpanded = false
                     },
                 )

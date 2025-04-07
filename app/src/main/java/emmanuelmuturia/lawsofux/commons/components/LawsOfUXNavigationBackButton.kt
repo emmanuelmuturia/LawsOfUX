@@ -35,7 +35,7 @@ fun LawsOfUXNavigationBackButton(navigateBack: () -> Unit) {
 
         Text(
             text = "BACK TO ALL",
-            fontSize = 14.sp,
+            fontSize = 12.sp,
             color = MaterialTheme.colorScheme.onPrimary,
             fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_mono_regular))),
         )

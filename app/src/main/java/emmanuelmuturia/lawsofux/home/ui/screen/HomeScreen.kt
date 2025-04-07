@@ -160,11 +160,13 @@ private fun HomeScreenContent(
 private fun HomeScreenText() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
-        text = "Laws of UX is a collection of best practices that designers can consider when building user interfaces.",
+        text = "Laws of UX is a collection of best practices that designers can consider when " +
+            "building user interfaces.",
         fontSize = 21.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+        lineHeight = 33.sp,
     )
 }
 
@@ -190,7 +192,7 @@ private fun HomeScreenNotification() {
             )
 
             VerticalDivider(
-                thickness = 3.dp,
+                thickness = 1.4.dp,
                 color = MaterialTheme.colorScheme.background,
             )
 

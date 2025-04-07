@@ -1,6 +1,11 @@
 package emmanuelmuturia.lawsofux.home.ui.screen
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.slideInHorizontally
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -39,6 +44,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -50,6 +56,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.LinkAnnotation
@@ -150,7 +157,7 @@ fun HomeDetailsScreen(
                                             ),
                                     ),
                                 fontWeight = FontWeight.Bold,
-                                fontSize = 16.sp,
+                                fontSize = 12.sp,
                             )
                             Icon(
                                 imageVector =
@@ -174,14 +181,35 @@ fun HomeDetailsScreen(
                         DropdownMenuItem(
                             text = {
                                 Text(
+                                    text = "-> English",
+                                    fontFamily =
+                                    FontFamily(
+                                        fonts =
+                                        listOf(
+                                            Font(resId = R.font.ibm_plex_mono_regular),
+                                        ),
+                                    ),
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.onPrimary,
+                                    fontSize = 21.sp,
+                                )
+                            },
+                            onClick = {
+                                // Change language to English...
+                                languagesMenuExpanded = false
+                            },
+                        )
+                        DropdownMenuItem(
+                            text = {
+                                Text(
                                     text = "Español",
                                     fontFamily =
-                                        FontFamily(
-                                            fonts =
-                                                listOf(
-                                                    Font(resId = R.font.ibm_plex_mono_regular),
-                                                ),
+                                    FontFamily(
+                                        fonts =
+                                        listOf(
+                                            Font(resId = R.font.ibm_plex_mono_regular),
                                         ),
+                                    ),
                                     fontWeight = FontWeight.Bold,
                                     color = MaterialTheme.colorScheme.onPrimary,
                                     fontSize = 21.sp,
@@ -197,12 +225,12 @@ fun HomeDetailsScreen(
                                 Text(
                                     text = "Français",
                                     fontFamily =
-                                        FontFamily(
-                                            fonts =
-                                                listOf(
-                                                    Font(resId = R.font.ibm_plex_mono_regular),
-                                                ),
+                                    FontFamily(
+                                        fonts =
+                                        listOf(
+                                            Font(resId = R.font.ibm_plex_mono_regular),
                                         ),
+                                    ),
                                     fontWeight = FontWeight.Bold,
                                     color = MaterialTheme.colorScheme.onPrimary,
                                     fontSize = 21.sp,
@@ -210,6 +238,49 @@ fun HomeDetailsScreen(
                             },
                             onClick = {
                                 // Change language to French...
+                                languagesMenuExpanded = false
+                            },
+                        )
+                        DropdownMenuItem(
+                            text = {
+                                Text(
+                                    text = "عربي",
+                                    fontFamily =
+                                    FontFamily(
+                                        fonts =
+                                        listOf(
+                                            Font(resId = R.font.ibm_plex_mono_regular),
+                                        ),
+                                    ),
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.onPrimary,
+                                    fontSize = 21.sp,
+                                )
+                            },
+                            onClick = {
+                                // Change language to Arabic...
+                                languagesMenuExpanded = false
+                            },
+                        )
+
+                        DropdownMenuItem(
+                            text = {
+                                Text(
+                                    text = "فارسی",
+                                    fontFamily =
+                                    FontFamily(
+                                        fonts =
+                                        listOf(
+                                            Font(resId = R.font.ibm_plex_mono_regular),
+                                        ),
+                                    ),
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.onPrimary,
+                                    fontSize = 21.sp,
+                                )
+                            },
+                            onClick = {
+                                // Change language to Arabic...
                                 languagesMenuExpanded = false
                             },
                         )
@@ -268,19 +339,46 @@ private fun HomeDetailsScreenContent(
         modifier = modifier.fillMaxSize(),
         state = homeDetailsScreenListState,
     ) {
-        item {
+        item(
+            key = 1
+        ) {
             HomeDetailsScreenTitle(uxLaw = uxLaw)
         }
 
-        item {
-            HomeDetailsScreenImage(uxLaw = uxLaw)
+        item(
+            key = 2
+        ) {
+            var isVisible by remember { mutableStateOf(value = false) }
+            LaunchedEffect(key1 = Unit) {
+                isVisible = true
+            }
+            val density = LocalDensity.current
+            AnimatedVisibility(
+                visible = isVisible,
+                enter = slideInHorizontally {
+                    // Slide in from 40 dp from the top.
+                    with(density) { -40.dp.roundToPx() }
+                } + expandVertically(
+                    // Expand from the top.
+                    expandFrom = Alignment.Top
+                ) + fadeIn(
+                    // Fade in with the initial alpha of 0.3f.
+                    initialAlpha = 0.3f
+                )
+            ) {
+                HomeDetailsScreenImage(uxLaw = uxLaw)
+            }
         }
 
-        item {
+        item(
+            key = 3
+        ) {
             HomeDetailsScreenDefinition(uxLaw = uxLaw)
         }
 
-        item {
+        item(
+            key = 4
+        ) {
             HomeDetailsScreenTakeawayTitle()
         }
 
@@ -369,32 +467,34 @@ private fun HomeDetailsScreenContent(
 
 @Composable
 private fun HomeDetailsScreenTitle(uxLaw: UXLaw) {
-    Text(
-        modifier = Modifier.padding(all = 14.dp),
-        text = uxLaw.uxLawTitle,
-        fontSize = 28.sp,
-        color = MaterialTheme.colorScheme.onBackground,
-        overflow = TextOverflow.Clip,
-        fontFamily =
+
+        Text(
+            modifier = Modifier.padding(all = 14.dp),
+            text = uxLaw.uxLawTitle,
+            fontSize = 28.sp,
+            color = MaterialTheme.colorScheme.onBackground,
+            overflow = TextOverflow.Clip,
+            fontFamily =
             FontFamily(
                 fonts =
-                    listOf(
-                        Font(resId = R.font.ibm_plex_sans_regular),
-                    ),
+                listOf(
+                    Font(resId = R.font.ibm_plex_sans_regular),
+                ),
             ),
-        fontWeight = FontWeight.ExtraBold,
-        textAlign = TextAlign.Center,
-    )
+            fontWeight = FontWeight.ExtraBold,
+            textAlign = TextAlign.Center,
+            lineHeight = 30.sp
+        )
 }
 
 @Composable
 private fun HomeDetailsScreenImage(uxLaw: UXLaw) {
-    Image(
-        modifier = Modifier.fillMaxSize(),
-        painter = painterResource(id = uxLaw.uxLawThumbnail),
-        contentDescription = "Home Details Screen Content Thumbnail",
-        contentScale = ContentScale.Crop,
-    )
+        Image(
+            modifier = Modifier.fillMaxSize(),
+            painter = painterResource(id = uxLaw.uxLawThumbnail),
+            contentDescription = "Home Details Screen Content Thumbnail",
+            contentScale = ContentScale.Crop,
+        )
 }
 
 @Composable
