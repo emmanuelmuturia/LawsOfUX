@@ -1,7 +1,7 @@
 # Laws Of UX
 
 <p align="center">
-  <img src="assets/photos/play_store.png" width="200" alt="The Project Logo">
+  <img src="assets/photos/play_store.png" width="333" alt="The Project Logo">
 </p>
 
 ## Overview
