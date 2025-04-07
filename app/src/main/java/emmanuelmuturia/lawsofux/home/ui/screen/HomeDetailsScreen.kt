@@ -339,13 +339,13 @@ private fun HomeDetailsScreenContent(
         state = homeDetailsScreenListState,
     ) {
         item(
-            key = 1
+            key = "HomeDetailsScreenTitle"
         ) {
             HomeDetailsScreenTitle(uxLaw = uxLaw)
         }
 
         item(
-            key = 2
+            key = "HomeDetailsScreenImage"
         ) {
             var isVisible by remember { mutableStateOf(value = false) }
             LaunchedEffect(key1 = Unit) {
@@ -370,18 +370,20 @@ private fun HomeDetailsScreenContent(
         }
 
         item(
-            key = 3
+            key = "HomeDetailsScreenDefinition"
         ) {
             HomeDetailsScreenDefinition(uxLaw = uxLaw)
         }
 
         item(
-            key = 4
+            key = "HomeDetailsScreenTakeawayTitle"
         ) {
             HomeDetailsScreenTakeawayTitle()
         }
 
-        itemsIndexed(items = uxLaw.uXLawTakeaways) { index, uxLawTakeAway ->
+        itemsIndexed(items = uxLaw.uXLawTakeaways, key = { index, _ ->
+            TODO()
+        }) { index, uxLawTakeAway ->
 
             Text(
                 modifier = Modifier.padding(start = 14.dp),
@@ -411,37 +413,37 @@ private fun HomeDetailsScreenContent(
         }
 
         item(
-            key = 5
+            key = "HomeDetailsScreenOriginsTitle"
         ) {
             HomeDetailsScreenOriginsTitle()
         }
 
         item(
-            key = 6
+            key = "HomeDetailsScreenOriginsContent"
         ) {
             HomeDetailsScreenOriginsContent(uxLaw = uxLaw)
         }
 
         item(
-            key = 7
+            key = "HomeDetailsScreenSource"
         ) {
             HomeDetailsScreenSource(uxLaw = uxLaw)
         }
 
         item(
-            key = 8
+            key = "HomeDetailsScreenSpacer"
         ) {
             Spacer(modifier = Modifier.height(height = 42.dp))
         }
 
         item(
-            key = 9
+            key = "HomeDetailsScreenFurtherReadingTitle"
         ) {
             HomeDetailsScreenFurtherReadingTitle()
         }
 
         items(items = uxLaw.uXLawFurtherReading, key = {
-            uxLaw.uXLawFurtherReading.indexOf(element = it)
+            TODO()
         }) { furtherReading ->
             LawsOfUXExtraCardItem(
                 title = furtherReading.first,
@@ -450,7 +452,7 @@ private fun HomeDetailsScreenContent(
         }
 
         item(
-            key = 10
+            key = "HomeDetailsScreenLargePosterButton"
         ) {
             HomeDetailsScreenLargePosterButton(
                 navigateToPosterShop = navigateToPosterShop,
@@ -458,31 +460,31 @@ private fun HomeDetailsScreenContent(
         }
 
         item(
-            key = 11
+            key = "HomeDetailsScreenSmallPosterText"
         ) {
             HomeDetailsScreenSmallPosterText(uxLaw = uxLaw)
         }
 
         item(
-            key = 12
+            key = "HomeDetailsScreenDivider"
         ) {
             HomeDetailsScreenDivider()
         }
 
         item(
-            key = 13
+            key = "HomeDetailsScreenRelatedTitle"
         ) {
             HomeDetailsScreenRelatedTitle()
         }
 
         items(items = randomLawsOfUX, key = {
-            uxLaw.uxLawTitle
+            TODO()
         }) { uxLaw ->
             LawsOfUXCardItem(uxLaw = uxLaw, navigateToHomeDetailsScreen = {})
         }
 
         item(
-            key = 14
+            key = "HomeDetailsScreenNext"
         ) {
             HomeDetailsScreenNext(
                 uxLaws = uxLaws,

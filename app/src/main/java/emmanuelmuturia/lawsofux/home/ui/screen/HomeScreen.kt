@@ -137,9 +137,15 @@ private fun HomeScreenContent(
         modifier = modifier.fillMaxSize(),
         state = homeScreenListState,
     ) {
-        item { HomeScreenText() }
-        item { HomeScreenNotification() }
-        items(items = homeScreenUIState.uxLaws) { uxLaw ->
+        item(
+            key = "HomeScreenText"
+        ) { HomeScreenText() }
+        item(
+            key = "HomeScreenNotification"
+        ) { HomeScreenNotification() }
+        items(items = homeScreenUIState.uxLaws, key = {
+            TODO()
+        }) { uxLaw ->
             LawsOfUXCardItem(
                 uxLaw = uxLaw,
                 navigateToHomeDetailsScreen = {
@@ -147,8 +153,12 @@ private fun HomeScreenContent(
                 },
             )
         }
-        item { Spacer(modifier = Modifier.height(height = 21.dp)) }
-        item {
+        item(
+            key = "HomeScreenSpacer"
+        ) { Spacer(modifier = Modifier.height(height = 21.dp)) }
+        item(
+            key = "LawsOfUXFooter"
+        ) {
             LawsOfUXFooter(
                 navigateToInfoScreen = navigateToInfoScreen,
             )

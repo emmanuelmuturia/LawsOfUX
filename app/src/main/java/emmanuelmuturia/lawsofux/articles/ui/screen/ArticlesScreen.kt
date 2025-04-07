@@ -124,18 +124,24 @@ private fun ArticlesScreenContent(
         modifier = modifier.fillMaxSize(),
         state = articlesScreenListState,
     ) {
-        item {
+        item(
+            key = "ArticlesScreenText"
+        ) {
             ArticlesScreenText()
         }
 
-        items(items = articlesScreenUIState.articles) { article ->
+        items(items = articlesScreenUIState.articles, key = {
+            TODO()
+        }) { article ->
             ArticlesCardItem(
                 article = article,
                 navigateToArticlesDetailsPage = navigateToArticlesDetailsPage,
             )
         }
 
-        item {
+        item(
+           key = "LawsOfUXFooter"
+        ) {
             LawsOfUXFooter(
                 navigateToInfoScreen = navigateToInfoScreen,
             )

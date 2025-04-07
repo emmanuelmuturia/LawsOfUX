@@ -127,50 +127,72 @@ private fun CardsScreenContent(
         modifier = modifier.fillMaxSize(),
         state = cardsScreenListState,
     ) {
-        item {
+        item(
+            key = "CardsScreenText"
+        ) {
             CardsScreenText()
         }
 
-        item {
+        item(
+            key = "Cards Screen Spacer #1"
+        ) {
             Spacer(modifier = Modifier.height(height = 28.dp))
         }
 
-        item {
+        item(
+            key = "CardsScreenImage"
+        ) {
             CardsScreenImage()
         }
 
-        item {
+        item(
+            key = "Cards Screen Spacer #2"
+        ) {
             Spacer(modifier = Modifier.height(height = 28.dp))
         }
 
-        item {
+        item(
+            key = "CardsScreenContentTitle"
+        ) {
             CardsScreenContentTitle()
         }
 
-        item {
+        item(
+            key = "CardsScreenContentText"
+        ) {
             CardsScreenContentText()
         }
 
-        item {
+        item(
+            key = "CardsScreenButton"
+        ) {
             CardsScreenButton(navigateToDeckShop = navigateToDeckShop)
         }
 
-        item {
+        item(
+            key = "Cards Screen Spacer #3"
+        ) {
             Spacer(modifier = Modifier.height(height = 28.dp))
         }
 
-        item {
+        item(
+            key = "CardsScreenRelatedTitle"
+        ) {
             CardsScreenRelatedTitle()
         }
 
-        items(items = cardsScreenUIState.cards) { card ->
+        items(items = cardsScreenUIState.cards, key = {
+            TODO()
+        }) { card ->
             LawsOfUXExtraCardItem(
                 title = card.cardTitle,
                 content = card.cardDescription,
             )
         }
 
-        item {
+        item(
+            key = "LawsOfUXFooter"
+        ) {
             LawsOfUXFooter(
                 navigateToInfoScreen = navigateToInfoScreen,
             )
