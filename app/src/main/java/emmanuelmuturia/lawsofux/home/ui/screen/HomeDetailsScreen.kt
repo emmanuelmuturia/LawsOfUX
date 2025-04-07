@@ -182,12 +182,12 @@ fun HomeDetailsScreen(
                                 Text(
                                     text = "-> English",
                                     fontFamily =
-                                    FontFamily(
-                                        fonts =
-                                        listOf(
-                                            Font(resId = R.font.ibm_plex_mono_regular),
+                                        FontFamily(
+                                            fonts =
+                                                listOf(
+                                                    Font(resId = R.font.ibm_plex_mono_regular),
+                                                ),
                                         ),
-                                    ),
                                     fontWeight = FontWeight.Bold,
                                     color = MaterialTheme.colorScheme.onPrimary,
                                     fontSize = 21.sp,
@@ -203,12 +203,12 @@ fun HomeDetailsScreen(
                                 Text(
                                     text = "Español",
                                     fontFamily =
-                                    FontFamily(
-                                        fonts =
-                                        listOf(
-                                            Font(resId = R.font.ibm_plex_mono_regular),
+                                        FontFamily(
+                                            fonts =
+                                                listOf(
+                                                    Font(resId = R.font.ibm_plex_mono_regular),
+                                                ),
                                         ),
-                                    ),
                                     fontWeight = FontWeight.Bold,
                                     color = MaterialTheme.colorScheme.onPrimary,
                                     fontSize = 21.sp,
@@ -224,12 +224,12 @@ fun HomeDetailsScreen(
                                 Text(
                                     text = "Français",
                                     fontFamily =
-                                    FontFamily(
-                                        fonts =
-                                        listOf(
-                                            Font(resId = R.font.ibm_plex_mono_regular),
+                                        FontFamily(
+                                            fonts =
+                                                listOf(
+                                                    Font(resId = R.font.ibm_plex_mono_regular),
+                                                ),
                                         ),
-                                    ),
                                     fontWeight = FontWeight.Bold,
                                     color = MaterialTheme.colorScheme.onPrimary,
                                     fontSize = 21.sp,
@@ -245,12 +245,12 @@ fun HomeDetailsScreen(
                                 Text(
                                     text = "عربي",
                                     fontFamily =
-                                    FontFamily(
-                                        fonts =
-                                        listOf(
-                                            Font(resId = R.font.ibm_plex_mono_regular),
+                                        FontFamily(
+                                            fonts =
+                                                listOf(
+                                                    Font(resId = R.font.ibm_plex_mono_regular),
+                                                ),
                                         ),
-                                    ),
                                     fontWeight = FontWeight.Bold,
                                     color = MaterialTheme.colorScheme.onPrimary,
                                     fontSize = 21.sp,
@@ -267,12 +267,12 @@ fun HomeDetailsScreen(
                                 Text(
                                     text = "فارسی",
                                     fontFamily =
-                                    FontFamily(
-                                        fonts =
-                                        listOf(
-                                            Font(resId = R.font.ibm_plex_mono_regular),
+                                        FontFamily(
+                                            fonts =
+                                                listOf(
+                                                    Font(resId = R.font.ibm_plex_mono_regular),
+                                                ),
                                         ),
-                                    ),
                                     fontWeight = FontWeight.Bold,
                                     color = MaterialTheme.colorScheme.onPrimary,
                                     fontSize = 21.sp,
@@ -339,13 +339,13 @@ private fun HomeDetailsScreenContent(
         state = homeDetailsScreenListState,
     ) {
         item(
-            key = "HomeDetailsScreenTitle"
+            key = "HomeDetailsScreenTitle",
         ) {
             HomeDetailsScreenTitle(uxLaw = uxLaw)
         }
 
         item(
-            key = "HomeDetailsScreenImage"
+            key = "HomeDetailsScreenImage",
         ) {
             var isVisible by remember { mutableStateOf(value = false) }
             LaunchedEffect(key1 = Unit) {
@@ -354,29 +354,32 @@ private fun HomeDetailsScreenContent(
             val density = LocalDensity.current
             AnimatedVisibility(
                 visible = isVisible,
-                enter = slideInHorizontally {
-                    // Slide in from 40 dp from the top.
-                    with(density) { -40.dp.roundToPx() }
-                } + expandVertically(
-                    // Expand from the top.
-                    expandFrom = Alignment.Top
-                ) + fadeIn(
-                    // Fade in with the initial alpha of 0.3f.
-                    initialAlpha = 0.3f
-                )
+                enter =
+                    slideInHorizontally {
+                        // Slide in from 40 dp from the top.
+                        with(density) { -40.dp.roundToPx() }
+                    } +
+                        expandVertically(
+                            // Expand from the top.
+                            expandFrom = Alignment.Top,
+                        ) +
+                        fadeIn(
+                            // Fade in with the initial alpha of 0.3f.
+                            initialAlpha = 0.3f,
+                        ),
             ) {
                 HomeDetailsScreenImage(uxLaw = uxLaw)
             }
         }
 
         item(
-            key = "HomeDetailsScreenDefinition"
+            key = "HomeDetailsScreenDefinition",
         ) {
             HomeDetailsScreenDefinition(uxLaw = uxLaw)
         }
 
         item(
-            key = "HomeDetailsScreenTakeawayTitle"
+            key = "HomeDetailsScreenTakeawayTitle",
         ) {
             HomeDetailsScreenTakeawayTitle()
         }
@@ -413,31 +416,31 @@ private fun HomeDetailsScreenContent(
         }
 
         item(
-            key = "HomeDetailsScreenOriginsTitle"
+            key = "HomeDetailsScreenOriginsTitle",
         ) {
             HomeDetailsScreenOriginsTitle()
         }
 
         item(
-            key = "HomeDetailsScreenOriginsContent"
+            key = "HomeDetailsScreenOriginsContent",
         ) {
             HomeDetailsScreenOriginsContent(uxLaw = uxLaw)
         }
 
         item(
-            key = "HomeDetailsScreenSource"
+            key = "HomeDetailsScreenSource",
         ) {
             HomeDetailsScreenSource(uxLaw = uxLaw)
         }
 
         item(
-            key = "HomeDetailsScreenSpacer"
+            key = "HomeDetailsScreenSpacer",
         ) {
             Spacer(modifier = Modifier.height(height = 42.dp))
         }
 
         item(
-            key = "HomeDetailsScreenFurtherReadingTitle"
+            key = "HomeDetailsScreenFurtherReadingTitle",
         ) {
             HomeDetailsScreenFurtherReadingTitle()
         }
@@ -452,7 +455,7 @@ private fun HomeDetailsScreenContent(
         }
 
         item(
-            key = "HomeDetailsScreenLargePosterButton"
+            key = "HomeDetailsScreenLargePosterButton",
         ) {
             HomeDetailsScreenLargePosterButton(
                 navigateToPosterShop = navigateToPosterShop,
@@ -460,19 +463,19 @@ private fun HomeDetailsScreenContent(
         }
 
         item(
-            key = "HomeDetailsScreenSmallPosterText"
+            key = "HomeDetailsScreenSmallPosterText",
         ) {
             HomeDetailsScreenSmallPosterText(uxLaw = uxLaw)
         }
 
         item(
-            key = "HomeDetailsScreenDivider"
+            key = "HomeDetailsScreenDivider",
         ) {
             HomeDetailsScreenDivider()
         }
 
         item(
-            key = "HomeDetailsScreenRelatedTitle"
+            key = "HomeDetailsScreenRelatedTitle",
         ) {
             HomeDetailsScreenRelatedTitle()
         }
@@ -484,7 +487,7 @@ private fun HomeDetailsScreenContent(
         }
 
         item(
-            key = "HomeDetailsScreenNext"
+            key = "HomeDetailsScreenNext",
         ) {
             HomeDetailsScreenNext(
                 uxLaws = uxLaws,
@@ -496,34 +499,33 @@ private fun HomeDetailsScreenContent(
 
 @Composable
 private fun HomeDetailsScreenTitle(uxLaw: UXLaw) {
-
-        Text(
-            modifier = Modifier.padding(all = 14.dp),
-            text = uxLaw.uxLawTitle,
-            fontSize = 28.sp,
-            color = MaterialTheme.colorScheme.onBackground,
-            overflow = TextOverflow.Clip,
-            fontFamily =
+    Text(
+        modifier = Modifier.padding(all = 14.dp),
+        text = uxLaw.uxLawTitle,
+        fontSize = 28.sp,
+        color = MaterialTheme.colorScheme.onBackground,
+        overflow = TextOverflow.Clip,
+        fontFamily =
             FontFamily(
                 fonts =
-                listOf(
-                    Font(resId = R.font.ibm_plex_sans_regular),
-                ),
+                    listOf(
+                        Font(resId = R.font.ibm_plex_sans_regular),
+                    ),
             ),
-            fontWeight = FontWeight.ExtraBold,
-            textAlign = TextAlign.Center,
-            lineHeight = 42.sp
-        )
+        fontWeight = FontWeight.ExtraBold,
+        textAlign = TextAlign.Center,
+        lineHeight = 42.sp,
+    )
 }
 
 @Composable
 private fun HomeDetailsScreenImage(uxLaw: UXLaw) {
-        Image(
-            modifier = Modifier.fillMaxSize(),
-            painter = painterResource(id = uxLaw.uxLawThumbnail),
-            contentDescription = "Home Details Screen Content Thumbnail",
-            contentScale = ContentScale.Crop,
-        )
+    Image(
+        modifier = Modifier.fillMaxSize(),
+        painter = painterResource(id = uxLaw.uxLawThumbnail),
+        contentDescription = "Home Details Screen Content Thumbnail",
+        contentScale = ContentScale.Crop,
+    )
 }
 
 @Composable

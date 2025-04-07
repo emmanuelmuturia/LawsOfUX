@@ -136,43 +136,43 @@ fun BookScreenContent(
         state = bookScreenListState,
     ) {
         item(
-            key = "BookScreenText"
+            key = "BookScreenText",
         ) {
             BookScreenText()
         }
 
         item(
-            key = "BookScreenImage"
+            key = "BookScreenImage",
         ) {
             BookScreenImage()
         }
 
         item(
-            key = "BookScreenOverviewTitle"
+            key = "BookScreenOverviewTitle",
         ) {
             BookScreenOverviewTitle()
         }
 
         item(
-            key = "BookScreenOverviewContent"
+            key = "BookScreenOverviewContent",
         ) {
             BookScreenOverviewContent()
         }
 
         item(
-            key = "BookScreenNewBookTitle"
+            key = "BookScreenNewBookTitle",
         ) {
             BookScreenNewBookTitle()
         }
 
         item(
-            key = "BookScreenNewBookContent"
+            key = "BookScreenNewBookContent",
         ) {
             BookScreenNewBookContent()
         }
 
         item(
-            key = "BookScreenViewOnAmazonButton"
+            key = "BookScreenViewOnAmazonButton",
         ) {
             BookScreenViewOnAmazonButton(
                 navigateToAmazon = navigateToAmazon,
@@ -180,7 +180,7 @@ fun BookScreenContent(
         }
 
         item(
-            key = "Book Screen Horizontal Divider #1"
+            key = "Book Screen Horizontal Divider #1",
         ) {
             HorizontalDivider(
                 modifier = Modifier.padding(all = 14.dp),
@@ -190,43 +190,43 @@ fun BookScreenContent(
         }
 
         item(
-            key = "BookScreenNewConceptsImage"
+            key = "BookScreenNewConceptsImage",
         ) {
             BookScreenNewConceptsImage()
         }
 
         item(
-            key = "BookScreenNewConcepts"
+            key = "BookScreenNewConcepts",
         ) {
             BookScreenNewConcepts()
         }
 
         item(
-            key = "BookScreenNewConsiderationsImage"
+            key = "BookScreenNewConsiderationsImage",
         ) {
             BookScreenNewConsiderationsImage()
         }
 
         item(
-            key = "BookScreenNewConsiderations"
+            key = "BookScreenNewConsiderations",
         ) {
             BookScreenNewConsiderations()
         }
 
         item(
-            key = "BookScreenNewTechniquesImage"
+            key = "BookScreenNewTechniquesImage",
         ) {
             BookScreenNewTechniquesImage()
         }
 
         item(
-            key = "BookScreenNewTechniques"
+            key = "BookScreenNewTechniques",
         ) {
             BookScreenNewTechniques()
         }
 
         item(
-            key = "BookScreenLessonsTitle"
+            key = "BookScreenLessonsTitle",
         ) {
             BookScreenLessonsTitle()
         }
@@ -262,13 +262,13 @@ fun BookScreenContent(
         }
 
         item(
-            key = "BookScreenSpacer"
+            key = "BookScreenSpacer",
         ) {
             Spacer(modifier = Modifier.height(height = 56.dp))
         }
 
         item(
-            key = "BookScreenReviewsTitle"
+            key = "BookScreenReviewsTitle",
         ) {
             BookScreenReviewsTitle()
         }
@@ -304,13 +304,13 @@ fun BookScreenContent(
         }
 
         item(
-            key = "Book Screen Spacer #2"
+            key = "Book Screen Spacer #2",
         ) {
             Spacer(modifier = Modifier.height(height = 56.dp))
         }
 
         item(
-            key = "BookScreenGalleryTitle"
+            key = "BookScreenGalleryTitle",
         ) {
             BookScreenGalleryTitle()
         }
@@ -331,19 +331,19 @@ fun BookScreenContent(
         }
 
         item(
-            key = "BookScreenBookLocationsTitle"
+            key = "BookScreenBookLocationsTitle",
         ) {
             BookScreenBookLocationsTitle()
         }
 
         item(
-            key = "Book Screen Horizontal Divider #2"
+            key = "Book Screen Horizontal Divider #2",
         ) {
             BookScreenHorizontalDivider()
         }
 
         item(
-            key = "BookScreenSecondEditionTitle"
+            key = "BookScreenSecondEditionTitle",
         ) {
             BookScreenSecondEditionTitle()
         }
@@ -358,25 +358,25 @@ fun BookScreenContent(
         }
 
         item(
-            key = "BookScreenSecondEditionBookImage"
+            key = "BookScreenSecondEditionBookImage",
         ) {
             BookScreenSecondEditionBookImage()
         }
 
         item(
-            key = "BookScreenSecondEditionBookTitle"
+            key = "BookScreenSecondEditionBookTitle",
         ) {
             BookScreenSecondEditionBookTitle()
         }
 
         item(
-            key = "BookScreenSecondEditionBookContent"
+            key = "BookScreenSecondEditionBookContent",
         ) {
             BookScreenSecondEditionBookContent()
         }
 
         item(
-            key = "BookScreenSecondEditionBookButton"
+            key = "BookScreenSecondEditionBookButton",
         ) {
             BookScreenSecondEditionBookButton(
                 navigateToOreilly = navigateToOreilly,
@@ -384,7 +384,7 @@ fun BookScreenContent(
         }
 
         item(
-            key = "BookScreenFirstEditionTitle"
+            key = "BookScreenFirstEditionTitle",
         ) {
             BookScreenFirstEditionTitle()
         }
@@ -399,13 +399,13 @@ fun BookScreenContent(
         }
 
         item(
-            key = "BookScreenTranslationsTitle"
+            key = "BookScreenTranslationsTitle",
         ) {
             BookScreenTranslationsTitle()
         }
 
         item(
-            key = "BookScreenTranslatedSecondEditionTitle"
+            key = "BookScreenTranslatedSecondEditionTitle",
         ) {
             BookScreenTranslatedSecondEditionTitle()
         }
@@ -420,7 +420,7 @@ fun BookScreenContent(
         }
 
         item(
-            key = "BookScreenTranslatedFirstEditionTitle"
+            key = "BookScreenTranslatedFirstEditionTitle",
         ) {
             BookScreenTranslatedFirstEditionTitle()
         }
@@ -435,7 +435,7 @@ fun BookScreenContent(
         }
 
         item(
-            key = "Book Screen Horizontal Divider #3"
+            key = "Book Screen Horizontal Divider #3",
         ) {
             HorizontalDivider(
                 modifier = Modifier.padding(all = 14.dp),
@@ -445,31 +445,31 @@ fun BookScreenContent(
         }
 
         item(
-            key = "Book Screen Spacer #3"
+            key = "Book Screen Spacer #3",
         ) {
             Spacer(modifier = Modifier.height(height = 49.dp))
         }
 
         item(
-            key = "BookScreenRelatedTitle"
+            key = "BookScreenRelatedTitle",
         ) {
             BookScreenRelatedTitle()
         }
 
         item(
-            key = "BookScreenRelatedImage"
+            key = "BookScreenRelatedImage",
         ) {
             BookScreenRelatedImage()
         }
 
         item(
-            key = "BookScreenRelatedContent"
+            key = "BookScreenRelatedContent",
         ) {
             BookScreenRelatedContent()
         }
 
         item(
-            key = "BookScreenRelatedButton"
+            key = "BookScreenRelatedButton",
         ) {
             BookScreenRelatedButton(
                 navigateToBootcamp = navigateToBootcamp,
@@ -477,7 +477,7 @@ fun BookScreenContent(
         }
 
         item(
-            key = "LawsOfUXFooter"
+            key = "LawsOfUXFooter",
         ) {
             LawsOfUXFooter(
                 navigateToInfoScreen = navigateToInfoScreen,

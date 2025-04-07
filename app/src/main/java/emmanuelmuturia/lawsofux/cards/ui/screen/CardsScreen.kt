@@ -128,55 +128,55 @@ private fun CardsScreenContent(
         state = cardsScreenListState,
     ) {
         item(
-            key = "CardsScreenText"
+            key = "CardsScreenText",
         ) {
             CardsScreenText()
         }
 
         item(
-            key = "Cards Screen Spacer #1"
+            key = "Cards Screen Spacer #1",
         ) {
             Spacer(modifier = Modifier.height(height = 28.dp))
         }
 
         item(
-            key = "CardsScreenImage"
+            key = "CardsScreenImage",
         ) {
             CardsScreenImage()
         }
 
         item(
-            key = "Cards Screen Spacer #2"
+            key = "Cards Screen Spacer #2",
         ) {
             Spacer(modifier = Modifier.height(height = 28.dp))
         }
 
         item(
-            key = "CardsScreenContentTitle"
+            key = "CardsScreenContentTitle",
         ) {
             CardsScreenContentTitle()
         }
 
         item(
-            key = "CardsScreenContentText"
+            key = "CardsScreenContentText",
         ) {
             CardsScreenContentText()
         }
 
         item(
-            key = "CardsScreenButton"
+            key = "CardsScreenButton",
         ) {
             CardsScreenButton(navigateToDeckShop = navigateToDeckShop)
         }
 
         item(
-            key = "Cards Screen Spacer #3"
+            key = "Cards Screen Spacer #3",
         ) {
             Spacer(modifier = Modifier.height(height = 28.dp))
         }
 
         item(
-            key = "CardsScreenRelatedTitle"
+            key = "CardsScreenRelatedTitle",
         ) {
             CardsScreenRelatedTitle()
         }
@@ -191,7 +191,7 @@ private fun CardsScreenContent(
         }
 
         item(
-            key = "LawsOfUXFooter"
+            key = "LawsOfUXFooter",
         ) {
             LawsOfUXFooter(
                 navigateToInfoScreen = navigateToInfoScreen,

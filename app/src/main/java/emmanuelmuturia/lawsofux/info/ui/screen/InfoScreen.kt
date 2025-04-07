@@ -150,31 +150,31 @@ private fun InfoScreenContent(
         state = infoScreenListState,
     ) {
         item(
-            key = "InfoScreenText"
+            key = "InfoScreenText",
         ) {
             InfoScreenText()
         }
 
         item(
-            key = "InfoScreenImage"
+            key = "InfoScreenImage",
         ) {
             InfoScreenImage()
         }
 
         item(
-            key = "InfoScreenContentText"
+            key = "InfoScreenContentText",
         ) {
             InfoScreenContentText()
         }
 
         item(
-            key = "InfoScreenNoteBox"
+            key = "InfoScreenNoteBox",
         ) {
             InfoScreenNoteBox()
         }
 
         item(
-            key = "Info Screen Spacer #1"
+            key = "Info Screen Spacer #1",
         ) {
             Spacer(
                 modifier = Modifier.height(height = 56.dp),
@@ -182,19 +182,19 @@ private fun InfoScreenContent(
         }
 
         item(
-            key = "InfoScreenShareTitle"
+            key = "InfoScreenShareTitle",
         ) {
             InfoScreenShareTitle()
         }
 
         item(
-            key = "InfoScreenShareContent"
+            key = "InfoScreenShareContent",
         ) {
             InfoScreenShareContent()
         }
 
         item(
-            key = "Info Screen Spacer #2"
+            key = "Info Screen Spacer #2",
         ) {
             Spacer(
                 modifier = Modifier.height(height = 56.dp),
@@ -202,19 +202,19 @@ private fun InfoScreenContent(
         }
 
         item(
-            key = "InfoScreenPostersTitle"
+            key = "InfoScreenPostersTitle",
         ) {
             InfoScreenPostersTitle()
         }
 
         item(
-            key = "InfoScreenPostersContent"
+            key = "InfoScreenPostersContent",
         ) {
             InfoScreenPostersContent()
         }
 
         item(
-            key = "Info Screen Spacer #3"
+            key = "Info Screen Spacer #3",
         ) {
             Spacer(
                 modifier = Modifier.height(height = 42.dp),
@@ -222,25 +222,25 @@ private fun InfoScreenContent(
         }
 
         item(
-            key = "InfoScreenIndexPosterTitle"
+            key = "InfoScreenIndexPosterTitle",
         ) {
             InfoScreenIndexPosterTitle()
         }
 
         item(
-            key = "InfoScreenIndexPosterImage"
+            key = "InfoScreenIndexPosterImage",
         ) {
             InfoScreenIndexPosterImage()
         }
 
         item(
-            key = "InfoScreenIndexPosterCaption"
+            key = "InfoScreenIndexPosterCaption",
         ) {
             InfoScreenIndexPosterCaption()
         }
 
         item(
-            key = "InfoScreenIndexPosterButton"
+            key = "InfoScreenIndexPosterButton",
         ) {
             InfoScreenIndexPosterButton(
                 navigateToPosterShop = navigateToPosterShop,
@@ -248,7 +248,7 @@ private fun InfoScreenContent(
         }
 
         item(
-            key = "Info Screen Spacer #4"
+            key = "Info Screen Spacer #4",
         ) {
             Spacer(
                 modifier = Modifier.height(height = 56.dp),
@@ -256,7 +256,7 @@ private fun InfoScreenContent(
         }
 
         item(
-            key = "InfoScreenInfoTitle"
+            key = "InfoScreenInfoTitle",
         ) {
             InfoScreenInfoTitle()
         }
@@ -271,7 +271,7 @@ private fun InfoScreenContent(
         }
 
         item(
-            key = "Info Screen Spacer #5"
+            key = "Info Screen Spacer #5",
         ) {
             Spacer(
                 modifier = Modifier.height(height = 56.dp),
@@ -279,19 +279,19 @@ private fun InfoScreenContent(
         }
 
         item(
-            key = "InfoScreenColophonTitle"
+            key = "InfoScreenColophonTitle",
         ) {
             InfoScreenColophonTitle()
         }
 
         item(
-            key = "InfoScreenColophonContent"
+            key = "InfoScreenColophonContent",
         ) {
             InfoScreenColophonContent()
         }
 
         item(
-            key = "Info Screen Spacer #6"
+            key = "Info Screen Spacer #6",
         ) {
             Spacer(
                 modifier = Modifier.height(height = 36.dp),
@@ -299,25 +299,25 @@ private fun InfoScreenContent(
         }
 
         item(
-            key = "InfoScreenDivider"
+            key = "InfoScreenDivider",
         ) {
             InfoScreenDivider()
         }
 
         item(
-            key = "InfoScreenContactTitle"
+            key = "InfoScreenContactTitle",
         ) {
             InfoScreenContactTitle()
         }
 
         item(
-            key = "InfoScreenContactCaption"
+            key = "InfoScreenContactCaption",
         ) {
             InfoScreenContactCaption()
         }
 
         item(
-            key = "InfoScreenContactBoxTitle"
+            key = "InfoScreenContactBoxTitle",
         ) {
             InfoScreenContactBoxTitle(
                 title = "NAME",
@@ -325,7 +325,7 @@ private fun InfoScreenContent(
         }
 
         item(
-            key = "InfoScreenContactBox"
+            key = "InfoScreenContactBox",
         ) {
             InfoScreenContactBox(
                 value = userName,
@@ -335,7 +335,7 @@ private fun InfoScreenContent(
         }
 
         item(
-            key = "InfoScreenContactBoxTitle"
+            key = "InfoScreenContactBoxTitle",
         ) {
             InfoScreenContactBoxTitle(
                 title = "EMAIL",
@@ -343,7 +343,7 @@ private fun InfoScreenContent(
         }
 
         item(
-            key = "InfoScreenContactBox"
+            key = "InfoScreenContactBox",
         ) {
             InfoScreenContactBox(
                 value = userEmail,
@@ -353,7 +353,7 @@ private fun InfoScreenContent(
         }
 
         item(
-            key = "InfoScreenContactBoxTitle"
+            key = "InfoScreenContactBoxTitle",
         ) {
             InfoScreenContactBoxTitle(
                 title = "SUBJECT",
@@ -361,7 +361,7 @@ private fun InfoScreenContent(
         }
 
         item(
-            key = "InfoScreenContactBox"
+            key = "InfoScreenContactBox",
         ) {
             InfoScreenContactBox(
                 value = userSubject,
@@ -371,7 +371,7 @@ private fun InfoScreenContent(
         }
 
         item(
-            key = "InfoScreenContactBoxTitle"
+            key = "InfoScreenContactBoxTitle",
         ) {
             InfoScreenContactBoxTitle(
                 title = "MESSAGE",
@@ -379,7 +379,7 @@ private fun InfoScreenContent(
         }
 
         item(
-            key = "InfoScreenContactBox"
+            key = "InfoScreenContactBox",
         ) {
             InfoScreenContactBox(
                 value = userMessage,
@@ -390,13 +390,13 @@ private fun InfoScreenContent(
         }
 
         item(
-            key = "InfoScreenContactButton"
+            key = "InfoScreenContactButton",
         ) {
             InfoScreenContactButton()
         }
 
         item(
-            key = "LawsOfUXFooter"
+            key = "LawsOfUXFooter",
         ) {
             LawsOfUXFooter(
                 navigateToInfoScreen = navigateToInfoScreen,

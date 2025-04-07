@@ -125,7 +125,7 @@ private fun ArticlesScreenContent(
         state = articlesScreenListState,
     ) {
         item(
-            key = "ArticlesScreenText"
+            key = "ArticlesScreenText",
         ) {
             ArticlesScreenText()
         }
@@ -140,7 +140,7 @@ private fun ArticlesScreenContent(
         }
 
         item(
-           key = "LawsOfUXFooter"
+            key = "LawsOfUXFooter",
         ) {
             LawsOfUXFooter(
                 navigateToInfoScreen = navigateToInfoScreen,

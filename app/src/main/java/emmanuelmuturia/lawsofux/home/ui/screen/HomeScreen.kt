@@ -138,10 +138,10 @@ private fun HomeScreenContent(
         state = homeScreenListState,
     ) {
         item(
-            key = "HomeScreenText"
+            key = "HomeScreenText",
         ) { HomeScreenText() }
         item(
-            key = "HomeScreenNotification"
+            key = "HomeScreenNotification",
         ) { HomeScreenNotification() }
         items(items = homeScreenUIState.uxLaws, key = { uxLaw ->
             uxLaw.uxLawId
@@ -154,10 +154,10 @@ private fun HomeScreenContent(
             )
         }
         item(
-            key = "HomeScreenSpacer"
+            key = "HomeScreenSpacer",
         ) { Spacer(modifier = Modifier.height(height = 21.dp)) }
         item(
-            key = "LawsOfUXFooter"
+            key = "LawsOfUXFooter",
         ) {
             LawsOfUXFooter(
                 navigateToInfoScreen = navigateToInfoScreen,
@@ -170,8 +170,9 @@ private fun HomeScreenContent(
 private fun HomeScreenText() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
-        text = "Laws of UX is a collection of best practices that designers can consider when " +
-            "building user interfaces.",
+        text =
+            "Laws of UX is a collection of best practices that designers can consider when " +
+                "building user interfaces.",
         fontSize = 21.sp,
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
