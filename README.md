@@ -59,10 +59,17 @@
 
 ## Tests
 
-
+- No tests have been written for this project as it is a mock project...
 
 ## Screenshots
 
+| Screenshot 1                                                 | Screenshot 2                                                 | Screenshot 3                                                 |
+  |--------------------------------------------------------------|--------------------------------------------------------------|--------------------------------------------------------------|
+| <img src="assets/screenshots/laws_of_ux_1.png" width="200"/> | <img src="assets/screenshots/laws_of_ux_2.png" width="200"/> | <img src="assets/screenshots/laws_of_ux_3.png" width="200"/> |
+| Screenshot 4                                                 | Screenshot 5                                                 | Screenshot 6                                                 |
+| <img src="assets/screenshots/laws_of_ux_4.png" width="200"/> | <img src="assets/screenshots/laws_of_ux_5.png" width="200"/> | <img src="assets/screenshots/laws_of_ux_6.png" width="200"/> |
+| Screenshot 7                                                 |                                                              |                                                              |
+| <img src="assets/screenshots/laws_of_ux_7.png" width="200"/> |                                                              |                                                              |
 
 
 ## Tools and Libraries
