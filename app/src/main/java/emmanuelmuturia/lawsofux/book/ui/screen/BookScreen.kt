@@ -231,8 +231,8 @@ fun BookScreenContent(
             BookScreenLessonsTitle()
         }
 
-        itemsIndexed(items = bookScreenUIState.bookLessons, key = { index, bookLesson ->
-            TODO()
+        itemsIndexed(items = bookScreenUIState.bookLessons, key = { _, bookLesson ->
+            bookLesson.bookLessonId
         }) { index, bookLesson ->
             Text(
                 modifier = Modifier.padding(start = 14.dp),
@@ -273,8 +273,8 @@ fun BookScreenContent(
             BookScreenReviewsTitle()
         }
 
-        itemsIndexed(items = bookScreenUIState.bookReviews, key = { index, bookReview ->
-            TODO()
+        itemsIndexed(items = bookScreenUIState.bookReviews, key = { _, bookReview ->
+            bookReview.bookReviewId
         }) { index, bookReview ->
             Text(
                 modifier = Modifier.padding(start = 14.dp),
@@ -315,8 +315,8 @@ fun BookScreenContent(
             BookScreenGalleryTitle()
         }
 
-        items(items = bookScreenUIState.bookGalleries, key = {
-            TODO()
+        items(items = bookScreenUIState.bookGalleries, key = { bookGallery ->
+            bookGallery.bookGalleryId
         }) { bookGallery ->
             Image(
                 painter = painterResource(id = bookGallery.bookGalleryImage),
@@ -348,8 +348,8 @@ fun BookScreenContent(
             BookScreenSecondEditionTitle()
         }
 
-        items(items = bookScreenUIState.bookSecondEditions, key = {
-            TODO()
+        items(items = bookScreenUIState.bookSecondEditions, key = { bookSecondEdition ->
+            bookSecondEdition.bookSecondEditionId
         }) { bookSecondEdition ->
             LawsOfUXExtraCardItem(
                 title = bookSecondEdition.bookSecondEditionTitle,
@@ -389,8 +389,8 @@ fun BookScreenContent(
             BookScreenFirstEditionTitle()
         }
 
-        items(items = bookScreenUIState.bookFirstEditions, key = {
-            TODO()
+        items(items = bookScreenUIState.bookFirstEditions, key = { bookFirstEdition ->
+            bookFirstEdition.bookFirstEditionId
         }) { bookFirstEdition ->
             LawsOfUXExtraCardItem(
                 title = bookFirstEdition.bookFirstEditionTitle,
@@ -410,8 +410,8 @@ fun BookScreenContent(
             BookScreenTranslatedSecondEditionTitle()
         }
 
-        items(items = bookScreenUIState.bookTranslatedSecondEditions, key = {
-            TODO()
+        items(items = bookScreenUIState.bookTranslatedSecondEditions, key = { bookTranslatedSecondEdition ->
+            bookTranslatedSecondEdition.bookTranslatedSecondEditionId
         }) { bookTranslatedSecondEdition ->
             LawsOfUXExtraCardItem(
                 title = bookTranslatedSecondEdition.bookTranslatedSecondEditionTitle,
@@ -425,8 +425,8 @@ fun BookScreenContent(
             BookScreenTranslatedFirstEditionTitle()
         }
 
-        items(items = bookScreenUIState.bookTranslatedFirstEditions, key = {
-            TODO()
+        items(items = bookScreenUIState.bookTranslatedFirstEditions, key = { bookTranslatedFirstEdition ->
+            bookTranslatedFirstEdition.bookTranslatedFirstEditionId
         }) { bookTranslatedFirstEdition ->
             LawsOfUXExtraCardItem(
                 title = bookTranslatedFirstEdition.bookTranslatedFirstEditionTitle,

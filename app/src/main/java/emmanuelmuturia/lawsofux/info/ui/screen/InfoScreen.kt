@@ -261,8 +261,8 @@ private fun InfoScreenContent(
             InfoScreenInfoTitle()
         }
 
-        items(items = infoScreenUIState.infos, key = {
-            TODO()
+        items(items = infoScreenUIState.infos, key = { info ->
+            info.infoId
         }) { info ->
             LawsOfUXExtraCardItem(
                 title = info.infoTitle,

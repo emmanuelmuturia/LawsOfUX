@@ -16,6 +16,7 @@ class CardsRepositoryImplementation(
             localCardSource.getAllLocalCards().map { localCards ->
                 localCards.map { localCard ->
                     Card(
+                        cardId = localCard.localCardId,
                         cardTitle = localCard.localCardTitle,
                         cardDescription = localCard.localCardDescription,
                     )

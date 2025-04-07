@@ -181,8 +181,8 @@ private fun CardsScreenContent(
             CardsScreenRelatedTitle()
         }
 
-        items(items = cardsScreenUIState.cards, key = {
-            TODO()
+        items(items = cardsScreenUIState.cards, key = { card ->
+            card.cardId
         }) { card ->
             LawsOfUXExtraCardItem(
                 title = card.cardTitle,

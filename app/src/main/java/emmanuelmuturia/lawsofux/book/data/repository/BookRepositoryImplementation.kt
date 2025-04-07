@@ -22,6 +22,7 @@ class BookRepositoryImplementation(
             localBookSource.getAllLocalBookFirstEditions().map { localBookFirstEditions ->
                 localBookFirstEditions.map { localBookFirstEdition ->
                     BookFirstEdition(
+                        bookFirstEditionId = localBookFirstEdition.localBookFirstEditionId,
                         bookFirstEditionTitle = localBookFirstEdition.localBookFirstEditionTitle,
                         bookFirstEditionSeller = localBookFirstEdition.localBookFirstEditionSeller,
                     )
@@ -35,6 +36,7 @@ class BookRepositoryImplementation(
             localBookSource.getAllLocalBookGalleries().map { localBookGalleries ->
                 localBookGalleries.map { localBookGallery ->
                     BookGallery(
+                        bookGalleryId = localBookGallery.localBookGalleryId,
                         bookGalleryImage = localBookGallery.localBookGalleryImage,
                     )
                 }
@@ -47,6 +49,7 @@ class BookRepositoryImplementation(
             localBookSource.getAllLocalBookLessons().map { localBookLessons ->
                 localBookLessons.map { localBookLesson ->
                     BookLesson(
+                        bookLessonId = localBookLesson.localBookLessonId,
                         bookLessonDescription = localBookLesson.localBookLessonDescription,
                     )
                 }
@@ -59,6 +62,7 @@ class BookRepositoryImplementation(
             localBookSource.getAllLocalBookReviews().map { localBookReviews ->
                 localBookReviews.map { localBookReview ->
                     BookReview(
+                        bookReviewId = localBookReview.localBookReviewId,
                         bookReviewCaption = localBookReview.localBookReviewCaption,
                         bookReviewAuthor = localBookReview.localBookReviewAuthor,
                     )
@@ -72,6 +76,7 @@ class BookRepositoryImplementation(
             localBookSource.getAllLocalBookSecondEditions().map { localBookSecondEditions ->
                 localBookSecondEditions.map { localBookSecondEdition ->
                     BookSecondEdition(
+                        bookSecondEditionId = localBookSecondEdition.localBookSecondEditionId,
                         bookSecondEditionTitle = localBookSecondEdition.localBookSecondEditionTitle,
                         bookSecondEditionSeller = localBookSecondEdition.localBookSecondEditionSeller,
                     )
@@ -85,6 +90,7 @@ class BookRepositoryImplementation(
             localBookSource.getAllLocalBookTranslatedFirstEditions().map { localBookTranslatedFirstEditions ->
                 localBookTranslatedFirstEditions.map { localBookTranslatedFirstEdition ->
                     BookTranslatedFirstEdition(
+                        bookTranslatedFirstEditionId = localBookTranslatedFirstEdition.localBookTranslatedFirstEditionId,
                         bookTranslatedFirstEditionTitle = localBookTranslatedFirstEdition.localBookTranslatedFirstEditionTitle,
                         bookTranslatedFirstEditionSeller = localBookTranslatedFirstEdition.localBookTranslatedFirstEditionSeller,
                     )
@@ -98,6 +104,7 @@ class BookRepositoryImplementation(
             localBookSource.getAllLocalBookTranslatedSecondEditions().map { localBookTranslatedSecondEditions ->
                 localBookTranslatedSecondEditions.map { localBookTranslatedSecondEdition ->
                     BookTranslatedSecondEdition(
+                        bookTranslatedSecondEditionId = localBookTranslatedSecondEdition.localBookTranslatedSecondEditionId,
                         bookTranslatedSecondEditionTitle = localBookTranslatedSecondEdition.localBookTranslatedSecondEditionTitle,
                         bookTranslatedSecondEditionSeller = localBookTranslatedSecondEdition.localBookTranslatedSecondEditionSeller,
                     )

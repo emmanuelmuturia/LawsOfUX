@@ -130,8 +130,8 @@ private fun ArticlesScreenContent(
             ArticlesScreenText()
         }
 
-        items(items = articlesScreenUIState.articles, key = {
-            TODO()
+        items(items = articlesScreenUIState.articles, key = { article ->
+            article.articleId
         }) { article ->
             ArticlesCardItem(
                 article = article,

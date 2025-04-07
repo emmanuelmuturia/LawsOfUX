@@ -381,8 +381,8 @@ private fun HomeDetailsScreenContent(
             HomeDetailsScreenTakeawayTitle()
         }
 
-        itemsIndexed(items = uxLaw.uXLawTakeaways, key = { index, _ ->
-            TODO()
+        itemsIndexed(items = uxLaw.uXLawTakeaways, key = { _, uxLawTakeAway ->
+            uxLawTakeAway
         }) { index, uxLawTakeAway ->
 
             Text(
@@ -442,8 +442,8 @@ private fun HomeDetailsScreenContent(
             HomeDetailsScreenFurtherReadingTitle()
         }
 
-        items(items = uxLaw.uXLawFurtherReading, key = {
-            TODO()
+        items(items = uxLaw.uXLawFurtherReading, key = { uXLawFurtherReading ->
+            uXLawFurtherReading
         }) { furtherReading ->
             LawsOfUXExtraCardItem(
                 title = furtherReading.first,
@@ -477,8 +477,8 @@ private fun HomeDetailsScreenContent(
             HomeDetailsScreenRelatedTitle()
         }
 
-        items(items = randomLawsOfUX, key = {
-            TODO()
+        items(items = randomLawsOfUX, key = { randomLawOfUX ->
+            randomLawOfUX.uxLawId
         }) { uxLaw ->
             LawsOfUXCardItem(uxLaw = uxLaw, navigateToHomeDetailsScreen = {})
         }

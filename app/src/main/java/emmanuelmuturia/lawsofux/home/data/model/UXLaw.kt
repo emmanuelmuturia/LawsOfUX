@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class UXLaw(
+    val uxLawId: String,
     val uxLawThumbnail: Int,
     val uxLawTitle: String,
     val uxLawDescription: String,

@@ -143,8 +143,8 @@ private fun HomeScreenContent(
         item(
             key = "HomeScreenNotification"
         ) { HomeScreenNotification() }
-        items(items = homeScreenUIState.uxLaws, key = {
-            TODO()
+        items(items = homeScreenUIState.uxLaws, key = { uxLaw ->
+            uxLaw.uxLawId
         }) { uxLaw ->
             LawsOfUXCardItem(
                 uxLaw = uxLaw,

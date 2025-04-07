@@ -16,6 +16,7 @@ class HomeRepositoryImplementation(
             localUXLawsSource.getAllLocalUXLaws().map { localUXLaws ->
                 localUXLaws.map { localUXLaw ->
                     UXLaw(
+                        uxLawId = localUXLaw.localUxLawID,
                         uxLawThumbnail = localUXLaw.localUxLawThumbnail,
                         uxLawTitle = localUXLaw.localUxLawTitle,
                         uxLawDescription = localUXLaw.localUxLawDescription,

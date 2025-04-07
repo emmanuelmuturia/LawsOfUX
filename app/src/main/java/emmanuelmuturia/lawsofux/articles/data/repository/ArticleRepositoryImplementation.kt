@@ -18,6 +18,7 @@ class ArticleRepositoryImplementation(
             localArticleSource.getAllLocalArticles().map { localArticles ->
                 localArticles.map { localArticle ->
                     Article(
+                        articleId = localArticle.localArticleId,
                         articleTitle = localArticle.localArticleTitle,
                         articleDescription = localArticle.localArticleDescription,
                         articleThumbnail = localArticle.localArticleThumbnail,
