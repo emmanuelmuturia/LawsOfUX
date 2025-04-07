@@ -168,7 +168,7 @@ fun BookScreenContent(
         item {
             HorizontalDivider(
                 modifier = Modifier.padding(all = 14.dp),
-                thickness = 3.dp,
+                thickness = 1.4.dp,
                 color = MaterialTheme.colorScheme.onBackground,
             )
         }
@@ -214,7 +214,7 @@ fun BookScreenContent(
 
             HorizontalDivider(
                 modifier = Modifier.padding(all = 14.dp),
-                thickness = 3.dp,
+                thickness = 1.4.dp,
                 color = MaterialTheme.colorScheme.onBackground,
             )
 
@@ -363,7 +363,7 @@ fun BookScreenContent(
         item {
             HorizontalDivider(
                 modifier = Modifier.padding(all = 14.dp),
-                thickness = 3.dp,
+                thickness = 1.4.dp,
                 color = MaterialTheme.colorScheme.onBackground,
             )
         }
@@ -743,7 +743,7 @@ fun BookScreenHorizontalDivider() {
     HorizontalDivider(
         modifier = Modifier.padding(all = 14.dp),
         color = MaterialTheme.colorScheme.onBackground,
-        thickness = 3.dp,
+        thickness = 1.4.dp,
     )
 }
 

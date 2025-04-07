@@ -460,7 +460,7 @@ private fun InfoScreenNoteDivider(modifier: Modifier = Modifier) {
     HorizontalDivider(
         modifier = modifier.fillMaxWidth(),
         color = MaterialTheme.colorScheme.onBackground,
-        thickness = 1.dp,
+        thickness = 1.4.dp,
     )
 }
 
@@ -808,7 +808,7 @@ private fun InfoScreenColophonContent() {
 private fun InfoScreenDivider() {
     HorizontalDivider(
         modifier = Modifier.padding(all = 14.dp),
-        thickness = 3.dp,
+        thickness = 1.4.dp,
         color = MaterialTheme.colorScheme.onBackground,
     )
 }
