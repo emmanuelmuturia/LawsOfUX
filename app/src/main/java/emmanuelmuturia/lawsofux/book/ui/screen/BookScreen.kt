@@ -135,73 +135,105 @@ fun BookScreenContent(
         modifier = modifier.fillMaxSize(),
         state = bookScreenListState,
     ) {
-        item {
+        item(
+            key = "BookScreenText",
+        ) {
             BookScreenText()
         }
 
-        item {
+        item(
+            key = "BookScreenImage",
+        ) {
             BookScreenImage()
         }
 
-        item {
+        item(
+            key = "BookScreenOverviewTitle",
+        ) {
             BookScreenOverviewTitle()
         }
 
-        item {
+        item(
+            key = "BookScreenOverviewContent",
+        ) {
             BookScreenOverviewContent()
         }
 
-        item {
+        item(
+            key = "BookScreenNewBookTitle",
+        ) {
             BookScreenNewBookTitle()
         }
 
-        item {
+        item(
+            key = "BookScreenNewBookContent",
+        ) {
             BookScreenNewBookContent()
         }
 
-        item {
+        item(
+            key = "BookScreenViewOnAmazonButton",
+        ) {
             BookScreenViewOnAmazonButton(
                 navigateToAmazon = navigateToAmazon,
             )
         }
 
-        item {
+        item(
+            key = "Book Screen Horizontal Divider #1",
+        ) {
             HorizontalDivider(
                 modifier = Modifier.padding(all = 14.dp),
-                thickness = 3.dp,
+                thickness = 1.4.dp,
                 color = MaterialTheme.colorScheme.onBackground,
             )
         }
 
-        item {
+        item(
+            key = "BookScreenNewConceptsImage",
+        ) {
             BookScreenNewConceptsImage()
         }
 
-        item {
+        item(
+            key = "BookScreenNewConcepts",
+        ) {
             BookScreenNewConcepts()
         }
 
-        item {
+        item(
+            key = "BookScreenNewConsiderationsImage",
+        ) {
             BookScreenNewConsiderationsImage()
         }
 
-        item {
+        item(
+            key = "BookScreenNewConsiderations",
+        ) {
             BookScreenNewConsiderations()
         }
 
-        item {
+        item(
+            key = "BookScreenNewTechniquesImage",
+        ) {
             BookScreenNewTechniquesImage()
         }
 
-        item {
+        item(
+            key = "BookScreenNewTechniques",
+        ) {
             BookScreenNewTechniques()
         }
 
-        item {
+        item(
+            key = "BookScreenLessonsTitle",
+        ) {
             BookScreenLessonsTitle()
         }
 
-        itemsIndexed(items = bookScreenUIState.bookLessons) { index, bookLesson ->
+        itemsIndexed(items = bookScreenUIState.bookLessons, key = { _, bookLesson ->
+            bookLesson.bookLessonId
+        }) { index, bookLesson ->
             Text(
                 modifier = Modifier.padding(start = 14.dp),
                 text = "${index + 1}",
@@ -214,7 +246,7 @@ fun BookScreenContent(
 
             HorizontalDivider(
                 modifier = Modifier.padding(all = 14.dp),
-                thickness = 3.dp,
+                thickness = 1.4.dp,
                 color = MaterialTheme.colorScheme.onBackground,
             )
 
@@ -229,15 +261,21 @@ fun BookScreenContent(
             )
         }
 
-        item {
+        item(
+            key = "BookScreenSpacer",
+        ) {
             Spacer(modifier = Modifier.height(height = 56.dp))
         }
 
-        item {
+        item(
+            key = "BookScreenReviewsTitle",
+        ) {
             BookScreenReviewsTitle()
         }
 
-        itemsIndexed(items = bookScreenUIState.bookReviews) { index, bookReview ->
+        itemsIndexed(items = bookScreenUIState.bookReviews, key = { _, bookReview ->
+            bookReview.bookReviewId
+        }) { index, bookReview ->
             Text(
                 modifier = Modifier.padding(start = 14.dp),
                 text = "\"${bookReview.bookReviewCaption}\"",
@@ -265,15 +303,21 @@ fun BookScreenContent(
             }
         }
 
-        item {
+        item(
+            key = "Book Screen Spacer #2",
+        ) {
             Spacer(modifier = Modifier.height(height = 56.dp))
         }
 
-        item {
+        item(
+            key = "BookScreenGalleryTitle",
+        ) {
             BookScreenGalleryTitle()
         }
 
-        items(items = bookScreenUIState.bookGalleries) { bookGallery ->
+        items(items = bookScreenUIState.bookGalleries, key = { bookGallery ->
+            bookGallery.bookGalleryId
+        }) { bookGallery ->
             Image(
                 painter = painterResource(id = bookGallery.bookGalleryImage),
                 contentDescription = "Project Info Screen Image",
@@ -286,111 +330,155 @@ fun BookScreenContent(
             )
         }
 
-        item {
+        item(
+            key = "BookScreenBookLocationsTitle",
+        ) {
             BookScreenBookLocationsTitle()
         }
 
-        item {
+        item(
+            key = "Book Screen Horizontal Divider #2",
+        ) {
             BookScreenHorizontalDivider()
         }
 
-        item {
+        item(
+            key = "BookScreenSecondEditionTitle",
+        ) {
             BookScreenSecondEditionTitle()
         }
 
-        items(items = bookScreenUIState.bookSecondEditions) { bookSecondEdition ->
+        items(items = bookScreenUIState.bookSecondEditions, key = { bookSecondEdition ->
+            bookSecondEdition.bookSecondEditionId
+        }) { bookSecondEdition ->
             LawsOfUXExtraCardItem(
                 title = bookSecondEdition.bookSecondEditionTitle,
                 content = bookSecondEdition.bookSecondEditionSeller,
             )
         }
 
-        item {
+        item(
+            key = "BookScreenSecondEditionBookImage",
+        ) {
             BookScreenSecondEditionBookImage()
         }
 
-        item {
+        item(
+            key = "BookScreenSecondEditionBookTitle",
+        ) {
             BookScreenSecondEditionBookTitle()
         }
 
-        item {
+        item(
+            key = "BookScreenSecondEditionBookContent",
+        ) {
             BookScreenSecondEditionBookContent()
         }
 
-        item {
+        item(
+            key = "BookScreenSecondEditionBookButton",
+        ) {
             BookScreenSecondEditionBookButton(
                 navigateToOreilly = navigateToOreilly,
             )
         }
 
-        item {
+        item(
+            key = "BookScreenFirstEditionTitle",
+        ) {
             BookScreenFirstEditionTitle()
         }
 
-        items(items = bookScreenUIState.bookFirstEditions) { bookFirstEdition ->
+        items(items = bookScreenUIState.bookFirstEditions, key = { bookFirstEdition ->
+            bookFirstEdition.bookFirstEditionId
+        }) { bookFirstEdition ->
             LawsOfUXExtraCardItem(
                 title = bookFirstEdition.bookFirstEditionTitle,
                 content = bookFirstEdition.bookFirstEditionSeller,
             )
         }
 
-        item {
+        item(
+            key = "BookScreenTranslationsTitle",
+        ) {
             BookScreenTranslationsTitle()
         }
 
-        item {
+        item(
+            key = "BookScreenTranslatedSecondEditionTitle",
+        ) {
             BookScreenTranslatedSecondEditionTitle()
         }
 
-        items(items = bookScreenUIState.bookTranslatedSecondEditions) { bookTranslatedSecondEdition ->
+        items(items = bookScreenUIState.bookTranslatedSecondEditions, key = { bookTranslatedSecondEdition ->
+            bookTranslatedSecondEdition.bookTranslatedSecondEditionId
+        }) { bookTranslatedSecondEdition ->
             LawsOfUXExtraCardItem(
                 title = bookTranslatedSecondEdition.bookTranslatedSecondEditionTitle,
                 content = bookTranslatedSecondEdition.bookTranslatedSecondEditionSeller,
             )
         }
 
-        item {
+        item(
+            key = "BookScreenTranslatedFirstEditionTitle",
+        ) {
             BookScreenTranslatedFirstEditionTitle()
         }
 
-        items(items = bookScreenUIState.bookTranslatedFirstEditions) { bookTranslatedFirstEdition ->
+        items(items = bookScreenUIState.bookTranslatedFirstEditions, key = { bookTranslatedFirstEdition ->
+            bookTranslatedFirstEdition.bookTranslatedFirstEditionId
+        }) { bookTranslatedFirstEdition ->
             LawsOfUXExtraCardItem(
                 title = bookTranslatedFirstEdition.bookTranslatedFirstEditionTitle,
                 content = bookTranslatedFirstEdition.bookTranslatedFirstEditionSeller,
             )
         }
 
-        item {
+        item(
+            key = "Book Screen Horizontal Divider #3",
+        ) {
             HorizontalDivider(
                 modifier = Modifier.padding(all = 14.dp),
-                thickness = 3.dp,
+                thickness = 1.4.dp,
                 color = MaterialTheme.colorScheme.onBackground,
             )
         }
 
-        item {
+        item(
+            key = "Book Screen Spacer #3",
+        ) {
             Spacer(modifier = Modifier.height(height = 49.dp))
         }
 
-        item {
+        item(
+            key = "BookScreenRelatedTitle",
+        ) {
             BookScreenRelatedTitle()
         }
 
-        item {
+        item(
+            key = "BookScreenRelatedImage",
+        ) {
             BookScreenRelatedImage()
         }
 
-        item {
+        item(
+            key = "BookScreenRelatedContent",
+        ) {
             BookScreenRelatedContent()
         }
 
-        item {
+        item(
+            key = "BookScreenRelatedButton",
+        ) {
             BookScreenRelatedButton(
                 navigateToBootcamp = navigateToBootcamp,
             )
         }
 
-        item {
+        item(
+            key = "LawsOfUXFooter",
+        ) {
             LawsOfUXFooter(
                 navigateToInfoScreen = navigateToInfoScreen,
             )
@@ -743,7 +831,7 @@ fun BookScreenHorizontalDivider() {
     HorizontalDivider(
         modifier = Modifier.padding(all = 14.dp),
         color = MaterialTheme.colorScheme.onBackground,
-        thickness = 3.dp,
+        thickness = 1.4.dp,
     )
 }
 

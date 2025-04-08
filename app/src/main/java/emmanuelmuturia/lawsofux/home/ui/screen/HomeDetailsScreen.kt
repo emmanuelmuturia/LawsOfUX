@@ -1,6 +1,9 @@
 package emmanuelmuturia.lawsofux.home.ui.screen
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.slideInHorizontally
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -10,6 +13,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -39,6 +43,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -50,6 +55,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.LinkAnnotation
@@ -150,7 +156,7 @@ fun HomeDetailsScreen(
                                             ),
                                     ),
                                 fontWeight = FontWeight.Bold,
-                                fontSize = 16.sp,
+                                fontSize = 12.sp,
                             )
                             Icon(
                                 imageVector =
@@ -171,6 +177,27 @@ fun HomeDetailsScreen(
                         onDismissRequest = { languagesMenuExpanded = false },
                         modifier = Modifier.background(color = MaterialTheme.colorScheme.primary),
                     ) {
+                        DropdownMenuItem(
+                            text = {
+                                Text(
+                                    text = "-> English",
+                                    fontFamily =
+                                        FontFamily(
+                                            fonts =
+                                                listOf(
+                                                    Font(resId = R.font.ibm_plex_mono_regular),
+                                                ),
+                                        ),
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.onPrimary,
+                                    fontSize = 21.sp,
+                                )
+                            },
+                            onClick = {
+                                // Change language to English...
+                                languagesMenuExpanded = false
+                            },
+                        )
                         DropdownMenuItem(
                             text = {
                                 Text(
@@ -210,6 +237,49 @@ fun HomeDetailsScreen(
                             },
                             onClick = {
                                 // Change language to French...
+                                languagesMenuExpanded = false
+                            },
+                        )
+                        DropdownMenuItem(
+                            text = {
+                                Text(
+                                    text = "عربي",
+                                    fontFamily =
+                                        FontFamily(
+                                            fonts =
+                                                listOf(
+                                                    Font(resId = R.font.ibm_plex_mono_regular),
+                                                ),
+                                        ),
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.onPrimary,
+                                    fontSize = 21.sp,
+                                )
+                            },
+                            onClick = {
+                                // Change language to Arabic...
+                                languagesMenuExpanded = false
+                            },
+                        )
+
+                        DropdownMenuItem(
+                            text = {
+                                Text(
+                                    text = "فارسی",
+                                    fontFamily =
+                                        FontFamily(
+                                            fonts =
+                                                listOf(
+                                                    Font(resId = R.font.ibm_plex_mono_regular),
+                                                ),
+                                        ),
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.onPrimary,
+                                    fontSize = 21.sp,
+                                )
+                            },
+                            onClick = {
+                                // Change language to Arabic...
                                 languagesMenuExpanded = false
                             },
                         )
@@ -268,23 +338,55 @@ private fun HomeDetailsScreenContent(
         modifier = modifier.fillMaxSize(),
         state = homeDetailsScreenListState,
     ) {
-        item {
+        item(
+            key = "HomeDetailsScreenTitle",
+        ) {
             HomeDetailsScreenTitle(uxLaw = uxLaw)
         }
 
-        item {
-            HomeDetailsScreenImage(uxLaw = uxLaw)
+        item(
+            key = "HomeDetailsScreenImage",
+        ) {
+            var isVisible by remember { mutableStateOf(value = false) }
+            LaunchedEffect(key1 = Unit) {
+                isVisible = true
+            }
+            val density = LocalDensity.current
+            AnimatedVisibility(
+                visible = isVisible,
+                enter =
+                    slideInHorizontally {
+                        // Slide in from 40 dp from the top.
+                        with(density) { -40.dp.roundToPx() }
+                    } +
+                        expandVertically(
+                            // Expand from the top.
+                            expandFrom = Alignment.Top,
+                        ) +
+                        fadeIn(
+                            // Fade in with the initial alpha of 0.3f.
+                            initialAlpha = 0.3f,
+                        ),
+            ) {
+                HomeDetailsScreenImage(uxLaw = uxLaw)
+            }
         }
 
-        item {
+        item(
+            key = "HomeDetailsScreenDefinition",
+        ) {
             HomeDetailsScreenDefinition(uxLaw = uxLaw)
         }
 
-        item {
+        item(
+            key = "HomeDetailsScreenTakeawayTitle",
+        ) {
             HomeDetailsScreenTakeawayTitle()
         }
 
-        itemsIndexed(items = uxLaw.uXLawTakeaways) { index, uxLawTakeAway ->
+        itemsIndexed(items = uxLaw.uXLawTakeaways, key = { _, uxLawTakeAway ->
+            uxLawTakeAway
+        }) { index, uxLawTakeAway ->
 
             Text(
                 modifier = Modifier.padding(start = 14.dp),
@@ -298,7 +400,7 @@ private fun HomeDetailsScreenContent(
 
             HorizontalDivider(
                 modifier = Modifier.padding(all = 14.dp),
-                thickness = 3.dp,
+                thickness = 1.4.dp,
                 color = MaterialTheme.colorScheme.onBackground,
             )
 
@@ -313,52 +415,80 @@ private fun HomeDetailsScreenContent(
             )
         }
 
-        item {
+        item(
+            key = "HomeDetailsScreenOriginsTitle",
+        ) {
             HomeDetailsScreenOriginsTitle()
         }
 
-        item {
+        item(
+            key = "HomeDetailsScreenOriginsContent",
+        ) {
             HomeDetailsScreenOriginsContent(uxLaw = uxLaw)
         }
 
-        item {
+        item(
+            key = "HomeDetailsScreenSource",
+        ) {
             HomeDetailsScreenSource(uxLaw = uxLaw)
         }
 
-        item {
+        item(
+            key = "HomeDetailsScreenSpacer",
+        ) {
+            Spacer(modifier = Modifier.height(height = 42.dp))
+        }
+
+        item(
+            key = "HomeDetailsScreenFurtherReadingTitle",
+        ) {
             HomeDetailsScreenFurtherReadingTitle()
         }
 
-        items(items = uxLaw.uXLawFurtherReading) { furtherReading ->
+        items(items = uxLaw.uXLawFurtherReading, key = { uXLawFurtherReading ->
+            uXLawFurtherReading
+        }) { furtherReading ->
             LawsOfUXExtraCardItem(
                 title = furtherReading.first,
                 content = furtherReading.second,
             )
         }
 
-        item {
+        item(
+            key = "HomeDetailsScreenLargePosterButton",
+        ) {
             HomeDetailsScreenLargePosterButton(
                 navigateToPosterShop = navigateToPosterShop,
             )
         }
 
-        item {
+        item(
+            key = "HomeDetailsScreenSmallPosterText",
+        ) {
             HomeDetailsScreenSmallPosterText(uxLaw = uxLaw)
         }
 
-        item {
+        item(
+            key = "HomeDetailsScreenDivider",
+        ) {
             HomeDetailsScreenDivider()
         }
 
-        item {
+        item(
+            key = "HomeDetailsScreenRelatedTitle",
+        ) {
             HomeDetailsScreenRelatedTitle()
         }
 
-        items(items = randomLawsOfUX) { uxLaw ->
+        items(items = randomLawsOfUX, key = { randomLawOfUX ->
+            randomLawOfUX.uxLawId
+        }) { uxLaw ->
             LawsOfUXCardItem(uxLaw = uxLaw, navigateToHomeDetailsScreen = {})
         }
 
-        item {
+        item(
+            key = "HomeDetailsScreenNext",
+        ) {
             HomeDetailsScreenNext(
                 uxLaws = uxLaws,
                 currentUXLaw = uxLaw,
@@ -384,6 +514,7 @@ private fun HomeDetailsScreenTitle(uxLaw: UXLaw) {
             ),
         fontWeight = FontWeight.ExtraBold,
         textAlign = TextAlign.Center,
+        lineHeight = 42.sp,
     )
 }
 
@@ -406,6 +537,7 @@ private fun HomeDetailsScreenDefinition(uxLaw: UXLaw) {
         color = MaterialTheme.colorScheme.onBackground,
         overflow = TextOverflow.Clip,
         fontFamily = FontFamily(fonts = listOf(Font(resId = R.font.ibm_plex_sans_regular))),
+        lineHeight = 30.sp,
     )
 }
 
@@ -535,13 +667,13 @@ private fun HomeDetailsScreenSmallPosterText(uxLaw: UXLaw) {
 private fun HomeDetailsScreenDivider() {
     HorizontalDivider(
         modifier = Modifier.padding(all = 14.dp),
-        thickness = 3.dp,
+        thickness = 1.4.dp,
         color = MaterialTheme.colorScheme.onBackground,
     )
 }
 
 @Composable
-private fun HomeDetailsScreenRelatedTitle(modifier: Modifier = Modifier) {
+private fun HomeDetailsScreenRelatedTitle() {
     Text(
         modifier = Modifier.padding(all = 14.dp),
         text = "Related",

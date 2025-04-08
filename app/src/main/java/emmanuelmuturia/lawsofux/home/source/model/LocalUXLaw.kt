@@ -1,6 +1,7 @@
 package emmanuelmuturia.lawsofux.home.source.model
 
 data class LocalUXLaw(
+    val localUxLawID: String = "Default Local UX Law Key",
     val localUxLawThumbnail: Int,
     val localUxLawTitle: String,
     val localUxLawDescription: String,

@@ -1,10 +1,12 @@
 # Laws Of UX
 
-
+<p align="center">
+  <img src="assets/photos/play_store.png" width="333" alt="The Project Logo">
+</p>
 
 ## Overview
 
-- This project is a mock Android app that was inspired by the [Laws of UX](https://lawsofux.com/) website...
+- This project is a mock Android app that was inspired by [The Laws of UX Project](https://lawsofux.com/)...
 
 ## Table of Contents
 
@@ -59,11 +61,17 @@
 
 ## Tests
 
-
+- No tests have been written for this project as it is a mock project...
 
 ## Screenshots
 
-
+| The Splash Screen                                            | The Home Screen                                              | The Home Details Screen [Sample]                             |
+|--------------------------------------------------------------|--------------------------------------------------------------|--------------------------------------------------------------|
+| <img src="assets/screenshots/laws_of_ux_1.png" width="200"/> | <img src="assets/screenshots/laws_of_ux_2.png" width="200"/> | <img src="assets/screenshots/laws_of_ux_7.png" width="200"/> |
+| The Articles Screen                                          | The Book Screen                                              | The Cards Screen                                             |
+| <img src="assets/screenshots/laws_of_ux_3.png" width="200"/> | <img src="assets/screenshots/laws_of_ux_4.png" width="200"/> | <img src="assets/screenshots/laws_of_ux_5.png" width="200"/> |
+| The Info Screen                                              |                                                              |                                                              |
+| <img src="assets/screenshots/laws_of_ux_6.png" width="200"/> |                                                              |                                                              |
 
 ## Tools and Libraries
 
@@ -91,12 +99,10 @@
 - [ktlint](https://github.com/JLLeitschuh/ktlint-gradle) and [spotless](https://github.com/diffplug/spotless) has been used to format the code...
 - [detekt](https://detekt.dev/) has been used to perform Static Code Analysis...
 
-### 6. Timber
-
-- [Timber](https://github.com/JakeWharton/timber) has been used for logging...
-
 ## Trivia
 
+- This is a mock version of [The Laws of UX Project](https://lawsofux.com/) and all credits go to [Jon Yablonski](https://jonyablonski.com/)
 
 ## Future
 
+- The project is still in development...

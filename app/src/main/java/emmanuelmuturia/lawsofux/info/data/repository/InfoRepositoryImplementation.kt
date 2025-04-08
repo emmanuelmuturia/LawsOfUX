@@ -16,6 +16,7 @@ class InfoRepositoryImplementation(
             localInfoSource.getAllLocalInfos().map { localInfos ->
                 localInfos.map { localInfo ->
                     Info(
+                        infoId = localInfo.localInfoId,
                         infoTitle = localInfo.localInfoTitle,
                         infoDescription = localInfo.localInfoDescription,
                     )
